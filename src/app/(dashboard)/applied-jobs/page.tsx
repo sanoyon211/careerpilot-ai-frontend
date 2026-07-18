@@ -35,7 +35,16 @@ export default function AppliedJobsPage() {
         <div className="divide-y">
           {isLoading && <div className="p-8 text-center text-muted-foreground">Loading applications...</div>}
           {!isLoading && applications.length === 0 && (
-            <div className="p-8 text-center text-muted-foreground">You haven't applied to any jobs yet.</div>
+            <div className="p-12 text-center bg-card border-dashed rounded-b-2xl">
+              <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 text-muted-foreground">
+                <Building2 className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">No applications yet</h3>
+              <p className="text-muted-foreground mb-6">You haven't applied to any jobs yet. Start exploring and apply to your dream job!</p>
+              <Link href="/explore-jobs">
+                <Button>Explore Jobs</Button>
+              </Link>
+            </div>
           )}
           {applications.map((app: any) => {
             const job = app.jobId;

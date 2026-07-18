@@ -74,8 +74,9 @@ export default function AIChatPage() {
       }
       setMessages(prev => [...prev, aiMsg])
     } catch (err: any) {
-      toast.error(err.data?.message || "Failed to get response from AI")
-      // Remove the user message if it failed or maybe just show error
+      toast.error(err.data?.message || "Failed to get response from AI. Please try again.")
+      // Remove the user message if it failed so they can try again
+      setMessages(messages) // revert to previous state before the user message
     }
   }
 

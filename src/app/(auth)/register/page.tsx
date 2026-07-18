@@ -11,6 +11,8 @@ import { useAppDispatch } from "@/redux/hooks"
 import { setCredentials } from "@/redux/slices/authSlice"
 import { auth } from "@/firebase/firebase.config"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { toast } from "sonner"
+import { baseApi } from "@/redux/api/baseApi"
 
 export default function RegisterPage() {
   const [name, setName] = useState("")
@@ -29,13 +31,23 @@ export default function RegisterPage() {
     e.preventDefault()
     setErrorMsg("")
     setSuccessMsg("")
-    try {
-      await registerUser({ name, email, password, role }).unwrap()
-      setSuccessMsg("Account created! Redirecting to login...")
-      setTimeout(() => router.push("/login"), 1500)
-    } catch (err: any) {
-      setErrorMsg(err.data?.message || "Failed to register")
-    }
+    
+    toast.promise(
+      registerUser({ name, email, password, role }).unwrap(),
+      {
+        loading: 'Creating account...',
+        success: () => {
+          setSuccessMsg("Account created! Redirecting to login...")
+          setTimeout(() => router.push("/login"), 1500)
+          return 'Registration successful!'
+        },
+        error: (err) => {
+          const msg = err.data?.message || "Failed to register"
+          setErrorMsg(msg)
+          return msg
+        }
+      }
+    )
   }
 
   const handleGoogleLogin = async () => {
@@ -45,20 +57,34 @@ export default function RegisterPage() {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
 
-      const response = await socialLogin({
-        email: user.email,
-        name: user.displayName || "Google User",
-        photoURL: user.photoURL,
-      }).unwrap()
-
-      dispatch(setCredentials({
-        user: response.data.user,
-        accessToken: response.data.accessToken
-      }))
-      setSuccessMsg("Account created! Redirecting to dashboard...")
-      setTimeout(() => router.push("/dashboard"), 1500)
+      toast.promise(
+        socialLogin({
+          email: user.email,
+          name: user.displayName || "Google User",
+          photoURL: user.photoURL,
+        }).unwrap(),
+        {
+          loading: 'Signing up with Google...',
+          success: (response) => {
+            dispatch(baseApi.util.resetApiState())
+            dispatch(setCredentials({
+              user: response.data.user,
+              accessToken: response.data.accessToken
+            }))
+            document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
+            setSuccessMsg("Account created! Redirecting to dashboard...")
+            setTimeout(() => router.push("/dashboard"), 1500)
+            return 'Registration successful!'
+          },
+          error: (err) => {
+            const msg = err.message || err.data?.message || "Failed to register with Google"
+            setErrorMsg(msg)
+            return msg
+          }
+        }
+      )
     } catch (err: any) {
-      setErrorMsg(err.message || err.data?.message || "Failed to register with Google")
+      setErrorMsg(err.message || "Failed to initialize Google login")
     }
   }
 

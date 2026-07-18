@@ -24,13 +24,14 @@ export default function JobApplicationsBoard({ params }: { params: { jobId: stri
   const applications = appsResponse?.data || []
 
   const handleStatusChange = async (appId: string, newStatus: string) => {
-    try {
-      await updateStatus({ id: appId, status: newStatus }).unwrap()
-      toast.success(`Application moved to ${newStatus}`)
-    } catch (error: any) {
-      console.error(error)
-      toast.error(error.data?.message || "Failed to update status")
-    }
+    toast.promise(
+      updateStatus({ id: appId, status: newStatus }).unwrap(),
+      {
+        loading: 'Updating status...',
+        success: `Application moved to ${newStatus}`,
+        error: (err) => err.data?.message || "Failed to update status"
+      }
+    )
   }
 
   const handleDragStart = (e: React.DragEvent, appId: string) => {

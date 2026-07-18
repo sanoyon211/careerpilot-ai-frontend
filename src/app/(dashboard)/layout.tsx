@@ -13,6 +13,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/common/Button"
 import { io } from "socket.io-client"
 import { toast } from "sonner"
+import { baseApi } from "@/redux/api/baseApi"
 
 const NAV_LINKS = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
@@ -147,8 +148,10 @@ export default function DashboardLayout({
           <button 
             onClick={() => {
               dispatch(logout());
+              dispatch(baseApi.util.resetApiState()); // Reset RTK Query cache
               document.cookie = 'accessToken=; Max-Age=0; path=/; SameSite=Lax';
               router.push('/login');
+              toast.success("Logged out successfully");
             }}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors mt-1"
           >

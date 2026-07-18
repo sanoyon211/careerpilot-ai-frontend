@@ -14,12 +14,14 @@ export default function ManageJobsPage() {
 
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this job?")) {
-      try {
-        await deleteJob(id).unwrap()
-        toast.success("Job deleted successfully")
-      } catch (err: any) {
-        toast.error(err.data?.message || "Failed to delete job")
-      }
+      toast.promise(
+        deleteJob(id).unwrap(),
+        {
+          loading: 'Deleting job...',
+          success: 'Job deleted successfully',
+          error: (err) => err.data?.message || 'Failed to delete job'
+        }
+      )
     }
   }
   return (

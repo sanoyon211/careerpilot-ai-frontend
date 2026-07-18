@@ -10,6 +10,8 @@ import { useAppDispatch } from "@/redux/hooks"
 import { setCredentials } from "@/redux/slices/authSlice"
 import { auth } from "@/firebase/firebase.config"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { toast } from "sonner"
+import { baseApi } from "@/redux/api/baseApi"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -23,17 +25,28 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setErrorMsg("")
-    try {
-      const response = await login({ email, password }).unwrap()
-      dispatch(setCredentials({
-        user: response.data.user,
-        accessToken: response.data.accessToken
-      }))
-      document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
-      router.push("/dashboard")
-    } catch (err: any) {
-      setErrorMsg(err.data?.message || "Failed to login")
-    }
+    
+    toast.promise(
+      login({ email, password }).unwrap(),
+      {
+        loading: 'Signing in...',
+        success: (response) => {
+          dispatch(baseApi.util.resetApiState()) // Clear any stale cache
+          dispatch(setCredentials({
+            user: response.data.user,
+            accessToken: response.data.accessToken
+          }))
+          document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
+          router.push("/dashboard")
+          return `Welcome back, ${response.data.user.name}!`
+        },
+        error: (err) => {
+          const msg = err?.data?.message || "Failed to login"
+          setErrorMsg(msg)
+          return msg
+        }
+      }
+    )
   }
 
   const handleGoogleLogin = async () => {
@@ -43,20 +56,33 @@ export default function LoginPage() {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
 
-      const response = await socialLogin({
-        email: user.email,
-        name: user.displayName || "Google User",
-        photoURL: user.photoURL,
-      }).unwrap()
-
-      dispatch(setCredentials({
-        user: response.data.user,
-        accessToken: response.data.accessToken
-      }))
-      document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
-      router.push("/dashboard")
+      toast.promise(
+        socialLogin({
+          email: user.email,
+          name: user.displayName || "Google User",
+          photoURL: user.photoURL,
+        }).unwrap(),
+        {
+          loading: 'Signing in with Google...',
+          success: (response) => {
+            dispatch(baseApi.util.resetApiState())
+            dispatch(setCredentials({
+              user: response.data.user,
+              accessToken: response.data.accessToken
+            }))
+            document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
+            router.push("/dashboard")
+            return `Welcome back, ${response.data.user.name}!`
+          },
+          error: (err) => {
+            const msg = err.message || err.data?.message || "Failed to login with Google"
+            setErrorMsg(msg)
+            return msg
+          }
+        }
+      )
     } catch (err: any) {
-      setErrorMsg(err.message || err.data?.message || "Failed to login with Google")
+      setErrorMsg(err.message || "Failed to initialize Google login")
     }
   }
 

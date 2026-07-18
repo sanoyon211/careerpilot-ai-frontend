@@ -8,6 +8,7 @@ import { useGetJobByIdQuery } from "@/redux/api/jobsApi"
 import { useApplyForJobMutation } from "@/redux/api/applicationApi"
 import { useGenerateCoverLetterMutation } from "@/redux/api/aiApi"
 import { useGetMyResumeQuery } from "@/redux/api/resumeApi"
+import { toast } from "sonner"
 
 export default function JobDetailsPage({ params }: { params: { id: string } }) {
   const { data: jobResponse, isLoading } = useGetJobByIdQuery(params.id)
@@ -16,14 +17,16 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
   const [generateCoverLetter, { isLoading: isGenerating }] = useGenerateCoverLetterMutation()
   
   const [coverLetter, setCoverLetter] = useState<string | null>(null)
-  
+
   const handleApply = async () => {
-    try {
-      await applyForJob({ jobId: params.id }).unwrap()
-      alert("Successfully applied for this job!")
-    } catch (err: any) {
-      alert(err.data?.message || "Failed to apply. Have you already applied or uploaded your resume?")
-    }
+    toast.promise(
+      applyForJob({ jobId: params.id }).unwrap(),
+      {
+        loading: 'Submitting application...',
+        success: 'Successfully applied for this job!',
+        error: (err) => err.data?.message || 'Failed to apply. Have you already applied or uploaded your resume?'
+      }
+    )
   }
 
   const handleGenerateCoverLetter = async () => {
