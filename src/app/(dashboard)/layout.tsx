@@ -9,8 +9,10 @@ import {
   LayoutDashboard, User, FileText, Bookmark, CheckSquare, 
   Settings, LogOut, Menu, X, Sparkles, MessageSquare 
 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/common/Button"
+import { io } from "socket.io-client"
+import { toast } from "sonner"
 
 const NAV_LINKS = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
@@ -38,6 +40,24 @@ export default function DashboardLayout({
   const dispatch = useDispatch()
   const user = useSelector((state: RootState) => state.auth.user)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    if (!user?._id) return;
+
+    const socket = io(process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000");
+    
+    socket.emit("join_user_room", user._id);
+
+    socket.on("status_updated", (data) => {
+      toast.success(`Application Update!`, {
+        description: `Your application for ${data.jobTitle} moved to ${data.status}`
+      });
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [user]);
 
   return (
     <div className="min-h-screen bg-muted/20 flex flex-col md:flex-row">

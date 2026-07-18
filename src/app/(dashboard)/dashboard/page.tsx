@@ -1,6 +1,7 @@
 "use client"
 
 import { FileText, Briefcase, Eye, TrendingUp, Sparkles, Clock, CheckCircle2, ChevronRight, Bookmark } from "lucide-react"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Legend } from 'recharts'
 import { Button } from "@/components/common/Button"
 import Link from "next/link"
 import { useSelector } from "react-redux"
@@ -65,7 +66,7 @@ export default function DashboardOverviewPage() {
       <div className="grid lg:grid-cols-3 gap-6">
         
         {/* Recent Activity */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold">{isJobSeeker ? "Recent Applications" : "Recent Activity"}</h2>
             <Link href={isJobSeeker ? "/applied-jobs" : "/manage-jobs"} className="text-sm text-primary hover:underline font-medium">View All</Link>
@@ -108,6 +109,48 @@ export default function DashboardOverviewPage() {
               )}
             </div>
           </div>
+
+          {isEmployer && (statsData as any)?.chartData && (
+            <div className="grid sm:grid-cols-2 gap-6 mt-6">
+              <div className="bg-card border rounded-2xl p-6 shadow-sm">
+                <h3 className="font-bold text-lg mb-6">Views vs Applications</h3>
+                <div className="h-64 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={(statsData as any).chartData.viewsData}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} fontSize={12} tickMargin={10} />
+                      <YAxis axisLine={false} tickLine={false} fontSize={12} />
+                      <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                      <Legend iconType="circle" />
+                      <Line type="monotone" dataKey="views" stroke="#3b82f6" strokeWidth={3} dot={false} activeDot={{ r: 6 }} />
+                      <Line type="monotone" dataKey="applications" stroke="#8b5cf6" strokeWidth={3} dot={false} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              <div className="bg-card border rounded-2xl p-6 shadow-sm">
+                <h3 className="font-bold text-lg mb-6">Application Status</h3>
+                <div className="h-64 w-full flex justify-center">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={(statsData as any).chartData.statusData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        paddingAngle={5}
+                        dataKey="value"
+                      />
+                      <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                      <Legend iconType="circle" verticalAlign="bottom" />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Profile Completion / AI Tips */}
@@ -150,7 +193,7 @@ export default function DashboardOverviewPage() {
                 <Sparkles className="h-5 w-5" /> AI Coach Advice
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Based on your recent applications, you have a high success rate with React roles. I suggest highlighting your Next.js experience in your summary to attract more recruiters.
+                Based on your recent activity, you have a high success rate with tech roles. I suggest highlighting your Next.js experience in your summary to attract more attention.
               </p>
               <Link href="/ai-chat" className="inline-flex items-center text-sm font-semibold text-primary hover:underline">
                 Chat with Coach <ChevronRight className="h-4 w-4 ml-1" />

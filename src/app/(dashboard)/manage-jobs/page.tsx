@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/common/Button"
-import { Edit, Trash2, Eye, MoreVertical, PlusCircle, Search, Filter } from "lucide-react"
+import { Edit, Trash2, Eye, MoreVertical, PlusCircle, Search, Filter, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { useGetEmployerJobsQuery, useDeleteJobMutation } from "@/redux/api/jobsApi"
 import { toast } from "sonner"
@@ -107,6 +107,11 @@ export default function ManageJobsPage() {
                   </td>
                   <td className="py-4 px-6 text-right">
                     <div className="flex items-center justify-end gap-2">
+                      <Link href="/payment">
+                        <Button variant="outline" size="sm" className="gap-1 text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50 border-yellow-200">
+                          <Sparkles className="h-3.5 w-3.5" /> Promote
+                        </Button>
+                      </Link>
                       <Button variant="outline" size="icon" className="h-8 w-8" title="View Job">
                         <Eye className="h-4 w-4" />
                       </Button>
