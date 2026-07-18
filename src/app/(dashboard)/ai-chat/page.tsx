@@ -45,10 +45,23 @@ export default function AIChatPage() {
       
       const response = await sendMessage({ history }).unwrap()
       
+      console.log("AI API Response:", response);
+      
+      let aiText = "I'm sorry, I couldn't process that.";
+      if (response && response.data) {
+        if (typeof response.data === 'string') {
+          aiText = response.data;
+        } else if (typeof response.data.reply === 'string') {
+          aiText = response.data.reply;
+        } else {
+          aiText = JSON.stringify(response.data);
+        }
+      }
+
       const aiMsg: Message = { 
         id: Date.now() + 1, 
         role: "ai", 
-        content: response.data?.reply || "I'm sorry, I couldn't process that." 
+        content: aiText 
       }
       setMessages(prev => [...prev, aiMsg])
     } catch (err: any) {
