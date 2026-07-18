@@ -3,13 +3,19 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/common/Button"
-import { ArrowLeft, MapPin, Briefcase, DollarSign, Clock, Building, Users, Globe, Share2, Bookmark, CheckCircle2, Sparkles } from "lucide-react"
+import { ArrowLeft, MapPin, Briefcase, DollarSign, Clock, Building, Users, Globe, Share2, Bookmark, CheckCircle2, Sparkles, FileText } from "lucide-react"
 import { useGetJobByIdQuery } from "@/redux/api/jobsApi"
 import { useApplyForJobMutation } from "@/redux/api/applicationApi"
+import { useGenerateCoverLetterMutation } from "@/redux/api/aiApi"
+import { useGetMyResumeQuery } from "@/redux/api/resumeApi"
 
 export default function JobDetailsPage({ params }: { params: { id: string } }) {
   const { data: jobResponse, isLoading } = useGetJobByIdQuery(params.id)
+  const { data: resumeResponse } = useGetMyResumeQuery()
   const [applyForJob, { isLoading: isApplying }] = useApplyForJobMutation()
+  const [generateCoverLetter, { isLoading: isGenerating }] = useGenerateCoverLetterMutation()
+  
+  const [coverLetter, setCoverLetter] = useState<string | null>(null)
   
   const handleApply = async () => {
     try {
@@ -17,6 +23,24 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
       alert("Successfully applied for this job!")
     } catch (err: any) {
       alert(err.data?.message || "Failed to apply. Have you already applied or uploaded your resume?")
+    }
+  }
+
+  const handleGenerateCoverLetter = async () => {
+    if (!resumeResponse?.data) {
+      alert("Please upload and parse your resume first in the dashboard.");
+      return;
+    }
+    
+    try {
+      const result = await generateCoverLetter({
+        jobDescription: jobResponse?.data?.fullDescription || "",
+        resumeData: resumeResponse.data.parsedData
+      }).unwrap();
+      setCoverLetter(result.data);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to generate cover letter.");
     }
   }
 
@@ -65,8 +89,11 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
               
-              <div className="mt-8 pt-6 border-t flex flex-col sm:flex-row gap-4">
+              <div className="mt-8 pt-6 border-t flex flex-col sm:flex-row gap-4 flex-wrap">
                 <Button size="lg" className="flex-1 sm:flex-none sm:w-48 text-base" onClick={handleApply} isLoading={isApplying}>Apply Now</Button>
+                <Button variant="outline" size="lg" className="gap-2" onClick={handleGenerateCoverLetter} isLoading={isGenerating}>
+                  <Sparkles className="h-4 w-4 text-blue-500" /> AI Cover Letter
+                </Button>
                 <Button variant="outline" size="lg" className="gap-2">
                   <Bookmark className="h-4 w-4" /> Save Job
                 </Button>
@@ -74,6 +101,16 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
                   <Clock className="h-4 w-4" /> Posted {new Date(job.createdAt).toLocaleDateString()} • {job.applicantsCount || 0} applicants
                 </div>
               </div>
+              
+              {/* Cover Letter Display */}
+              {coverLetter && (
+                <div className="mt-6 bg-muted/30 border rounded-xl p-6">
+                  <h3 className="font-bold mb-4 flex items-center gap-2"><FileText className="h-5 w-5 text-primary"/> Generated Cover Letter</h3>
+                  <div className="whitespace-pre-line text-sm leading-relaxed font-serif">
+                    {coverLetter}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Details Section */}

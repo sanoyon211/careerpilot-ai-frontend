@@ -9,8 +9,15 @@ export const aiApi = baseApi.injectEndpoints({
         body: { history },
       }),
     }),
+    generateCoverLetter: builder.mutation<{ success: boolean; data: string }, { jobDescription: string; resumeData: any }>({
+      query: (body) => ({
+        url: '/ai/generate-cover-letter',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useSendMessageMutation } = aiApi;
+export const { useSendMessageMutation, useGenerateCoverLetterMutation } = aiApi;

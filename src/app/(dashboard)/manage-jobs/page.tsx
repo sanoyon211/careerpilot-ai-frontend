@@ -98,7 +98,7 @@ export default function ManageJobsPage() {
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-2">
                       <span className="font-semibold">{job.applicantsCount || 0}</span>
-                      <Link href="#" className="text-xs text-primary hover:underline">View</Link>
+                      <Link href={`/manage-jobs/${job._id}/applications`} className="text-xs text-primary hover:underline">View</Link>
                     </div>
                   </td>
                   <td className="py-4 px-6 text-sm text-muted-foreground">

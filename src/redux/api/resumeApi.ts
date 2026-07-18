@@ -9,6 +9,8 @@ export interface ResumeData {
     technicalSkills: string[];
     softSkills: string[];
     experienceSummary: string;
+    atsScore?: number;
+    atsFeedback?: string[];
   };
   createdAt: string;
 }

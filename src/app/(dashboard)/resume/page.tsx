@@ -152,6 +152,28 @@ export default function ResumePage() {
                     {resume.parsedData.experienceSummary || "No experience summary available."}
                   </p>
                 </div>
+
+                {resume.parsedData.atsScore !== undefined && (
+                  <div className="border-t pt-4 mt-4">
+                    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">ATS Score</h3>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="text-3xl font-bold text-primary">{resume.parsedData.atsScore}/100</div>
+                      <div className="w-full bg-muted rounded-full h-2.5">
+                        <div className="bg-primary h-2.5 rounded-full" style={{ width: `${resume.parsedData.atsScore}%` }}></div>
+                      </div>
+                    </div>
+                    {resume.parsedData.atsFeedback && resume.parsedData.atsFeedback.length > 0 && (
+                      <div>
+                        <h4 className="text-xs font-semibold mb-2">Feedback to improve:</h4>
+                        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                          {resume.parsedData.atsFeedback.map((feedback: string, i: number) => (
+                            <li key={i}>{feedback}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           )}
