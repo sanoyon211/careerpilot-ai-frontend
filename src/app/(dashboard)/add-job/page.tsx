@@ -20,8 +20,8 @@ export default function AddJobPage() {
       shortDescription: formData.get("shortDescription") as string,
       fullDescription: formData.get("fullDescription") as string,
       location: formData.get("location") as string,
-      workMode: formData.get("workMode") as string,
-      jobType: formData.get("jobType") as string,
+      workMode: formData.get("workMode") as "Remote" | "Hybrid" | "On-site",
+      jobType: formData.get("jobType") as "Full-time" | "Part-time" | "Contract" | "Internship",
       salaryRange: (formData.get("salaryRange") as string) || undefined,
       status: "Active" as const,
     }

@@ -29,6 +29,7 @@ export default function LoginPage() {
         user: response.data.user,
         accessToken: response.data.accessToken
       }))
+      document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
       router.push("/dashboard")
     } catch (err: any) {
       setErrorMsg(err.data?.message || "Failed to login")
@@ -52,6 +53,7 @@ export default function LoginPage() {
         user: response.data.user,
         accessToken: response.data.accessToken
       }))
+      document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
       router.push("/dashboard")
     } catch (err: any) {
       setErrorMsg(err.message || err.data?.message || "Failed to login with Google")
