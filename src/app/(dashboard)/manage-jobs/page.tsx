@@ -4,11 +4,23 @@ import { useState } from "react"
 import { Button } from "@/components/common/Button"
 import { Edit, Trash2, Eye, MoreVertical, PlusCircle, Search, Filter } from "lucide-react"
 import Link from "next/link"
-import { useGetEmployerJobsQuery } from "@/redux/api/jobsApi"
+import { useGetEmployerJobsQuery, useDeleteJobMutation } from "@/redux/api/jobsApi"
 
 export default function ManageJobsPage() {
   const { data: jobsResponse, isLoading, isError } = useGetEmployerJobsQuery()
+  const [deleteJob] = useDeleteJobMutation()
   const postedJobs = jobsResponse?.data || []
+
+  const handleDelete = async (id: string) => {
+    if (confirm("Are you sure you want to delete this job?")) {
+      try {
+        await deleteJob(id).unwrap()
+        alert("Job deleted successfully")
+      } catch (err: any) {
+        alert(err.data?.message || "Failed to delete job")
+      }
+    }
+  }
   return (
     <div className="max-w-6xl space-y-6">
       
@@ -100,7 +112,7 @@ export default function ManageJobsPage() {
                       <Button variant="outline" size="icon" className="h-8 w-8" title="Edit Job">
                         <Edit className="h-4 w-4" />
                       </Button>
-                      <Button variant="outline" size="icon" className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDelete(job._id)}>
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>

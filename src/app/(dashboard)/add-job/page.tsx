@@ -23,6 +23,7 @@ export default function AddJobPage() {
       workMode: formData.get("workMode") as "Remote" | "Hybrid" | "On-site",
       jobType: formData.get("jobType") as "Full-time" | "Part-time" | "Contract" | "Internship",
       salaryRange: (formData.get("salaryRange") as string) || undefined,
+      imageUrl: (formData.get("imageUrl") as string) || undefined,
       status: "Active" as const,
     }
 
@@ -139,6 +140,13 @@ export default function AddJobPage() {
               <input name="salaryRange" type="text" placeholder="e.g. $100,000 - $130,000" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
             </div>
             <p className="text-xs text-muted-foreground">Adding a salary range increases applications by up to 30%.</p>
+          </div>
+          
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Image URL (Optional)</label>
+            <div className="relative">
+              <input name="imageUrl" type="url" placeholder="https://example.com/image.jpg" className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
           </div>
         </div>
 

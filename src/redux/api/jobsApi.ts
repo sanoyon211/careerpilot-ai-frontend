@@ -10,6 +10,7 @@ export interface Job {
   workMode: 'Remote' | 'Hybrid' | 'On-site';
   jobType: 'Full-time' | 'Part-time' | 'Contract' | 'Internship';
   salaryRange?: string;
+  imageUrl?: string;
   employerId: {
     _id: string;
     name: string;
@@ -59,7 +60,14 @@ export const jobsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Job'],
     }),
+    deleteJob: builder.mutation<{ success: boolean; message: string }, string>({
+      query: (id) => ({
+        url: `/jobs/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Job'],
+    }),
   }),
 });
 
-export const { useGetJobsQuery, useGetEmployerJobsQuery, useGetJobByIdQuery, useCreateJobMutation } = jobsApi;
+export const { useGetJobsQuery, useGetEmployerJobsQuery, useGetJobByIdQuery, useCreateJobMutation, useDeleteJobMutation } = jobsApi;

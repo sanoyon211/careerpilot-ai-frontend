@@ -129,9 +129,25 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <Button type="submit" disabled={isLoading} className="w-full gap-2 mt-2">
-                <LogIn className="h-4 w-4" /> {isLoading ? "Signing in..." : "Sign In"}
-              </Button>
+              <div className="flex gap-2 mt-2">
+                <Button type="submit" disabled={isLoading} className="flex-1 gap-2">
+                  <LogIn className="h-4 w-4" /> {isLoading ? "Signing in..." : "Sign In"}
+                </Button>
+                <Button 
+                  type="button" 
+                  variant="secondary"
+                  disabled={isLoading} 
+                  className="flex-1 gap-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setEmail("johndoe@example.com");
+                    setPassword("password123");
+                    // We can just set them, user can then click Sign In, or we can auto submit
+                  }}
+                >
+                  Demo Credentials
+                </Button>
+              </div>
             </form>
 
             <div className="mt-6">
