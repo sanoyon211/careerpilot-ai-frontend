@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { Send, User, Sparkles, Copy, ThumbsUp, RefreshCw } from "lucide-react"
+import { useSendMessageMutation } from "@/redux/api/aiApi"
+import { toast } from "sonner"
 
 type Message = {
   id: number
@@ -27,27 +29,34 @@ const SUGGESTIONS = [
 export default function AIChatPage() {
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
   const [input, setInput] = useState("")
-  const [isTyping, setIsTyping] = useState(false)
+  const [sendMessage, { isLoading: isTyping }] = useSendMessageMutation()
 
-  const handleSend = (text: string) => {
+  const handleSend = async (text: string) => {
     if (!text.trim()) return
 
     const userMsg: Message = { id: Date.now(), role: "user", content: text }
-    setMessages(prev => [...prev, userMsg])
+    const newMessages = [...messages, userMsg]
+    setMessages(newMessages)
     setInput("")
-    setIsTyping(true)
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      // Extract history without ids to send to backend
+      const history = newMessages.map(msg => ({ role: msg.role, content: msg.content }))
+      
+      const response = await sendMessage(history).unwrap()
+      
       const aiMsg: Message = { 
         id: Date.now() + 1, 
         role: "ai", 
-        content: "That's a great question! Based on current market trends and your existing TypeScript experience, I'd highly recommend looking into server-side rendering patterns with Next.js. Would you like me to generate a personalized learning roadmap for this?" 
+        content: response.data?.reply || response.data || "I'm sorry, I couldn't process that." 
       }
       setMessages(prev => [...prev, aiMsg])
-      setIsTyping(false)
-    }, 1500)
+    } catch (err: any) {
+      toast.error(err.data?.message || "Failed to get response from AI")
+      // Remove the user message if it failed or maybe just show error
+    }
   }
+
 
   return (
     <div className="flex flex-col h-[calc(100vh-100px)] md:h-[calc(100vh-64px)] -m-4 md:-m-8">
@@ -69,7 +78,7 @@ export default function AIChatPage() {
             </p>
           </div>
         </div>
-        <button className="text-muted-foreground hover:text-foreground transition-colors p-2" title="Clear Chat">
+        <button onClick={() => setMessages(INITIAL_MESSAGES)} className="text-muted-foreground hover:text-foreground transition-colors p-2" title="Clear Chat">
           <RefreshCw className="h-4 w-4" />
         </button>
       </div>
