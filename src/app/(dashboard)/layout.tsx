@@ -1,7 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "@/redux/slices/authSlice"
+import type { RootState } from "@/redux/store"
 import { 
   LayoutDashboard, User, FileText, Bookmark, CheckSquare, 
   Settings, LogOut, Menu, X, Sparkles, MessageSquare 
@@ -31,6 +34,9 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state.auth.user)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
@@ -58,59 +64,74 @@ export default function DashboardLayout({
         </div>
 
         <nav className="p-4 space-y-1">
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 mt-2 px-3">
-            Job Seeker Menu
-          </div>
-          {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href
-            return (
-              <Link 
-                key={link.href} 
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                  isActive 
-                    ? "bg-primary text-primary-foreground" 
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-              >
-                <link.icon className="h-4 w-4 shrink-0" />
-                {link.label}
-                {link.isPremium && (
-                  <Sparkles className={`h-3 w-3 ml-auto ${isActive ? "text-yellow-300" : "text-yellow-500"}`} />
-                )}
-              </Link>
-            )
-          })}
+          {(!user || user.role === "job-seeker") && (
+            <>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 mt-2 px-3">
+                Job Seeker Menu
+              </div>
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href
+                return (
+                  <Link 
+                    key={link.href} 
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      isActive 
+                        ? "bg-primary text-primary-foreground" 
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    <link.icon className="h-4 w-4 shrink-0" />
+                    {link.label}
+                    {link.isPremium && (
+                      <Sparkles className={`h-3 w-3 ml-auto ${isActive ? "text-yellow-300" : "text-yellow-500"}`} />
+                    )}
+                  </Link>
+                )
+              })}
+            </>
+          )}
           
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 mt-8 px-3">
-            Employer Menu
-          </div>
-          {EMPLOYER_LINKS.map((link) => {
-            const isActive = pathname === link.href
-            return (
-              <Link 
-                key={link.href} 
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                  isActive 
-                    ? "bg-primary text-primary-foreground" 
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-              >
-                <link.icon className="h-4 w-4 shrink-0" />
-                {link.label}
-              </Link>
-            )
-          })}
+          {(!user || user.role === "employer") && (
+            <>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 mt-8 px-3">
+                Employer Menu
+              </div>
+              {EMPLOYER_LINKS.map((link) => {
+                const isActive = pathname === link.href
+                return (
+                  <Link 
+                    key={link.href} 
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      isActive 
+                        ? "bg-primary text-primary-foreground" 
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    <link.icon className="h-4 w-4 shrink-0" />
+                    {link.label}
+                  </Link>
+                )
+              })}
+            </>
+          )}
         </nav>
 
         <div className="p-4 mt-auto border-t md:absolute md:bottom-0 md:w-full bg-card">
           <Link href="/settings" className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${pathname === "/settings" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}>
             <Settings className="h-4 w-4 shrink-0" /> Settings
           </Link>
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors mt-1">
+          <button 
+            onClick={() => {
+              dispatch(logout());
+              document.cookie = 'accessToken=; Max-Age=0; path=/; SameSite=Lax';
+              router.push('/login');
+            }}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors mt-1"
+          >
             <LogOut className="h-4 w-4 shrink-0" /> Sign Out
           </button>
         </div>

@@ -48,7 +48,7 @@ export default function AIChatPage() {
       const aiMsg: Message = { 
         id: Date.now() + 1, 
         role: "ai", 
-        content: response.data || "I'm sorry, I couldn't process that." 
+        content: response.data?.reply || "I'm sorry, I couldn't process that." 
       }
       setMessages(prev => [...prev, aiMsg])
     } catch (err: any) {

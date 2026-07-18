@@ -8,7 +8,7 @@ export interface ChatMessage {
 export interface ChatResponse {
   success: boolean;
   message: string;
-  data: string; // The AI's response text
+  data: { reply: string }; // The AI's response text
 }
 
 export const chatApi = baseApi.injectEndpoints({
