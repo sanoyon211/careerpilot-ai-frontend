@@ -4,15 +4,11 @@ import { useState } from "react"
 import { Button } from "@/components/common/Button"
 import { Edit, Trash2, Eye, MoreVertical, PlusCircle, Search, Filter } from "lucide-react"
 import Link from "next/link"
-
-const POSTED_JOBS = [
-  { id: 1, title: "Senior Frontend Engineer", type: "Full-time", location: "Remote", postedDate: "2026-07-10", applicants: 45, status: "Active" },
-  { id: 2, title: "Product Designer", type: "Full-time", location: "New York, NY", postedDate: "2026-07-12", applicants: 12, status: "Active" },
-  { id: 3, title: "Marketing Director", type: "Contract", location: "London, UK", postedDate: "2026-06-25", applicants: 128, status: "Closed" },
-  { id: 4, title: "Backend Developer (Node.js)", type: "Full-time", location: "Hybrid", postedDate: "2026-07-15", applicants: 8, status: "Draft" },
-]
+import { useGetEmployerJobsQuery } from "@/redux/api/jobsApi"
 
 export default function ManageJobsPage() {
+  const { data: jobsResponse, isLoading, isError } = useGetEmployerJobsQuery()
+  const postedJobs = jobsResponse?.data || []
   return (
     <div className="max-w-6xl space-y-6">
       
@@ -62,11 +58,21 @@ export default function ManageJobsPage() {
               </tr>
             </thead>
             <tbody className="divide-y">
-              {POSTED_JOBS.map((job) => (
-                <tr key={job.id} className="hover:bg-muted/30 transition-colors">
+              {isLoading && (
+                <tr>
+                  <td colSpan={5} className="py-8 text-center text-muted-foreground">Loading your jobs...</td>
+                </tr>
+              )}
+              {!isLoading && postedJobs.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="py-8 text-center text-muted-foreground">You haven't posted any jobs yet.</td>
+                </tr>
+              )}
+              {postedJobs.map((job) => (
+                <tr key={job._id} className="hover:bg-muted/30 transition-colors">
                   <td className="py-4 px-6">
                     <div className="font-semibold text-base">{job.title}</div>
-                    <div className="text-sm text-muted-foreground">{job.type} • {job.location}</div>
+                    <div className="text-sm text-muted-foreground">{job.jobType} • {job.location}</div>
                   </td>
                   <td className="py-4 px-6">
                     <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold
@@ -79,12 +85,12 @@ export default function ManageJobsPage() {
                   </td>
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold">{job.applicants}</span>
+                      <span className="font-semibold">{job.applicantsCount || 0}</span>
                       <Link href="#" className="text-xs text-primary hover:underline">View</Link>
                     </div>
                   </td>
                   <td className="py-4 px-6 text-sm text-muted-foreground">
-                    {job.postedDate}
+                    {new Date(job.createdAt).toLocaleDateString()}
                   </td>
                   <td className="py-4 px-6 text-right">
                     <div className="flex items-center justify-end gap-2">
@@ -107,8 +113,9 @@ export default function ManageJobsPage() {
 
         {/* Mobile List View */}
         <div className="md:hidden divide-y">
-          {POSTED_JOBS.map((job) => (
-            <div key={job.id} className="p-4 space-y-3">
+          {isLoading && <div className="p-4 text-center text-muted-foreground">Loading...</div>}
+          {postedJobs.map((job) => (
+            <div key={job._id} className="p-4 space-y-3">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-semibold">{job.title}</h3>
@@ -124,7 +131,7 @@ export default function ManageJobsPage() {
                 >
                   {job.status}
                 </span>
-                <span className="text-muted-foreground">{job.applicants} applicants</span>
+                <span className="text-muted-foreground">{job.applicantsCount || 0} applicants</span>
               </div>
             </div>
           ))}

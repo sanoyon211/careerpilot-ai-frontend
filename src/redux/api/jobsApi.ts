@@ -37,7 +37,29 @@ export const jobsApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Job'],
     }),
+    getEmployerJobs: builder.query<JobsResponse, void>({
+      query: () => ({
+        url: '/jobs/employer',
+        method: 'GET',
+      }),
+      providesTags: ['Job'],
+    }),
+    getJobById: builder.query<{ success: boolean; data: Job }, string>({
+      query: (id) => ({
+        url: `/jobs/${id}`,
+        method: 'GET',
+      }),
+      providesTags: ['Job'],
+    }),
+    createJob: builder.mutation<{ success: boolean; message: string; data: Job }, Partial<Job>>({
+      query: (body) => ({
+        url: '/jobs',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Job'],
+    }),
   }),
 });
 
-export const { useGetJobsQuery } = jobsApi;
+export const { useGetJobsQuery, useGetEmployerJobsQuery, useGetJobByIdQuery, useCreateJobMutation } = jobsApi;

@@ -3,18 +3,36 @@
 import { useState } from "react"
 import { Button } from "@/components/common/Button"
 import { Briefcase, MapPin, DollarSign, List, Tag, FileText, Send, Sparkles } from "lucide-react"
+import { useCreateJobMutation } from "@/redux/api/jobsApi"
+import { useRouter } from "next/navigation"
 
 export default function AddJobPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [showAiEnhance, setShowAiEnhance] = useState(false)
+  const [createJob, { isLoading: isSubmitting }] = useCreateJobMutation()
+  const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setTimeout(() => {
-      setIsSubmitting(false)
+    const formData = new FormData(e.currentTarget)
+    const jobData = {
+      title: formData.get("title") as string,
+      category: formData.get("category") as string,
+      shortDescription: formData.get("shortDescription") as string,
+      fullDescription: formData.get("fullDescription") as string,
+      location: formData.get("location") as string,
+      workMode: formData.get("workMode") as string,
+      jobType: formData.get("jobType") as string,
+      salaryRange: (formData.get("salaryRange") as string) || undefined,
+      status: "Active" as const,
+    }
+
+    try {
+      await createJob(jobData).unwrap()
       alert("Job posted successfully!")
-    }, 1500)
+      router.push("/manage-jobs")
+    } catch (err: any) {
+      alert(err.data?.message || "Failed to post job")
+    }
   }
 
   return (
@@ -56,20 +74,20 @@ export default function AddJobPage() {
               <label className="text-sm font-medium">Job Title *</label>
               <div className="relative">
                 <Briefcase className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <input type="text" required placeholder="e.g. Senior Frontend Engineer" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
+                <input name="title" type="text" required placeholder="e.g. Senior Frontend Engineer" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
               </div>
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Category / Industry *</label>
               <div className="relative">
                 <Tag className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <select required className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary appearance-none">
+                <select name="category" required className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary appearance-none">
                   <option value="">Select a category</option>
-                  <option>Software Engineering</option>
-                  <option>Data Science</option>
-                  <option>Design / UX</option>
-                  <option>Marketing</option>
-                  <option>Sales</option>
+                  <option value="Software Engineering">Software Engineering</option>
+                  <option value="Data Science">Data Science</option>
+                  <option value="Design / UX">Design / UX</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Sales">Sales</option>
                 </select>
               </div>
             </div>
@@ -77,7 +95,7 @@ export default function AddJobPage() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium">Short Description (Summary) *</label>
-            <textarea required rows={2} placeholder="A brief summary of the role to display on the job card..." className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none" />
+            <textarea name="shortDescription" required rows={2} placeholder="A brief summary of the role to display on the job card..." className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none" />
           </div>
         </div>
 
@@ -90,13 +108,13 @@ export default function AddJobPage() {
               <label className="text-sm font-medium">Location *</label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <input type="text" required placeholder="e.g. New York, NY" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
+                <input name="location" type="text" required placeholder="e.g. New York, NY" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
               </div>
             </div>
             
             <div className="space-y-2">
               <label className="text-sm font-medium">Work Mode *</label>
-              <select required className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
+              <select name="workMode" required className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
                 <option value="Remote">Remote</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="On-site">On-site</option>
@@ -105,7 +123,7 @@ export default function AddJobPage() {
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Job Type *</label>
-              <select required className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
+              <select name="jobType" required className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
                 <option value="Full-time">Full-time</option>
                 <option value="Part-time">Part-time</option>
                 <option value="Contract">Contract</option>
@@ -118,7 +136,7 @@ export default function AddJobPage() {
             <label className="text-sm font-medium">Salary Range</label>
             <div className="relative">
               <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <input type="text" placeholder="e.g. $100,000 - $130,000" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
+              <input name="salaryRange" type="text" placeholder="e.g. $100,000 - $130,000" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
             </div>
             <p className="text-xs text-muted-foreground">Adding a salary range increases applications by up to 30%.</p>
           </div>
@@ -132,7 +150,7 @@ export default function AddJobPage() {
             <label className="text-sm font-medium">Responsibilities & Requirements *</label>
             <div className="relative">
               <FileText className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <textarea required rows={8} placeholder="List the full responsibilities, requirements, and benefits..." className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
+              <textarea name="fullDescription" required rows={8} placeholder="List the full responsibilities, requirements, and benefits..." className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
             </div>
           </div>
         </div>

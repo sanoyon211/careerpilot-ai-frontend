@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Send, User, Sparkles, Copy, ThumbsUp, RefreshCw } from "lucide-react"
-import { useSendMessageMutation } from "@/redux/api/aiApi"
+import { useSendMessageMutation } from "@/redux/api/chatApi"
 import { toast } from "sonner"
 
 type Message = {
@@ -43,7 +43,7 @@ export default function AIChatPage() {
       // Extract history without ids to send to backend
       const history = newMessages.map(msg => ({ role: msg.role, content: msg.content }))
       
-      const response = await sendMessage(history).unwrap()
+      const response = await sendMessage({ history }).unwrap()
       
       const aiMsg: Message = { 
         id: Date.now() + 1, 
