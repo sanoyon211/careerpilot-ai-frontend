@@ -6,10 +6,11 @@ export interface ButtonProps
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
   size?: "default" | "sm" | "lg" | "icon"
   asChild?: boolean
+  isLoading?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", asChild = false, ...props }, ref) => {
+  ({ className, variant = "default", size = "default", asChild = false, isLoading, disabled, children, ...props }, ref) => {
     const Comp = asChild ? "span" : "button"
     
     let variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -33,8 +34,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         ref={ref}
+        disabled={disabled || isLoading}
         {...props}
-      />
+      >
+        {children}
+      </Comp>
     )
   }
 )

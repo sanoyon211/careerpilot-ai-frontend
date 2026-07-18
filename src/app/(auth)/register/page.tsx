@@ -2,19 +2,64 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/common/Button"
 import { Mail, Lock, User, UserPlus, ArrowLeft } from "lucide-react"
+import { useRegisterMutation } from "@/redux/api/authApi"
+import { useSocialLoginMutation } from "@/redux/api/authApi"
+import { useAppDispatch } from "@/redux/hooks"
+import { setCredentials } from "@/redux/slices/authSlice"
+import { auth } from "@/firebase/firebase.config"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 
 export default function RegisterPage() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [role, setRole] = useState("candidate")
+  const [role, setRole] = useState("job-seeker")
+  const [errorMsg, setErrorMsg] = useState("")
+  const [successMsg, setSuccessMsg] = useState("")
+  
+  const router = useRouter()
+  const dispatch = useAppDispatch()
+  const [registerUser, { isLoading }] = useRegisterMutation()
+  const [socialLogin, { isLoading: isSocialLoading }] = useSocialLoginMutation()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Static behavior
-    console.log("Registration attempted with", { name, email, password, role })
+    setErrorMsg("")
+    setSuccessMsg("")
+    try {
+      await registerUser({ name, email, password, role }).unwrap()
+      setSuccessMsg("Account created! Redirecting to login...")
+      setTimeout(() => router.push("/login"), 1500)
+    } catch (err: any) {
+      setErrorMsg(err.data?.message || "Failed to register")
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    setErrorMsg("")
+    try {
+      const provider = new GoogleAuthProvider()
+      const result = await signInWithPopup(auth, provider)
+      const user = result.user
+
+      const response = await socialLogin({
+        email: user.email,
+        name: user.displayName || "Google User",
+        photoURL: user.photoURL,
+      }).unwrap()
+
+      dispatch(setCredentials({
+        user: response.data.user,
+        accessToken: response.data.accessToken
+      }))
+      setSuccessMsg("Account created! Redirecting to dashboard...")
+      setTimeout(() => router.push("/dashboard"), 1500)
+    } catch (err: any) {
+      setErrorMsg(err.message || err.data?.message || "Failed to register with Google")
+    }
   }
 
   return (
@@ -39,15 +84,26 @@ export default function RegisterPage() {
                 Join thousands of professionals finding their dream jobs
               </p>
             </div>
+            
+            {errorMsg && (
+              <div className="bg-red-50 text-red-500 text-sm p-3 rounded-md mb-4 text-center">
+                {errorMsg}
+              </div>
+            )}
+            {successMsg && (
+              <div className="bg-green-50 text-green-600 text-sm p-3 rounded-md mb-4 text-center">
+                {successMsg}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4 mb-2">
                 <label
                   className={`cursor-pointer border rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all ${
-                    role === "candidate" ? "border-primary bg-primary/5 text-primary" : "border-border hover:bg-muted"
+                    role === "job-seeker" ? "border-primary bg-primary/5 text-primary" : "border-border hover:bg-muted"
                   }`}
                 >
-                  <input type="radio" name="role" value="candidate" checked={role === "candidate"} onChange={() => setRole("candidate")} className="sr-only" />
+                  <input type="radio" name="role" value="job-seeker" checked={role === "job-seeker"} onChange={() => setRole("job-seeker")} className="sr-only" />
                   <User className="h-5 w-5" />
                   <span className="text-sm font-medium">Job Seeker</span>
                 </label>
@@ -115,8 +171,8 @@ export default function RegisterPage() {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full gap-2 mt-4">
-                Create Account
+              <Button type="submit" disabled={isLoading} className="w-full gap-2 mt-4">
+                {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
             </form>
 
@@ -131,7 +187,7 @@ export default function RegisterPage() {
               </div>
 
               <div className="mt-6">
-                <Button variant="outline" type="button" className="w-full" onClick={() => {}}>
+                <Button variant="outline" type="button" className="w-full" onClick={handleGoogleLogin} disabled={isSocialLoading || isLoading}>
                   <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                     <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />

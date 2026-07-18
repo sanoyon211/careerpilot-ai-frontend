@@ -2,17 +2,60 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/common/Button"
 import { Mail, Lock, LogIn, ArrowRight } from "lucide-react"
+import { useLoginMutation, useSocialLoginMutation } from "@/redux/api/authApi"
+import { useAppDispatch } from "@/redux/hooks"
+import { setCredentials } from "@/redux/slices/authSlice"
+import { auth } from "@/firebase/firebase.config"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [errorMsg, setErrorMsg] = useState("")
+  const router = useRouter()
+  const dispatch = useAppDispatch()
+  const [login, { isLoading }] = useLoginMutation()
+  const [socialLogin, { isLoading: isSocialLoading }] = useSocialLoginMutation()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Static behavior: do nothing for now
-    console.log("Login attempted with", { email, password })
+    setErrorMsg("")
+    try {
+      const response = await login({ email, password }).unwrap()
+      dispatch(setCredentials({
+        user: response.data.user,
+        accessToken: response.data.accessToken
+      }))
+      router.push("/dashboard")
+    } catch (err: any) {
+      setErrorMsg(err.data?.message || "Failed to login")
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    setErrorMsg("")
+    try {
+      const provider = new GoogleAuthProvider()
+      const result = await signInWithPopup(auth, provider)
+      const user = result.user
+
+      const response = await socialLogin({
+        email: user.email,
+        name: user.displayName || "Google User",
+        photoURL: user.photoURL,
+      }).unwrap()
+
+      dispatch(setCredentials({
+        user: response.data.user,
+        accessToken: response.data.accessToken
+      }))
+      router.push("/dashboard")
+    } catch (err: any) {
+      setErrorMsg(err.message || err.data?.message || "Failed to login with Google")
+    }
   }
 
   return (
@@ -37,6 +80,11 @@ export default function LoginPage() {
                 Enter your credentials to access your account
               </p>
             </div>
+            {errorMsg && (
+              <div className="bg-red-50 text-red-500 text-sm p-3 rounded-md mb-4 text-center">
+                {errorMsg}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
@@ -79,8 +127,8 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full gap-2 mt-2">
-                <LogIn className="h-4 w-4" /> Sign In
+              <Button type="submit" disabled={isLoading} className="w-full gap-2 mt-2">
+                <LogIn className="h-4 w-4" /> {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
 
@@ -97,7 +145,7 @@ export default function LoginPage() {
               </div>
 
               <div className="mt-6">
-                <Button variant="outline" type="button" className="w-full" onClick={() => {}}>
+                <Button variant="outline" type="button" className="w-full" onClick={handleGoogleLogin} disabled={isSocialLoading || isLoading}>
                   <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                     <path
                       d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"

@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Your Agentic AI Career & Job Assistant",
 }
 
+import { Providers } from "@/redux/provider"
+
 export default function RootLayout({
   children,
 }: {
@@ -17,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased min-h-screen bg-background font-sans`}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   )
