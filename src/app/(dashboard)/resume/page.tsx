@@ -4,24 +4,44 @@ import { useState } from "react"
 import { Button } from "@/components/common/Button"
 import { UploadCloud, FileText, CheckCircle2, AlertCircle, Sparkles, Trash2, Download } from "lucide-react"
 import { useGetRecommendationsQuery } from "@/redux/api/recommendationApi"
+import { useGetMyResumeQuery, useUploadFileMutation, useParseResumeMutation } from "@/redux/api/resumeApi"
 import Link from "next/link"
+import { toast } from "sonner"
 
 export default function ResumePage() {
-  const [isUploading, setIsUploading] = useState(false)
-  const [hasResume, setHasResume] = useState(true)
+  const { data: resumeResponse, isLoading: isLoadingResume } = useGetMyResumeQuery();
+  const resume = resumeResponse?.data;
+  
+  const [uploadFile, { isLoading: isUploadingFile }] = useUploadFileMutation();
+  const [parseResume, { isLoading: isParsing }] = useParseResumeMutation();
 
+  const isWorking = isUploadingFile || isParsing;
+  
   const { data: recData, isLoading: isLoadingRecs } = useGetRecommendationsQuery(undefined, {
-    skip: !hasResume,
+    skip: !resume,
   });
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setIsUploading(true)
-      // Simulate upload & AI parsing
-      setTimeout(() => {
-        setIsUploading(false)
-        setHasResume(true)
-      }, 2000)
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      try {
+        // Step 1: Upload file
+        toast.loading("Uploading file...", { id: "resume-upload" });
+        const uploadRes = await uploadFile(formData).unwrap();
+        const fileUrl = uploadRes.data.url;
+        
+        // Step 2: Parse resume
+        toast.loading("AI is analyzing your resume...", { id: "resume-upload" });
+        await parseResume({ fileUrl }).unwrap();
+        
+        toast.success("Resume parsed successfully!", { id: "resume-upload" });
+      } catch (error: any) {
+        console.error(error);
+        toast.error(error.data?.message || "Failed to process resume", { id: "resume-upload" });
+      }
     }
   }
 
@@ -40,24 +60,25 @@ export default function ResumePage() {
           <div className="bg-card border rounded-2xl p-6 sm:p-8 shadow-sm">
             <h2 className="text-xl font-bold mb-4">Manage Resume</h2>
             
-            {hasResume ? (
+            {isLoadingResume ? (
+              <div className="p-4 text-center text-muted-foreground animate-pulse">Loading resume data...</div>
+            ) : resume ? (
               <div className="border rounded-xl p-4 flex items-center justify-between bg-muted/30">
                 <div className="flex items-center gap-4">
                   <div className="bg-primary/10 p-3 rounded-lg text-primary">
                     <FileText className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-sm">john_doe_resume_2026.pdf</h3>
-                    <p className="text-xs text-muted-foreground">Uploaded on July 10, 2026 • 2.4 MB</p>
+                    <h3 className="font-semibold text-sm">{resume.fileName || "Uploaded Resume"}</h3>
+                    <p className="text-xs text-muted-foreground">Uploaded on {new Date(resume.createdAt).toLocaleDateString()}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" className="h-8 w-8 p-0" title="Download">
-                    <Download className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" size="sm" className="h-8 w-8 p-0 text-red-500 hover:bg-red-50 hover:text-red-600" onClick={() => setHasResume(false)} title="Delete">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <a href={resume.fileUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="h-8 w-8 p-0" title="Download">
+                      <Download className="h-4 w-4" />
+                    </Button>
+                  </a>
                 </div>
               </div>
             ) : (
@@ -74,15 +95,15 @@ export default function ResumePage() {
                   accept=".pdf,.doc,.docx"
                   onChange={handleUpload}
                 />
-                <Button asChild isLoading={isUploading}>
+                <Button asChild isLoading={isWorking}>
                   <label htmlFor="resume-upload" className="cursor-pointer">
-                    Browse Files
+                    {isWorking ? "Processing..." : "Browse Files"}
                   </label>
                 </Button>
               </div>
             )}
             
-            {hasResume && (
+            {resume && (
               <div className="mt-6 bg-green-500/10 text-green-700 p-4 rounded-lg flex items-start gap-3 text-sm">
                 <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
                 <div>
@@ -94,48 +115,49 @@ export default function ResumePage() {
           </div>
 
           {/* AI Extracted Data */}
-          <div className="bg-card border rounded-2xl p-6 sm:p-8 shadow-sm">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-primary" /> AI Extracted Skills
-              </h2>
-              <Button variant="outline" size="sm">Edit Skills</Button>
-            </div>
+          {resume && resume.parsedData && (
+            <div className="bg-card border rounded-2xl p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" /> AI Extracted Skills
+                </h2>
+              </div>
 
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Technical Skills</h3>
-                <div className="flex flex-wrap gap-2">
-                  {["React", "Next.js", "TypeScript", "Node.js", "Tailwind CSS", "GraphQL", "Redux", "Git"].map(skill => (
-                    <span key={skill} className="bg-secondary text-secondary-foreground text-sm px-3 py-1.5 rounded-md font-medium">
-                      {skill}
-                    </span>
-                  ))}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Technical Skills</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {resume.parsedData.technicalSkills?.map((skill: string) => (
+                      <span key={skill} className="bg-secondary text-secondary-foreground text-sm px-3 py-1.5 rounded-md font-medium">
+                        {skill}
+                      </span>
+                    )) || <span className="text-muted-foreground text-sm">No technical skills extracted.</span>}
+                  </div>
                 </div>
-              </div>
-              
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Soft Skills</h3>
-                <div className="flex flex-wrap gap-2">
-                  {["Team Leadership", "Agile Methodology", "Problem Solving", "Communication"].map(skill => (
-                    <span key={skill} className="bg-muted text-foreground border text-sm px-3 py-1.5 rounded-md font-medium">
-                      {skill}
-                    </span>
-                  ))}
+                
+                <div>
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Soft Skills</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {resume.parsedData.softSkills?.map((skill: string) => (
+                      <span key={skill} className="bg-muted text-foreground border text-sm px-3 py-1.5 rounded-md font-medium">
+                        {skill}
+                      </span>
+                    )) || <span className="text-muted-foreground text-sm">No soft skills extracted.</span>}
+                  </div>
                 </div>
-              </div>
-              
-              <div className="border-t pt-4 mt-4">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Experience Summary</h3>
-                <p className="text-sm leading-relaxed">
-                  5+ years of experience as a Frontend Engineer. Strong focus on building scalable web applications using React and Next.js. Led a team of 3 developers in previous role at TechCorp.
-                </p>
+                
+                <div className="border-t pt-4 mt-4">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Experience Summary</h3>
+                  <p className="text-sm leading-relaxed">
+                    {resume.parsedData.experienceSummary || "No experience summary available."}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* AI Job Matches */}
-          {hasResume && (
+          {resume && (
             <div className="bg-card border rounded-2xl p-6 sm:p-8 shadow-sm">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold flex items-center gap-2">
