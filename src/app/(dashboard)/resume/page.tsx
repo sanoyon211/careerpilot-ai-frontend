@@ -3,10 +3,16 @@
 import { useState } from "react"
 import { Button } from "@/components/common/Button"
 import { UploadCloud, FileText, CheckCircle2, AlertCircle, Sparkles, Trash2, Download } from "lucide-react"
+import { useGetRecommendationsQuery } from "@/redux/api/recommendationApi"
+import Link from "next/link"
 
 export default function ResumePage() {
   const [isUploading, setIsUploading] = useState(false)
   const [hasResume, setHasResume] = useState(true)
+
+  const { data: recData, isLoading: isLoadingRecs } = useGetRecommendationsQuery(undefined, {
+    skip: !hasResume,
+  });
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -127,6 +133,44 @@ export default function ResumePage() {
               </div>
             </div>
           </div>
+
+          {/* AI Job Matches */}
+          {hasResume && (
+            <div className="bg-card border rounded-2xl p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" /> AI Matched Jobs
+                </h2>
+              </div>
+
+              {isLoadingRecs ? (
+                <div className="text-center py-8 text-muted-foreground animate-pulse">
+                  Analyzing your profile against available jobs...
+                </div>
+              ) : recData?.data?.recommendedJobs?.length ? (
+                <div className="space-y-4">
+                  {recData.data.recommendedJobs.map((rec) => (
+                    <div key={rec.jobId} className="border rounded-xl p-4 hover:border-primary/50 transition-colors">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="font-semibold">{rec.jobId}</h3>
+                        <span className="bg-green-500/10 text-green-600 text-xs font-semibold px-2 py-1 rounded-md">
+                          {rec.matchPercentage}% Match
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-4">{rec.reason}</p>
+                      <Link href={`/jobs/${rec.jobId}`}>
+                        <Button variant="outline" size="sm" className="w-full">View Job</Button>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  No perfect matches found at this time. We'll keep looking!
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Sidebar Info */}
