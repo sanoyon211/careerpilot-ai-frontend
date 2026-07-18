@@ -21,13 +21,13 @@ export default function DashboardOverviewPage() {
   const recentApps = appsResponse?.data?.slice(0, 3) || [];
 
   const STATS = isJobSeeker ? [
-    { label: "Applied Jobs", value: statsData?.appliedJobs || 0, icon: Briefcase, color: "text-blue-500", bg: "bg-blue-500/10" },
-    { label: "Saved Jobs", value: statsData?.savedJobs || 0, icon: Bookmark, color: "text-purple-500", bg: "bg-purple-500/10" },
+    { label: "Applied Jobs", value: (statsData as any)?.appliedJobs || 0, icon: Briefcase, color: "text-blue-500", bg: "bg-blue-500/10" },
+    { label: "Saved Jobs", value: (statsData as any)?.savedJobs || 0, icon: Bookmark, color: "text-purple-500", bg: "bg-purple-500/10" },
     { label: "Profile Views", value: statsData?.profileViews || 0, icon: Eye, color: "text-orange-500", bg: "bg-orange-500/10" },
     { label: "AI Match Score", value: (statsData as any)?.aiMatchScore || "0%", icon: Sparkles, color: "text-green-500", bg: "bg-green-500/10" },
   ] : [
-    { label: "Posted Jobs", value: statsData?.postedJobs || 0, icon: Briefcase, color: "text-blue-500", bg: "bg-blue-500/10" },
-    { label: "Total Applicants", value: statsData?.totalApplicants || 0, icon: FileText, color: "text-purple-500", bg: "bg-purple-500/10" },
+    { label: "Posted Jobs", value: (statsData as any)?.postedJobs || 0, icon: Briefcase, color: "text-blue-500", bg: "bg-blue-500/10" },
+    { label: "Total Applicants", value: (statsData as any)?.totalApplicants || 0, icon: FileText, color: "text-purple-500", bg: "bg-purple-500/10" },
     { label: "Profile Views", value: statsData?.profileViews || 0, icon: Eye, color: "text-orange-500", bg: "bg-orange-500/10" },
   ];
 
