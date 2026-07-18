@@ -4,22 +4,21 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/common/Button"
 import { Search, MapPin, Briefcase, DollarSign, Clock, Filter, Sparkles } from "lucide-react"
-
-// Mock Data
-const MOCK_JOBS = [
-  { id: "1", title: "Senior Frontend Engineer", company: "TechCorp Inc.", location: "San Francisco, CA (Remote)", type: "Full-time", salary: "$120k - $160k", posted: "2 days ago", tags: ["React", "Next.js", "TypeScript"], isAiMatch: true },
-  { id: "2", title: "Product Designer", company: "DesignHub", location: "New York, NY", type: "Full-time", salary: "$100k - $130k", posted: "1 day ago", tags: ["Figma", "UI/UX", "Prototyping"], isAiMatch: false },
-  { id: "3", title: "Backend Developer", company: "DataSystems", location: "Austin, TX (Hybrid)", type: "Contract", salary: "$80 - $110 / hr", posted: "3 hours ago", tags: ["Node.js", "MongoDB", "Express"], isAiMatch: true },
-  { id: "4", title: "Marketing Manager", company: "GrowthScale", location: "Remote", type: "Full-time", salary: "$90k - $120k", posted: "5 days ago", tags: ["SEO", "Content", "Strategy"], isAiMatch: false },
-  { id: "5", title: "AI Research Scientist", company: "OpenAI Labs", location: "San Francisco, CA", type: "Full-time", salary: "$150k - $250k", posted: "Just now", tags: ["Python", "PyTorch", "LLMs"], isAiMatch: true },
-  { id: "6", title: "DevOps Engineer", company: "CloudNet", location: "Remote", type: "Full-time", salary: "$130k - $170k", posted: "1 week ago", tags: ["AWS", "Kubernetes", "CI/CD"], isAiMatch: false },
-  { id: "7", title: "iOS Developer", company: "AppWorks", location: "London, UK", type: "Full-time", salary: "£70k - £90k", posted: "4 days ago", tags: ["Swift", "iOS", "Mobile"], isAiMatch: false },
-  { id: "8", title: "Data Analyst", company: "FinTech Solutions", location: "Chicago, IL", type: "Full-time", salary: "$80k - $110k", posted: "2 days ago", tags: ["SQL", "Tableau", "Python"], isAiMatch: true },
-]
+import { useGetJobsQuery } from "@/redux/api/jobsApi"
 
 export default function ExploreJobsPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [showFilters, setShowFilters] = useState(false)
+  const [jobType, setJobType] = useState<string>("")
+  const [workMode, setWorkMode] = useState<string>("")
+
+  const { data: jobsResponse, isLoading, isError } = useGetJobsQuery({
+    searchTerm: searchQuery || undefined,
+    jobType: jobType || undefined,
+    workMode: workMode || undefined,
+  })
+
+  const jobs = jobsResponse?.data || []
 
   return (
     <div className="min-h-screen bg-background py-12">
@@ -80,7 +79,13 @@ export default function ExploreJobsPage() {
                 <div className="space-y-2">
                   {["Full-time", "Part-time", "Contract", "Freelance", "Internship"].map(type => (
                     <label key={type} className="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" className="rounded border-input text-primary focus:ring-primary" />
+                      <input 
+                        type="checkbox" 
+                        name="jobType"
+                        checked={jobType === type}
+                        onChange={(e) => setJobType(e.target.checked ? type : "")}
+                        className="rounded border-input text-primary focus:ring-primary" 
+                      />
                       <span className="text-sm">{type}</span>
                     </label>
                   ))}
@@ -92,7 +97,13 @@ export default function ExploreJobsPage() {
                 <div className="space-y-2">
                   {["Remote", "On-site", "Hybrid"].map(mode => (
                     <label key={mode} className="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" className="rounded border-input text-primary focus:ring-primary" />
+                      <input 
+                        type="checkbox" 
+                        name="workMode"
+                        checked={workMode === mode}
+                        onChange={(e) => setWorkMode(e.target.checked ? mode : "")}
+                        className="rounded border-input text-primary focus:ring-primary" 
+                      />
                       <span className="text-sm">{mode}</span>
                     </label>
                   ))}
@@ -123,47 +134,51 @@ export default function ExploreJobsPage() {
 
             {/* Desktop: 4 cols? The rules say "Desktop view: 4 cards per row". Let's do grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-              {MOCK_JOBS.map((job) => (
-                <div key={job.id} className="bg-card border rounded-2xl p-6 hover:shadow-lg transition-all hover:border-primary/50 group flex flex-col h-full">
+              {isLoading && <div className="col-span-full text-center py-12">Loading jobs...</div>}
+              {!isLoading && jobs.length === 0 && (
+                <div className="col-span-full text-center py-12 text-muted-foreground">
+                  No jobs found matching your criteria.
+                </div>
+              )}
+              {jobs.map((job) => (
+                <div key={job._id} className="bg-card border rounded-2xl p-6 hover:shadow-lg transition-all hover:border-primary/50 group flex flex-col h-full">
                   <div className="flex justify-between items-start mb-4">
                     <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center text-xl font-bold text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                      {job.company.charAt(0)}
+                      {job.employerId?.name?.charAt(0) || "C"}
                     </div>
-                    {job.isAiMatch && (
-                      <span className="inline-flex items-center gap-1 bg-green-500/10 text-green-600 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                        <Sparkles className="h-3 w-3" /> High Match
-                      </span>
-                    )}
                   </div>
                   
                   <h3 className="font-semibold text-lg line-clamp-1 mb-1 group-hover:text-primary transition-colors">{job.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-1">{job.company}</p>
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-1">{job.employerId?.name || "Company"}</p>
                   
                   <div className="space-y-2 mb-6 flex-1">
                     <div className="flex items-center text-sm text-muted-foreground gap-2">
                       <MapPin className="h-4 w-4 shrink-0" /> <span className="line-clamp-1">{job.location}</span>
                     </div>
                     <div className="flex items-center text-sm text-muted-foreground gap-2">
-                      <Briefcase className="h-4 w-4 shrink-0" /> {job.type}
+                      <Briefcase className="h-4 w-4 shrink-0" /> {job.jobType}
                     </div>
-                    <div className="flex items-center text-sm text-muted-foreground gap-2">
-                      <DollarSign className="h-4 w-4 shrink-0" /> {job.salary}
-                    </div>
+                    {job.salaryRange && (
+                      <div className="flex items-center text-sm text-muted-foreground gap-2">
+                        <DollarSign className="h-4 w-4 shrink-0" /> {job.salaryRange}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {job.tags.map(tag => (
-                      <span key={tag} className="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded-md">
-                        {tag}
-                      </span>
-                    ))}
+                    <span className="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded-md">
+                      {job.category}
+                    </span>
+                    <span className="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded-md">
+                      {job.workMode}
+                    </span>
                   </div>
 
                   <div className="flex items-center justify-between mt-auto pt-4 border-t">
                     <span className="flex items-center text-xs text-muted-foreground gap-1">
-                      <Clock className="h-3.5 w-3.5" /> {job.posted}
+                      <Clock className="h-3.5 w-3.5" /> {new Date(job.createdAt).toLocaleDateString()}
                     </span>
-                    <Link href={`/jobs/${job.id}`}>
+                    <Link href={`/jobs/${job._id}`}>
                       <Button variant="default" size="sm" className="rounded-lg">View Details</Button>
                     </Link>
                   </div>
