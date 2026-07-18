@@ -11,11 +11,19 @@ type Message = {
   content: string
 }
 
-const INITIAL_MESSAGES: Message[] = [
+const INITIAL_COACH_MESSAGES: Message[] = [
   { 
     id: 1, 
     role: "ai", 
-    content: "Hi John! I'm your CareerPilot AI Coach. I've analyzed your resume and recent applications. How can I help you today? I can help you prepare for interviews, negotiate salary, or suggest skills to learn." 
+    content: "Hi! I'm your CareerPilot AI Coach. How can I help you today? I can help you prepare for interviews, negotiate salary, or suggest skills to learn." 
+  }
+]
+
+const INITIAL_MOCK_MESSAGES: Message[] = [
+  { 
+    id: 1, 
+    role: "ai", 
+    content: "Welcome to your Mock Interview session. I will be your interviewer today. Are you ready to begin? If so, please introduce yourself." 
   }
 ]
 
@@ -27,7 +35,8 @@ const SUGGESTIONS = [
 ]
 
 export default function AIChatPage() {
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
+  const [mode, setMode] = useState<"coach" | "mock-interview">("coach")
+  const [messages, setMessages] = useState<Message[]>(INITIAL_COACH_MESSAGES)
   const [input, setInput] = useState("")
   const [sendMessage, { isLoading: isTyping }] = useSendMessageMutation()
 
@@ -43,7 +52,7 @@ export default function AIChatPage() {
       // Extract history without ids to send to backend
       const history = newMessages.map(msg => ({ role: msg.role, content: msg.content }))
       
-      const response = await sendMessage({ history }).unwrap()
+      const response = await sendMessage({ history, mode }).unwrap()
       
       console.log("AI API Response:", response);
       
@@ -81,19 +90,41 @@ export default function AIChatPage() {
             <Sparkles className="h-5 w-5" />
           </div>
           <div>
-            <h1 className="font-bold text-lg leading-tight">Career Coach AI</h1>
+            <h1 className="font-bold text-lg leading-tight">{mode === 'coach' ? 'Career Coach AI' : 'Mock Interviewer'}</h1>
             <p className="text-xs text-muted-foreground flex items-center gap-1">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-              Online • Powered by GPT-4
+              Online • Powered by Gemini Flash
             </p>
           </div>
         </div>
-        <button onClick={() => setMessages(INITIAL_MESSAGES)} className="text-muted-foreground hover:text-foreground transition-colors p-2" title="Clear Chat">
-          <RefreshCw className="h-4 w-4" />
-        </button>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center bg-muted p-1 rounded-lg">
+            <button
+              onClick={() => {
+                setMode("coach");
+                setMessages(INITIAL_COACH_MESSAGES);
+              }}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${mode === 'coach' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              Coach
+            </button>
+            <button
+              onClick={() => {
+                setMode("mock-interview");
+                setMessages(INITIAL_MOCK_MESSAGES);
+              }}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${mode === 'mock-interview' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              Mock Interview
+            </button>
+          </div>
+          <button onClick={() => setMessages(mode === 'coach' ? INITIAL_COACH_MESSAGES : INITIAL_MOCK_MESSAGES)} className="text-muted-foreground hover:text-foreground transition-colors p-2" title="Clear Chat">
+            <RefreshCw className="h-4 w-4" />
+          </button>
+        </div>
       </div>
 
       {/* Chat Area */}
@@ -151,7 +182,7 @@ export default function AIChatPage() {
         <div className="max-w-3xl mx-auto space-y-3">
           
           {/* Suggestions */}
-          {messages.length === 1 && (
+          {messages.length === 1 && mode === 'coach' && (
             <div className="flex flex-wrap gap-2 mb-2">
               {SUGGESTIONS.map(suggestion => (
                 <button 

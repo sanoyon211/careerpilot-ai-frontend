@@ -5,6 +5,7 @@ import { Button } from "@/components/common/Button"
 import { Edit, Trash2, Eye, MoreVertical, PlusCircle, Search, Filter } from "lucide-react"
 import Link from "next/link"
 import { useGetEmployerJobsQuery, useDeleteJobMutation } from "@/redux/api/jobsApi"
+import { toast } from "sonner"
 
 export default function ManageJobsPage() {
   const { data: jobsResponse, isLoading, isError } = useGetEmployerJobsQuery()
@@ -15,9 +16,9 @@ export default function ManageJobsPage() {
     if (confirm("Are you sure you want to delete this job?")) {
       try {
         await deleteJob(id).unwrap()
-        alert("Job deleted successfully")
+        toast.success("Job deleted successfully")
       } catch (err: any) {
-        alert(err.data?.message || "Failed to delete job")
+        toast.error(err.data?.message || "Failed to delete job")
       }
     }
   }

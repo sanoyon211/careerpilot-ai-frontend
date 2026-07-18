@@ -5,6 +5,7 @@ import { useGetJobApplicationsQuery, useUpdateApplicationStatusMutation } from "
 import { Button } from "@/components/common/Button"
 import { ArrowLeft, User, FileText, ChevronRight, Check, X, Clock } from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 const COLUMNS = [
   { id: "Applied", title: "Applied", color: "bg-gray-100 dark:bg-gray-800/50" },
@@ -17,16 +18,48 @@ const COLUMNS = [
 export default function JobApplicationsBoard({ params }: { params: { jobId: string } }) {
   const { data: appsResponse, isLoading } = useGetJobApplicationsQuery(params.jobId)
   const [updateStatus, { isLoading: isUpdating }] = useUpdateApplicationStatusMutation()
+  const [draggedAppId, setDraggedAppId] = useState<string | null>(null)
+  const [dragOverColId, setDragOverColId] = useState<string | null>(null)
   
   const applications = appsResponse?.data || []
 
   const handleStatusChange = async (appId: string, newStatus: string) => {
     try {
       await updateStatus({ id: appId, status: newStatus }).unwrap()
-    } catch (error) {
+      toast.success(`Application moved to ${newStatus}`)
+    } catch (error: any) {
       console.error(error)
-      alert("Failed to update status")
+      toast.error(error.data?.message || "Failed to update status")
     }
+  }
+
+  const handleDragStart = (e: React.DragEvent, appId: string) => {
+    setDraggedAppId(appId)
+    e.dataTransfer.setData("appId", appId)
+  }
+
+  const handleDragOver = (e: React.DragEvent, colId: string) => {
+    e.preventDefault() // Necessary to allow dropping
+    if (dragOverColId !== colId) {
+      setDragOverColId(colId)
+    }
+  }
+
+  const handleDragLeave = () => {
+    setDragOverColId(null)
+  }
+
+  const handleDrop = (e: React.DragEvent, colId: string) => {
+    e.preventDefault()
+    setDragOverColId(null)
+    const appId = e.dataTransfer.getData("appId")
+    if (appId && draggedAppId === appId) {
+      const app = applications.find((a: any) => a._id === appId)
+      if (app && app.status !== colId) {
+        handleStatusChange(appId, colId)
+      }
+    }
+    setDraggedAppId(null)
   }
 
   if (isLoading) {
@@ -56,9 +89,16 @@ export default function JobApplicationsBoard({ params }: { params: { jobId: stri
         <div className="flex gap-6 min-w-max h-full pb-4">
           {COLUMNS.map((column) => {
             const columnApps = applications.filter((app: any) => app.status === column.id)
+            const isDragOver = dragOverColId === column.id
             
             return (
-              <div key={column.id} className={`w-80 flex flex-col rounded-2xl border ${column.color} shadow-sm overflow-hidden`}>
+              <div 
+                key={column.id} 
+                className={`w-80 flex flex-col rounded-2xl border ${column.color} shadow-sm overflow-hidden transition-all duration-200 ${isDragOver ? 'ring-2 ring-primary ring-offset-1 scale-[1.01]' : ''}`}
+                onDragOver={(e) => handleDragOver(e, column.id)}
+                onDragLeave={handleDragLeave}
+                onDrop={(e) => handleDrop(e, column.id)}
+              >
                 {/* Column Header */}
                 <div className="p-4 border-b bg-background/50 backdrop-blur-sm flex justify-between items-center">
                   <h3 className="font-semibold">{column.title}</h3>
@@ -70,10 +110,16 @@ export default function JobApplicationsBoard({ params }: { params: { jobId: stri
                 {/* Column Cards */}
                 <div className="flex-1 overflow-y-auto p-3 space-y-3">
                   {columnApps.length === 0 ? (
-                    <div className="text-center p-4 text-xs text-muted-foreground opacity-50">Empty</div>
+                    <div className="text-center p-4 text-xs text-muted-foreground opacity-50">Drop candidates here</div>
                   ) : (
                     columnApps.map((app: any) => (
-                      <div key={app._id} className="bg-card border rounded-xl p-4 shadow-sm hover:border-primary/30 transition-colors group">
+                      <div 
+                        key={app._id} 
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, app._id)}
+                        onDragEnd={() => setDraggedAppId(null)}
+                        className={`bg-card border rounded-xl p-4 shadow-sm hover:border-primary/50 transition-colors group cursor-grab active:cursor-grabbing ${draggedAppId === app._id ? 'opacity-50 scale-95' : ''} ${isUpdating ? 'pointer-events-none opacity-80' : ''}`}
+                      >
                         <div className="flex items-start gap-3 mb-3">
                           <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center shrink-0 border">
                             <User className="h-5 w-5 text-muted-foreground" />
@@ -84,25 +130,10 @@ export default function JobApplicationsBoard({ params }: { params: { jobId: stri
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-2 mb-4">
-                          <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs bg-muted px-2 py-1 rounded hover:bg-muted/80 transition-colors">
+                        <div className="flex items-center gap-2">
+                          <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs bg-muted px-2 py-1.5 rounded hover:bg-muted/80 transition-colors w-full justify-center">
                             <FileText className="h-3.5 w-3.5" /> View Resume
                           </a>
-                        </div>
-                        
-                        {/* Status Actions */}
-                        <div className="pt-3 border-t">
-                          <label className="text-[10px] uppercase font-semibold text-muted-foreground mb-1 block">Move to:</label>
-                          <select 
-                            className="w-full text-xs border rounded p-1.5 bg-background focus:ring-primary focus:border-primary"
-                            value={app.status}
-                            onChange={(e) => handleStatusChange(app._id, e.target.value)}
-                            disabled={isUpdating}
-                          >
-                            {COLUMNS.map(col => (
-                              <option key={col.id} value={col.id}>{col.title}</option>
-                            ))}
-                          </select>
                         </div>
                       </div>
                     ))
