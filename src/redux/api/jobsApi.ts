@@ -28,14 +28,36 @@ export interface JobsResponse {
   data: Job[];
 }
 
+export interface GetJobsQueryParams {
+  searchTerm?: string;
+  category?: string;
+  jobType?: string;
+  workMode?: string;
+  agenticSearch?: boolean;
+}
+
 export const jobsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getJobs: builder.query<JobsResponse, Record<string, any> | void>({
-      query: (params) => ({
-        url: '/jobs',
-        method: 'GET',
-        params: params || undefined,
-      }),
+    getJobs: builder.query<{ success: boolean; data: Job[] }, GetJobsQueryParams | void>({
+      query: (params) => {
+        let url = '/jobs';
+        if (params) {
+          const queryParams = new URLSearchParams();
+          if (params.searchTerm) queryParams.append('searchTerm', params.searchTerm);
+          if (params.category) queryParams.append('category', params.category);
+          if (params.jobType) queryParams.append('jobType', params.jobType);
+          if (params.workMode) queryParams.append('workMode', params.workMode);
+          if (params.agenticSearch) queryParams.append('agenticSearch', 'true');
+          const queryString = queryParams.toString();
+          if (queryString) {
+            url += `?${queryString}`;
+          }
+        }
+        return {
+          url,
+          method: 'GET',
+        };
+      },
       providesTags: ['Job'],
     }),
     getEmployerJobs: builder.query<JobsResponse, void>({

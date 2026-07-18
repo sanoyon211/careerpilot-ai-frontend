@@ -13,7 +13,7 @@ export interface ChatResponse {
 
 export const chatApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    sendMessage: builder.mutation<ChatResponse, { history: ChatMessage[] }>({
+    sendMessage: builder.mutation<ChatResponse, { history: ChatMessage[], mode?: 'coach' | 'mock-interview' }>({
       query: (body) => ({
         url: '/chat',
         method: 'POST',

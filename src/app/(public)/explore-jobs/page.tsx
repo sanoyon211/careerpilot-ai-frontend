@@ -11,11 +11,13 @@ export default function ExploreJobsPage() {
   const [showFilters, setShowFilters] = useState(false)
   const [jobType, setJobType] = useState<string>("")
   const [workMode, setWorkMode] = useState<string>("")
+  const [agenticSearch, setAgenticSearch] = useState(true)
 
   const { data: jobsResponse, isLoading, isError } = useGetJobsQuery({
     searchTerm: searchQuery || undefined,
     jobType: jobType || undefined,
     workMode: workMode || undefined,
+    agenticSearch
   })
 
   const jobs = jobsResponse?.data || []
@@ -69,8 +71,13 @@ export default function ExploreJobsPage() {
                   <Sparkles className="h-4 w-4 text-primary" /> AI Match
                 </h3>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="rounded border-input text-primary focus:ring-primary" defaultChecked />
-                  <span className="text-sm">Only show AI matched jobs</span>
+                  <input 
+                    type="checkbox" 
+                    className="rounded border-input text-primary focus:ring-primary" 
+                    checked={agenticSearch}
+                    onChange={(e) => setAgenticSearch(e.target.checked)}
+                  />
+                  <span className="text-sm font-semibold text-primary">✨ Agentic AI Search</span>
                 </label>
               </div>
               
