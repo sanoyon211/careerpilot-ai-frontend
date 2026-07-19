@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const accessToken = request.cookies.get('accessToken')?.value;
+  const token = request.cookies.get('refreshToken')?.value;
 
   const protectedPaths = [
     '/dashboard',
@@ -23,7 +23,7 @@ export function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith(path)
   );
 
-  if (isProtectedPath && !accessToken) {
+  if (isProtectedPath && !token) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
@@ -33,15 +33,15 @@ export function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith(path)
   );
 
-  if (isAuthPath && accessToken) {
+  if (isAuthPath && token) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   // Role-based route protection
-  if (accessToken && isProtectedPath) {
+  if (token && isProtectedPath) {
     try {
-      // Decode JWT payload
-      const payloadBase64 = accessToken.split('.')[1];
+      // Decode JWT payload from refreshToken
+      const payloadBase64 = token.split('.')[1];
       const decodedPayload = JSON.parse(atob(payloadBase64));
       const role = decodedPayload.role;
 

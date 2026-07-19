@@ -4,7 +4,8 @@ export interface Application {
   _id: string;
   jobId: string | any; // Could be populated job
   applicantId: string | any;
-  status: 'Pending' | 'Reviewed' | 'Shortlisted' | 'Rejected' | 'Hired';
+  status: 'Applied' | 'In Review' | 'Interview' | 'Rejected' | 'Hired';
+  resumeUrl: string;
   coverLetter?: string;
   createdAt: string;
 }
@@ -23,7 +24,7 @@ export interface SingleApplicationResponse {
 
 export const applicationApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    applyForJob: builder.mutation<SingleApplicationResponse, { jobId: string; coverLetter?: string }>({
+    applyForJob: builder.mutation<SingleApplicationResponse, { jobId: string; resumeUrl: string; coverLetter?: string }>({
       query: (body) => ({
         url: '/applications',
         method: 'POST',

@@ -6,8 +6,11 @@ export interface User {
   email: string;
   role: string;
   phone?: string;
-  address?: string;
-  profileImage?: string;
+  avatar?: string;
+  location?: string;
+  headline?: string;
+  bio?: string;
+  portfolio?: string;
 }
 
 export interface AuthState {

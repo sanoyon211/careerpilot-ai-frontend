@@ -62,7 +62,7 @@ export const jobsApi = baseApi.injectEndpoints({
     }),
     getEmployerJobs: builder.query<JobsResponse, void>({
       query: () => ({
-        url: '/jobs/employer',
+        url: '/jobs/my-jobs',
         method: 'GET',
       }),
       providesTags: ['Job'],

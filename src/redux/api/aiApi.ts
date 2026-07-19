@@ -2,7 +2,7 @@ import { baseApi } from './baseApi';
 
 export const aiApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    sendMessage: builder.mutation({
+    sendAiChatMessage: builder.mutation({
       query: (history) => ({
         url: '/chat',
         method: 'POST',
@@ -20,4 +20,4 @@ export const aiApi = baseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useSendMessageMutation, useGenerateCoverLetterMutation } = aiApi;
+export const { useSendAiChatMessageMutation, useGenerateCoverLetterMutation } = aiApi;
