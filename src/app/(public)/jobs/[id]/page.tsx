@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 import { Button } from "@/components/common/Button"
 import { ArrowLeft, MapPin, Briefcase, DollarSign, Clock, Building, Users, Globe, Share2, Bookmark, CheckCircle2, Sparkles, FileText } from "lucide-react"
 import { useGetJobByIdQuery } from "@/redux/api/jobsApi"
@@ -10,8 +11,10 @@ import { useGenerateCoverLetterMutation } from "@/redux/api/aiApi"
 import { useGetMyResumeQuery } from "@/redux/api/resumeApi"
 import { toast } from "sonner"
 
-export default function JobDetailsPage({ params }: { params: { id: string } }) {
-  const { data: jobResponse, isLoading } = useGetJobByIdQuery(params.id)
+export default function JobDetailsPage() {
+  const routeParams = useParams<{ id: string }>();
+  const id = routeParams.id;
+  const { data: jobResponse, isLoading } = useGetJobByIdQuery(id)
   const { data: resumeResponse } = useGetMyResumeQuery()
   const [applyForJob, { isLoading: isApplying }] = useApplyForJobMutation()
   const [generateCoverLetter, { isLoading: isGenerating }] = useGenerateCoverLetterMutation()
@@ -19,8 +22,9 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
   const [coverLetter, setCoverLetter] = useState<string | null>(null)
 
   const handleApply = async () => {
+    const resumeUrl = resumeResponse?.data?.fileUrl || '';
     toast.promise(
-      applyForJob({ jobId: params.id }).unwrap(),
+      applyForJob({ jobId: id, resumeUrl, coverLetter: coverLetter || undefined }).unwrap(),
       {
         loading: 'Submitting application...',
         success: 'Successfully applied for this job!',

@@ -1,9 +1,21 @@
 import { baseApi } from './baseApi';
 
+export interface RecommendedJobDetails {
+  _id: string;
+  title: string;
+  category?: string;
+  location?: string;
+  jobType?: string;
+  workMode?: string;
+  salaryRange?: string;
+  shortDescription?: string;
+}
+
 export interface RecommendedJob {
   jobId: string;
   matchPercentage: number;
   reason: string;
+  jobDetails?: RecommendedJobDetails | null;
 }
 
 export interface RecommendedSkill {

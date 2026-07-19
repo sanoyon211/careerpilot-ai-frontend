@@ -2,11 +2,28 @@ import { createApi, fetchBaseQuery, BaseQueryFn, FetchArgs, FetchBaseQueryError 
 import type { RootState } from '../store';
 import { setCredentials, logout } from '../slices/authSlice';
 
+const getBaseUrl = () => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+  if (envUrl.endsWith('/api/v1')) {
+    return envUrl;
+  }
+  return `${envUrl.replace(/\/$/, '')}/api/v1`;
+};
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000/api/v1',
+  baseUrl: getBaseUrl(),
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    let token = (getState() as RootState).auth.token;
+
+    // Fallback to cookie if Redux memory state token is not hydrated yet
+    if (!token && typeof document !== 'undefined') {
+      const match = document.cookie.split('; ').find((row) => row.startsWith('accessToken='));
+      if (match) {
+        token = match.split('=')[1] || null;
+      }
+    }
+
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
@@ -33,16 +50,16 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     );
 
     if (refreshResult.data) {
-      // store the new token
       const data = refreshResult.data as any;
-      const user = (api.getState() as RootState).auth.user; 
-      
+      const user = (api.getState() as RootState).auth.user;
+
       if (user && data?.data?.accessToken) {
-         api.dispatch(setCredentials({ user, accessToken: data.data.accessToken }));
-         // retry the initial query
-         result = await baseQuery(args, api, extraOptions);
+        api.dispatch(setCredentials({ user, accessToken: data.data.accessToken }));
+        document.cookie = `accessToken=${data.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
+        // retry the initial query
+        result = await baseQuery(args, api, extraOptions);
       } else {
-         api.dispatch(logout());
+        api.dispatch(logout());
       }
     } else {
       api.dispatch(logout());

@@ -7,6 +7,7 @@ export interface User {
   role: string;
   phone?: string;
   avatar?: string;
+  photoURL?: string;
   location?: string;
   headline?: string;
   bio?: string;

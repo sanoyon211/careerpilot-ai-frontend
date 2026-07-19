@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useParams } from "next/navigation"
 import { useGetJobApplicationsQuery, useUpdateApplicationStatusMutation } from "@/redux/api/applicationApi"
 import { Button } from "@/components/common/Button"
 import { ArrowLeft, User, FileText, ChevronRight, Check, X, Clock } from "lucide-react"
@@ -15,8 +16,10 @@ const COLUMNS = [
   { id: "Rejected", title: "Rejected", color: "bg-red-50 dark:bg-red-900/20" },
 ]
 
-export default function JobApplicationsBoard({ params }: { params: { jobId: string } }) {
-  const { data: appsResponse, isLoading } = useGetJobApplicationsQuery(params.jobId)
+export default function JobApplicationsBoard() {
+  const routeParams = useParams<{ jobId: string }>();
+  const jobId = routeParams.jobId;
+  const { data: appsResponse, isLoading } = useGetJobApplicationsQuery(jobId)
   const [updateStatus, { isLoading: isUpdating }] = useUpdateApplicationStatusMutation()
   const [draggedAppId, setDraggedAppId] = useState<string | null>(null)
   const [dragOverColId, setDragOverColId] = useState<string | null>(null)
