@@ -2,9 +2,9 @@ import { baseApi } from './baseApi';
 
 export interface Application {
   _id: string;
-  jobId: string | any; // Could be populated job
+  jobId: string | any;
   applicantId: string | any;
-  status: 'Applied' | 'In Review' | 'Interview' | 'Rejected' | 'Hired';
+  status: 'Applied' | 'In Review' | 'Reviewed' | 'Shortlisted' | 'Interview' | 'Rejected' | 'Hired';
   resumeUrl: string;
   coverLetter?: string;
   createdAt: string;
@@ -30,7 +30,7 @@ export const applicationApi = baseApi.injectEndpoints({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Application'],
+      invalidatesTags: ['Application', 'Job'],
     }),
     getMyApplications: builder.query<ApplicationResponse, void>({
       query: () => ({
@@ -54,6 +54,13 @@ export const applicationApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Application'],
     }),
+    deleteApplication: builder.mutation<{ success: boolean; message: string }, string>({
+      query: (id) => ({
+        url: `/applications/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Application', 'Job'],
+    }),
   }),
 });
 
@@ -62,4 +69,5 @@ export const {
   useGetMyApplicationsQuery,
   useGetJobApplicationsQuery,
   useUpdateApplicationStatusMutation,
+  useDeleteApplicationMutation,
 } = applicationApi;
