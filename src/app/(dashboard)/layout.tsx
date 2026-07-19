@@ -98,24 +98,31 @@ export default function DashboardLayout({
     }
   }, [user, isProfileError, pathname]);
 
-  // Socket notification room connection
+  // Socket.io real-time notification room connection
   useEffect(() => {
     if (!user?._id) return;
 
-    const socket = io(process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000");
+    const rawUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const socketUrl = rawUrl.replace(/\/api\/v1\/?$/, "");
+
+    const socket = io(socketUrl);
 
     socket.emit("join_user_room", user._id);
 
     socket.on("status_updated", (data) => {
-      toast.success(`Application Update!`, {
-        description: `Your application for ${data.jobTitle} moved to ${data.status}`,
+      toast.success(`Application Update! 🎉`, {
+        description: `Your application for "${data.jobTitle}" moved to "${data.status}".`,
+        duration: 8000,
       });
+
+      // Invalidate RTK Query tags to refresh UI instantly without reloading
+      dispatch(baseApi.util.invalidateTags(["Application", "SavedJob", "Job"]));
     });
 
     return () => {
       socket.disconnect();
     };
-  }, [user]);
+  }, [user, dispatch]);
 
   const handleSignOut = () => {
     document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
