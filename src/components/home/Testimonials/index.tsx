@@ -31,29 +31,29 @@ const testimonials = [
 export function Testimonials() {
   return (
     <section className="py-24 bg-background">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            Trusted by Top Software Engineers & Leaders
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
+            Loved by professionals worldwide.
           </h2>
-          <p className="text-base text-muted-foreground font-medium">
-            Hear from professionals who accelerated their career trajectory with CareerPilot AI.
+          <p className="text-base text-muted-foreground font-normal">
+            Hear from software engineers who accelerated their career trajectory with CareerPilot AI.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="bg-card border border-border/80 rounded-3xl p-6 shadow-xs hover:border-primary/50 transition-all flex flex-col justify-between">
+            <Card key={testimonial.id} className="bg-white dark:bg-[#161617] border border-black/[0.06] dark:border-white/[0.08] rounded-[28px] p-8 flex flex-col justify-between">
               <div>
-                <CardHeader className="p-0 flex flex-row items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary to-indigo-600 text-white flex items-center justify-center font-extrabold text-base shadow-xs">
+                <CardHeader className="p-0 flex flex-row items-center gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#0071e3] text-white flex items-center justify-center font-bold text-base shadow-sm">
                     {testimonial.initials}
                   </div>
                   <div>
-                    <h4 className="font-extrabold text-base text-foreground flex items-center gap-1.5">
+                    <h4 className="font-bold text-base text-foreground tracking-tight flex items-center gap-1.5">
                       {testimonial.name} <ShieldCheck className="h-4 w-4 text-emerald-500" />
                     </h4>
-                    <p className="text-xs text-muted-foreground font-semibold">
+                    <p className="text-xs text-muted-foreground font-normal">
                       {testimonial.role} • {testimonial.company}
                     </p>
                   </div>
@@ -65,7 +65,7 @@ export function Testimonials() {
                       <Star key={star} className="h-4 w-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-serif italic">
+                  <p className="text-muted-foreground text-sm leading-relaxed font-normal">
                     "{testimonial.content}"
                   </p>
                 </CardContent>

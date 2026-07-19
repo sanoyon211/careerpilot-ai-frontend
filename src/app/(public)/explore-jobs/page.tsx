@@ -10,6 +10,7 @@ import {
   DollarSign,
   Clock,
   Filter,
+  Cpu,
   Sparkles,
   ChevronLeft,
   ChevronRight,
@@ -66,7 +67,7 @@ export default function ExploreJobsPage() {
         {/* Header & Search */}
         <div className="mb-12 space-y-6 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-extrabold bg-primary/10 text-primary border border-primary/20">
-            <Sparkles className="h-3.5 w-3.5" />
+            <Cpu className="h-3.5 w-3.5" />
             <span>Agentic AI Powered Job Search</span>
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight">Find Your Next High-Impact Career</h1>
@@ -127,7 +128,7 @@ export default function ExploreJobsPage() {
             <div className="bg-card border rounded-3xl p-6 space-y-6 shadow-xs">
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-sm flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-primary" /> AI Search Mode
+                  <Cpu className="h-4 w-4 text-primary" /> AI Search Mode
                 </h3>
                 {(jobType || workMode || searchQuery || locationQuery) && (
                   <button
@@ -148,7 +149,7 @@ export default function ExploreJobsPage() {
                 />
                 <div>
                   <span className="text-xs font-bold text-primary flex items-center gap-1">
-                    <Sparkles className="h-3 w-3" /> Agentic AI Matching
+                    <Cpu className="h-3 w-3" /> Agentic AI Matching
                   </span>
                   <span className="text-[10px] text-muted-foreground block mt-0.5">Understands intent & skill context</span>
                 </div>
@@ -241,33 +242,33 @@ export default function ExploreJobsPage() {
                 paginatedJobs.map((job) => (
                   <div
                     key={job._id}
-                    className="bg-card border rounded-3xl p-6 hover:shadow-lg transition-all hover:border-primary/50 group flex flex-col justify-between"
+                    className="bg-card border border-border rounded-[24px] p-6 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex justify-between items-start mb-4">
-                        <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary font-extrabold text-xl flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                        <div className="h-12 w-12 rounded-full bg-primary text-white font-bold text-xl flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
                           {job.employerId?.name?.charAt(0) || "C"}
                         </div>
-                        <span className="bg-slate-100 dark:bg-slate-800 text-foreground text-[11px] font-bold px-2.5 py-1 rounded-full">
+                        <span className="inline-flex items-center rounded-full bg-primary/10 text-primary px-3 py-1 text-[11px] font-bold border border-primary/20">
                           {job.workMode || "Remote"}
                         </span>
                       </div>
 
-                      <h3 className="font-bold text-lg line-clamp-1 mb-1 group-hover:text-primary transition-colors">
+                      <h3 className="font-bold text-lg line-clamp-1 mb-1 group-hover:text-primary transition-colors text-foreground tracking-tight">
                         {job.title}
                       </h3>
-                      <p className="text-muted-foreground text-xs font-semibold mb-4">{job.employerId?.name || "Verified Employer"}</p>
+                      <p className="text-muted-foreground text-xs font-normal mb-4">{job.employerId?.name || "Verified Employer"}</p>
 
                       <div className="space-y-2 mb-6">
-                        <div className="flex items-center text-xs text-muted-foreground gap-2">
-                          <MapPin className="h-3.5 w-3.5 shrink-0 text-indigo-500" />
+                        <div className="flex items-center text-xs text-muted-foreground gap-2 font-normal">
+                          <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />
                           <span className="line-clamp-1">{job.location || "Flexible"}</span>
                         </div>
-                        <div className="flex items-center text-xs text-muted-foreground gap-2">
-                          <Briefcase className="h-3.5 w-3.5 shrink-0 text-indigo-500" /> {job.jobType}
+                        <div className="flex items-center text-xs text-muted-foreground gap-2 font-normal">
+                          <Briefcase className="h-3.5 w-3.5 shrink-0 text-primary" /> {job.jobType}
                         </div>
                         {job.salaryRange && (
-                          <div className="flex items-center text-xs text-emerald-600 font-semibold gap-2">
+                          <div className="flex items-center text-xs text-emerald-600 dark:text-emerald-400 font-bold gap-2">
                             <DollarSign className="h-3.5 w-3.5 shrink-0" /> {job.salaryRange}
                           </div>
                         )}
@@ -279,8 +280,8 @@ export default function ExploreJobsPage() {
                         <Clock className="h-3 w-3" /> {new Date(job.createdAt).toLocaleDateString()}
                       </span>
                       <Link href={`/jobs/${job._id}`}>
-                        <Button size="sm" className="bg-primary hover:bg-primary/90 text-white rounded-xl font-bold">
-                          View Details
+                        <Button size="sm" className="bg-primary hover:bg-primary/90 text-white rounded-full font-semibold px-5">
+                          View Position
                         </Button>
                       </Link>
                     </div>

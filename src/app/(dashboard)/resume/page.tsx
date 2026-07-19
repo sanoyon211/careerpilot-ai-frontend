@@ -139,14 +139,14 @@ export default function ResumePage() {
     <div className="max-w-6xl space-y-8 pb-10">
       
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-lg border border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card text-foreground p-6 sm:p-8 rounded-[24px] shadow-sm border border-border">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-            <Zap className="h-3.5 w-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+            <Zap className="h-3.5 w-3.5" />
             <span>Agentic AI Engine Active (Groq Llama 3.3 70B & Gemini 2.0)</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Resume & AI Match</h1>
-          <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
+          <h1 className="text-3xl font-extrabold tracking-tight text-foreground">Resume & AI Match</h1>
+          <p className="text-muted-foreground text-sm max-w-2xl leading-relaxed">
             Upload your resume to extract key skills, compute your ATS Readiness Score, identify skill gaps, and autonomously match with top jobs.
           </p>
         </div>
@@ -287,16 +287,16 @@ export default function ResumePage() {
               </div>
 
               <div className="grid sm:grid-cols-3 gap-4">
-                <div className="bg-slate-50 dark:bg-slate-900 border p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-                  <span className="text-4xl font-extrabold text-indigo-600">{atsScore}</span>
+                <div className="bg-secondary border border-border p-5 rounded-2xl flex flex-col items-center justify-center text-center">
+                  <span className="text-4xl font-extrabold text-primary">{atsScore}</span>
                   <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">ATS Score / 100</span>
                 </div>
-                <div className="bg-slate-50 dark:bg-slate-900 border p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+                <div className="bg-secondary border border-border p-5 rounded-2xl flex flex-col items-center justify-center text-center">
                   <span className="text-3xl font-bold text-foreground">{resume.parsedData?.technicalSkills?.length || 0}</span>
                   <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">Tech Skills Extracted</span>
                 </div>
-                <div className="bg-slate-50 dark:bg-slate-900 border p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-                  <span className="text-3xl font-bold text-emerald-600">{recData?.data?.recommendedJobs?.length || 0}</span>
+                <div className="bg-secondary border border-border p-5 rounded-2xl flex flex-col items-center justify-center text-center">
+                  <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{recData?.data?.recommendedJobs?.length || 0}</span>
                   <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">Matched Active Jobs</span>
                 </div>
               </div>
@@ -508,23 +508,23 @@ export default function ResumePage() {
         {/* Sidebar Info Column */}
         <div className="space-y-6">
           
-          <div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-950 rounded-3xl p-6 text-white shadow-md border border-indigo-900/50 space-y-4">
-            <div className="bg-indigo-500/20 p-3 rounded-2xl w-fit text-indigo-400">
+          <div className="bg-card border border-border rounded-[24px] p-6 text-foreground shadow-sm space-y-4">
+            <div className="bg-primary/10 p-3 rounded-2xl w-fit text-primary">
               <Zap className="h-6 w-6" />
             </div>
-            <h3 className="font-bold text-lg">How Agentic AI Matching Works</h3>
-            <p className="text-xs opacity-90 leading-relaxed text-indigo-100">
+            <h3 className="font-bold text-lg text-foreground">How Agentic AI Matching Works</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
               Our Agentic AI leverages Groq Llama 3.3 70B & Gemini 2.0 Flash to analyze contextual experience rather than plain keywords. It evaluates candidate capability, domain depth, and culture fit against live job requirements.
             </p>
             <ul className="space-y-2.5 text-xs pt-2">
-              <li className="flex items-center gap-2 text-indigo-200">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" /> Contextual Skill & Experience Mapping
+              <li className="flex items-center gap-2 text-foreground font-medium">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> Contextual Skill & Experience Mapping
               </li>
-              <li className="flex items-center gap-2 text-indigo-200">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" /> ATS Compatibility Score Computation
+              <li className="flex items-center gap-2 text-foreground font-medium">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> ATS Compatibility Score Computation
               </li>
-              <li className="flex items-center gap-2 text-indigo-200">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" /> Targeted Skill Gap Recommendations
+              <li className="flex items-center gap-2 text-foreground font-medium">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> Targeted Skill Gap Recommendations
               </li>
             </ul>
           </div>

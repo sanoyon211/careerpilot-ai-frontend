@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/common/Button";
 import {
-  Sparkles,
+  Cpu,
   User as UserIcon,
   LayoutDashboard,
   LogOut,
@@ -17,6 +17,7 @@ import {
   X,
   ChevronDown,
   Settings,
+  Bot,
 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { logout } from "@/redux/slices/authSlice";
@@ -64,19 +65,19 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl transition-all">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl transition-all">
       <div className="container mx-auto flex h-14 items-center justify-between px-4 md:px-8 max-w-7xl">
-        {/* Apple Logo & Brand Title */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-            <Sparkles className="h-4 w-4" />
+        {/* Brand Title with Sleek Cpu Icon */}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="h-7 w-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+            <Cpu className="h-4 w-4" />
           </div>
-          <span className="text-lg font-bold tracking-tight text-foreground">
+          <span className="text-base font-bold tracking-tight text-foreground">
             CareerPilot <span className="text-primary font-black">AI</span>
           </span>
         </Link>
 
-        {/* Desktop Links (Apple-style Navigation) */}
+        {/* Desktop Links */}
         <nav className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-tight text-muted-foreground">
           <Link
             href="/explore-jobs"
@@ -114,7 +115,7 @@ export function Navbar() {
                   pathname === "/ai-chat" ? "text-primary font-extrabold" : ""
                 }`}
               >
-                <MessageSquare className="h-3.5 w-3.5 text-primary" /> AI Coach
+                <Bot className="h-3.5 w-3.5 text-primary" /> AI Coach
               </Link>
             </>
           )}
@@ -159,7 +160,7 @@ export function Navbar() {
           </Link>
         </nav>
 
-        {/* Right Action / Profile */}
+        {/* Right User Actions */}
         <div className="hidden md:flex items-center gap-4">
           {user ? (
             <div className="relative" ref={dropdownRef}>
@@ -178,13 +179,12 @@ export function Navbar() {
                     {getInitials(user.name)}
                   </div>
                 )}
-                <span className="text-xs font-semibold pr-1">{user.name}</span>
+                <span className="text-xs font-semibold pr-1 text-foreground">{user.name}</span>
                 <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
               </button>
 
-              {/* Apple-style Dropdown */}
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-card/90 border border-border/80 shadow-2xl backdrop-blur-xl py-2 text-xs z-50 animate-in fade-in duration-150">
+                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-card border border-border shadow-2xl backdrop-blur-xl py-2 text-xs z-50 animate-in fade-in duration-150">
                   <div className="px-4 py-3 border-b">
                     <p className="font-extrabold text-foreground text-sm">{user.name}</p>
                     <p className="text-[11px] text-muted-foreground truncate">{user.email}</p>
@@ -194,21 +194,21 @@ export function Navbar() {
                     <Link
                       href="/dashboard"
                       onClick={() => setIsDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium"
+                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium text-foreground"
                     >
                       <LayoutDashboard className="h-4 w-4 text-muted-foreground" /> Dashboard
                     </Link>
                     <Link
                       href="/profile"
                       onClick={() => setIsDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium"
+                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium text-foreground"
                     >
                       <UserIcon className="h-4 w-4 text-muted-foreground" /> Profile
                     </Link>
                     <Link
                       href="/settings"
                       onClick={() => setIsDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium"
+                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium text-foreground"
                     >
                       <Settings className="h-4 w-4 text-muted-foreground" /> Settings
                     </Link>
@@ -249,87 +249,6 @@ export function Navbar() {
           {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
-
-      {/* Mobile Drawer */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-card/95 backdrop-blur-xl border-b px-4 py-6 space-y-4 animate-in slide-in-from-top-2 duration-150">
-          <nav className="flex flex-col space-y-3 font-semibold text-xs">
-            <Link
-              href="/explore-jobs"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl hover:bg-secondary"
-            >
-              Explore Jobs
-            </Link>
-
-            {user ? (
-              <>
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-xl hover:bg-secondary"
-                >
-                  Dashboard
-                </Link>
-
-                {user.role === "job-seeker" && (
-                  <>
-                    <Link
-                      href="/resume"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
-                    >
-                      <FileText className="h-4 w-4 text-primary" /> Resume Match
-                    </Link>
-                    <Link
-                      href="/ai-chat"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
-                    >
-                      <MessageSquare className="h-4 w-4 text-primary" /> AI Career Coach
-                    </Link>
-                  </>
-                )}
-
-                {user.role === "employer" && (
-                  <>
-                    <Link
-                      href="/add-job"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
-                    >
-                      <PlusCircle className="h-4 w-4 text-emerald-500" /> Post Job
-                    </Link>
-                    <Link
-                      href="/manage-jobs"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
-                    >
-                      <Briefcase className="h-4 w-4" /> Manage Jobs
-                    </Link>
-                  </>
-                )}
-
-                <button
-                  onClick={handleLogout}
-                  className="px-3 py-2 rounded-xl text-red-500 hover:bg-red-500/10 text-left flex items-center gap-2 font-bold"
-                >
-                  <LogOut className="h-4 w-4" /> Sign Out
-                </button>
-              </>
-            ) : (
-              <div className="flex flex-col gap-2 pt-2 border-t">
-                <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="outline" className="w-full">Sign In</Button>
-                </Link>
-                <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button className="w-full">Get Started</Button>
-                </Link>
-              </div>
-            )}
-          </nav>
-        </div>
-      )}
     </header>
   );
 }

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/common/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Sparkles, ArrowRight, ShieldCheck, Zap } from "lucide-react";
+import { Search, Cpu, ArrowRight } from "lucide-react";
 import { useGetJobsQuery } from "@/redux/api/jobsApi";
 
 export function Hero() {
@@ -26,27 +26,27 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-background pt-24 pb-32">
-      {/* Apple-style subtle Radial Glow */}
-      <div className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 h-[500px] w-[900px] rounded-full bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-[140px]" />
+      {/* Apple-style subtle Ambient Lighting */}
+      <div className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 h-[500px] w-[900px] rounded-full bg-gradient-to-b from-primary/10 via-primary/5 to-transparent blur-[140px]" />
 
       <div className="container mx-auto px-4 relative z-10 text-center max-w-5xl">
-        {/* Apple Pill Tag */}
+        {/* Sleek Enterprise Tech Pill Tag */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-secondary text-foreground border border-border/60 mb-8 shadow-xs"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-secondary text-foreground border border-border mb-8 shadow-xs"
         >
-          <Sparkles className="h-3.5 w-3.5 text-primary" />
+          <Cpu className="h-3.5 w-3.5 text-primary" />
           <span>Groq Llama 3.3 70B AI Engine</span>
           {totalJobsCount > 0 && (
-            <span className="ml-1 bg-primary text-white font-bold px-2.5 py-0.5 rounded-full text-[10px]">
+            <span className="ml-1 bg-primary text-white font-bold px-2 py-0.5 rounded-full text-[10px]">
               {totalJobsCount} Active Roles
             </span>
           )}
         </motion.div>
 
-        {/* Apple Headline */}
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,12 +54,10 @@ export function Hero() {
           className="font-black tracking-tight text-5xl sm:text-7xl md:text-8xl leading-[1.05] text-foreground"
         >
           Career Copilot. <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-primary to-primary/80">
-            Powered by Groq AI.
-          </span>
+          <span className="text-primary">Powered by Groq AI.</span>
         </motion.h1>
 
-        {/* Apple Subtitle */}
+        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,13 +67,13 @@ export function Hero() {
           Match with top tech positions worldwide, score ATS resume compatibility, and accelerate your career trajectory effortlessly.
         </motion.p>
 
-        {/* Apple Search Input */}
+        {/* Search Bar */}
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           onSubmit={handleSearchSubmit}
-          className="mt-10 max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-3 p-2 rounded-full bg-card border border-border/80 shadow-2xl backdrop-blur-xl"
+          className="mt-10 max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-3 p-2 rounded-full bg-card border border-border shadow-xl backdrop-blur-xl"
         >
           <div className="relative flex-1 w-full pl-3">
             <Search className="absolute left-5 top-3.5 h-4.5 w-4.5 text-muted-foreground" />

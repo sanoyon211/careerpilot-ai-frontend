@@ -194,11 +194,11 @@ export default function DashboardLayout({
         </div>
 
         {/* User Card in Sidebar */}
-        <div className="p-4 mx-3 my-3 bg-slate-50 dark:bg-slate-900 border rounded-2xl flex items-center gap-3">
+        <div className="p-4 mx-3 my-3 bg-secondary border border-border rounded-2xl flex items-center gap-3">
           {user.photoURL ? (
             <img src={user.photoURL} alt={user.name} className="h-10 w-10 rounded-full object-cover border" />
           ) : (
-            <div className="h-10 w-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-xs shrink-0">
+            <div className="h-10 w-10 rounded-full bg-primary text-white font-bold flex items-center justify-center text-xs shrink-0">
               {getInitials(user.name)}
             </div>
           )}
