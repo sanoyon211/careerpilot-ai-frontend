@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials, logout } from "@/redux/slices/authSlice";
 import { useGetMyProfileQuery } from "@/redux/api/userApi";
@@ -20,7 +20,6 @@ import {
   MessageSquare,
   PlusCircle,
   Briefcase,
-  ShieldCheck,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
@@ -50,46 +49,54 @@ const EMPLOYER_LINKS: NavItem[] = [
   { href: "/manage-jobs", label: "Manage Jobs", icon: Briefcase },
 ];
 
+const getAccessTokenFromCookie = () => {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.split("; ").find((row) => row.startsWith("accessToken="));
+  if (!match) return null;
+  const token = match.split("=")[1]?.trim();
+  return token && token !== "" ? token : null;
+};
+
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Attempt to fetch profile to rehydrate session if user is not in Redux memory state
+  const cookieToken = typeof window !== "undefined" ? getAccessTokenFromCookie() : null;
+
+  // Skip profile fetching if user is already in Redux OR if there's no valid access token in cookies
   const { data: profileResponse, isLoading: isLoadingProfile, isError: isProfileError } = useGetMyProfileQuery(
     undefined,
     {
-      skip: !!user,
+      skip: !!user || !cookieToken,
     }
   );
 
   // Rehydrate Redux state if profile is fetched via cookie token
   useEffect(() => {
     if (!user && profileResponse?.data) {
-      const match = typeof document !== 'undefined' ? document.cookie.split('; ').find(row => row.startsWith('accessToken=')) : null;
-      const accessToken = match ? match.split('=')[1] || '' : '';
-      dispatch(setCredentials({ user: profileResponse.data, accessToken }));
+      const token = getAccessTokenFromCookie() || "";
+      dispatch(setCredentials({ user: profileResponse.data, accessToken: token }));
     }
   }, [user, profileResponse, dispatch]);
 
   // Client-side authentication guard redirect
   useEffect(() => {
-    const hasTokenCookie = typeof document !== 'undefined' && document.cookie.includes('accessToken=');
+    const token = getAccessTokenFromCookie();
 
-    if (!user && !isLoadingProfile) {
-      if (isProfileError || !hasTokenCookie) {
-        // Clear stale token and redirect to login
-        document.cookie = "accessToken=; Max-Age=0; path=/; SameSite=Lax";
-        router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
+    if (!user) {
+      if (!token || isProfileError) {
+        document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
       }
     }
-  }, [user, isLoadingProfile, isProfileError, pathname, router]);
+  }, [user, isProfileError, pathname]);
 
   // Socket notification room connection
   useEffect(() => {
@@ -111,11 +118,12 @@ export default function DashboardLayout({
   }, [user]);
 
   const handleSignOut = () => {
+    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     dispatch(logout());
     dispatch(baseApi.util.resetApiState());
-    document.cookie = "accessToken=; Max-Age=0; path=/; SameSite=Lax";
     toast.success("Logged out successfully");
-    router.push("/login");
+    window.location.replace("/login");
   };
 
   const getInitials = (name?: string) => {
@@ -135,7 +143,7 @@ export default function DashboardLayout({
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted/20">
         <div className="text-center space-y-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto" />
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto text-primary" />
           <p className="text-sm font-semibold text-muted-foreground animate-pulse">
             {isLoadingProfile ? "Verifying authentication session..." : "Redirecting to login..."}
           </p>

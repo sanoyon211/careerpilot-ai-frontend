@@ -4,7 +4,7 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/common/Button";
-import { Mail, Lock, LogIn, ArrowRight } from "lucide-react";
+import { Mail, Lock, LogIn, ArrowRight, UserCheck, Building2, Sparkles } from "lucide-react";
 import { useLoginMutation, useSocialLoginMutation } from "@/redux/api/authApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { setCredentials } from "@/redux/slices/authSlice";
@@ -26,12 +26,11 @@ function LoginForm() {
   const [login, { isLoading }] = useLoginMutation();
   const [socialLogin, { isLoading: isSocialLoading }] = useSocialLoginMutation();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleExecuteLogin = (loginEmail: string, loginPass: string) => {
     setErrorMsg("");
 
     toast.promise(
-      login({ email, password }).unwrap(),
+      login({ email: loginEmail, password: loginPass }).unwrap(),
       {
         loading: "Signing in...",
         success: (response) => {
@@ -53,6 +52,27 @@ function LoginForm() {
         },
       }
     );
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    handleExecuteLogin(email, password);
+  };
+
+  const handleQuickDemoLogin = (type: "seeker" | "employer") => {
+    if (type === "seeker") {
+      const demoEmail = "seeker@careerpilot.com";
+      const demoPass = "Password123!";
+      setEmail(demoEmail);
+      setPassword(demoPass);
+      handleExecuteLogin(demoEmail, demoPass);
+    } else {
+      const demoEmail = "employer@careerpilot.com";
+      const demoPass = "Password123!";
+      setEmail(demoEmail);
+      setPassword(demoPass);
+      handleExecuteLogin(demoEmail, demoPass);
+    }
   };
 
   const handleGoogleLogin = async () => {
@@ -98,19 +118,60 @@ function LoginForm() {
     <div className="w-full max-w-md">
       <div className="bg-card border rounded-2xl shadow-xl overflow-hidden">
         <div className="p-8">
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-block mb-4">
+          <div className="text-center mb-6">
+            <Link href="/" className="inline-block mb-3">
               <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                 CareerPilot AI
               </span>
             </Link>
-            <h1 className="text-2xl font-bold tracking-tight">Welcome back</h1>
-            <p className="text-sm text-muted-foreground mt-2">
-              Enter your credentials to access your account
+            <h1 className="text-2xl font-bold tracking-tight">Welcome Back</h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Sign in to your account or click 1-Click Demo Logins below
             </p>
           </div>
+
+          {/* Quick Demo Login Preset Buttons */}
+          <div className="mb-6 bg-slate-50 dark:bg-slate-900 border rounded-2xl p-3.5 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-primary" /> 1-Click Demo Accounts
+              </span>
+              <span className="text-[10px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full">
+                Instant Access
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => handleQuickDemoLogin("seeker")}
+                disabled={isLoading}
+                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-primary/10 hover:border-primary/40 transition-all text-xs font-bold text-left shadow-2xs group"
+              >
+                <UserCheck className="h-4 w-4 text-indigo-500 shrink-0 group-hover:scale-110 transition-transform" />
+                <div className="overflow-hidden">
+                  <span className="block truncate text-foreground">Job Seeker</span>
+                  <span className="block text-[10px] text-muted-foreground font-normal">seeker@careerpilot.com</span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleQuickDemoLogin("employer")}
+                disabled={isLoading}
+                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all text-xs font-bold text-left shadow-2xs group"
+              >
+                <Building2 className="h-4 w-4 text-emerald-500 shrink-0 group-hover:scale-110 transition-transform" />
+                <div className="overflow-hidden">
+                  <span className="block truncate text-foreground">Employer</span>
+                  <span className="block text-[10px] text-muted-foreground font-normal">employer@careerpilot.com</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
           {errorMsg && (
-            <div className="bg-red-50 text-red-500 text-sm p-3 rounded-md mb-4 text-center">
+            <div className="bg-red-50 dark:bg-red-950/40 text-red-500 text-sm p-3 rounded-xl mb-4 text-center border border-red-200">
               {errorMsg}
             </div>
           )}
@@ -118,17 +179,17 @@ function LoginForm() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none" htmlFor="email">
-                Email address
+                Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Mail className="absolute left-3.5 top-3 h-4 w-4 text-muted-foreground" />
                 <input
                   id="email"
                   type="email"
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   required
                 />
               </div>
@@ -144,36 +205,22 @@ function LoginForm() {
                 </Link>
               </div>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Lock className="absolute left-3.5 top-3 h-4 w-4 text-muted-foreground" />
                 <input
                   id="password"
                   type="password"
                   value={password}
+                  placeholder="••••••••"
                   onChange={(e) => setPassword(e.target.value)}
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   required
                 />
               </div>
             </div>
 
-            <div className="flex gap-2 mt-2">
-              <Button type="submit" disabled={isLoading} className="flex-1 gap-2">
-                <LogIn className="h-4 w-4" /> {isLoading ? "Signing in..." : "Sign In"}
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={isLoading}
-                className="flex-1 gap-2"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setEmail("johndoe@example.com");
-                  setPassword("password123");
-                }}
-              >
-                Demo Credentials
-              </Button>
-            </div>
+            <Button type="submit" disabled={isLoading} className="w-full gap-2 mt-2 bg-primary hover:bg-primary/90 rounded-xl">
+              <LogIn className="h-4 w-4" /> {isLoading ? "Signing in..." : "Sign In"}
+            </Button>
           </form>
 
           <div className="mt-6">
@@ -192,7 +239,7 @@ function LoginForm() {
               <Button
                 variant="outline"
                 type="button"
-                className="w-full"
+                className="w-full rounded-xl"
                 onClick={handleGoogleLogin}
                 disabled={isSocialLoading || isLoading}
               >

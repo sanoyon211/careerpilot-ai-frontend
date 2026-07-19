@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/common/Button";
 import {
   Sparkles,
@@ -17,7 +17,6 @@ import {
   X,
   ChevronDown,
   Settings,
-  ShieldCheck,
 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { logout } from "@/redux/slices/authSlice";
@@ -26,7 +25,6 @@ import { toast } from "sonner";
 
 export function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
 
@@ -48,11 +46,12 @@ export function Navbar() {
   const handleLogout = () => {
     setIsDropdownOpen(false);
     setIsMobileMenuOpen(false);
+    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     dispatch(logout());
     dispatch(baseApi.util.resetApiState());
-    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     toast.success("Logged out successfully");
-    router.push("/");
+    window.location.replace("/login");
   };
 
   const getInitials = (name?: string) => {

@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const token =
-    request.cookies.get('accessToken')?.value ||
-    request.cookies.get('refreshToken')?.value;
+  const accessToken = request.cookies.get('accessToken')?.value;
+  const refreshToken = request.cookies.get('refreshToken')?.value;
+  const token = accessToken || refreshToken;
 
   const protectedPaths = [
     '/dashboard',
@@ -27,18 +27,18 @@ export function middleware(request: NextRequest) {
     pathname.startsWith(path)
   );
 
-  // If trying to access protected route without token -> redirect to login with redirect param
+  // If trying to access protected route without any token -> redirect to login
   if (isProtectedPath && !token) {
     const loginUrl = new URL('/login', request.url);
     loginUrl.searchParams.set('redirect', pathname + search);
     return NextResponse.redirect(loginUrl);
   }
 
-  // Redirect logged-in users away from auth pages
+  // Redirect logged-in users away from auth pages ONLY if valid accessToken is present
   const authPaths = ['/login', '/register'];
   const isAuthPath = authPaths.some((path) => pathname.startsWith(path));
 
-  if (isAuthPath && token) {
+  if (isAuthPath && accessToken) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
@@ -56,7 +56,7 @@ export function middleware(request: NextRequest) {
             .join('')
         );
         const decodedPayload = JSON.parse(jsonPayload);
-        const role = decodedPayload.role;
+        const role = decodedPayload?.role;
 
         const jobSeekerRoutes = [
           '/resume',
