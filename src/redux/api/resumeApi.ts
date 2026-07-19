@@ -31,11 +31,18 @@ export const resumeApi = baseApi.injectEndpoints({
         body,
       }),
     }),
-    parseResume: builder.mutation<{ success: boolean; data: ResumeData }, { fileUrl: string }>({
+    parseResume: builder.mutation<{ success: boolean; data: ResumeData }, { fileUrl: string; fileName: string }>({
       query: (body) => ({
         url: '/resume',
         method: 'POST',
         body,
+      }),
+      invalidatesTags: ['Resume'],
+    }),
+    deleteResume: builder.mutation<{ success: boolean; data: any }, void>({
+      query: () => ({
+        url: '/resume/me',
+        method: 'DELETE',
       }),
       invalidatesTags: ['Resume'],
     }),
@@ -45,5 +52,6 @@ export const resumeApi = baseApi.injectEndpoints({
 export const { 
   useGetMyResumeQuery,
   useUploadFileMutation,
-  useParseResumeMutation
+  useParseResumeMutation,
+  useDeleteResumeMutation
 } = resumeApi;

@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/common/Button"
 import { UploadCloud, FileText, CheckCircle2, AlertCircle, Sparkles, Trash2, Download } from "lucide-react"
 import { useGetRecommendationsQuery } from "@/redux/api/recommendationApi"
-import { useGetMyResumeQuery, useUploadFileMutation, useParseResumeMutation } from "@/redux/api/resumeApi"
+import { useGetMyResumeQuery, useUploadFileMutation, useParseResumeMutation, useDeleteResumeMutation } from "@/redux/api/resumeApi"
 import Link from "next/link"
 import { toast } from "sonner"
 
@@ -14,8 +14,9 @@ export default function ResumePage() {
   
   const [uploadFile, { isLoading: isUploadingFile }] = useUploadFileMutation();
   const [parseResume, { isLoading: isParsing }] = useParseResumeMutation();
+  const [deleteResume, { isLoading: isDeleting }] = useDeleteResumeMutation();
 
-  const isWorking = isUploadingFile || isParsing;
+  const isWorking = isUploadingFile || isParsing || isDeleting;
   
   const { data: recData, isLoading: isLoadingRecs } = useGetRecommendationsQuery(undefined, {
     skip: !resume,
@@ -35,12 +36,24 @@ export default function ResumePage() {
         
         // Step 2: Parse resume
         toast.loading("AI is analyzing your resume...", { id: "resume-upload" });
-        await parseResume({ fileUrl }).unwrap();
+        await parseResume({ fileUrl, fileName: file.name }).unwrap();
         
         toast.success("Resume parsed successfully!", { id: "resume-upload" });
       } catch (error: any) {
-        console.error(error);
+        // console.error(error); // Commented out to prevent Next.js dev overlay
         toast.error(error.data?.message || "Failed to process resume", { id: "resume-upload" });
+      }
+    }
+  }
+
+  const handleDelete = async () => {
+    if (confirm("Are you sure you want to delete your resume?")) {
+      try {
+        toast.loading("Deleting resume...", { id: "resume-delete" });
+        await deleteResume().unwrap();
+        toast.success("Resume deleted successfully", { id: "resume-delete" });
+      } catch (error: any) {
+        toast.error(error.data?.message || "Failed to delete resume", { id: "resume-delete" });
       }
     }
   }
@@ -79,6 +92,9 @@ export default function ResumePage() {
                       <Download className="h-4 w-4" />
                     </Button>
                   </a>
+                  <Button variant="outline" size="sm" className="h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete Resume" onClick={handleDelete} isLoading={isDeleting}>
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             ) : (
@@ -103,7 +119,7 @@ export default function ResumePage() {
               </div>
             )}
             
-            {resume && (
+            {resume && (resume.parsedData?.technicalSkills?.length > 0 || resume.parsedData?.softSkills?.length > 0) && (
               <div className="mt-6 bg-green-500/10 text-green-700 p-4 rounded-lg flex items-start gap-3 text-sm">
                 <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
                 <div>
