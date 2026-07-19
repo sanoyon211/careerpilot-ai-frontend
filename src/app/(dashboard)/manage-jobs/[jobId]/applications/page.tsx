@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { SwalConfirm } from "@/utils/swal";
 
 const COLUMNS = [
   { id: "Applied", title: "Applied", color: "bg-slate-100 dark:bg-slate-800/50" },
@@ -60,7 +61,14 @@ export default function JobApplicationsBoard() {
 
   const handleDeleteApplication = async (appId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    if (confirm("Are you sure you want to remove this application from the pipeline?")) {
+    const isConfirmed = await SwalConfirm(
+      "Remove Application?",
+      "Are you sure you want to remove this candidate's application from the pipeline?",
+      "Yes, Remove",
+      "warning"
+    );
+
+    if (isConfirmed) {
       toast.promise(deleteApp(appId).unwrap(), {
         loading: "Removing application...",
         success: () => {

@@ -110,7 +110,7 @@ export default function DashboardLayout({
     socket.emit("join_user_room", user._id);
 
     socket.on("status_updated", (data) => {
-      toast.success(`Application Update! 🎉`, {
+      toast.success("Application Status Update", {
         description: `Your application for "${data.jobTitle}" moved to "${data.status}".`,
         duration: 8000,
       });

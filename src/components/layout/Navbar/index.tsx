@@ -32,7 +32,6 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -65,25 +64,24 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/85 backdrop-blur-md transition-all shadow-xs">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        
-        {/* Brand Logo */}
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl transition-all">
+      <div className="container mx-auto flex h-14 items-center justify-between px-4 md:px-8 max-w-7xl">
+        {/* Apple Logo & Brand Title */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="bg-primary/10 text-primary p-2 rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-            <Sparkles className="h-5 w-5" />
+          <div className="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+            <Sparkles className="h-4 w-4" />
           </div>
-          <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-indigo-600 to-blue-600 bg-clip-text text-transparent">
-            CareerPilot AI
+          <span className="text-lg font-bold tracking-tight text-foreground">
+            CareerPilot <span className="text-primary font-black">AI</span>
           </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        {/* Desktop Links (Apple-style Navigation) */}
+        <nav className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-tight text-muted-foreground">
           <Link
             href="/explore-jobs"
-            className={`transition-colors hover:text-primary ${
-              pathname === "/explore-jobs" ? "text-primary font-bold" : "text-muted-foreground"
+            className={`transition-colors hover:text-foreground ${
+              pathname === "/explore-jobs" ? "text-primary font-extrabold" : ""
             }`}
           >
             Explore Jobs
@@ -92,8 +90,8 @@ export function Navbar() {
           {user && (
             <Link
               href="/dashboard"
-              className={`transition-colors hover:text-primary ${
-                pathname === "/dashboard" ? "text-primary font-bold" : "text-muted-foreground"
+              className={`transition-colors hover:text-foreground ${
+                pathname === "/dashboard" ? "text-primary font-extrabold" : ""
               }`}
             >
               Dashboard
@@ -104,19 +102,19 @@ export function Navbar() {
             <>
               <Link
                 href="/resume"
-                className={`transition-colors hover:text-primary flex items-center gap-1.5 ${
-                  pathname === "/resume" ? "text-primary font-bold" : "text-muted-foreground"
+                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
+                  pathname === "/resume" ? "text-primary font-extrabold" : ""
                 }`}
               >
-                <FileText className="h-4 w-4" /> Resume & AI Match
+                <FileText className="h-3.5 w-3.5" /> Resume Match
               </Link>
               <Link
                 href="/ai-chat"
-                className={`transition-colors hover:text-primary flex items-center gap-1.5 ${
-                  pathname === "/ai-chat" ? "text-primary font-bold" : "text-muted-foreground"
+                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
+                  pathname === "/ai-chat" ? "text-primary font-extrabold" : ""
                 }`}
               >
-                <MessageSquare className="h-4 w-4 text-indigo-500" /> AI Coach
+                <MessageSquare className="h-3.5 w-3.5 text-primary" /> AI Coach
               </Link>
             </>
           )}
@@ -125,27 +123,27 @@ export function Navbar() {
             <>
               <Link
                 href="/add-job"
-                className={`transition-colors hover:text-primary flex items-center gap-1.5 ${
-                  pathname === "/add-job" ? "text-primary font-bold" : "text-muted-foreground"
+                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
+                  pathname === "/add-job" ? "text-primary font-extrabold" : ""
                 }`}
               >
-                <PlusCircle className="h-4 w-4 text-emerald-500" /> Post a Job
+                <PlusCircle className="h-3.5 w-3.5 text-emerald-500" /> Post Job
               </Link>
               <Link
                 href="/manage-jobs"
-                className={`transition-colors hover:text-primary flex items-center gap-1.5 ${
-                  pathname === "/manage-jobs" ? "text-primary font-bold" : "text-muted-foreground"
+                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
+                  pathname === "/manage-jobs" ? "text-primary font-extrabold" : ""
                 }`}
               >
-                <Briefcase className="h-4 w-4" /> Manage Jobs
+                <Briefcase className="h-3.5 w-3.5" /> Manage Jobs
               </Link>
             </>
           )}
 
           <Link
             href="/about"
-            className={`transition-colors hover:text-primary ${
-              pathname === "/about" ? "text-primary font-bold" : "text-muted-foreground"
+            className={`transition-colors hover:text-foreground ${
+              pathname === "/about" ? "text-primary font-extrabold" : ""
             }`}
           >
             About
@@ -153,79 +151,73 @@ export function Navbar() {
 
           <Link
             href="/faq"
-            className={`transition-colors hover:text-primary ${
-              pathname === "/faq" ? "text-primary font-bold" : "text-muted-foreground"
+            className={`transition-colors hover:text-foreground ${
+              pathname === "/faq" ? "text-primary font-extrabold" : ""
             }`}
           >
             FAQ
           </Link>
         </nav>
 
-        {/* Right CTA / User Profile Dropdown */}
+        {/* Right Action / Profile */}
         <div className="hidden md:flex items-center gap-4">
           {user ? (
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-2.5 p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none"
+                className="flex items-center gap-2 p-1 rounded-full hover:bg-secondary transition-colors focus:outline-none cursor-pointer"
               >
                 {user.photoURL ? (
                   <img
                     src={user.photoURL}
                     alt={user.name}
-                    className="h-9 w-9 rounded-full object-cover border-2 border-primary/30"
+                    className="h-8 w-8 rounded-full object-cover border"
                   />
                 ) : (
-                  <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-primary to-indigo-600 text-white font-bold flex items-center justify-center text-xs shadow-xs">
+                  <div className="h-8 w-8 rounded-full bg-primary text-white font-extrabold flex items-center justify-center text-xs">
                     {getInitials(user.name)}
                   </div>
                 )}
-                <div className="text-left hidden lg:block pr-1">
-                  <p className="text-xs font-bold leading-none">{user.name}</p>
-                  <p className="text-[10px] text-muted-foreground capitalize mt-0.5">{user.role || "User"}</p>
-                </div>
-                <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                <span className="text-xs font-semibold pr-1">{user.name}</span>
+                <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
               </button>
 
-              {/* Dropdown Menu */}
+              {/* Apple-style Dropdown */}
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-card border shadow-xl py-2 text-sm z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-card/90 border border-border/80 shadow-2xl backdrop-blur-xl py-2 text-xs z-50 animate-in fade-in duration-150">
                   <div className="px-4 py-3 border-b">
-                    <p className="font-bold text-foreground text-sm">{user.name}</p>
-                    <p className="text-xs text-muted-foreground truncate">{user.email}</p>
-                    <span className="inline-block mt-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
-                      {user.role === "employer" ? "Employer Account" : "Job Seeker"}
-                    </span>
+                    <p className="font-extrabold text-foreground text-sm">{user.name}</p>
+                    <p className="text-[11px] text-muted-foreground truncate">{user.email}</p>
                   </div>
 
                   <div className="py-1">
                     <Link
                       href="/dashboard"
                       onClick={() => setIsDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium"
                     >
                       <LayoutDashboard className="h-4 w-4 text-muted-foreground" /> Dashboard
                     </Link>
                     <Link
                       href="/profile"
                       onClick={() => setIsDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium"
                     >
-                      <UserIcon className="h-4 w-4 text-muted-foreground" /> My Profile
+                      <UserIcon className="h-4 w-4 text-muted-foreground" /> Profile
                     </Link>
                     <Link
                       href="/settings"
                       onClick={() => setIsDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-secondary transition-colors font-medium"
                     >
-                      <Settings className="h-4 w-4 text-muted-foreground" /> Account Settings
+                      <Settings className="h-4 w-4 text-muted-foreground" /> Settings
                     </Link>
                   </div>
 
                   <div className="border-t pt-1">
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-2.5 px-4 py-2 text-red-500 hover:bg-red-500/10 transition-colors font-medium text-left"
+                      className="w-full flex items-center gap-2.5 px-4 py-2 text-red-500 hover:bg-red-500/10 transition-colors font-semibold text-left"
                     >
                       <LogOut className="h-4 w-4" /> Sign Out
                     </button>
@@ -236,32 +228,36 @@ export function Navbar() {
           ) : (
             <div className="flex items-center gap-3">
               <Link href="/login">
-                <Button variant="ghost" size="sm">Log in</Button>
+                <Button variant="ghost" size="sm" className="text-xs font-semibold">
+                  Sign In
+                </Button>
               </Link>
               <Link href="/register">
-                <Button size="sm" className="bg-primary hover:bg-primary/90">Sign Up</Button>
+                <Button size="sm" className="text-xs font-semibold bg-primary text-white hover:bg-primary/90">
+                  Get Started
+                </Button>
               </Link>
             </div>
           )}
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-muted-foreground hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="md:hidden p-2 text-muted-foreground hover:text-foreground"
         >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-card border-b px-4 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col space-y-3 font-medium text-sm">
+        <div className="md:hidden bg-card/95 backdrop-blur-xl border-b px-4 py-6 space-y-4 animate-in slide-in-from-top-2 duration-150">
+          <nav className="flex flex-col space-y-3 font-semibold text-xs">
             <Link
               href="/explore-jobs"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-lg hover:bg-muted"
+              className="px-3 py-2 rounded-xl hover:bg-secondary"
             >
               Explore Jobs
             </Link>
@@ -271,7 +267,7 @@ export function Navbar() {
                 <Link
                   href="/dashboard"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-lg hover:bg-muted"
+                  className="px-3 py-2 rounded-xl hover:bg-secondary"
                 >
                   Dashboard
                 </Link>
@@ -281,16 +277,16 @@ export function Navbar() {
                     <Link
                       href="/resume"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg hover:bg-muted flex items-center gap-2"
+                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
                     >
-                      <FileText className="h-4 w-4 text-indigo-500" /> Resume & AI Match
+                      <FileText className="h-4 w-4 text-primary" /> Resume Match
                     </Link>
                     <Link
                       href="/ai-chat"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg hover:bg-muted flex items-center gap-2"
+                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
                     >
-                      <MessageSquare className="h-4 w-4 text-indigo-500" /> AI Career Coach
+                      <MessageSquare className="h-4 w-4 text-primary" /> AI Career Coach
                     </Link>
                   </>
                 )}
@@ -300,31 +296,23 @@ export function Navbar() {
                     <Link
                       href="/add-job"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg hover:bg-muted flex items-center gap-2"
+                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
                     >
-                      <PlusCircle className="h-4 w-4 text-emerald-500" /> Post a Job
+                      <PlusCircle className="h-4 w-4 text-emerald-500" /> Post Job
                     </Link>
                     <Link
                       href="/manage-jobs"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg hover:bg-muted flex items-center gap-2"
+                      className="px-3 py-2 rounded-xl hover:bg-secondary flex items-center gap-2"
                     >
                       <Briefcase className="h-4 w-4" /> Manage Jobs
                     </Link>
                   </>
                 )}
 
-                <Link
-                  href="/profile"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-lg hover:bg-muted flex items-center gap-2"
-                >
-                  <UserIcon className="h-4 w-4" /> My Profile
-                </Link>
-
                 <button
                   onClick={handleLogout}
-                  className="px-3 py-2 rounded-lg text-red-500 hover:bg-red-500/10 text-left flex items-center gap-2 font-semibold"
+                  className="px-3 py-2 rounded-xl text-red-500 hover:bg-red-500/10 text-left flex items-center gap-2 font-bold"
                 >
                   <LogOut className="h-4 w-4" /> Sign Out
                 </button>
@@ -332,10 +320,10 @@ export function Navbar() {
             ) : (
               <div className="flex flex-col gap-2 pt-2 border-t">
                 <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="outline" className="w-full">Log in</Button>
+                  <Button variant="outline" className="w-full">Sign In</Button>
                 </Link>
                 <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button className="w-full">Sign Up</Button>
+                  <Button className="w-full">Get Started</Button>
                 </Link>
               </div>
             )}

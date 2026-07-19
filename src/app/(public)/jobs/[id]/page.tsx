@@ -98,7 +98,7 @@ export default function JobDetailsPage() {
         success: () => {
           setIsApplyModalOpen(false);
           setIsAppliedSuccess(true);
-          return "🎉 Application submitted successfully!";
+          return "Application submitted successfully!";
         },
         error: (err) => err?.data?.message || "Failed to submit application. You may have already applied.",
       }

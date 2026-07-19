@@ -1,19 +1,20 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/common/Button"
-import { Briefcase, MapPin, DollarSign, List, Tag, FileText, Send, Sparkles } from "lucide-react"
-import { useCreateJobMutation } from "@/redux/api/jobsApi"
-import { useRouter } from "next/navigation"
+import { useState } from "react";
+import { Button } from "@/components/common/Button";
+import { Briefcase, MapPin, DollarSign, List, Tag, FileText, Send, Sparkles } from "lucide-react";
+import { useCreateJobMutation } from "@/redux/api/jobsApi";
+import { useRouter } from "next/navigation";
+import { SwalSuccess, SwalError } from "@/utils/swal";
 
 export default function AddJobPage() {
-  const [showAiEnhance, setShowAiEnhance] = useState(false)
-  const [createJob, { isLoading: isSubmitting }] = useCreateJobMutation()
-  const router = useRouter()
+  const [showAiEnhance, setShowAiEnhance] = useState(false);
+  const [createJob, { isLoading: isSubmitting }] = useCreateJobMutation();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
     const jobData = {
       title: formData.get("title") as string,
       category: formData.get("category") as string,
@@ -25,16 +26,16 @@ export default function AddJobPage() {
       salaryRange: (formData.get("salaryRange") as string) || undefined,
       imageUrl: (formData.get("imageUrl") as string) || undefined,
       status: "Active" as const,
-    }
+    };
 
     try {
-      await createJob(jobData).unwrap()
-      alert("Job posted successfully!")
-      router.push("/manage-jobs")
+      await createJob(jobData).unwrap();
+      SwalSuccess("Job Posted!", "Your job listing is live and visible to candidates.");
+      router.push("/manage-jobs");
     } catch (err: any) {
-      alert(err.data?.message || "Failed to post job")
+      SwalError("Failed to Post Job", err.data?.message || "Something went wrong while posting the job.");
     }
-  }
+  };
 
   return (
     <div className="max-w-4xl space-y-6">
@@ -65,11 +66,10 @@ export default function AddJobPage() {
       )}
 
       <form onSubmit={handleSubmit} className="bg-card border rounded-2xl p-6 sm:p-8 shadow-sm space-y-8">
-        
         {/* Basic Information */}
         <div className="space-y-4">
           <h3 className="font-semibold text-lg border-b pb-2">Basic Information</h3>
-          
+
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium">Job Title *</label>
@@ -103,7 +103,7 @@ export default function AddJobPage() {
         {/* Job Details */}
         <div className="space-y-4">
           <h3 className="font-semibold text-lg border-b pb-2">Job Details</h3>
-          
+
           <div className="grid sm:grid-cols-3 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium">Location *</label>
@@ -112,7 +112,7 @@ export default function AddJobPage() {
                 <input name="location" type="text" required placeholder="e.g. New York, NY" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <label className="text-sm font-medium">Work Mode *</label>
               <select name="workMode" required className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
@@ -141,7 +141,7 @@ export default function AddJobPage() {
             </div>
             <p className="text-xs text-muted-foreground">Adding a salary range increases applications by up to 30%.</p>
           </div>
-          
+
           <div className="space-y-2">
             <label className="text-sm font-medium">Image URL (Optional)</label>
             <div className="relative">
@@ -153,7 +153,7 @@ export default function AddJobPage() {
         {/* Detailed Description */}
         <div className="space-y-4">
           <h3 className="font-semibold text-lg border-b pb-2">Full Description</h3>
-          
+
           <div className="space-y-2">
             <label className="text-sm font-medium">Responsibilities & Requirements *</label>
             <div className="relative">
@@ -169,8 +169,7 @@ export default function AddJobPage() {
             <Send className="h-4 w-4" /> Publish Job
           </Button>
         </div>
-
       </form>
     </div>
-  )
+  );
 }

@@ -29,7 +29,7 @@ export default function ExploreJobsPage() {
   const [agenticSearch, setAgenticSearch] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: jobsResponse, isLoading, isError } = useGetJobsQuery({
+  const { data: jobsResponse, isLoading } = useGetJobsQuery({
     searchTerm: searchQuery || undefined,
     jobType: jobType || undefined,
     workMode: workMode || undefined,
@@ -38,14 +38,12 @@ export default function ExploreJobsPage() {
 
   let jobs = jobsResponse?.data || [];
 
-  // Local location filter if location parameter is entered
   if (locationQuery.trim()) {
     jobs = jobs.filter((job) =>
       job.location?.toLowerCase().includes(locationQuery.toLowerCase())
     );
   }
 
-  // Calculate pagination
   const totalJobs = jobs.length;
   const totalPages = Math.max(1, Math.ceil(totalJobs / JOBS_PER_PAGE));
   const currentPageClamped = Math.min(currentPage, totalPages);
@@ -67,13 +65,13 @@ export default function ExploreJobsPage() {
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header & Search */}
         <div className="mb-12 space-y-6 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-extrabold bg-primary/10 text-primary border border-primary/20">
             <Sparkles className="h-3.5 w-3.5" />
             <span>Agentic AI Powered Job Search</span>
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight">Find Your Next High-Impact Career</h1>
           <p className="text-muted-foreground text-base leading-relaxed">
-            Discover thousands of active job opportunities matched to your technical background using Groq Llama 3.3 70B AI.
+            Discover active job opportunities matched to your technical background using Groq Llama 3.3 70B AI.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 max-w-3xl mx-auto pt-4">
@@ -141,7 +139,7 @@ export default function ExploreJobsPage() {
                 )}
               </div>
 
-              <label className="flex items-center gap-2 cursor-pointer bg-primary/5 p-3 rounded-xl border border-primary/20">
+              <label className="flex items-center gap-2.5 cursor-pointer bg-primary/5 p-3 rounded-2xl border border-primary/20">
                 <input
                   type="checkbox"
                   className="rounded border-input text-primary focus:ring-primary h-4 w-4"
@@ -149,15 +147,17 @@ export default function ExploreJobsPage() {
                   onChange={(e) => setAgenticSearch(e.target.checked)}
                 />
                 <div>
-                  <span className="text-xs font-bold text-primary block">✨ Agentic AI Matching</span>
-                  <span className="text-[10px] text-muted-foreground">Understands intent & skill context</span>
+                  <span className="text-xs font-bold text-primary flex items-center gap-1">
+                    <Sparkles className="h-3 w-3" /> Agentic AI Matching
+                  </span>
+                  <span className="text-[10px] text-muted-foreground block mt-0.5">Understands intent & skill context</span>
                 </div>
               </label>
 
               <div className="border-t pt-4">
                 <h3 className="font-bold text-xs uppercase tracking-wider text-muted-foreground mb-3">Job Type</h3>
                 <div className="space-y-2">
-                  {["Full-time", "Part-time", "Contract", "Freelance", "Internship"].map((type) => (
+                  {["Full-time", "Part-time", "Contract", "Internship"].map((type) => (
                     <label key={type} className="flex items-center gap-2.5 cursor-pointer text-sm font-medium">
                       <input
                         type="checkbox"
@@ -231,7 +231,7 @@ export default function ExploreJobsPage() {
                   <p className="text-xs text-muted-foreground max-w-sm mx-auto">
                     Try broadening your search query or clearing filter options.
                   </p>
-                  <Button variant="outline" size="sm" onClick={clearAllFilters} className="mt-2">
+                  <Button variant="outline" size="sm" onClick={clearAllFilters} className="mt-2 rounded-xl">
                     Clear Filters
                   </Button>
                 </div>
@@ -279,7 +279,7 @@ export default function ExploreJobsPage() {
                         <Clock className="h-3 w-3" /> {new Date(job.createdAt).toLocaleDateString()}
                       </span>
                       <Link href={`/jobs/${job._id}`}>
-                        <Button size="sm" className="bg-primary hover:bg-primary/90 text-white rounded-xl">
+                        <Button size="sm" className="bg-primary hover:bg-primary/90 text-white rounded-xl font-bold">
                           View Details
                         </Button>
                       </Link>
@@ -288,7 +288,7 @@ export default function ExploreJobsPage() {
                 ))}
             </div>
 
-            {/* Dynamic Functional Pagination */}
+            {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-12 flex justify-center items-center gap-2">
                 <Button
@@ -296,7 +296,7 @@ export default function ExploreJobsPage() {
                   size="sm"
                   disabled={currentPageClamped === 1}
                   onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-                  className="gap-1"
+                  className="gap-1 rounded-xl"
                 >
                   <ChevronLeft className="h-4 w-4" /> Previous
                 </Button>
@@ -309,7 +309,7 @@ export default function ExploreJobsPage() {
                       variant={currentPageClamped === pageNum ? "default" : "outline"}
                       size="sm"
                       onClick={() => setCurrentPage(pageNum)}
-                      className="w-9 h-9 p-0 font-bold"
+                      className="w-9 h-9 p-0 font-bold rounded-xl"
                     >
                       {pageNum}
                     </Button>
@@ -321,7 +321,7 @@ export default function ExploreJobsPage() {
                   size="sm"
                   disabled={currentPageClamped === totalPages}
                   onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-                  className="gap-1"
+                  className="gap-1 rounded-xl"
                 >
                   Next <ChevronRight className="h-4 w-4" />
                 </Button>

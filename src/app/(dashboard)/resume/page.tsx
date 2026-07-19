@@ -32,6 +32,7 @@ import {
 } from "@/redux/api/resumeApi";
 import Link from "next/link";
 import { toast } from "sonner";
+import { SwalConfirm } from "@/utils/swal";
 
 export default function ResumePage() {
   const [dragActive, setDragActive] = useState(false);
@@ -108,7 +109,14 @@ export default function ResumePage() {
   };
 
   const handleDelete = async () => {
-    if (confirm("Are you sure you want to delete your stored resume?")) {
+    const isConfirmed = await SwalConfirm(
+      "Delete Resume?",
+      "Are you sure you want to delete your stored resume and AI analysis?",
+      "Yes, Delete Resume",
+      "warning"
+    );
+
+    if (isConfirmed) {
       try {
         toast.loading("Deleting resume...", { id: "resume-delete" });
         await deleteResume().unwrap();

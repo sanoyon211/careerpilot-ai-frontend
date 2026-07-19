@@ -6,6 +6,7 @@ import { Edit, Trash2, Eye, MoreVertical, PlusCircle, Search, Filter, Sparkles, 
 import Link from "next/link";
 import { useGetEmployerJobsQuery, useDeleteJobMutation, useUpdateJobMutation, Job } from "@/redux/api/jobsApi";
 import { toast } from "sonner";
+import { SwalConfirm } from "@/utils/swal";
 
 export default function ManageJobsPage() {
   const { data: jobsResponse, isLoading } = useGetEmployerJobsQuery();
@@ -64,7 +65,14 @@ export default function ManageJobsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this job posting?")) {
+    const isConfirmed = await SwalConfirm(
+      "Delete Job Listing?",
+      "Are you sure you want to permanently delete this job posting?",
+      "Yes, Delete Job",
+      "warning"
+    );
+
+    if (isConfirmed) {
       toast.promise(deleteJob(id).unwrap(), {
         loading: "Deleting job...",
         success: "Job posting deleted successfully",
@@ -83,7 +91,7 @@ export default function ManageJobsPage() {
         loading: "Promoting job to Featured status...",
         success: () => {
           setPromotingJob(null);
-          return `✨ ${job.title} is now a Featured Priority Job!`;
+          return `${job.title} is now a Featured Priority Job!`;
         },
         error: "Failed to promote job",
       }
