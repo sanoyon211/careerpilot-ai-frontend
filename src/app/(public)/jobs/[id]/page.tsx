@@ -29,6 +29,7 @@ export default function JobDetailPage() {
   const [applicantName, setApplicantName] = useState(user?.name || "");
   const [applicantEmail, setApplicantEmail] = useState(user?.email || "");
   const [applicantPhone, setApplicantPhone] = useState(user?.phone || "");
+  const [resumeUrl, setResumeUrl] = useState(user?.portfolio || "");
   const [coverLetter, setCoverLetter] = useState("");
   const [isAppliedSuccess, setIsAppliedSuccess] = useState(false);
 
@@ -51,8 +52,11 @@ export default function JobDetailPage() {
 
     try {
       toast.loading("Groq AI is crafting your tailored cover letter...", { id: "cover-letter-gen" });
-      const res = await generateCoverLetter({ jobId: id }).unwrap();
-      const generatedText = res?.data?.coverLetter || res?.coverLetter || "";
+      const res = await generateCoverLetter({ 
+        jobDescription: job?.fullDescription || job?.title || "Job Application", 
+        resumeData: user 
+      }).unwrap();
+      const generatedText = (typeof res?.data === "string" ? res.data : (res as any)?.data?.coverLetter || (res as any)?.coverLetter) || "";
       setCoverLetter(generatedText);
       toast.success("AI Cover Letter generated successfully!", { id: "cover-letter-gen" });
     } catch (err: any) {
@@ -68,6 +72,7 @@ export default function JobDetailPage() {
         applicantName,
         applicantEmail,
         applicantPhone,
+        resumeUrl,
         coverLetter,
       }).unwrap();
 
@@ -119,7 +124,7 @@ export default function JobDetailPage() {
 
       <div className="grid lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2">
-          <JobDetailDescription fullDescription={job.description} />
+          <JobDetailDescription fullDescription={job.fullDescription} />
         </div>
         <div>
           <JobDetailSidebar employerName={job.employerId?.name} />
@@ -136,6 +141,8 @@ export default function JobDetailPage() {
           setApplicantEmail={setApplicantEmail}
           applicantPhone={applicantPhone}
           setApplicantPhone={setApplicantPhone}
+          resumeUrl={resumeUrl}
+          setResumeUrl={setResumeUrl}
           coverLetter={coverLetter}
           setCoverLetter={setCoverLetter}
           onClose={() => setIsApplyModalOpen(false)}

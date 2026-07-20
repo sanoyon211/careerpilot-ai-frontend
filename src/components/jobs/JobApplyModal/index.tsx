@@ -1,6 +1,6 @@
 "use client";
 
-import { X, User, Mail, Phone, Sparkles, Send } from "lucide-react";
+import { X, User, Mail, Phone, Link as LinkIcon, Sparkles, Send } from "lucide-react";
 import { Button } from "@/components/common/Button";
 import { Input } from "@/components/common/Input";
 
@@ -13,6 +13,8 @@ interface JobApplyModalProps {
   setApplicantEmail: (val: string) => void;
   applicantPhone: string;
   setApplicantPhone: (val: string) => void;
+  resumeUrl: string;
+  setResumeUrl: (val: string) => void;
   coverLetter: string;
   setCoverLetter: (val: string) => void;
   onClose: () => void;
@@ -30,6 +32,8 @@ export function JobApplyModal({
   setApplicantEmail,
   applicantPhone,
   setApplicantPhone,
+  resumeUrl,
+  setResumeUrl,
   coverLetter,
   setCoverLetter,
   onClose,
@@ -79,17 +83,32 @@ export function JobApplyModal({
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1.5">
-              <Phone className="h-3.5 w-3.5 text-[#8B5CF6]" /> Phone Number
-            </label>
-            <Input
-              type="text"
-              value={applicantPhone}
-              onChange={(e) => setApplicantPhone(e.target.value)}
-              placeholder="+1 (555) 000-0000"
-              required
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1.5">
+                <Phone className="h-3.5 w-3.5 text-[#8B5CF6]" /> Phone Number
+              </label>
+              <Input
+                type="text"
+                value={applicantPhone}
+                onChange={(e) => setApplicantPhone(e.target.value)}
+                placeholder="+1 (555) 000-0000"
+                required
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1.5">
+                <LinkIcon className="h-3.5 w-3.5 text-[#8B5CF6]" /> Resume URL
+              </label>
+              <Input
+                type="url"
+                value={resumeUrl}
+                onChange={(e) => setResumeUrl(e.target.value)}
+                placeholder="https://your-resume-link.com"
+                required
+              />
+            </div>
           </div>
 
           <div>

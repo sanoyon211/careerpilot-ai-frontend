@@ -38,7 +38,7 @@ export interface GetJobsQueryParams {
 
 export const jobsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getJobs: builder.query<{ success: boolean; data: Job[] }, GetJobsQueryParams | void>({
+    getJobs: builder.query<{ success: boolean; data: Job[]; meta?: { total: number; page: number; limit: number; totalPages: number } }, GetJobsQueryParams | void>({
       query: (params) => {
         let url = '/jobs';
         if (params) {
