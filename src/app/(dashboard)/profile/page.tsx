@@ -80,8 +80,8 @@ export default function ProfilePage() {
             <h2 className="text-2xl font-extrabold text-[#1E293B]">{user?.name}</h2>
             <p className="text-[#64748B] font-semibold mb-3 text-sm">{user?.headline || user?.role}</p>
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs font-semibold text-[#64748B]">
-              {user?.location && <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-[#2563EB]" /> {user.location}</span>}
-              <span className="flex items-center gap-1.5"><Mail className="h-4 w-4 text-[#2563EB]" /> {user?.email}</span>
+              {user?.location && <span>{user.location}</span>}
+              <span>{user?.email}</span>
             </div>
           </div>
         </div>
@@ -94,31 +94,19 @@ export default function ProfilePage() {
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="space-y-1">
                 <label className="text-xs font-bold uppercase tracking-wider text-[#64748B]">Full Name</label>
-                <div className="relative">
-                  <User className="absolute left-3.5 top-3.5 h-4 w-4 text-[#64748B]" />
-                  <Input name="name" value={formData.name} onChange={handleChange} type="text" disabled={!isEditing} className="pl-10" />
-                </div>
+                <Input name="name" value={formData.name} onChange={handleChange} type="text" disabled={!isEditing} />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold uppercase tracking-wider text-[#64748B]">Email Address (Read-only)</label>
-                <div className="relative">
-                  <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-[#64748B]" />
-                  <Input type="email" value={user?.email || ""} disabled className="pl-10 opacity-70 bg-white" />
-                </div>
+                <Input type="email" value={user?.email || ""} disabled className="opacity-70 bg-white" />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold uppercase tracking-wider text-[#64748B]">Phone Number</label>
-                <div className="relative">
-                  <Phone className="absolute left-3.5 top-3.5 h-4 w-4 text-[#64748B]" />
-                  <Input name="phone" value={formData.phone} onChange={handleChange} type="tel" disabled={!isEditing} className="pl-10" />
-                </div>
+                <Input name="phone" value={formData.phone} onChange={handleChange} type="tel" disabled={!isEditing} />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold uppercase tracking-wider text-[#64748B]">Location</label>
-                <div className="relative">
-                  <MapPin className="absolute left-3.5 top-3.5 h-4 w-4 text-[#64748B]" />
-                  <Input name="location" value={formData.location} onChange={handleChange} type="text" disabled={!isEditing} className="pl-10" />
-                </div>
+                <Input name="location" value={formData.location} onChange={handleChange} type="text" disabled={!isEditing} />
               </div>
             </div>
           </div>
@@ -144,10 +132,7 @@ export default function ProfilePage() {
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold uppercase tracking-wider text-[#64748B]">Portfolio / Website</label>
-                <div className="relative">
-                  <Globe className="absolute left-3.5 top-3.5 h-4 w-4 text-[#64748B]" />
-                  <Input name="portfolio" value={formData.portfolio} onChange={handleChange} type="url" placeholder="https://" disabled={!isEditing} className="pl-10" />
-                </div>
+                <Input name="portfolio" value={formData.portfolio} onChange={handleChange} type="url" placeholder="https://" disabled={!isEditing} />
               </div>
             </div>
           </div>
@@ -157,8 +142,8 @@ export default function ProfilePage() {
               <Button type="button" variant="outline" className="rounded-xl font-bold" onClick={() => setIsEditing(false)}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={isUpdating} className="gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl px-6 font-extrabold text-white">
-                <Save className="h-4 w-4" /> {isUpdating ? "Saving..." : "Save Changes"}
+              <Button type="submit" disabled={isUpdating} className="bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl px-6 font-extrabold text-white">
+                {isUpdating ? "Saving..." : "Save Changes"}
               </Button>
             </div>
           )}

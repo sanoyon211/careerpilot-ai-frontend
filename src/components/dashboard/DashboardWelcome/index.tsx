@@ -23,14 +23,14 @@ export function DashboardWelcome({ userName, isEmployer }: DashboardWelcomeProps
 
       {isEmployer ? (
         <Link href="/add-job">
-          <Button className="gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3 text-sm">
-            <PlusCircle className="h-4.5 w-4.5" /> Post New Job
+          <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3 text-sm">
+            Post New Job
           </Button>
         </Link>
       ) : (
         <Link href="/explore-jobs">
-          <Button variant="ai" className="gap-2 rounded-full font-extrabold px-8 py-3 text-sm">
-            <Sparkles className="h-4.5 w-4.5" /> Find AI Job Matches
+          <Button variant="ai" className="rounded-full font-extrabold px-8 py-3 text-sm">
+            Find AI Job Matches
           </Button>
         </Link>
       )}

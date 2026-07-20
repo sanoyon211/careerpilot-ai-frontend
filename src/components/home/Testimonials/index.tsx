@@ -49,10 +49,9 @@ export function Testimonials() {
               <div>
                 <div className="flex items-center gap-1 mb-6 text-amber-500">
                   {Array.from({ length: item.stars }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-400" />
+                    <Star key={i} className="h-4 w-4 fill-amber-400" strokeWidth={1.5} />
                   ))}
                 </div>
-                <Quote className="h-9 w-9 text-[#8B5CF6]/20 mb-4" />
                 <p className="text-base text-[#0F172A] font-medium leading-relaxed mb-8">
                   "{item.quote}"
                 </p>

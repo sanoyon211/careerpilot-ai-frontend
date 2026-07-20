@@ -114,8 +114,8 @@ export default function ManageJobsPage() {
           <p className="text-muted-foreground mt-1">View, edit, promote, and manage all your posted job listings.</p>
         </div>
         <Link href="/add-job">
-          <Button className="gap-2 bg-primary hover:bg-primary/90 rounded-xl">
-            <PlusCircle className="h-4 w-4" /> Post New Job
+          <Button className="bg-primary hover:bg-primary/90 rounded-xl">
+            Post New Job
           </Button>
         </Link>
       </div>
@@ -123,18 +123,16 @@ export default function ManageJobsPage() {
       <div className="bg-card border rounded-3xl overflow-hidden">
         {/* Toolbar */}
         <div className="p-4 border-b flex flex-col sm:flex-row justify-between gap-4 bg-muted/10">
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3.5 top-3 h-4 w-4 text-muted-foreground" />
+          <div className="flex-1 max-w-sm">
             <input
               type="text"
               placeholder="Search jobs by title or location..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-xl border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-2 rounded-xl border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-muted-foreground ml-2" />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
@@ -218,12 +216,12 @@ export default function ManageJobsPage() {
                         onClick={() => setPromotingJob(job)}
                         className="gap-1 text-amber-600 hover:text-amber-700 hover:bg-amber-500/10 border-amber-500/30 rounded-xl"
                       >
-                        <Sparkles className="h-3.5 w-3.5" /> Promote
+                        <Sparkles className="h-3.5 w-3.5 text-[#0F172A]" strokeWidth={1.5} /> Promote
                       </Button>
 
                       <Link href={`/jobs/${job._id}`}>
                         <Button variant="outline" size="icon" className="h-8 w-8 rounded-lg" title="View Job Details">
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} />
                         </Button>
                       </Link>
 
@@ -234,7 +232,7 @@ export default function ManageJobsPage() {
                         title="Edit Job"
                         onClick={() => openEditModal(job)}
                       >
-                        <Edit className="h-4 w-4" />
+                        <Edit className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} />
                       </Button>
 
                       <Button
@@ -244,7 +242,7 @@ export default function ManageJobsPage() {
                         title="Delete Job"
                         onClick={() => handleDelete(job._id)}
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                       </Button>
                     </div>
                   </td>
@@ -284,7 +282,7 @@ export default function ManageJobsPage() {
             <div className="flex justify-between items-center border-b pb-3">
               <h2 className="text-xl font-bold">Edit Job Details</h2>
               <button onClick={() => setEditingJob(null)} className="p-1 text-muted-foreground hover:text-foreground">
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5" strokeWidth={1.5} />
               </button>
             </div>
 
@@ -384,7 +382,7 @@ export default function ManageJobsPage() {
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
           <div className="bg-card border rounded-3xl p-6 w-full max-w-md space-y-4 text-center">
             <div className="h-12 w-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mx-auto">
-              <Sparkles className="h-6 w-6" />
+              <Sparkles className="h-6 w-6 text-[#8B5CF6]" strokeWidth={1.5} />
             </div>
             <h2 className="text-xl font-bold">Promote Job Listing</h2>
             <p className="text-sm text-muted-foreground">
@@ -399,7 +397,7 @@ export default function ManageJobsPage() {
                 Cancel
               </Button>
               <Button className="flex-1 bg-amber-600 hover:bg-amber-700 text-white gap-1.5" onClick={() => handlePromoteConfirm(promotingJob)}>
-                <CheckCircle2 className="h-4 w-4" /> Activate Priority
+                <CheckCircle2 className="h-4 w-4" strokeWidth={1.5} /> Activate Priority
               </Button>
             </div>
           </div>

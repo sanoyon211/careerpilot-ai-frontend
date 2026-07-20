@@ -80,9 +80,6 @@ export default function AIChatPage() {
       {/* Header */}
       <div className="bg-[#FAFAFA] border-b border-[#E5E7EB] p-6 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-4">
-          <div className="h-11 w-11 rounded-2xl bg-[#8B5CF6] text-white flex items-center justify-center">
-            <Sparkles className="h-5 w-5" />
-          </div>
           <div>
             <h1 className="font-extrabold text-lg text-[#1E293B] leading-tight">
               {mode === "coach" ? "AI Career Coach" : "Mock Interviewer"}
@@ -127,7 +124,7 @@ export default function AIChatPage() {
             className="text-[#64748B] hover:text-[#8B5CF6] transition-colors p-2"
             title="Clear Chat"
           >
-            <RefreshCw className="h-4 w-4" />
+            <RefreshCw className="h-5 w-5 text-[#64748B]" strokeWidth={1.5} />
           </button>
         </div>
       </div>
@@ -143,7 +140,7 @@ export default function AIChatPage() {
                   : "bg-[#2563EB] text-white"
               }`}
             >
-              {msg.role === "ai" ? <Sparkles className="h-4.5 w-4.5" /> : <User className="h-4.5 w-4.5" />}
+              {msg.role === "ai" ? <Sparkles className="h-5 w-5" strokeWidth={1.5} /> : <User className="h-5 w-5" strokeWidth={1.5} />}
             </div>
 
             <div className="space-y-2">
@@ -160,10 +157,10 @@ export default function AIChatPage() {
               {msg.role === "ai" && (
                 <div className="flex items-center gap-2 px-1">
                   <button className="text-[#64748B] hover:text-[#8B5CF6] transition-colors p-1" title="Copy">
-                    <Copy className="h-3.5 w-3.5" />
+                    <Copy className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} />
                   </button>
                   <button className="text-[#64748B] hover:text-[#8B5CF6] transition-colors p-1" title="Helpful">
-                    <ThumbsUp className="h-3.5 w-3.5" />
+                    <ThumbsUp className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} />
                   </button>
                 </div>
               )}
@@ -174,7 +171,7 @@ export default function AIChatPage() {
         {isTyping && (
           <div className="flex gap-4 max-w-3xl">
             <div className="h-9 w-9 rounded-2xl shrink-0 flex items-center justify-center bg-[#8B5CF6] text-white">
-              <Sparkles className="h-4.5 w-4.5" />
+              <Sparkles className="h-5 w-5" strokeWidth={1.5} />
             </div>
             <div className="bg-[#F3E8FF] border border-[#8B5CF6]/20 rounded-2xl rounded-tl-sm px-6 py-4 flex items-center gap-1.5">
               <div className="w-2 h-2 bg-[#8B5CF6]/40 rounded-full animate-bounce"></div>
@@ -221,7 +218,7 @@ export default function AIChatPage() {
               disabled={!input.trim() || isTyping}
               className="bg-[#8B5CF6] text-white p-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0 mb-0.5 mr-0.5 hover:bg-[#7C3AED]"
             >
-              <Send className="h-4 w-4" />
+              <Send className="h-5 w-5" strokeWidth={1.5} />
             </button>
           </div>
           <div className="text-center">

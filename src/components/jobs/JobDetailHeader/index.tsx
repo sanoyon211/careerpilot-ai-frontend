@@ -32,10 +32,10 @@ export function JobDetailHeader({
             <div className="text-lg text-[#8B5CF6] font-extrabold mt-1.5 mb-5">{job.employerId?.name || "Company"}</div>
 
             <div className="flex flex-wrap gap-y-3 gap-x-8 text-xs sm:text-sm text-[#64748B] font-semibold">
-              <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#8B5CF6]" /> {job.location}</span>
-              <span className="flex items-center gap-2"><Briefcase className="h-4 w-4 text-[#8B5CF6]" /> {job.jobType} • {job.workMode}</span>
+              <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#8B5CF6]" strokeWidth={1.5} /> {job.location}</span>
+              <span className="flex items-center gap-2"><Briefcase className="h-4 w-4 text-[#8B5CF6]" strokeWidth={1.5} /> {job.jobType} • {job.workMode}</span>
               {job.salaryRange && (
-                <span className="flex items-center gap-2 text-emerald-600 font-black"><DollarSign className="h-4 w-4" /> {job.salaryRange}</span>
+                <span className="flex items-center gap-2 text-emerald-600 font-black"><DollarSign className="h-4 w-4" strokeWidth={1.5} /> {job.salaryRange}</span>
               )}
             </div>
           </div>
@@ -45,27 +45,27 @@ export function JobDetailHeader({
       <div className="mt-10 pt-8 border-t border-[#E5E7EB] flex flex-col sm:flex-row gap-4 items-center flex-wrap">
         {isAppliedSuccess ? (
           <div className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 font-extrabold text-sm">
-            <CheckCircle2 className="h-5 w-5" /> Applied to this position
+            <CheckCircle2 className="h-5 w-5" strokeWidth={1.5} /> Applied to this position
           </div>
         ) : (
           <Button size="lg" className="w-full sm:w-auto px-10 py-3.5 text-base bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold gap-2.5" onClick={onOpenApplyModal}>
-            <Send className="h-5 w-5" /> Apply Now
+            <Send className="h-5 w-5" strokeWidth={1.5} /> Apply Now
           </Button>
         )}
 
         <Button variant="outline" size="lg" className="gap-2.5 rounded-full font-extrabold px-8 py-3.5 border-[#8B5CF6]/40 text-[#8B5CF6] hover:bg-[#F3E8FF]" onClick={onGenerateCoverLetter} isLoading={isGenerating}>
-          <Sparkles className="h-5 w-5 text-[#8B5CF6]" /> AI Cover Letter
+          <Sparkles className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> AI Cover Letter
         </Button>
 
         <div className="ml-auto flex items-center gap-2 text-xs text-[#64748B] font-semibold self-center">
-          <Clock className="h-4 w-4" /> Posted {new Date(job.createdAt).toLocaleDateString()} • {job.applicantsCount || 0} applicants
+          <Clock className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} /> Posted {new Date(job.createdAt).toLocaleDateString()} • {job.applicantsCount || 0} applicants
         </div>
       </div>
 
       {coverLetter && (
         <div className="mt-8 bg-white border border-[#E5E7EB] rounded-2xl p-8">
           <h3 className="font-extrabold text-base mb-4 flex items-center gap-2 text-[#8B5CF6]">
-            <FileText className="h-5 w-5" /> AI Generated Cover Letter
+            <FileText className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> AI Generated Cover Letter
           </h3>
           <div className="whitespace-pre-line text-sm leading-relaxed font-sans text-[#0F172A] font-medium">
             {coverLetter}

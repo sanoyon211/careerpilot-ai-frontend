@@ -55,28 +55,24 @@ export default function ForgotPasswordPage() {
                   <label className="text-sm font-medium leading-none" htmlFor="email">
                     Email address
                   </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <input
                       id="email"
                       type="email"
                       placeholder="name@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring pl-10"
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       required
                     />
-                  </div>
                 </div>
 
-                <Button type="submit" isLoading={isSubmitting} className="w-full gap-2 mt-4 bg-primary hover:bg-primary/90">
-                  <Send className="h-4 w-4" /> Send Reset Link
+                <Button type="submit" isLoading={isSubmitting} className="w-full mt-4 bg-primary hover:bg-primary/90">
+                  Send Reset Link
                 </Button>
               </form>
             ) : (
               <div className="space-y-5 text-center">
                 <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 p-4 rounded-xl flex flex-col items-center gap-2 text-sm">
-                  <CheckCircle2 className="h-8 w-8 text-emerald-600" />
                   <p className="font-semibold">Reset Link Sent!</p>
                   <p className="text-xs opacity-90">
                     We've sent an email to <strong>{email}</strong> with step-by-step instructions.
@@ -90,8 +86,8 @@ export default function ForgotPasswordPage() {
           </div>
 
           <div className="bg-muted/50 p-4 text-center border-t text-sm text-muted-foreground flex justify-center">
-            <Link href="/login" className="font-semibold text-primary hover:underline inline-flex items-center">
-              <ArrowLeft className="mr-1 h-3.5 w-3.5" /> Back to Sign In
+            <Link href="/login" className="font-semibold text-primary hover:underline">
+              Back to Sign In
             </Link>
           </div>
         </div>

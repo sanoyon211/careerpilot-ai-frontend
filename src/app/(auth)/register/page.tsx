@@ -125,21 +125,19 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4 mb-2">
                 <label
-                  className={`cursor-pointer border rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all ${
+                  className={`cursor-pointer border rounded-lg p-3 flex flex-col items-center justify-center transition-all ${
                     role === "job-seeker" ? "border-primary bg-primary/5 text-primary" : "border-border hover:bg-muted"
                   }`}
                 >
                   <input type="radio" name="role" value="job-seeker" checked={role === "job-seeker"} onChange={() => setRole("job-seeker")} className="sr-only" />
-                  <User className="h-5 w-5" />
                   <span className="text-sm font-medium">Job Seeker</span>
                 </label>
                 <label
-                  className={`cursor-pointer border rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all ${
+                  className={`cursor-pointer border rounded-lg p-3 flex flex-col items-center justify-center transition-all ${
                     role === "employer" ? "border-primary bg-primary/5 text-primary" : "border-border hover:bg-muted"
                   }`}
                 >
                   <input type="radio" name="role" value="employer" checked={role === "employer"} onChange={() => setRole("employer")} className="sr-only" />
-                  <UserPlus className="h-5 w-5" />
                   <span className="text-sm font-medium">Employer</span>
                 </label>
               </div>
@@ -148,56 +146,47 @@ export default function RegisterPage() {
                 <label className="text-sm font-medium leading-none" htmlFor="name">
                   Full Name
                 </label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <input
-                    id="name"
-                    type="text"
-                    placeholder="John Doe"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring pl-10"
-                    required
-                  />
-                </div>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="John Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  required
+                />
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium leading-none" htmlFor="email">
                   Email address
                 </label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <input
-                    id="email"
-                    type="email"
-                    placeholder="name@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring pl-10"
-                    required
-                  />
-                </div>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  required
+                />
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium leading-none" htmlFor="password">
                   Password
                 </label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring pl-10"
-                    required
-                  />
-                </div>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  required
+                />
               </div>
 
-              <Button type="submit" disabled={isLoading} className="w-full gap-2 mt-4">
+              <Button type="submit" disabled={isLoading} className="w-full mt-4">
                 {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
             </form>
@@ -227,9 +216,9 @@ export default function RegisterPage() {
             </div>
           </div>
           
-          <div className="bg-muted/50 p-4 text-center border-t text-sm text-muted-foreground flex justify-between items-center px-8">
-            <Link href="/login" className="font-semibold text-primary hover:underline inline-flex items-center">
-              <ArrowLeft className="mr-1 h-3 w-3" /> Back to Login
+          <div className="bg-muted/50 p-4 text-center border-t text-sm text-muted-foreground flex justify-center items-center px-8">
+            <Link href="/login" className="font-semibold text-primary hover:underline">
+              Back to Login
             </Link>
           </div>
         </div>

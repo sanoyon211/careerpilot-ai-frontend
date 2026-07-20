@@ -165,7 +165,7 @@ export default function DashboardLayout({
           </span>
         </Link>
         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-[#64748B]">
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMobileMenuOpen ? <X className="h-6 w-6" strokeWidth={1.5} /> : <Menu className="h-6 w-6 text-[#0F172A]" strokeWidth={1.5} />}
         </button>
       </div>
 
@@ -231,11 +231,8 @@ export default function DashboardLayout({
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all ${linkClass}`}
               >
-                <link.icon className={`h-4.5 w-4.5 shrink-0 ${!isActive && link.isAI ? "text-[#8B5CF6]" : ""}`} />
+                <link.icon className={`h-5 w-5 shrink-0 ${isActive ? "text-white" : link.isAI ? "text-[#8B5CF6]" : "text-[#0F172A]"}`} strokeWidth={1.5} />
                 <span>{link.label}</span>
-                {link.isAI && !isAICoachActive && (
-                  <Sparkles className={`h-3.5 w-3.5 ml-auto ${isActive ? "text-white" : "text-[#8B5CF6]"}`} />
-                )}
               </Link>
             );
           })}
@@ -252,14 +249,14 @@ export default function DashboardLayout({
                 : "text-[#64748B] hover:bg-[#FAFAFA] hover:text-[#2563EB]"
             }`}
           >
-            <Settings className="h-4.5 w-4.5 shrink-0" /> Settings
+            <Settings className="h-5 w-5 shrink-0 text-[#0F172A]" strokeWidth={1.5} /> Settings
           </Link>
 
           <button
             onClick={handleSignOut}
             className="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors text-left cursor-pointer"
           >
-            <LogOut className="h-4.5 w-4.5 shrink-0" /> Sign Out
+            <LogOut className="h-5 w-5 shrink-0" strokeWidth={1.5} /> Sign Out
           </button>
         </div>
       </aside>

@@ -13,8 +13,7 @@ export function AISection() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left AI Text Info */}
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#8B5CF6] text-white">
-                <Sparkles className="h-4 w-4" />
+              <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#8B5CF6] text-white">
                 <span>AI Feature Spotlight</span>
               </div>
 
@@ -33,10 +32,8 @@ export function AISection() {
                   "Automated cover letter generation for any job opening",
                   "24/7 conversational career coach for interview strategies",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-3.5 text-sm sm:text-base font-extrabold text-[#0F172A]">
-                    <div className="h-7 w-7 rounded-full bg-[#FAFAFA] border border-[#E5E7EB] text-[#8B5CF6] flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="h-4.5 w-4.5" />
-                    </div>
+                  <li key={idx} className="flex items-center gap-3 text-sm sm:text-base font-extrabold text-[#0F172A]">
+                    <span className="h-2 w-2 rounded-full bg-[#8B5CF6] shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -44,13 +41,13 @@ export function AISection() {
 
               <div className="flex flex-wrap gap-4 pt-4">
                 <Link href="/ai-chat">
-                  <Button variant="ai" size="lg" className="gap-2.5 text-sm font-extrabold px-8 py-3.5">
-                    <Bot className="h-5 w-5" /> Start AI Chat Coach
+                  <Button variant="ai" size="lg" className="text-sm font-extrabold px-8 py-3.5">
+                    Start AI Chat Coach
                   </Button>
                 </Link>
                 <Link href="/resume">
-                  <Button variant="outline" size="lg" className="gap-2.5 text-sm border-[#E5E7EB] text-[#0F172A] hover:bg-white px-8 py-3.5">
-                    <FileText className="h-5 w-5" /> Analyze Resume Free
+                  <Button variant="outline" size="lg" className="text-sm border-[#E5E7EB] text-[#0F172A] hover:bg-white px-8 py-3.5">
+                    Analyze Resume Free
                   </Button>
                 </Link>
               </div>
@@ -59,14 +56,9 @@ export function AISection() {
             {/* Right Side Interactive Card Preview */}
             <div className="bg-white border border-[#E5E7EB] rounded-[28px] p-8 space-y-6">
               <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-5">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-2xl bg-[#8B5CF6] text-white flex items-center justify-center font-bold">
-                    <Sparkles className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-extrabold text-base text-[#0F172A]">AI Match Insight</h4>
-                    <p className="text-xs text-[#64748B] font-semibold">Groq Llama 3.3 Engine</p>
-                  </div>
+                <div>
+                  <h4 className="font-extrabold text-base text-[#0F172A]">AI Match Insight</h4>
+                  <p className="text-xs text-[#64748B] font-semibold">Groq Llama 3.3 Engine</p>
                 </div>
                 <span className="text-xs font-black text-[#8B5CF6] bg-white px-3.5 py-1 rounded-full border border-[#E5E7EB]">
                   94% Match
@@ -75,8 +67,8 @@ export function AISection() {
 
               {/* Sample Chat Bubble */}
               <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-extrabold text-[#8B5CF6]">
-                  <Bot className="h-4 w-4" /> CareerPilot Assistant
+                <div className="text-xs font-extrabold text-[#8B5CF6]">
+                  CareerPilot Assistant
                 </div>
                 <p className="text-xs sm:text-sm text-[#0F172A] leading-relaxed font-medium">
                   "Your resume shows strong proficiency in TypeScript & Next.js! Adding PostgreSQL ORM examples will boost your ATS score by +12% for Senior Fullstack roles."

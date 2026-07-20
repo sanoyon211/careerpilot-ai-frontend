@@ -11,8 +11,7 @@ export function Hero() {
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         {/* Top Header Badge */}
         <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
-            <Cpu className="h-4 w-4 text-[#8B5CF6]" />
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
             <span>Autonomous Groq Llama 3.3 70B AI Platform</span>
           </div>
 
@@ -27,13 +26,13 @@ export function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
             <Link href="/explore-jobs">
-              <Button size="lg" className="w-full sm:w-auto bg-[#8B5CF6] hover:bg-[#7C3AED] text-white gap-2.5 text-base font-extrabold px-8 py-3.5">
-                <Search className="h-5 w-5" /> Explore Open Roles
+              <Button size="lg" className="w-full sm:w-auto bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-base font-extrabold px-8 py-3.5">
+                Explore Open Roles
               </Button>
             </Link>
             <Link href="/ai-chat">
-              <Button size="lg" variant="secondary" className="w-full sm:w-auto bg-[#0F172A] hover:bg-[#1E293B] text-white gap-2.5 text-base font-extrabold px-8 py-3.5">
-                <Sparkles className="h-5 w-5 text-[#8B5CF6]" /> Launch AI Coach
+              <Button size="lg" variant="secondary" className="w-full sm:w-auto bg-[#0F172A] hover:bg-[#1E293B] text-white text-base font-extrabold px-8 py-3.5">
+                Launch AI Coach
               </Button>
             </Link>
           </div>
@@ -44,10 +43,7 @@ export function Hero() {
           {/* Bento Card 1: AI Agentic Matching */}
           <div className="md:col-span-7 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[32px] p-8 md:p-12 relative overflow-hidden hover:border-[#CBD5E1] transition-all group flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2.5 mb-6">
-                <div className="p-3 rounded-2xl bg-[#FAFAFA] border border-[#E5E7EB] text-[#8B5CF6]">
-                  <Cpu className="h-6 w-6" />
-                </div>
+              <div className="mb-6">
                 <span className="text-xs font-black uppercase tracking-wider text-[#8B5CF6]">Agentic AI Engine</span>
               </div>
               <h3 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] mb-4 group-hover:text-[#8B5CF6] transition-colors">
@@ -68,9 +64,6 @@ export function Hero() {
           <div className="md:col-span-5 bg-white border border-[#E5E7EB] rounded-[32px] p-8 md:p-12 hover:border-[#8B5CF6]/50 transition-all flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="p-3 rounded-2xl bg-[#8B5CF6] text-white">
-                  <Sparkles className="h-6 w-6" />
-                </div>
                 <span className="text-xs font-black text-[#8B5CF6] bg-white px-3.5 py-1 rounded-full border border-[#E5E7EB]">AI Feature</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mb-3">ATS Resume Optimizer</h3>
@@ -79,43 +72,28 @@ export function Hero() {
               </p>
             </div>
             <Link href="/resume">
-              <Button size="sm" variant="ai" className="w-full gap-2 rounded-2xl text-xs py-3 font-extrabold">
-                Check Resume Score <ArrowRight className="h-4 w-4" />
+              <Button size="sm" variant="ai" className="w-full rounded-2xl text-xs py-3 font-extrabold">
+                Check Resume Score
               </Button>
             </Link>
           </div>
 
           {/* Bento Card 3: Metrics Banner */}
-          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 flex items-center gap-5">
-            <div className="p-4 rounded-2xl bg-white border border-[#E5E7EB] text-[#8B5CF6] shrink-0">
-              <TrendingUp className="h-8 w-8" />
-            </div>
-            <div>
-              <div className="text-3xl font-black text-[#0F172A]">2,500+</div>
-              <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">Active Verified Jobs</div>
-            </div>
+          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
+            <div className="text-3xl font-black text-[#0F172A]">2,500+</div>
+            <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">Active Verified Jobs</div>
           </div>
 
           {/* Bento Card 4: Employer Match */}
-          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 flex items-center gap-5">
-            <div className="p-4 rounded-2xl bg-white border border-[#E5E7EB] text-emerald-600 shrink-0">
-              <ShieldCheck className="h-8 w-8" />
-            </div>
-            <div>
-              <div className="text-3xl font-black text-[#0F172A]">100%</div>
-              <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">Verified Companies</div>
-            </div>
+          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
+            <div className="text-3xl font-black text-[#0F172A]">100%</div>
+            <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">Verified Companies</div>
           </div>
 
           {/* Bento Card 5: Fast Track Applications */}
-          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 flex items-center gap-5">
-            <div className="p-4 rounded-2xl bg-white border border-[#E5E7EB] text-indigo-600 shrink-0">
-              <Zap className="h-8 w-8" />
-            </div>
-            <div>
-              <div className="text-3xl font-black text-[#0F172A]">Instant</div>
-              <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">AI Cover Letter Gen</div>
-            </div>
+          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
+            <div className="text-3xl font-black text-[#0F172A]">Instant</div>
+            <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">AI Cover Letter Gen</div>
           </div>
         </div>
       </div>

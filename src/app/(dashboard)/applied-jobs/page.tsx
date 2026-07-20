@@ -71,9 +71,6 @@ export default function AppliedJobsPage() {
 
           {!isLoading && filteredApps.length === 0 && (
             <div className="p-16 text-center bg-[#FAFAFA]">
-              <div className="mx-auto w-16 h-16 bg-[#2563EB]/10 rounded-full flex items-center justify-center mb-4 text-[#2563EB]">
-                <Building2 className="h-8 w-8" />
-              </div>
               <h3 className="text-xl font-extrabold text-[#1E293B] mb-2">No applications found</h3>
               <p className="text-[#64748B] text-sm max-w-sm mx-auto mb-6 font-medium">
                 You haven't submitted any job applications under this status yet.
@@ -101,15 +98,9 @@ export default function AppliedJobsPage() {
                         {job?.title || "Job Listing"}
                       </h3>
                       <div className="flex flex-wrap items-center gap-4 mt-1.5 text-xs text-[#64748B] font-semibold">
-                        {job?.location && (
-                          <span className="flex items-center gap-1.5">
-                            <MapPin className="h-3.5 w-3.5 text-[#2563EB]" /> {job.location}
-                          </span>
-                        )}
+                        {job?.location && <span>{job.location}</span>}
                         {job?.salaryRange && (
-                          <span className="flex items-center gap-1.5 font-extrabold text-emerald-600">
-                            <DollarSign className="h-3.5 w-3.5" /> {job.salaryRange}
-                          </span>
+                          <span className="font-extrabold text-emerald-600">{job.salaryRange}</span>
                         )}
                       </div>
                     </div>
@@ -120,15 +111,15 @@ export default function AppliedJobsPage() {
                       <span className={`text-xs font-extrabold px-3.5 py-1 rounded-full border ${getStatusBadge(app.status)}`}>
                         {app.status}
                       </span>
-                      <span className="text-[11px] text-[#64748B] flex items-center gap-1 font-semibold">
-                        <Clock className="h-3 w-3" /> Applied {new Date(app.createdAt).toLocaleDateString()}
+                      <span className="text-[11px] text-[#64748B] font-semibold">
+                        Applied {new Date(app.createdAt).toLocaleDateString()}
                       </span>
                     </div>
 
                     {job?._id && (
                       <Link href={`/jobs/${job._id}`}>
                         <Button variant="outline" size="icon" className="h-10 w-10 rounded-2xl">
-                          <ChevronRight className="h-5 w-5" />
+                          <ChevronRight className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} />
                         </Button>
                       </Link>
                     )}

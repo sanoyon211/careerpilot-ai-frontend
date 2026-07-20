@@ -11,8 +11,7 @@ export function CTA() {
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         <div className="relative overflow-hidden bg-[#FAFAFA] border border-[#E5E7EB] rounded-[36px] p-10 md:p-20 text-[#0F172A] text-center">
           <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-extrabold bg-white border border-[#E5E7EB] text-[#8B5CF6]">
-              <Sparkles className="h-4 w-4 text-[#8B5CF6]" />
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold bg-white border border-[#E5E7EB] text-[#8B5CF6]">
               <span>Ready to Elevate Your Tech Career?</span>
             </div>
 
@@ -26,13 +25,13 @@ export function CTA() {
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
               <Link href="/register">
-                <Button size="lg" className="w-full sm:w-auto bg-[#8B5CF6] text-white hover:bg-[#7C3AED] gap-2.5 text-base font-extrabold px-8 py-3.5">
-                  <Search className="h-5 w-5" /> Get Started Free
+                <Button size="lg" className="w-full sm:w-auto bg-[#8B5CF6] text-white hover:bg-[#7C3AED] text-base font-extrabold px-8 py-3.5">
+                  Get Started Free
                 </Button>
               </Link>
               <Link href="/explore-jobs">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto border-[#E5E7EB] text-[#0F172A] hover:bg-white gap-2.5 text-base font-extrabold px-8 py-3.5">
-                  Explore Positions <ArrowRight className="h-5 w-5" />
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-[#E5E7EB] text-[#0F172A] hover:bg-white text-base font-extrabold px-8 py-3.5">
+                  Explore Positions
                 </Button>
               </Link>
             </div>

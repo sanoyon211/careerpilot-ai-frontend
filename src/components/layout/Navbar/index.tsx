@@ -106,7 +106,7 @@ export function Navbar() {
                   pathname === "/resume" ? "text-[#8B5CF6] font-black" : ""
                 }`}
               >
-                <Sparkles className="h-4 w-4 text-[#8B5CF6]" /> Resume Match
+                <Sparkles className="h-4 w-4 text-[#8B5CF6]" strokeWidth={1.5} /> Resume Match
               </Link>
               <Link
                 href="/ai-chat"
@@ -114,7 +114,7 @@ export function Navbar() {
                   pathname === "/ai-chat" ? "text-[#8B5CF6] font-black" : ""
                 }`}
               >
-                <Bot className="h-4 w-4 text-[#8B5CF6]" /> AI Coach
+                <Bot className="h-4 w-4 text-[#8B5CF6]" strokeWidth={1.5} /> AI Coach
               </Link>
             </>
           )}
@@ -127,7 +127,7 @@ export function Navbar() {
                   pathname === "/add-job" ? "text-[#8B5CF6] font-black" : ""
                 }`}
               >
-                <PlusCircle className="h-4 w-4 text-[#8B5CF6]" /> Post Job
+                <PlusCircle className="h-4 w-4 text-[#8B5CF6]" strokeWidth={1.5} /> Post Job
               </Link>
               <Link
                 href="/manage-jobs"
@@ -135,7 +135,7 @@ export function Navbar() {
                   pathname === "/manage-jobs" ? "text-[#8B5CF6] font-black" : ""
                 }`}
               >
-                <Briefcase className="h-4 w-4" /> Manage Jobs
+                <Briefcase className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} /> Manage Jobs
               </Link>
             </>
           )}
@@ -188,7 +188,7 @@ export function Navbar() {
                   </div>
                 )}
                 <span className="text-xs font-extrabold pr-1 text-[#0F172A]">{user.name}</span>
-                <ChevronDown className="h-4 w-4 text-[#64748B]" />
+                <ChevronDown className="h-5 w-5 text-[#64748B]" strokeWidth={1.5} />
               </button>
 
               {isDropdownOpen && (
@@ -204,21 +204,21 @@ export function Navbar() {
                       onClick={() => setIsDropdownOpen(false)}
                       className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#FAFAFA] transition-colors font-bold text-[#0F172A]"
                     >
-                      <LayoutDashboard className="h-4 w-4 text-[#8B5CF6]" /> Dashboard
+                      <LayoutDashboard className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} /> Dashboard
                     </Link>
                     <Link
                       href="/profile"
                       onClick={() => setIsDropdownOpen(false)}
                       className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#FAFAFA] transition-colors font-bold text-[#0F172A]"
                     >
-                      <UserIcon className="h-4 w-4 text-[#64748B]" /> Profile
+                      <UserIcon className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} /> Profile
                     </Link>
                     <Link
                       href="/settings"
                       onClick={() => setIsDropdownOpen(false)}
                       className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#FAFAFA] transition-colors font-bold text-[#0F172A]"
                     >
-                      <Settings className="h-4 w-4 text-[#64748B]" /> Settings
+                      <Settings className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} /> Settings
                     </Link>
                   </div>
 
@@ -227,7 +227,7 @@ export function Navbar() {
                       onClick={handleLogout}
                       className="w-full flex items-center gap-2.5 px-4 py-2.5 text-red-600 hover:bg-red-50 transition-colors font-bold text-left cursor-pointer"
                     >
-                      <LogOut className="h-4 w-4" /> Sign Out
+                      <LogOut className="h-5 w-5" strokeWidth={1.5} /> Sign Out
                     </button>
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export function Navbar() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden p-2 text-[#64748B] hover:text-[#0F172A]"
         >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMobileMenuOpen ? <X className="h-6 w-6" strokeWidth={1.5} /> : <Menu className="h-6 w-6 text-[#0F172A]" strokeWidth={1.5} />}
         </button>
       </div>
 

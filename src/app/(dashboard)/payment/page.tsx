@@ -31,22 +31,15 @@ export default function PaymentMockupPage() {
       <div className="grid md:grid-cols-2 gap-8 items-start">
         {/* Plan Details */}
         <div className="bg-card border border-primary/20 rounded-2xl p-6 space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
-              <Sparkles className="h-6 w-6" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold">Premium Job Boost</h2>
-              <p className="text-sm text-primary font-semibold">$49.00 / job</p>
-            </div>
+          <div>
+            <h2 className="text-xl font-bold">Premium Job Boost</h2>
+            <p className="text-sm text-primary font-semibold">$49.00 / job</p>
           </div>
           
           <ul className="space-y-4">
             {["Featured at the top of search results", "AI-powered candidate matching", "Highlighted 'Premium' badge", "Instant alerts to top 5% matched candidates"].map((feature, i) => (
               <li key={i} className="flex items-start gap-3 text-sm">
-                <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="h-3 w-3 text-primary" />
-                </div>
+                <span className="h-2 w-2 rounded-full bg-primary shrink-0 mt-1.5" />
                 <span>{feature}</span>
               </li>
             ))}
@@ -55,23 +48,19 @@ export default function PaymentMockupPage() {
 
         {/* Checkout Form */}
         <div className="bg-card border rounded-2xl p-6 space-y-6">
-          <div className="flex items-center gap-2 pb-4 border-b">
-            <ShieldCheck className="h-5 w-5 text-green-500" />
+          <div className="pb-4 border-b">
             <span className="font-medium">Secure Checkout</span>
           </div>
 
           <div className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-sm font-medium">Card Information</label>
-              <div className="relative">
-                <CreditCard className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
-                <input 
-                  type="text" 
-                  placeholder="4242 4242 4242 4242" 
-                  className="w-full pl-10 pr-3 py-2.5 rounded-lg border bg-background focus:ring-2 focus:ring-primary focus:outline-none"
-                  defaultValue="4242 4242 4242 4242"
-                />
-              </div>
+              <input 
+                type="text" 
+                placeholder="4242 4242 4242 4242" 
+                className="w-full px-3 py-2.5 rounded-lg border bg-background focus:ring-2 focus:ring-primary focus:outline-none"
+                defaultValue="4242 4242 4242 4242"
+              />
             </div>
             
             <div className="grid grid-cols-2 gap-4">

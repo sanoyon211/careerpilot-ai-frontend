@@ -46,7 +46,7 @@ export default function SavedJobsPage() {
                   className="absolute top-5 right-5 p-2.5 bg-white border border-[#E5E7EB] rounded-full text-[#64748B] hover:text-red-600 hover:border-red-200 transition-colors opacity-0 group-hover:opacity-100 z-10 cursor-pointer"
                   title="Remove from saved"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} />
                 </button>
 
                 <div className="flex items-start gap-4 mb-4">
@@ -61,24 +61,18 @@ export default function SavedJobsPage() {
 
                 {job.isAiMatch && (
                   <div className="mb-4">
-                    <span className="inline-flex items-center gap-1.5 bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3 py-1 rounded-full">
-                      <Sparkles className="h-3.5 w-3.5" /> High AI Match
+                    <span className="inline-flex items-center bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3 py-1 rounded-full">
+                      High AI Match
                     </span>
                   </div>
                 )}
 
                 <div className="space-y-2 mb-6 mt-auto text-xs font-semibold text-[#64748B]">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-3.5 w-3.5 text-[#2563EB] shrink-0" /> {job.location || "Location not specified"}
-                  </div>
+                  <div>{job.location || "Location not specified"}</div>
                   {job.salaryRange && (
-                    <div className="flex items-center gap-2 text-emerald-600 font-extrabold">
-                      <DollarSign className="h-3.5 w-3.5 shrink-0" /> {job.salaryRange}
-                    </div>
+                    <div className="text-emerald-600 font-extrabold">{job.salaryRange}</div>
                   )}
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-3.5 w-3.5 shrink-0" /> Saved {new Date(item.createdAt).toLocaleDateString()}
-                  </div>
+                  <div>Saved {new Date(item.createdAt).toLocaleDateString()}</div>
                 </div>
 
                 <div className="flex gap-3 mt-auto border-t border-[#E5E7EB] pt-4">
@@ -86,8 +80,8 @@ export default function SavedJobsPage() {
                     <Button className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-bold">Apply Now</Button>
                   </Link>
                   <Link href={`/jobs/${job._id}`} className="flex-1">
-                    <Button variant="outline" className="w-full gap-1.5 rounded-full font-bold">
-                      Details <ExternalLink className="h-3.5 w-3.5" />
+                    <Button variant="outline" className="w-full rounded-full font-bold">
+                      Details
                     </Button>
                   </Link>
                 </div>
@@ -97,9 +91,6 @@ export default function SavedJobsPage() {
         </div>
       ) : (
         <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-16 text-center">
-          <div className="mx-auto w-16 h-16 bg-[#2563EB]/10 rounded-full flex items-center justify-center mb-4 text-[#2563EB]">
-            <Bookmark className="h-8 w-8" />
-          </div>
           <h3 className="text-xl font-extrabold text-[#1E293B] mb-2">No saved jobs</h3>
           <p className="text-[#64748B] text-sm font-medium mb-6">You haven't bookmarked any jobs yet. Start exploring to find your perfect match.</p>
           <Link href="/explore-jobs">

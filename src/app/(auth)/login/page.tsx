@@ -133,8 +133,8 @@ function LoginForm() {
           {/* Quick Demo Login Preset Buttons */}
           <div className="mb-6 bg-slate-50 dark:bg-slate-900 border rounded-2xl p-3.5 space-y-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-primary" /> 1-Click Demo Accounts
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                1-Click Demo Accounts
               </span>
               <span className="text-[10px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full">
                 Instant Access
@@ -146,9 +146,8 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleQuickDemoLogin("seeker")}
                 disabled={isLoading}
-                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-primary/10 hover:border-primary/40 transition-all text-xs font-bold text-left group"
+                className="flex items-center justify-center p-2.5 rounded-xl border bg-card hover:bg-primary/10 hover:border-primary/40 transition-all text-xs font-bold text-left group"
               >
-                <UserCheck className="h-4 w-4 text-indigo-500 shrink-0 group-hover:scale-110 transition-transform" />
                 <div className="overflow-hidden">
                   <span className="block truncate text-foreground">Job Seeker</span>
                   <span className="block text-[10px] text-muted-foreground font-normal">seeker@careerpilot.com</span>
@@ -159,9 +158,8 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleQuickDemoLogin("employer")}
                 disabled={isLoading}
-                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all text-xs font-bold text-left group"
+                className="flex items-center justify-center p-2.5 rounded-xl border bg-card hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all text-xs font-bold text-left group"
               >
-                <Building2 className="h-4 w-4 text-emerald-500 shrink-0 group-hover:scale-110 transition-transform" />
                 <div className="overflow-hidden">
                   <span className="block truncate text-foreground">Employer</span>
                   <span className="block text-[10px] text-muted-foreground font-normal">employer@careerpilot.com</span>
@@ -181,18 +179,15 @@ function LoginForm() {
               <label className="text-sm font-medium leading-none" htmlFor="email">
                 Email Address
               </label>
-              <div className="relative">
-                <Mail className="absolute left-3.5 top-3 h-4 w-4 text-muted-foreground" />
                 <input
                   id="email"
                   type="email"
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   required
                 />
-              </div>
             </div>
 
             <div className="space-y-2">
@@ -204,22 +199,19 @@ function LoginForm() {
                   Forgot password?
                 </Link>
               </div>
-              <div className="relative">
-                <Lock className="absolute left-3.5 top-3 h-4 w-4 text-muted-foreground" />
                 <input
                   id="password"
                   type="password"
                   value={password}
                   placeholder="••••••••"
                   onChange={(e) => setPassword(e.target.value)}
-                  className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   required
                 />
-              </div>
             </div>
 
-            <Button type="submit" disabled={isLoading} className="w-full gap-2 mt-2 bg-primary hover:bg-primary/90 rounded-xl">
-              <LogIn className="h-4 w-4" /> {isLoading ? "Signing in..." : "Sign In"}
+            <Button type="submit" disabled={isLoading} className="w-full mt-2 bg-primary hover:bg-primary/90 rounded-xl">
+              {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 
@@ -269,8 +261,8 @@ function LoginForm() {
 
         <div className="bg-muted/50 p-4 text-center border-t text-sm text-muted-foreground">
           Don't have an account?{" "}
-          <Link href="/register" className="font-semibold text-primary hover:underline inline-flex items-center">
-            Sign up <ArrowRight className="ml-1 h-3 w-3" />
+          <Link href="/register" className="font-semibold text-primary hover:underline">
+            Sign up
           </Link>
         </div>
       </div>

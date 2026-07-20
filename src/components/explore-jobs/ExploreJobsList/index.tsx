@@ -103,15 +103,15 @@ export function ExploreJobsList({
 
                 <div className="space-y-2.5 mb-6 text-xs font-semibold text-[#64748B]">
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-3.5 w-3.5 text-[#8B5CF6] shrink-0" />
+                    <MapPin className="h-4 w-4 text-[#0F172A] shrink-0" strokeWidth={1.5} />
                     <span className="line-clamp-1">{job.location || "Flexible"}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Briefcase className="h-3.5 w-3.5 text-[#8B5CF6] shrink-0" /> {job.jobType}
+                    <Briefcase className="h-4 w-4 text-[#0F172A] shrink-0" strokeWidth={1.5} /> {job.jobType}
                   </div>
                   {job.salaryRange && (
                     <div className="flex items-center text-emerald-600 font-extrabold gap-2">
-                      <DollarSign className="h-3.5 w-3.5 shrink-0" /> {job.salaryRange}
+                      <DollarSign className="h-4 w-4 shrink-0 text-[#0F172A]" strokeWidth={1.5} /> {job.salaryRange}
                     </div>
                   )}
                 </div>
@@ -119,7 +119,7 @@ export function ExploreJobsList({
 
               <div className="pt-4 border-t border-[#E5E7EB] flex items-center justify-between">
                 <span className="flex items-center text-[11px] text-[#64748B] font-semibold gap-1">
-                  <Clock className="h-3 w-3" /> {new Date(job.createdAt).toLocaleDateString()}
+                  <Clock className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} /> {new Date(job.createdAt).toLocaleDateString()}
                 </span>
                 <Link href={`/jobs/${job._id}`}>
                   <Button size="sm" className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold px-6">
@@ -138,9 +138,9 @@ export function ExploreJobsList({
             size="sm"
             disabled={currentPage === 1}
             onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-            className="gap-1 rounded-xl font-bold"
+            className="rounded-xl font-bold"
           >
-            <ChevronLeft className="h-4 w-4" /> Previous
+            Previous
           </Button>
 
           {Array.from({ length: totalPages }).map((_, idx) => {
@@ -165,9 +165,9 @@ export function ExploreJobsList({
             size="sm"
             disabled={currentPage === totalPages}
             onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-            className="gap-1 rounded-xl font-bold"
+            className="rounded-xl font-bold"
           >
-            Next <ChevronRight className="h-4 w-4" />
+            Next
           </Button>
         </div>
       )}

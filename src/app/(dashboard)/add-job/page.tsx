@@ -44,14 +44,13 @@ export default function AddJobPage() {
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">Post a New Job</h1>
           <p className="text-muted-foreground mt-1 text-sm font-normal">Fill in the details below to publish a new job listing.</p>
         </div>
-        <Button variant="outline" className="gap-2 text-rose-600 border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/50 hover:bg-rose-100 rounded-full font-extrabold text-xs" onClick={() => setShowAiEnhance(true)}>
-          <Sparkles className="h-4 w-4 text-rose-600" /> AI Enhance
+        <Button variant="outline" className="text-rose-600 border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/50 hover:bg-rose-100 rounded-full font-extrabold text-xs" onClick={() => setShowAiEnhance(true)}>
+          AI Enhance
         </Button>
       </div>
 
       {showAiEnhance && (
-        <div className="bg-rose-50/80 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-3xl p-6 shadow-sm flex gap-4">
-          <Sparkles className="h-8 w-8 text-rose-600 shrink-0" />
+        <div className="bg-rose-50/80 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-3xl p-6 shadow-sm">
           <div>
             <h3 className="font-extrabold text-rose-600 mb-1">AI Job Description Generator</h3>
             <p className="text-sm text-muted-foreground mb-4 font-normal">
@@ -73,16 +72,11 @@ export default function AddJobPage() {
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium">Job Title *</label>
-              <div className="relative">
-                <Briefcase className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <input name="title" type="text" required placeholder="e.g. Senior Frontend Engineer" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
-              </div>
+              <input name="title" type="text" required placeholder="e.g. Senior Frontend Engineer" className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Category / Industry *</label>
-              <div className="relative">
-                <Tag className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <select name="category" required className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary appearance-none">
+              <select name="category" required className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
                   <option value="">Select a category</option>
                   <option value="Software Engineering">Software Engineering</option>
                   <option value="Data Science">Data Science</option>
@@ -90,7 +84,6 @@ export default function AddJobPage() {
                   <option value="Marketing">Marketing</option>
                   <option value="Sales">Sales</option>
                 </select>
-              </div>
             </div>
           </div>
 
@@ -107,10 +100,7 @@ export default function AddJobPage() {
           <div className="grid sm:grid-cols-3 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium">Location *</label>
-              <div className="relative">
-                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <input name="location" type="text" required placeholder="e.g. New York, NY" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
-              </div>
+              <input name="location" type="text" required placeholder="e.g. New York, NY" className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
             </div>
 
             <div className="space-y-2">
@@ -135,10 +125,7 @@ export default function AddJobPage() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium">Salary Range</label>
-            <div className="relative">
-              <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <input name="salaryRange" type="text" placeholder="e.g. $100,000 - $130,000" className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
-            </div>
+            <input name="salaryRange" type="text" placeholder="e.g. $100,000 - $130,000" className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
             <p className="text-xs text-muted-foreground">Adding a salary range increases applications by up to 30%.</p>
           </div>
 
@@ -156,17 +143,14 @@ export default function AddJobPage() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium">Responsibilities & Requirements *</label>
-            <div className="relative">
-              <FileText className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <textarea name="fullDescription" required rows={8} placeholder="List the full responsibilities, requirements, and benefits..." className="w-full pl-10 pr-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
-            </div>
+            <textarea name="fullDescription" required rows={8} placeholder="List the full responsibilities, requirements, and benefits..." className="w-full px-3 py-2.5 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
           </div>
         </div>
 
         <div className="pt-4 flex justify-end gap-4">
           <Button type="button" variant="outline">Save as Draft</Button>
-          <Button type="submit" isLoading={isSubmitting} className="gap-2">
-            <Send className="h-4 w-4" /> Publish Job
+          <Button type="submit" isLoading={isSubmitting}>
+            Publish Job
           </Button>
         </div>
       </form>

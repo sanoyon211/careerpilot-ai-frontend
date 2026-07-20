@@ -67,9 +67,6 @@ export function Features() {
                 className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className={`h-14 w-14 rounded-2xl ${feature.accent} flex items-center justify-center mb-8`}>
-                    <Icon className="h-7 w-7" />
-                  </div>
                   <h3 className="text-2xl font-extrabold text-[#0F172A] mb-3">{feature.title}</h3>
                   <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">{feature.desc}</p>
                 </div>
