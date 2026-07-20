@@ -8,10 +8,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  title: "CareerPilot AI | Intelligent Autonomous Career Copilot",
-  description: "AI-powered career platform combining Groq Agentic AI with human-centric recruitment.",
-};
+import { constructMetadata } from "@/utils/metadata";
+
+export const metadata: Metadata = constructMetadata();
 
 import { Providers } from "@/redux/provider";
 import { SweetAlertProvider } from "@/components/common/SweetAlertProvider";

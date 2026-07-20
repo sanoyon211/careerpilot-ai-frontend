@@ -1,1 +1,0 @@
-﻿.next/types/validator.ts(75,39): error TS2306: File 'C:/Users/USER/OneDrive/Desktop/SCIC_13/career-pilot-ai/careerpilot-ai-frontend/src/app/(dashboard)/layout.tsx' is not a module.
