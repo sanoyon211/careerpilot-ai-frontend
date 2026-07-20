@@ -41,6 +41,17 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
   const handleLogout = () => {
     setIsDropdownOpen(false);
     setIsMobileMenuOpen(false);
@@ -265,30 +276,47 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-b border-[#E5E7EB] bg-white p-6 space-y-4">
-          <Link href="/explore-jobs" className="block text-sm font-extrabold text-[#0F172A] py-2">
-            Explore Jobs
-          </Link>
-          <Link href="/about" className="block text-sm font-extrabold text-[#0F172A] py-2">
-            About
-          </Link>
-          <Link href="/faq" className="block text-sm font-extrabold text-[#0F172A] py-2">
-            FAQ
-          </Link>
-          <Link href="/blog" className="block text-sm font-extrabold text-[#0F172A] py-2">
-            Blog
-          </Link>
-          {!user && (
-            <div className="flex flex-col gap-2.5 pt-3 border-t border-[#E5E7EB]">
-              <Link href="/login">
-                <Button variant="outline" className="w-full text-xs font-bold">Log in</Button>
-              </Link>
-              <Link href="/register">
-                <Button className="w-full text-xs font-extrabold bg-[#8B5CF6]">For Job Seekers</Button>
-              </Link>
+        <>
+          <div
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div className="fixed inset-y-0 right-0 w-[280px] bg-white z-50 shadow-2xl md:hidden flex flex-col animate-in slide-in-from-right duration-300">
+            <div className="flex items-center justify-between p-6 border-b border-[#E5E7EB]">
+              <span className="text-lg font-extrabold text-[#0F172A]">Menu</span>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-1 text-[#64748B] hover:text-[#0F172A]"
+              >
+                <X className="h-6 w-6" strokeWidth={1.5} />
+              </button>
             </div>
-          )}
-        </div>
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              <Link href="/explore-jobs" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-extrabold text-[#0F172A] py-2">
+                Explore Jobs
+              </Link>
+              <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-extrabold text-[#0F172A] py-2">
+                About
+              </Link>
+              <Link href="/faq" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-extrabold text-[#0F172A] py-2">
+                FAQ
+              </Link>
+              <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-extrabold text-[#0F172A] py-2">
+                Blog
+              </Link>
+              {!user && (
+                <div className="flex flex-col gap-2.5 pt-6 mt-2 border-t border-[#E5E7EB]">
+                  <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full text-xs font-bold border-[#E5E7EB]">Log in</Button>
+                  </Link>
+                  <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button className="w-full text-xs font-extrabold bg-[#8B5CF6] hover:bg-[#7C3AED] text-white">For Job Seekers</Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
       )}
     </header>
   );

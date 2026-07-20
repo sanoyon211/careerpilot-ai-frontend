@@ -69,6 +69,17 @@ export default function DashboardLayout({
 
   const cookieToken = typeof window !== "undefined" ? getAccessTokenFromCookie() : null;
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
   const { data: profileResponse, isLoading: isLoadingProfile, isError: isProfileError } = useGetMyProfileQuery(
     undefined,
     {
@@ -169,10 +180,18 @@ export default function DashboardLayout({
         </button>
       </div>
 
+      {/* Mobile Sidebar Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar Navigation */}
       <aside
         className={`
-        ${isMobileMenuOpen ? "fixed inset-0 top-[65px] z-30 bg-white" : "hidden"} 
+        ${isMobileMenuOpen ? "fixed inset-y-0 left-0 w-[280px] z-40 bg-white animate-in slide-in-from-left duration-300" : "hidden"} 
         md:block md:w-64 md:shrink-0 bg-[#FAFAFA] border-r border-[#E5E7EB] md:sticky md:top-0 md:h-screen flex flex-col overflow-y-auto
       `}
       >
@@ -258,7 +277,24 @@ export default function DashboardLayout({
       </aside>
 
       {/* Main Page Area with Generous Whitespace */}
-      <main className="flex-1 p-6 md:p-10 overflow-x-hidden max-w-full bg-white">{children}</main>
+      <main className="flex-1 p-6 md:p-10 overflow-x-hidden max-w-full bg-white pb-24 md:pb-6">{children}</main>
+
+      {/* Mobile Bottom Navigation (Facebook style) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E7EB] flex items-center justify-around py-2 px-1 z-20 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+        {navItems.slice(0, 4).map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`flex flex-col items-center p-2 gap-1 flex-1 ${isActive ? "text-[#8B5CF6]" : "text-[#64748B]"}`}
+            >
+              <link.icon className="h-6 w-6 shrink-0" strokeWidth={isActive ? 2.5 : 1.5} />
+              <span className="text-[10px] font-extrabold truncate w-full text-center">{link.label.split(" ")[0]}</span>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }
