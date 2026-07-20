@@ -28,7 +28,7 @@ export function LoginForm() {
         user: response.data.user,
         accessToken: response.data.accessToken
       }));
-      router.push('/dashboard');
+      router.push('/');
     } catch (err: any) {
       setErrorMsg(err.data?.message || 'Failed to login');
     }
