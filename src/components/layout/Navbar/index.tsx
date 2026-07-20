@@ -110,7 +110,7 @@ export function Navbar() {
             </Link>
           )}
 
-          {user && user.role === "job-seeker" && (
+          {user && user.role !== "employer" && (
             <>
               <Link
                 href="/resume"
@@ -297,6 +297,31 @@ export function Navbar() {
               <Link href="/explore-jobs" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-extrabold text-[#0F172A] py-2">
                 Explore Jobs
               </Link>
+              {user && (
+                <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-sm font-extrabold text-[#0F172A] py-2">
+                  <LayoutDashboard className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} /> Dashboard
+                </Link>
+              )}
+              {user && user.role !== "employer" && (
+                <>
+                  <Link href="/resume" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-sm font-extrabold text-[#0F172A] py-2">
+                    <Sparkles className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> Resume Match
+                  </Link>
+                  <Link href="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-sm font-extrabold text-[#0F172A] py-2">
+                    <Bot className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> AI Coach
+                  </Link>
+                </>
+              )}
+              {user && user.role === "employer" && (
+                <>
+                  <Link href="/add-job" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-sm font-extrabold text-[#0F172A] py-2">
+                    <PlusCircle className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> Post Job
+                  </Link>
+                  <Link href="/manage-jobs" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-sm font-extrabold text-[#0F172A] py-2">
+                    <Briefcase className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} /> Manage Jobs
+                  </Link>
+                </>
+              )}
               <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-extrabold text-[#0F172A] py-2">
                 About
               </Link>
@@ -306,7 +331,7 @@ export function Navbar() {
               <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-extrabold text-[#0F172A] py-2">
                 Blog
               </Link>
-              {!user && (
+              {!user ? (
                 <div className="flex flex-col gap-2.5 pt-6 mt-2 border-t border-[#E5E7EB]">
                   <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button variant="outline" className="w-full text-xs font-bold border-[#E5E7EB]">Log in</Button>
@@ -314,6 +339,18 @@ export function Navbar() {
                   <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button className="w-full text-xs font-extrabold bg-[#8B5CF6] hover:bg-[#7C3AED] text-white">For Job Seekers</Button>
                   </Link>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-2 pt-6 mt-2 border-t border-[#E5E7EB]">
+                  <Link href="/profile" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-sm font-extrabold text-[#0F172A] py-2">
+                    <UserIcon className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} /> Profile
+                  </Link>
+                  <Link href="/settings" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-sm font-extrabold text-[#0F172A] py-2">
+                    <Settings className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} /> Settings
+                  </Link>
+                  <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-extrabold text-red-600 py-2 w-full text-left">
+                    <LogOut className="h-5 w-5 text-red-600" strokeWidth={1.5} /> Sign Out
+                  </button>
                 </div>
               )}
             </div>
