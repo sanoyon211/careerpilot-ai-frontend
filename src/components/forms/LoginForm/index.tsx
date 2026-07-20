@@ -35,7 +35,7 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-8 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-8 bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl">
       <h2 className="text-2xl font-extrabold text-center text-[#1E293B] mb-6">Login to CareerPilot</h2>
       {errorMsg && <div className="text-red-500 text-xs font-bold text-center mb-4 p-2 bg-red-50 rounded-xl border border-red-200">{errorMsg}</div>}
       
@@ -62,7 +62,7 @@ export function LoginForm() {
       <Button 
         type="submit" 
         isLoading={isLoading}
-        className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white mt-4 font-extrabold rounded-xl"
+        className="w-full bg-[#8B5CF6] hover:bg-[#7C3AED] text-white mt-4 font-extrabold rounded-lg"
       >
         Sign In
       </Button>

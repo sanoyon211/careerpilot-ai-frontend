@@ -62,7 +62,7 @@ export default function AppliedJobsPage() {
         <div className="divide-y divide-[#E5E7EB]">
           {isLoading && (
             <div className="p-16 text-center text-[#64748B] font-semibold">
-              <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#2563EB] border-t-transparent mx-auto mb-3" />
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#8B5CF6] border-t-transparent mx-auto mb-3" />
               Loading your application history...
             </div>
           )}

@@ -30,14 +30,14 @@ export default function DashboardOverviewPage() {
     ? [
         { label: "Applied Jobs", value: (statsData as any)?.appliedJobs || 0, icon: Briefcase, color: "text-rose-600", bg: "bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900" },
         { label: "Saved Jobs", value: (statsData as any)?.savedJobs || 0, icon: Bookmark, color: "text-purple-600", bg: "bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-900" },
-        { label: "Profile Views", value: statsData?.profileViews || 0, icon: Eye, color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-900" },
-        { label: "AI Match Precision", value: (statsData as any)?.aiMatchScore || "94%", icon: Sparkles, color: "text-emerald-600", bg: "bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900" },
+        { label: "Profile Views", value: statsData?.profileViews || 0, icon: Eye, color: "text-[#0F172A]", bg: "bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800" },
+        { label: "AI Match Precision", value: (statsData as any)?.aiMatchScore || "94%", icon: Sparkles, color: "text-[#8B5CF6]", bg: "bg-[#F3E8FF] dark:bg-purple-950/60 border border-[#8B5CF6]/30 dark:border-[#8B5CF6]/30" },
       ]
     : [
         { label: "Posted Jobs", value: (statsData as any)?.postedJobs || 0, icon: Briefcase, color: "text-rose-600", bg: "bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900" },
         { label: "Total Applicants", value: (statsData as any)?.totalApplicants || 0, icon: Users, color: "text-purple-600", bg: "bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-900" },
-        { label: "Profile Views", value: statsData?.profileViews || 0, icon: Eye, color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-900" },
-        { label: "Active Listings", value: (statsData as any)?.postedJobs || 0, icon: Sparkles, color: "text-emerald-600", bg: "bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900" },
+        { label: "Profile Views", value: statsData?.profileViews || 0, icon: Eye, color: "text-[#0F172A]", bg: "bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800" },
+        { label: "Active Listings", value: (statsData as any)?.postedJobs || 0, icon: Sparkles, color: "text-[#8B5CF6]", bg: "bg-[#F3E8FF] dark:bg-purple-950/60 border border-[#8B5CF6]/30 dark:border-[#8B5CF6]/30" },
       ];
 
   return (

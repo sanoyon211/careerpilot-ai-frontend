@@ -34,17 +34,17 @@ export function ContactForm() {
 
   return (
     <div className="lg:col-span-2">
-      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-10">
         {isSubmitted ? (
           <div className="text-center py-16 space-y-4">
-            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-emerald-500/10 text-emerald-600 mb-4 border border-emerald-500/20">
+            <div className="inline-flex items-center justify-center h-16 w-16 rounded-xl bg-emerald-500/10 text-emerald-600 mb-4 border border-emerald-500/20">
               <CheckCircle2 className="h-8 w-8 text-emerald-600" />
             </div>
             <h3 className="text-2xl font-extrabold text-[#0F172A]">Message Sent Successfully!</h3>
             <p className="text-[#64748B] max-w-md mx-auto text-sm font-medium">
               Thank you for reaching out to us. One of our team members will get back to you within 24 hours.
             </p>
-            <Button variant="outline" className="mt-6 rounded-full font-bold px-6" onClick={() => setIsSubmitted(false)}>
+            <Button variant="outline" className="mt-6 rounded-lg font-bold px-6" onClick={() => setIsSubmitted(false)}>
               Send another message
             </Button>
           </div>
@@ -111,7 +111,7 @@ export function ContactForm() {
               />
             </div>
 
-            <Button type="submit" isLoading={isSubmitting} size="lg" className="w-full sm:w-auto px-8 gap-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold py-3.5">
+            <Button type="submit" isLoading={isSubmitting} size="lg" className="w-full sm:w-auto px-8 gap-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg font-extrabold py-3.5">
               <Send className="h-4.5 w-4.5" /> Send Message
             </Button>
           </form>

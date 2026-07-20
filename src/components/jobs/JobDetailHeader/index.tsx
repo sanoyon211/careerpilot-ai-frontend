@@ -21,7 +21,7 @@ export function JobDetailHeader({
   coverLetter,
 }: JobDetailHeaderProps) {
   return (
-    <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[32px] p-8 sm:p-12">
+    <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-12">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-8">
         <div className="flex items-start gap-6">
           <div className="h-18 w-18 sm:h-24 sm:w-24 shrink-0 rounded-2xl bg-[#0F172A] text-white font-black flex items-center justify-center text-3xl sm:text-4xl">
@@ -44,16 +44,16 @@ export function JobDetailHeader({
 
       <div className="mt-10 pt-8 border-t border-[#E5E7EB] flex flex-col sm:flex-row gap-4 items-center flex-wrap">
         {isAppliedSuccess ? (
-          <div className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 font-extrabold text-sm">
+          <div className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 font-extrabold text-sm">
             <CheckCircle2 className="h-5 w-5" strokeWidth={1.5} /> Applied to this position
           </div>
         ) : (
-          <Button size="lg" className="w-full sm:w-auto px-10 py-3.5 text-base bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold gap-2.5" onClick={onOpenApplyModal}>
+          <Button size="lg" className="w-full sm:w-auto px-10 py-3.5 text-base bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg font-extrabold gap-2.5" onClick={onOpenApplyModal}>
             <Send className="h-5 w-5" strokeWidth={1.5} /> Apply Now
           </Button>
         )}
 
-        <Button variant="outline" size="lg" className="gap-2.5 rounded-full font-extrabold px-8 py-3.5 border-[#8B5CF6]/40 text-[#8B5CF6] hover:bg-[#F3E8FF]" onClick={onGenerateCoverLetter} isLoading={isGenerating}>
+        <Button variant="outline" size="lg" className="gap-2.5 rounded-lg font-extrabold px-8 py-3.5 border-[#8B5CF6]/40 text-[#8B5CF6] hover:bg-[#F3E8FF]" onClick={onGenerateCoverLetter} isLoading={isGenerating}>
           <Sparkles className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> AI Cover Letter
         </Button>
 

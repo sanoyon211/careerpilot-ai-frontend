@@ -11,7 +11,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
       {/* 4 Column Grid on Extra Large Screens */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {posts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.id}`} className="group flex flex-col bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] overflow-hidden hover:border-[#CBD5E1] transition-all">
+          <Link key={post.id} href={`/blog/${post.id}`} className="group flex flex-col bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl overflow-hidden hover:border-[#CBD5E1] transition-all">
             <div className={`h-52 w-full bg-[#FAFAFA] border-b border-[#E5E7EB] relative`}>
               <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
             </div>
@@ -47,7 +47,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
       </div>
 
       <div className="mt-20 text-center">
-        <Button variant="outline" size="lg" className="rounded-full px-8 font-extrabold border-[#8B5CF6]/40 text-[#8B5CF6] hover:bg-[#F3E8FF]">
+        <Button variant="outline" size="lg" className="rounded-lg px-8 font-extrabold border-[#8B5CF6]/40 text-[#8B5CF6] hover:bg-[#F3E8FF]">
           Load More Articles
         </Button>
       </div>

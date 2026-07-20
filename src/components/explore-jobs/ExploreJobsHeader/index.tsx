@@ -21,7 +21,7 @@ export function ExploreJobsHeader({
 }: ExploreJobsHeaderProps) {
   return (
     <div className="mb-12 space-y-6 text-center max-w-4xl mx-auto">
-      <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
+      <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-lg text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
         <Cpu className="h-4 w-4" />
         <span>Agentic AI Powered Job Search</span>
       </div>

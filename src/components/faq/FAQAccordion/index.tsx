@@ -68,7 +68,7 @@ export function FAQAccordion({ faqs = DEFAULT_FAQS }: { faqs?: FAQCategory[] }) 
   return (
     <div className="space-y-10">
       {faqs.map((section, idx) => (
-        <div key={idx} className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 md:p-12">
+        <div key={idx} className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 md:p-12">
           <h2 className="text-2xl font-extrabold mb-6 text-[#8B5CF6]">{section.category}</h2>
           <div className="flex flex-col">
             {section.questions.map((faq, fIdx) => (

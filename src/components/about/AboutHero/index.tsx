@@ -5,7 +5,7 @@ import { Cpu } from "lucide-react";
 export function AboutHero() {
   return (
     <div className="text-center max-w-4xl mx-auto mb-20 space-y-6">
-      <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
+      <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-lg text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
         <Cpu className="h-4 w-4" />
         <span>Groq Llama 3.3 70B AI Engine</span>
       </div>

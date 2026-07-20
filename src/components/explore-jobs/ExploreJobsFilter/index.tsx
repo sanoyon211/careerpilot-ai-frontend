@@ -31,7 +31,7 @@ export function ExploreJobsFilter({
 
   return (
     <aside className={`lg:w-72 shrink-0 space-y-6 ${showFilters ? "block" : "hidden lg:block"}`}>
-      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-7 space-y-6">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-7 space-y-6">
         <div className="flex items-center justify-between">
           <h3 className="font-extrabold text-sm text-[#0F172A] flex items-center gap-2">
             <Cpu className="h-4 w-4 text-[#8B5CF6]" /> AI Search Mode

@@ -82,15 +82,15 @@ export default function SettingsPage() {
       </div>
 
       {/* Account Profile Summary Card */}
-      <div className="bg-card border rounded-3xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-card border rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="h-14 w-14 rounded-2xl bg-[#0F172A] text-white font-extrabold text-xl flex items-center justify-center">
+          <div className="h-14 w-14 rounded-xl bg-[#0F172A] text-white font-extrabold text-xl flex items-center justify-center">
             {user?.name?.charAt(0) || "U"}
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h2 className="font-bold text-lg">{user?.name || "User"}</h2>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-primary/10 text-primary border border-primary/20">
+              <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
                 {user?.role || "Job Seeker"}
               </span>
             </div>
@@ -100,13 +100,13 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 text-xs font-bold">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30 text-xs font-bold">
           <ShieldCheck className="h-4 w-4" /> Account Verified
         </div>
       </div>
 
       {/* Security & Password Section */}
-      <div className="bg-card border rounded-3xl p-6 sm:p-8 space-y-6">
+      <div className="bg-card border rounded-xl p-6 sm:p-8 space-y-6">
         <div className="flex items-center gap-3 border-b pb-4">
           <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
             <KeyRound className="h-5 w-5" />
@@ -175,9 +175,9 @@ export default function SettingsPage() {
       </div>
 
       {/* Notification Preferences Section */}
-      <div className="bg-card border rounded-3xl p-6 sm:p-8 space-y-6">
+      <div className="bg-card border rounded-xl p-6 sm:p-8 space-y-6">
         <div className="flex items-center gap-3 border-b pb-4">
-          <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-600">
+          <div className="p-2.5 rounded-xl bg-[#F3E8FF] text-[#8B5CF6]">
             <Bell className="h-5 w-5" />
           </div>
           <div>
@@ -187,7 +187,7 @@ export default function SettingsPage() {
         </div>
 
         <div className="space-y-4 max-w-xl">
-          <label className="flex items-center justify-between p-3.5 rounded-2xl border bg-slate-50 dark:bg-slate-900 cursor-pointer">
+          <label className="flex items-center justify-between p-3.5 rounded-xl border bg-slate-50 dark:bg-slate-900 cursor-pointer">
             <div>
               <span className="font-bold text-sm block">Job Application Updates</span>
               <span className="text-xs text-muted-foreground">Get notified when employer reviews or updates application status</span>
@@ -200,7 +200,7 @@ export default function SettingsPage() {
             />
           </label>
 
-          <label className="flex items-center justify-between p-3.5 rounded-2xl border bg-slate-50 dark:bg-slate-900 cursor-pointer">
+          <label className="flex items-center justify-between p-3.5 rounded-xl border bg-slate-50 dark:bg-slate-900 cursor-pointer">
             <div>
               <span className="font-bold text-sm block flex items-center gap-1.5">
                 <Sparkles className="h-3.5 w-3.5 text-primary" /> AI Career & Job Match Alerts
@@ -215,7 +215,7 @@ export default function SettingsPage() {
             />
           </label>
 
-          <label className="flex items-center justify-between p-3.5 rounded-2xl border bg-slate-50 dark:bg-slate-900 cursor-pointer">
+          <label className="flex items-center justify-between p-3.5 rounded-xl border bg-slate-50 dark:bg-slate-900 cursor-pointer">
             <div>
               <span className="font-bold text-sm block">News & Platform Updates</span>
               <span className="text-xs text-muted-foreground">Receive product feature announcements and career insights</span>
@@ -235,7 +235,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Danger Zone */}
-      <div className="bg-red-500/5 border border-red-500/20 rounded-3xl p-6 sm:p-8 space-y-4">
+      <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-6 sm:p-8 space-y-4">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-red-500/10 text-red-600">
             <AlertTriangle className="h-5 w-5" />

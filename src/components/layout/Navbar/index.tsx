@@ -236,17 +236,17 @@ export function Navbar() {
           ) : (
             <div className="flex items-center gap-3">
               <Link href="/login">
-                <Button variant="outline" size="sm" className="text-xs font-extrabold rounded-full px-5 border-[#E5E7EB]">
+                <Button variant="outline" size="sm" className="text-xs font-extrabold rounded-lg px-5 border-[#E5E7EB]">
                   Log in
                 </Button>
               </Link>
               <Link href="/register">
-                <Button size="sm" className="text-xs font-extrabold bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full px-6">
+                <Button size="sm" className="text-xs font-extrabold bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg px-6">
                   For Job Seekers
                 </Button>
               </Link>
               <Link href="/register?role=employer">
-                <Button variant="secondary" size="sm" className="text-xs font-extrabold rounded-full bg-[#0F172A] text-white px-5">
+                <Button variant="secondary" size="sm" className="text-xs font-extrabold rounded-lg bg-[#0F172A] text-white px-5">
                   Recruiter
                 </Button>
               </Link>

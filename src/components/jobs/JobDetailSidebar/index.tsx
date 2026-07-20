@@ -11,7 +11,7 @@ export function JobDetailSidebar({ employerName }: JobDetailSidebarProps) {
 
   return (
     <div className="space-y-8">
-      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[32px] p-8">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8">
         <h3 className="font-extrabold text-xl text-[#0F172A] mb-6">About the Hiring Employer</h3>
         <div className="flex items-center gap-4 mb-4">
           <div className="h-14 w-14 rounded-2xl bg-[#0F172A] text-white font-black flex items-center justify-center text-xl shrink-0">
@@ -24,7 +24,7 @@ export function JobDetailSidebar({ employerName }: JobDetailSidebarProps) {
         </div>
       </div>
 
-      <div className="bg-white border border-[#E5E7EB] rounded-[32px] p-8 space-y-4">
+      <div className="bg-white border border-[#E5E7EB] rounded-xl p-8 space-y-4">
         <div className="flex items-center gap-2.5">
           <Sparkles className="h-6 w-6 text-[#8B5CF6]" />
           <h3 className="font-extrabold text-lg text-[#8B5CF6]">Groq AI Candidate Match</h3>

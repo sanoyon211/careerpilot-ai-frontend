@@ -130,9 +130,9 @@ export default function ResumePage() {
 
   const atsScore = resume?.parsedData?.atsScore ?? 85;
   const getScoreBadge = (score: number) => {
-    if (score >= 90) return { label: "Excellent ATS Fit", color: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" };
-    if (score >= 75) return { label: "Strong Candidate Fit", color: "bg-[#2563EB]/10 text-[#2563EB] border-[#2563EB]/20" };
-    return { label: "Needs Optimization", color: "bg-amber-500/10 text-amber-600 border-amber-500/20" };
+    if (score >= 90) return { label: "Excellent ATS Fit", color: "bg-[#F3E8FF] text-[#8B5CF6] border-[#8B5CF6]/30" };
+    if (score >= 75) return { label: "Strong Candidate Fit", color: "bg-[#F3E8FF] text-[#8B5CF6] border-[#8B5CF6]/30" };
+    return { label: "Needs Optimization", color: "bg-slate-100 text-[#64748B] border-[#E2E8F0]" };
   };
 
   return (
@@ -199,7 +199,7 @@ export default function ResumePage() {
                         <span className="flex items-center gap-1">
                           <Clock className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} /> Uploaded {new Date(resume.createdAt).toLocaleDateString()}
                         </span>
-                        <span className="bg-emerald-500/10 text-emerald-600 px-2.5 py-0.5 rounded-full font-extrabold text-[11px] border border-emerald-500/20">
+                        <span className="bg-[#F3E8FF] text-[#8B5CF6] px-2.5 py-0.5 rounded-lg font-extrabold text-[11px] border border-[#8B5CF6]/30">
                           Parsed
                         </span>
                       </div>
@@ -226,7 +226,7 @@ export default function ResumePage() {
                 </div>
 
                 <div className="bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] p-5 rounded-xl flex items-start gap-3.5 text-sm font-medium">
-                  <CheckCircle2 className="h-6 w-6 text-emerald-600 shrink-0 mt-0.5" strokeWidth={1.5} />
+                  <CheckCircle2 className="h-6 w-6 text-[#8B5CF6] shrink-0 mt-0.5" strokeWidth={1.5} />
                   <div>
                     <p className="font-extrabold text-[#1E293B]">AI Resume Parsing Complete</p>
                     <p className="text-xs text-[#64748B] font-medium leading-relaxed mt-1">
@@ -241,13 +241,13 @@ export default function ResumePage() {
                 onDragLeave={handleDrag}
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
-                className={`border-2 border-dashed rounded-2xl p-12 flex flex-col items-center justify-center text-center transition-all ${
+                className={`border-2 border-dashed rounded-xl p-12 flex flex-col items-center justify-center text-center transition-all ${
                   dragActive
-                    ? "border-[#2563EB] bg-blue-50/50 scale-[1.01]"
-                    : "border-[#CBD5E1] bg-white hover:border-[#2563EB] hover:bg-[#F4F7FE]"
+                    ? "border-[#8B5CF6] bg-[#F3E8FF]/50 scale-[1.01]"
+                    : "border-[#CBD5E1] bg-white hover:border-[#8B5CF6] hover:bg-[#FAFAFA]"
                 }`}
               >
-                <div className="bg-[#2563EB]/10 text-[#2563EB] p-4 rounded-2xl mb-4">
+                <div className="bg-[#F3E8FF] text-[#8B5CF6] p-4 rounded-xl mb-4">
                   <UploadCloud className="h-10 w-10" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-extrabold text-lg text-[#1E293B] mb-1">Drag & drop your resume here</h3>
@@ -261,7 +261,7 @@ export default function ResumePage() {
                   accept=".pdf,.doc,.docx"
                   onChange={handleFileChange}
                 />
-                <Button asChild isLoading={isWorking} className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-8 py-3 rounded-2xl font-extrabold">
+                <Button asChild isLoading={isWorking} className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white px-8 py-3 rounded-lg font-extrabold">
                   <label htmlFor="resume-upload-input" className="cursor-pointer">
                     {isWorking ? "Parsing Resume..." : "Browse Computer Files"}
                   </label>
@@ -316,14 +316,14 @@ export default function ResumePage() {
 
               {/* ATS Improvement Suggestions */}
               {resume.parsedData?.atsFeedback && resume.parsedData.atsFeedback.length > 0 && (
-                <div className="bg-white border border-[#E5E7EB] p-6 rounded-2xl space-y-3">
-                  <h4 className="text-xs font-extrabold text-amber-600 uppercase tracking-wider flex items-center gap-2">
+                <div className="bg-white border border-[#E5E7EB] p-6 rounded-xl space-y-3">
+                  <h4 className="text-xs font-extrabold text-[#8B5CF6] uppercase tracking-wider flex items-center gap-2">
                     <AlertCircle className="h-5 w-5" strokeWidth={1.5} /> Recommended ATS Improvements
                   </h4>
                   <ul className="space-y-2 pl-1">
                     {resume.parsedData.atsFeedback.map((item: string, idx: number) => (
                       <li key={idx} className="text-xs font-medium text-[#1E293B] flex items-start gap-2.5">
-                        <span className="h-2 w-2 rounded-full bg-amber-500 shrink-0 mt-1.5" />
+                        <span className="h-2 w-2 rounded-full bg-[#8B5CF6] shrink-0 mt-1.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -359,7 +359,7 @@ export default function ResumePage() {
 
                 <div>
                   <h3 className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mb-4 flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5 text-emerald-600" strokeWidth={1.5} /> Soft Skills & Traits
+                    <TrendingUp className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> Soft Skills & Traits
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {resume.parsedData.softSkills?.map((skill: string) => (
@@ -375,7 +375,7 @@ export default function ResumePage() {
 
                 <div className="pt-4 border-t border-[#E2E8F0]">
                   <h3 className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mb-3">Experience Summary</h3>
-                  <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 text-sm leading-relaxed text-[#1E293B] font-medium italic">
+                  <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 text-sm leading-relaxed text-[#1E293B] font-medium italic">
                     "{resume.parsedData.experienceSummary || "No summary provided."}"
                   </div>
                 </div>
@@ -388,7 +388,7 @@ export default function ResumePage() {
             <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-10 space-y-6">
               <div>
                 <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
-                  <Target className="h-6 w-6 text-[#2563EB]" strokeWidth={1.5} /> AI Skill Gap Analysis & Target Skills
+                  <Target className="h-6 w-6 text-[#8B5CF6]" strokeWidth={1.5} /> AI Skill Gap Analysis & Target Skills
                 </h2>
                 <p className="text-xs text-[#64748B] font-medium mt-1">Acquiring these skills will increase your match rate for higher-paying roles</p>
               </div>
@@ -400,13 +400,7 @@ export default function ResumePage() {
                       <div className="flex items-center gap-2">
                         <span className="font-extrabold text-sm text-[#1E293B]">{skill.name}</span>
                         <span
-                          className={`text-[10px] uppercase font-black px-2.5 py-0.5 rounded-full border ${
-                            skill.importance === "High"
-                              ? "bg-rose-50 text-rose-600 border-rose-200"
-                              : skill.importance === "Medium"
-                              ? "bg-amber-50 text-amber-600 border-amber-200"
-                              : "bg-blue-50 text-[#2563EB] border-blue-200"
-                          }`}
+                          className={`text-[10px] uppercase font-black px-2.5 py-0.5 rounded-lg border bg-[#F3E8FF] text-[#8B5CF6] border-[#8B5CF6]/30`}
                         >
                           {skill.importance} Priority
                         </span>
@@ -425,7 +419,7 @@ export default function ResumePage() {
               <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
                 <div>
                   <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
-                    <Briefcase className="h-6 w-6 text-[#2563EB]" strokeWidth={1.5} /> AI Matched Job Opportunities
+                    <Briefcase className="h-6 w-6 text-[#8B5CF6]" strokeWidth={1.5} /> AI Matched Job Opportunities
                   </h2>
                   <p className="text-xs text-[#64748B] font-medium mt-1">Roles autonomously ranked by skill similarity score</p>
                 </div>
@@ -438,7 +432,7 @@ export default function ResumePage() {
 
               {isLoadingRecs ? (
                 <div className="text-center py-12 text-[#64748B] animate-pulse space-y-3 font-semibold">
-                  <RefreshCw className="h-8 w-8 animate-spin mx-auto text-[#2563EB]" strokeWidth={1.5} />
+                  <RefreshCw className="h-8 w-8 animate-spin mx-auto text-[#8B5CF6]" strokeWidth={1.5} />
                   <p className="text-sm">Groq Llama 3.3 70B is analyzing candidate-job alignment...</p>
                 </div>
               ) : recData?.data?.recommendedJobs?.length ? (
@@ -456,15 +450,15 @@ export default function ResumePage() {
                               {job?.title || "Matching Position"}
                             </h3>
                             <div className="flex flex-wrap items-center gap-2.5 text-xs text-[#64748B] font-semibold mt-1">
-                              {job?.category && <span className="bg-[#F4F7FE] px-3 py-1 rounded-full border border-[#E2E8F0]">{job.category}</span>}
+                              {job?.category && <span className="bg-[#FAFAFA] px-3 py-1 rounded-lg border border-[#E5E7EB]">{job.category}</span>}
                               {job?.location && (
                                 <span className="flex items-center gap-1">
                                   <MapPin className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} /> {job.location}
                                 </span>
                               )}
-                              {job?.workMode && <span className="text-[#2563EB] font-bold">{job.workMode}</span>}
+                              {job?.workMode && <span className="text-[#8B5CF6] font-bold">{job.workMode}</span>}
                               {job?.salaryRange && (
-                                <span className="flex items-center gap-1 text-emerald-600 font-extrabold">
+                                <span className="flex items-center gap-1 text-[#0F172A] font-extrabold">
                                   <DollarSign className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} /> {job.salaryRange}
                                 </span>
                               )}
@@ -478,7 +472,7 @@ export default function ResumePage() {
                           </div>
                         </div>
 
-                        <p className="text-xs text-[#64748B] mb-5 line-clamp-2 leading-relaxed bg-[#F4F7FE] border border-[#E2E8F0] p-4 rounded-xl font-medium">
+                        <p className="text-xs text-[#64748B] mb-5 line-clamp-2 leading-relaxed bg-[#FAFAFA] border border-[#E5E7EB] p-4 rounded-xl font-medium">
                           <strong className="text-[#1E293B] font-bold">AI Match Rationale: </strong>
                           {rec.reason}
                         </p>
@@ -507,7 +501,7 @@ export default function ResumePage() {
         {/* Sidebar Info Column */}
         <div className="space-y-6">
           <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 text-[#1E293B] space-y-5">
-            <div className="bg-[#2563EB]/10 p-3.5 rounded-2xl w-fit text-[#2563EB]">
+            <div className="bg-[#F3E8FF] p-3.5 rounded-xl w-fit text-[#8B5CF6]">
               <Zap className="h-6 w-6" strokeWidth={1.5} />
             </div>
             <h3 className="font-extrabold text-lg text-[#1E293B]">How Agentic AI Matching Works</h3>
@@ -516,20 +510,20 @@ export default function ResumePage() {
             </p>
             <ul className="space-y-3 text-xs pt-2 font-bold text-[#1E293B]">
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" strokeWidth={1.5} /> Contextual Skill & Experience Mapping
+                <CheckCircle2 className="h-5 w-5 text-[#8B5CF6] shrink-0" strokeWidth={1.5} /> Contextual Skill & Experience Mapping
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" strokeWidth={1.5} /> ATS Compatibility Score Computation
+                <CheckCircle2 className="h-5 w-5 text-[#8B5CF6] shrink-0" strokeWidth={1.5} /> ATS Compatibility Score Computation
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" strokeWidth={1.5} /> Targeted Skill Gap Recommendations
+                <CheckCircle2 className="h-5 w-5 text-[#8B5CF6] shrink-0" strokeWidth={1.5} /> Targeted Skill Gap Recommendations
               </li>
             </ul>
           </div>
 
           <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 space-y-3">
             <h3 className="font-extrabold text-sm flex items-center gap-2 text-[#1E293B]">
-              <ShieldCheck className="h-5 w-5 text-emerald-600" strokeWidth={1.5} /> Privacy & Security Guarantee
+              <ShieldCheck className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} /> Privacy & Security Guarantee
             </h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-medium">
               Your resume data is stored securely and only shared with employers when you explicitly apply for a job posting.

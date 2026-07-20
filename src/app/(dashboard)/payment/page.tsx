@@ -30,7 +30,7 @@ export default function PaymentMockupPage() {
 
       <div className="grid md:grid-cols-2 gap-8 items-start">
         {/* Plan Details */}
-        <div className="bg-card border border-primary/20 rounded-2xl p-6 space-y-6">
+        <div className="bg-card border border-primary/20 rounded-xl p-6 space-y-6">
           <div>
             <h2 className="text-xl font-bold">Premium Job Boost</h2>
             <p className="text-sm text-primary font-semibold">$49.00 / job</p>
@@ -47,7 +47,7 @@ export default function PaymentMockupPage() {
         </div>
 
         {/* Checkout Form */}
-        <div className="bg-card border rounded-2xl p-6 space-y-6">
+        <div className="bg-card border rounded-xl p-6 space-y-6">
           <div className="pb-4 border-b">
             <span className="font-medium">Secure Checkout</span>
           </div>

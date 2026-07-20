@@ -31,8 +31,8 @@ export function AboutMission() {
         </ul>
       </div>
       <div className="relative">
-        <div className="relative bg-[#FAFAFA] border border-[#E5E7EB] rounded-[36px] p-12 aspect-square flex flex-col justify-center items-center text-center">
-          <div className="h-24 w-24 bg-white border border-[#E5E7EB] rounded-3xl flex items-center justify-center mb-6 text-[#8B5CF6]">
+        <div className="relative bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-12 aspect-square flex flex-col justify-center items-center text-center">
+          <div className="h-24 w-24 bg-white border border-[#E5E7EB] rounded-xl flex items-center justify-center mb-6 text-[#8B5CF6]">
             <Sparkles className="h-12 w-12" />
           </div>
           <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mb-4">Powered by Groq Agentic AI</h3>

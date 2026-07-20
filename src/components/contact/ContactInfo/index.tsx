@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 export function ContactInfo() {
   return (
     <div className="lg:col-span-1 space-y-8">
-      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-10">
         <h3 className="text-2xl font-extrabold text-[#0F172A] mb-8">Contact Information</h3>
         <div className="space-y-8">
           <div className="flex items-start gap-4">

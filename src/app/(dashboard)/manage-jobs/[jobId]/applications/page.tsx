@@ -29,11 +29,11 @@ import { toast } from "sonner";
 import { SwalConfirm } from "@/utils/swal";
 
 const COLUMNS = [
-  { id: "Applied", title: "Applied", color: "bg-slate-100 dark:bg-slate-800/50" },
-  { id: "In Review", title: "In Review", color: "bg-blue-50 dark:bg-blue-950/20" },
-  { id: "Shortlisted", title: "Shortlisted", color: "bg-purple-50 dark:bg-purple-950/20" },
-  { id: "Hired", title: "Hired", color: "bg-emerald-50 dark:bg-emerald-950/20" },
-  { id: "Rejected", title: "Rejected", color: "bg-red-50 dark:bg-red-950/20" },
+  { id: "Applied", title: "Applied", color: "bg-slate-50" },
+  { id: "In Review", title: "In Review", color: "bg-slate-50" },
+  { id: "Shortlisted", title: "Shortlisted", color: "bg-[#F3E8FF]/50" },
+  { id: "Hired", title: "Hired", color: "bg-[#F3E8FF]/50" },
+  { id: "Rejected", title: "Rejected", color: "bg-slate-50" },
 ];
 
 export default function JobApplicationsBoard() {
@@ -154,7 +154,7 @@ export default function JobApplicationsBoard() {
             return (
               <div
                 key={column.id}
-                className={`w-84 flex flex-col rounded-3xl border ${column.color} shadow-xs overflow-hidden transition-all duration-200 ${
+                className={`w-84 flex flex-col rounded-xl border ${column.color} shadow-xs overflow-hidden transition-all duration-200 ${
                   isDragOver ? "ring-2 ring-primary ring-offset-2 scale-[1.01]" : ""
                 }`}
                 onDragOver={(e) => handleDragOver(e, column.id)}
@@ -164,7 +164,7 @@ export default function JobApplicationsBoard() {
                 {/* Column Header */}
                 <div className="p-4 border-b bg-background/60 backdrop-blur-md flex justify-between items-center">
                   <h3 className="font-bold text-sm tracking-tight">{column.title}</h3>
-                  <span className="bg-background px-2.5 py-0.5 rounded-full text-xs font-bold border">
+                  <span className="bg-background px-2.5 py-0.5 rounded-lg text-xs font-bold border">
                     {columnApps.length}
                   </span>
                 </div>
@@ -172,7 +172,7 @@ export default function JobApplicationsBoard() {
                 {/* Candidate Cards Column */}
                 <div className="flex-1 overflow-y-auto p-3 space-y-3">
                   {columnApps.length === 0 ? (
-                    <div className="text-center py-12 px-4 text-xs font-semibold text-muted-foreground opacity-60 border-2 border-dashed border-muted/50 rounded-2xl">
+                    <div className="text-center py-12 px-4 text-xs font-semibold text-muted-foreground opacity-60 border-2 border-dashed border-muted/50 rounded-xl">
                       Drag candidates here
                     </div>
                   ) : (
@@ -274,10 +274,10 @@ export default function JobApplicationsBoard() {
       {/* Candidate Profile Details Modal */}
       {selectedCandidate && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-card border rounded-3xl p-6 sm:p-8 w-full max-w-lg space-y-6 animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-card border rounded-xl p-6 sm:p-8 w-full max-w-lg space-y-6 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex justify-between items-start border-b pb-4">
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-indigo-600 text-white font-extrabold text-xl flex items-center justify-center shrink-0">
+                <div className="h-12 w-12 rounded-xl bg-[#8B5CF6] text-white font-extrabold text-xl flex items-center justify-center shrink-0">
                   {(selectedCandidate.applicantName || selectedCandidate.applicantId?.name || "A").charAt(0).toUpperCase()}
                 </div>
                 <div>
@@ -289,13 +289,13 @@ export default function JobApplicationsBoard() {
                   </p>
                   {selectedCandidate.applicantPhone && (
                     <p className="text-xs text-muted-foreground font-medium flex items-center gap-1.5 mt-0.5">
-                      <Phone className="h-3.5 w-3.5 text-emerald-600" /> {selectedCandidate.applicantPhone}
+                      <Phone className="h-3.5 w-3.5 text-[#8B5CF6]" /> {selectedCandidate.applicantPhone}
                     </p>
                   )}
                 </div>
               </div>
 
-              <button onClick={() => setSelectedCandidate(null)} className="p-1.5 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted">
+              <button onClick={() => setSelectedCandidate(null)} className="p-1.5 text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">
                 <X className="h-5 w-5" />
               </button>
             </div>

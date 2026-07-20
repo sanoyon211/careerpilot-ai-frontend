@@ -92,7 +92,7 @@ export default function JobDetailPage() {
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 py-20 text-center space-y-4">
         <h2 className="text-2xl font-black text-[#0F172A]">Job position not found</h2>
         <Link href="/explore-jobs">
-          <Button variant="outline" className="rounded-full font-bold">
+          <Button variant="outline" className="rounded-lg font-bold">
             <ArrowLeft className="h-4 w-4 mr-2" /> Back to Job Listings
           </Button>
         </Link>
@@ -103,7 +103,7 @@ export default function JobDetailPage() {
   return (
     <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 py-12 md:py-20 space-y-10">
       <Link href="/explore-jobs">
-        <Button variant="outline" size="sm" className="gap-2 rounded-full font-extrabold text-xs">
+        <Button variant="outline" size="sm" className="gap-2 rounded-lg font-extrabold text-xs">
           <ArrowLeft className="h-4 w-4" /> Back to Explore Jobs
         </Button>
       </Link>
