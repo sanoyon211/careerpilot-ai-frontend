@@ -44,27 +44,27 @@ export default function AddJobPage() {
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">Post a New Job</h1>
           <p className="text-muted-foreground mt-1 text-sm font-normal">Fill in the details below to publish a new job listing.</p>
         </div>
-        <Button variant="outline" className="text-rose-600 border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/50 hover:bg-rose-100 rounded-full font-extrabold text-xs" onClick={() => setShowAiEnhance(true)}>
+        <Button variant="outline" className="text-[#8B5CF6] border-[#8B5CF6]/30 bg-[#F3E8FF] hover:bg-[#F3E8FF]/80 rounded-lg font-extrabold text-xs" onClick={() => setShowAiEnhance(true)}>
           AI Enhance
         </Button>
       </div>
 
       {showAiEnhance && (
-        <div className="bg-rose-50/80 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-3xl p-6 shadow-sm">
+        <div className="bg-[#F3E8FF]/60 border border-[#8B5CF6]/30 rounded-xl p-6 shadow-sm">
           <div>
-            <h3 className="font-extrabold text-rose-600 mb-1">AI Job Description Generator</h3>
+            <h3 className="font-extrabold text-[#8B5CF6] mb-1">AI Job Description Generator</h3>
             <p className="text-sm text-muted-foreground mb-4 font-normal">
               Not sure how to write the perfect description? Type the job title and key requirements, and our AI will generate a professional job post for you.
             </p>
             <div className="flex gap-2">
-              <input type="text" placeholder="e.g. React Developer with 3 years experience" className="flex-1 rounded-full border bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500" />
-              <Button size="sm" className="rounded-full bg-rose-600 text-white font-extrabold">Generate</Button>
+              <input type="text" placeholder="e.g. React Developer with 3 years experience" className="flex-1 rounded-lg border bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]" />
+              <Button size="sm" className="rounded-lg bg-[#8B5CF6] text-white font-extrabold">Generate</Button>
             </div>
           </div>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-card border rounded-2xl p-6 sm:p-8 space-y-8">
+      <form onSubmit={handleSubmit} className="bg-card border rounded-xl p-6 sm:p-8 space-y-8">
         {/* Basic Information */}
         <div className="space-y-4">
           <h3 className="font-semibold text-lg border-b pb-2">Basic Information</h3>
@@ -149,7 +149,7 @@ export default function AddJobPage() {
 
         <div className="pt-4 flex justify-end gap-4">
           <Button type="button" variant="outline">Save as Draft</Button>
-          <Button type="submit" isLoading={isSubmitting}>
+          <Button type="submit" isLoading={isSubmitting} className="bg-[#8B5CF6] hover:bg-[#7C3AED] rounded-lg">
             Publish Job
           </Button>
         </div>

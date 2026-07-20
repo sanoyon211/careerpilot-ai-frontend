@@ -143,7 +143,7 @@ export default function DashboardLayout({
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
         <div className="text-center space-y-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#2563EB] border-t-transparent mx-auto text-[#2563EB]" />
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#8B5CF6] border-t-transparent mx-auto text-[#8B5CF6]" />
           <p className="text-sm font-bold text-[#64748B] animate-pulse">
             {isLoadingProfile ? "Verifying authentication session..." : "Redirecting to login..."}
           </p>
@@ -158,8 +158,8 @@ export default function DashboardLayout({
       <div className="md:hidden bg-white border-b border-[#E5E7EB] p-4 flex items-center justify-between sticky top-0 z-20">
         <Link href="/" className="flex items-center gap-1">
           <span className="font-extrabold text-xl tracking-tight text-[#1E293B] font-sans">
-            careerpilot<span className="text-[#2563EB] font-black">:</span>
-            <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full ml-1">
+            careerpilot<span className="text-[#8B5CF6] font-black">:</span>
+            <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-lg ml-1">
               AI
             </span>
           </span>
@@ -180,8 +180,8 @@ export default function DashboardLayout({
         <div className="p-6 hidden md:block border-b border-[#E5E7EB] bg-white">
           <Link href="/" className="flex items-center gap-1 group">
             <span className="font-extrabold text-xl tracking-tight text-[#1E293B] font-sans">
-              careerpilot<span className="text-[#2563EB] font-black">:</span>
-              <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full ml-1">
+              careerpilot<span className="text-[#8B5CF6] font-black">:</span>
+              <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-lg ml-1">
                 AI
               </span>
             </span>
@@ -189,11 +189,11 @@ export default function DashboardLayout({
         </div>
 
         {/* Compact Sidebar Profile Box */}
-        <div className="p-3.5 mx-3 my-4 bg-white border border-[#E5E7EB] rounded-2xl flex items-center gap-3">
+        <div className="p-3.5 mx-3 my-4 bg-white border border-[#E5E7EB] rounded-xl flex items-center gap-3">
           {user.photoURL ? (
             <img src={user.photoURL} alt={user.name} className="h-9 w-9 rounded-full object-cover border border-[#E5E7EB]" />
           ) : (
-            <div className="h-9 w-9 rounded-full bg-[#2563EB] text-white font-extrabold flex items-center justify-center text-xs shrink-0">
+            <div className="h-9 w-9 rounded-full bg-[#8B5CF6] text-white font-extrabold flex items-center justify-center text-xs shrink-0">
               {getInitials(user.name)}
             </div>
           )}
@@ -215,13 +215,9 @@ export default function DashboardLayout({
             const isActive = pathname === link.href;
             const isAICoachActive = link.href === "/ai-chat" && isActive;
 
-            let linkClass = "text-[#64748B] hover:bg-white hover:text-[#2563EB]";
+            let linkClass = "text-[#64748B] hover:bg-white hover:text-[#8B5CF6]";
             if (isActive) {
-              if (isAICoachActive) {
-                linkClass = "bg-[#8B5CF6] text-white font-extrabold";
-              } else {
-                linkClass = "bg-[#2563EB] text-white font-extrabold";
-              }
+              linkClass = "bg-[#8B5CF6] text-white font-extrabold";
             }
 
             return (
@@ -229,7 +225,7 @@ export default function DashboardLayout({
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all ${linkClass}`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${linkClass}`}
               >
                 <link.icon className={`h-5 w-5 shrink-0 ${isActive ? "text-white" : link.isAI ? "text-[#8B5CF6]" : "text-[#0F172A]"}`} strokeWidth={1.5} />
                 <span>{link.label}</span>
@@ -243,10 +239,10 @@ export default function DashboardLayout({
           <Link
             href="/settings"
             onClick={() => setIsMobileMenuOpen(false)}
-            className={`flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-bold transition-all ${
+            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${
               pathname === "/settings"
-                ? "bg-[#2563EB] text-white"
-                : "text-[#64748B] hover:bg-[#FAFAFA] hover:text-[#2563EB]"
+                ? "bg-[#8B5CF6] text-white"
+                : "text-[#64748B] hover:bg-[#FAFAFA] hover:text-[#8B5CF6]"
             }`}
           >
             <Settings className="h-5 w-5 shrink-0 text-[#0F172A]" strokeWidth={1.5} /> Settings
@@ -254,7 +250,7 @@ export default function DashboardLayout({
 
           <button
             onClick={handleSignOut}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors text-left cursor-pointer"
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors text-left cursor-pointer"
           >
             <LogOut className="h-5 w-5 shrink-0" strokeWidth={1.5} /> Sign Out
           </button>

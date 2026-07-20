@@ -32,7 +32,7 @@ export function Testimonials() {
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-4 py-1.5 rounded-full">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-4 py-1.5 rounded-lg">
             User Success Stories
           </span>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight">
@@ -44,7 +44,7 @@ export function Testimonials() {
           {TESTIMONIALS.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between"
+              className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-10 hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center gap-1 mb-6 text-amber-500">
@@ -58,7 +58,7 @@ export function Testimonials() {
               </div>
 
               <div className="pt-5 border-t border-[#E5E7EB] flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-[#0F172A] text-white font-extrabold flex items-center justify-center text-base">
+                <div className="h-12 w-12 rounded-xl bg-[#0F172A] text-white font-extrabold flex items-center justify-center text-base">
                   {item.author.charAt(0)}
                 </div>
                 <div>

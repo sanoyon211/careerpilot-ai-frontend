@@ -39,7 +39,7 @@ export default function SavedJobsPage() {
             return (
               <div
                 key={item._id}
-                className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-7 hover:border-[#CBD5E1] transition-all flex flex-col relative group"
+                className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-7 hover:border-[#CBD5E1] transition-all flex flex-col relative group"
               >
                 <button
                   onClick={() => handleRemove(item._id)}
@@ -50,7 +50,7 @@ export default function SavedJobsPage() {
                 </button>
 
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="h-12 w-12 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-xl font-extrabold shrink-0">
+                  <div className="h-12 w-12 rounded-xl bg-[#8B5CF6] text-white flex items-center justify-center text-xl font-extrabold shrink-0">
                     {job.company?.charAt(0) || "C"}
                   </div>
                   <div>
@@ -61,7 +61,7 @@ export default function SavedJobsPage() {
 
                 {job.isAiMatch && (
                   <div className="mb-4">
-                    <span className="inline-flex items-center bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3 py-1 rounded-lg">
                       High AI Match
                     </span>
                   </div>
@@ -70,17 +70,17 @@ export default function SavedJobsPage() {
                 <div className="space-y-2 mb-6 mt-auto text-xs font-semibold text-[#64748B]">
                   <div>{job.location || "Location not specified"}</div>
                   {job.salaryRange && (
-                    <div className="text-emerald-600 font-extrabold">{job.salaryRange}</div>
+                    <div className="text-[#0F172A] font-extrabold">{job.salaryRange}</div>
                   )}
                   <div>Saved {new Date(item.createdAt).toLocaleDateString()}</div>
                 </div>
 
                 <div className="flex gap-3 mt-auto border-t border-[#E5E7EB] pt-4">
                   <Link href={`/jobs/${job._id}`} className="flex-1">
-                    <Button className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-bold">Apply Now</Button>
+                    <Button className="w-full bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg font-bold">Apply Now</Button>
                   </Link>
                   <Link href={`/jobs/${job._id}`} className="flex-1">
-                    <Button variant="outline" className="w-full rounded-full font-bold">
+                    <Button variant="outline" className="w-full rounded-lg font-bold">
                       Details
                     </Button>
                   </Link>
@@ -90,11 +90,11 @@ export default function SavedJobsPage() {
           })}
         </div>
       ) : (
-        <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-16 text-center">
+        <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-16 text-center">
           <h3 className="text-xl font-extrabold text-[#1E293B] mb-2">No saved jobs</h3>
           <p className="text-[#64748B] text-sm font-medium mb-6">You haven't bookmarked any jobs yet. Start exploring to find your perfect match.</p>
           <Link href="/explore-jobs">
-            <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3">
+            <Button className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg font-extrabold px-8 py-3">
               Explore Jobs
             </Button>
           </Link>

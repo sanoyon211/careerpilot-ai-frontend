@@ -9,9 +9,9 @@ export function CTA() {
     <section className="py-24 bg-white">
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="relative overflow-hidden bg-[#FAFAFA] border border-[#E5E7EB] rounded-[36px] p-10 md:p-20 text-[#0F172A] text-center">
+        <div className="relative overflow-hidden bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-10 md:p-20 text-[#0F172A] text-center">
           <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold bg-white border border-[#E5E7EB] text-[#8B5CF6]">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-lg text-xs font-extrabold bg-white border border-[#E5E7EB] text-[#8B5CF6]">
               <span>Ready to Elevate Your Tech Career?</span>
             </div>
 

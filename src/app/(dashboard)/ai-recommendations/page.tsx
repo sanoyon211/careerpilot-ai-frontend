@@ -37,23 +37,23 @@ export default function AIRecommendationsPage() {
           
           <div className="space-y-4">
             {RECOMMENDED_JOBS.map(job => (
-              <div key={job.id} className="bg-card border border-blue-500/20 rounded-2xl p-6 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1.5 rounded-bl-xl">
+              <div key={job.id} className="bg-card border border-[#8B5CF6]/30 rounded-xl p-6 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 bg-[#8B5CF6] text-white text-xs font-bold px-3 py-1.5 rounded-bl-xl">
                   {job.match}% Match
                 </div>
                 
                 <h3 className="font-bold text-lg mt-2 pr-12">{job.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{job.company}</p>
                 
-                <div className="bg-blue-500/5 p-4 rounded-xl border border-blue-500/10 mb-6">
+                <div className="bg-[#F3E8FF] p-4 rounded-xl border border-[#8B5CF6]/20 mb-6">
                   <p className="text-sm leading-relaxed text-foreground/90">
-                    <strong className="text-blue-600 block mb-1">Why this match?</strong>
+                    <strong className="text-[#8B5CF6] block mb-1">Why this match?</strong>
                     {job.reason}
                   </p>
                 </div>
                 
                 <Link href={`/jobs/${job.id}`}>
-                  <Button variant="outline" className="w-full border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-600 transition-colors">
+                  <Button variant="outline" className="w-full border-[#8B5CF6]/30 hover:bg-[#F3E8FF] hover:text-[#8B5CF6] transition-colors rounded-lg">
                     Review Job
                   </Button>
                 </Link>
@@ -70,13 +70,11 @@ export default function AIRecommendationsPage() {
           
           <div className="space-y-4">
             {RECOMMENDED_SKILLS.map((skill, idx) => (
-              <div key={idx} className="bg-card border border-yellow-500/20 rounded-2xl p-6">
+              <div key={idx} className="bg-card border border-[#E5E7EB] rounded-xl p-6">
                 
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-bold text-lg">{skill.name}</h3>
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                    skill.importance === "High" ? "bg-red-500/10 text-red-600" : "bg-orange-500/10 text-orange-600"
-                  }`}>
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#F3E8FF] text-[#8B5CF6]">
                     {skill.importance} Priority
                   </span>
                 </div>
@@ -85,20 +83,20 @@ export default function AIRecommendationsPage() {
                   {skill.reason}
                 </p>
                 
-                <div className="flex items-center justify-between pt-4 border-t border-yellow-500/10">
+                <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
                   <span className="text-xs text-muted-foreground font-medium">Est. Time: {skill.timeframe}</span>
-                  <Link href="#" className="text-xs font-bold text-yellow-600 flex items-center gap-1 hover:underline">
-                    Find Courses <ExternalLink className="h-4 w-4 text-[#0F172A]" strokeWidth={1.5} />
+                  <Link href="#" className="text-xs font-bold text-[#8B5CF6] flex items-center gap-1 hover:underline">
+                    Find Courses <ExternalLink className="h-4 w-4 text-[#8B5CF6]" strokeWidth={1.5} />
                   </Link>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-muted/30 border border-dashed rounded-2xl p-6 text-center">
+          <div className="bg-muted/30 border border-dashed rounded-xl p-6 text-center">
             <p className="text-sm text-muted-foreground mb-4">Want a complete roadmap to level up your career?</p>
             <Link href="/ai-roadmap">
-              <Button variant="default">Generate Career Roadmap</Button>
+              <Button variant="default" className="rounded-lg bg-[#8B5CF6] hover:bg-[#7C3AED]">Generate Career Roadmap</Button>
             </Link>
           </div>
         </div>

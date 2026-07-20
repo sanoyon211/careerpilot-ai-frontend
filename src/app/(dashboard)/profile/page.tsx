@@ -62,17 +62,17 @@ export default function ProfilePage() {
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1E293B]">My Profile</h1>
           <p className="text-[#64748B] font-medium mt-1 text-sm">Manage your personal information and preferences.</p>
         </div>
-        <Button variant={isEditing ? "outline" : "default"} className="rounded-full px-6 font-extrabold" onClick={() => setIsEditing(!isEditing)}>
+        <Button variant={isEditing ? "outline" : "default"} className="rounded-lg px-6 font-extrabold bg-[#8B5CF6] hover:bg-[#7C3AED] text-white" onClick={() => setIsEditing(!isEditing)}>
           {isEditing ? "Cancel Editing" : "Edit Profile"}
         </Button>
       </div>
 
-      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-10">
         
         {/* Avatar Section */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 pb-8 border-b border-[#E5E7EB]">
           <div className="relative">
-            <div className="h-24 w-24 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-3xl font-extrabold border-4 border-white">
+            <div className="h-24 w-24 rounded-full bg-[#8B5CF6] text-white flex items-center justify-center text-3xl font-extrabold border-4 border-white">
               {user?.name?.charAt(0) || "U"}
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function ProfilePage() {
                   rows={4}
                   disabled={!isEditing}
                   placeholder="Tell us about your technical experience and career background..."
-                  className="flex w-full rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-medium text-[#1E293B] placeholder:text-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] disabled:opacity-50 resize-y"
+                  className="flex w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-medium text-[#1E293B] placeholder:text-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] disabled:opacity-50 resize-y"
                 />
               </div>
               <div className="space-y-1">
@@ -139,10 +139,10 @@ export default function ProfilePage() {
 
           {isEditing && (
             <div className="pt-4 flex justify-end gap-3">
-              <Button type="button" variant="outline" className="rounded-xl font-bold" onClick={() => setIsEditing(false)}>
+              <Button type="button" variant="outline" className="rounded-lg font-bold" onClick={() => setIsEditing(false)}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={isUpdating} className="bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl px-6 font-extrabold text-white">
+              <Button type="submit" disabled={isUpdating} className="bg-[#8B5CF6] hover:bg-[#7C3AED] rounded-lg px-6 font-extrabold text-white">
                 {isUpdating ? "Saving..." : "Save Changes"}
               </Button>
             </div>

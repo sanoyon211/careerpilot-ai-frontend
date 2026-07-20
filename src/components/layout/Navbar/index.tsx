@@ -70,7 +70,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2 group">
           <span className="text-2xl font-extrabold tracking-tight text-[#0F172A] font-sans">
             careerpilot<span className="text-[#8B5CF6] font-black">:</span>
-            <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-2.5 py-0.5 rounded-full ml-1.5">
+            <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-2.5 py-0.5 rounded-lg ml-1.5">
               AI
             </span>
           </span>
@@ -174,7 +174,7 @@ export function Navbar() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-2.5 p-2 rounded-full hover:bg-[#FAFAFA] transition-colors focus:outline-none cursor-pointer border border-[#E5E7EB]"
+                className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-[#FAFAFA] transition-colors focus:outline-none cursor-pointer border border-[#E5E7EB]"
               >
                 {user.photoURL ? (
                   <img

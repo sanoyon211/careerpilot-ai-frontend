@@ -114,13 +114,13 @@ export default function ManageJobsPage() {
           <p className="text-muted-foreground mt-1">View, edit, promote, and manage all your posted job listings.</p>
         </div>
         <Link href="/add-job">
-          <Button className="bg-primary hover:bg-primary/90 rounded-xl">
+          <Button className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg">
             Post New Job
           </Button>
         </Link>
       </div>
 
-      <div className="bg-card border rounded-3xl overflow-hidden">
+      <div className="bg-card border rounded-xl overflow-hidden">
         {/* Toolbar */}
         <div className="p-4 border-b flex flex-col sm:flex-row justify-between gap-4 bg-muted/10">
           <div className="flex-1 max-w-sm">
@@ -136,7 +136,7 @@ export default function ManageJobsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="border rounded-xl px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary font-medium"
+              className="border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-medium"
             >
               <option value="All">All Statuses</option>
               <option value="Active">Active</option>
@@ -186,12 +186,10 @@ export default function ManageJobsPage() {
                   </td>
                   <td className="py-4 px-6">
                     <span
-                      className={`inline-flex px-2.5 py-1 rounded-full text-xs font-bold ${
+                      className={`inline-flex px-2.5 py-1 rounded-lg text-xs font-bold ${
                         job.status === "Active"
-                          ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
-                          : job.status === "Closed"
-                          ? "bg-red-500/10 text-red-600 border border-red-500/20"
-                          : "bg-gray-500/10 text-gray-600 border border-gray-500/20"
+                          ? "bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30"
+                          : "bg-gray-100 text-gray-600 border border-gray-200"
                       }`}
                     >
                       {job.status}
@@ -214,7 +212,7 @@ export default function ManageJobsPage() {
                         variant="outline"
                         size="sm"
                         onClick={() => setPromotingJob(job)}
-                        className="gap-1 text-amber-600 hover:text-amber-700 hover:bg-amber-500/10 border-amber-500/30 rounded-xl"
+                        className="gap-1 text-[#8B5CF6] hover:bg-[#F3E8FF] border-[#8B5CF6]/30 rounded-lg"
                       >
                         <Sparkles className="h-3.5 w-3.5 text-[#0F172A]" strokeWidth={1.5} /> Promote
                       </Button>
@@ -278,7 +276,7 @@ export default function ManageJobsPage() {
       {/* Edit Job Modal */}
       {editingJob && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-card border rounded-3xl p-6 w-full max-w-lg space-y-5">
+          <div className="bg-card border rounded-xl p-6 w-full max-w-lg space-y-5">
             <div className="flex justify-between items-center border-b pb-3">
               <h2 className="text-xl font-bold">Edit Job Details</h2>
               <button onClick={() => setEditingJob(null)} className="p-1 text-muted-foreground hover:text-foreground">
@@ -380,8 +378,8 @@ export default function ManageJobsPage() {
       {/* Promote Job Modal */}
       {promotingJob && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-card border rounded-3xl p-6 w-full max-w-md space-y-4 text-center">
-            <div className="h-12 w-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mx-auto">
+          <div className="bg-card border rounded-xl p-6 w-full max-w-md space-y-4 text-center">
+            <div className="h-12 w-12 rounded-xl bg-[#F3E8FF] text-[#8B5CF6] flex items-center justify-center mx-auto">
               <Sparkles className="h-6 w-6 text-[#8B5CF6]" strokeWidth={1.5} />
             </div>
             <h2 className="text-xl font-bold">Promote Job Listing</h2>
@@ -393,11 +391,11 @@ export default function ManageJobsPage() {
               <p className="text-muted-foreground">{promotingJob.location} • {promotingJob.jobType}</p>
             </div>
             <div className="pt-2 flex gap-3">
-              <Button variant="outline" className="flex-1" onClick={() => setPromotingJob(null)}>
+              <Button variant="outline" className="flex-1 rounded-lg" onClick={() => setPromotingJob(null)}>
                 Cancel
               </Button>
-              <Button className="flex-1 bg-amber-600 hover:bg-amber-700 text-white gap-1.5" onClick={() => handlePromoteConfirm(promotingJob)}>
-                <CheckCircle2 className="h-4 w-4" strokeWidth={1.5} /> Activate Priority
+              <Button className="flex-1 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg" onClick={() => handlePromoteConfirm(promotingJob)}>
+                Activate Priority
               </Button>
             </div>
           </div>

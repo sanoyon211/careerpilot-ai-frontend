@@ -11,7 +11,7 @@ export function Hero() {
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         {/* Top Header Badge */}
         <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto mb-16">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-lg text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
             <span>Autonomous Groq Llama 3.3 70B AI Platform</span>
           </div>
 
@@ -41,7 +41,7 @@ export function Hero() {
         {/* Bento Grid Showcase scaling to 1440px */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Bento Card 1: AI Agentic Matching */}
-          <div className="md:col-span-7 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[32px] p-8 md:p-12 relative overflow-hidden hover:border-[#CBD5E1] transition-all group flex flex-col justify-between">
+          <div className="md:col-span-7 bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-8 md:p-12 relative overflow-hidden hover:border-[#CBD5E1] transition-all group flex flex-col justify-between">
             <div>
               <div className="mb-6">
                 <span className="text-xs font-black uppercase tracking-wider text-[#8B5CF6]">Agentic AI Engine</span>
@@ -54,17 +54,17 @@ export function Hero() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 text-xs font-extrabold">
-              <span className="bg-white border border-[#E5E7EB] px-4 py-2 rounded-full text-[#0F172A]">94% Skill Accuracy</span>
-              <span className="bg-white border border-[#E5E7EB] px-4 py-2 rounded-full text-[#8B5CF6]">Real-Time Scoring</span>
-              <span className="bg-white border border-[#E5E7EB] px-4 py-2 rounded-full text-[#8B5CF6]">Zero Bias</span>
+              <span className="bg-white border border-[#E5E7EB] px-4 py-2 rounded-lg text-[#0F172A]">94% Skill Accuracy</span>
+              <span className="bg-white border border-[#E5E7EB] px-4 py-2 rounded-lg text-[#8B5CF6]">Real-Time Scoring</span>
+              <span className="bg-white border border-[#E5E7EB] px-4 py-2 rounded-lg text-[#8B5CF6]">Zero Bias</span>
             </div>
           </div>
 
           {/* Bento Card 2: ATS Resume Analyzer */}
-          <div className="md:col-span-5 bg-white border border-[#E5E7EB] rounded-[32px] p-8 md:p-12 hover:border-[#8B5CF6]/50 transition-all flex flex-col justify-between">
+          <div className="md:col-span-5 bg-white border border-[#E5E7EB] rounded-2xl p-8 md:p-12 hover:border-[#8B5CF6]/50 transition-all flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-black text-[#8B5CF6] bg-white px-3.5 py-1 rounded-full border border-[#E5E7EB]">AI Feature</span>
+                <span className="text-xs font-black text-[#8B5CF6] bg-white px-3.5 py-1 rounded-lg border border-[#E5E7EB]">AI Feature</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mb-3">ATS Resume Optimizer</h3>
               <p className="text-sm sm:text-base text-[#64748B] leading-relaxed mb-8 font-medium">
@@ -72,26 +72,26 @@ export function Hero() {
               </p>
             </div>
             <Link href="/resume">
-              <Button size="sm" variant="ai" className="w-full rounded-2xl text-xs py-3 font-extrabold">
+              <Button size="sm" variant="ai" className="w-full rounded-xl text-xs py-3 font-extrabold">
                 Check Resume Score
               </Button>
             </Link>
           </div>
 
           {/* Bento Card 3: Metrics Banner */}
-          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
+          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8">
             <div className="text-3xl font-black text-[#0F172A]">2,500+</div>
             <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">Active Verified Jobs</div>
           </div>
 
           {/* Bento Card 4: Employer Match */}
-          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
+          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8">
             <div className="text-3xl font-black text-[#0F172A]">100%</div>
             <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">Verified Companies</div>
           </div>
 
           {/* Bento Card 5: Fast Track Applications */}
-          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
+          <div className="md:col-span-4 bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8">
             <div className="text-3xl font-black text-[#0F172A]">Instant</div>
             <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">AI Cover Letter Gen</div>
           </div>

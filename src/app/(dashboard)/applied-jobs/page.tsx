@@ -19,15 +19,13 @@ export default function AppliedJobsPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "Hired":
-        return "bg-emerald-50 text-emerald-600 border-emerald-200";
       case "Shortlisted":
       case "Interview":
-        return "bg-[#F3E8FF] text-[#8B5CF6] border-[#8B5CF6]/30";
       case "Reviewed":
       case "In Review":
-        return "bg-blue-50 text-[#2563EB] border-blue-200";
+        return "bg-[#F3E8FF] text-[#8B5CF6] border-[#8B5CF6]/30";
       case "Rejected":
-        return "bg-red-50 text-red-600 border-red-200";
+        return "bg-slate-100 text-[#64748B] border-[#E2E8F0]";
       default:
         return "bg-slate-100 text-[#64748B] border-[#E2E8F0]";
     }
@@ -40,7 +38,7 @@ export default function AppliedJobsPage() {
         <p className="text-[#64748B] font-medium mt-1 text-sm">Track the real-time status and progress of all your job applications.</p>
       </div>
 
-      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] overflow-hidden">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl overflow-hidden">
         {/* Filter Toolbar */}
         <div className="p-6 border-b border-[#E5E7EB] flex flex-col sm:flex-row justify-between items-center gap-4 bg-white">
           <div className="flex gap-2.5 w-full sm:w-auto overflow-x-auto pb-1 hide-scrollbar">
@@ -50,8 +48,8 @@ export default function AppliedJobsPage() {
                 variant={statusFilter === status ? "default" : "outline"}
                 size="sm"
                 onClick={() => setStatusFilter(status)}
-                className={`rounded-full text-xs font-extrabold shrink-0 hover:shadow-xs transition-all ${
-                  statusFilter === status ? "bg-[#2563EB] text-white" : ""
+                className={`rounded-lg text-xs font-extrabold shrink-0 hover:shadow-xs transition-all ${
+                  statusFilter === status ? "bg-[#8B5CF6] text-white" : ""
                 }`}
               >
                 {status}
@@ -76,7 +74,7 @@ export default function AppliedJobsPage() {
                 You haven't submitted any job applications under this status yet.
               </p>
               <Link href="/explore-jobs">
-                <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3">
+                <Button className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg font-extrabold px-8 py-3">
                   Explore Open Positions
                 </Button>
               </Link>
@@ -90,17 +88,17 @@ export default function AppliedJobsPage() {
               <div key={app._id} className="p-6 sm:p-8 hover:bg-white transition-colors">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div className="flex items-start gap-5 flex-1">
-                    <div className="h-14 w-14 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-xl font-extrabold shrink-0">
+                    <div className="h-14 w-14 rounded-xl bg-[#8B5CF6] text-white flex items-center justify-center text-xl font-extrabold shrink-0">
                       {job?.title?.charAt(0) || "J"}
                     </div>
                     <div>
-                      <h3 className="font-extrabold text-lg text-[#1E293B] hover:text-[#2563EB] transition-colors">
+                      <h3 className="font-extrabold text-lg text-[#1E293B] hover:text-[#8B5CF6] transition-colors">
                         {job?.title || "Job Listing"}
                       </h3>
                       <div className="flex flex-wrap items-center gap-4 mt-1.5 text-xs text-[#64748B] font-semibold">
                         {job?.location && <span>{job.location}</span>}
                         {job?.salaryRange && (
-                          <span className="font-extrabold text-emerald-600">{job.salaryRange}</span>
+                          <span className="font-extrabold text-[#0F172A]">{job.salaryRange}</span>
                         )}
                       </div>
                     </div>
@@ -108,7 +106,7 @@ export default function AppliedJobsPage() {
 
                   <div className="flex items-center justify-between md:justify-end gap-6 md:w-1/3 border-t md:border-0 border-[#E5E7EB] pt-4 md:pt-0">
                     <div className="flex flex-col items-start md:items-end gap-1.5">
-                      <span className={`text-xs font-extrabold px-3.5 py-1 rounded-full border ${getStatusBadge(app.status)}`}>
+                      <span className={`text-xs font-extrabold px-3.5 py-1 rounded-lg border ${getStatusBadge(app.status)}`}>
                         {app.status}
                       </span>
                       <span className="text-[11px] text-[#64748B] font-semibold">
@@ -118,8 +116,8 @@ export default function AppliedJobsPage() {
 
                     {job?._id && (
                       <Link href={`/jobs/${job._id}`}>
-                        <Button variant="outline" size="icon" className="h-10 w-10 rounded-2xl">
-                          <ChevronRight className="h-5 w-5 text-[#0F172A]" strokeWidth={1.5} />
+                        <Button variant="outline" size="icon" className="h-10 w-10 rounded-xl">
+                          View
                         </Button>
                       </Link>
                     )}

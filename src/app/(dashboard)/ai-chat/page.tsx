@@ -76,7 +76,7 @@ export default function AIChatPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-120px)] bg-white rounded-[28px] border border-[#E5E7EB] overflow-hidden">
+    <div className="flex flex-col h-[calc(100vh-120px)] bg-white rounded-xl border border-[#E5E7EB] overflow-hidden">
       {/* Header */}
       <div className="bg-[#FAFAFA] border-b border-[#E5E7EB] p-6 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-4">
@@ -95,13 +95,13 @@ export default function AIChatPage() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center bg-white p-1 rounded-full border border-[#E5E7EB]">
+          <div className="flex items-center bg-white p-1 rounded-lg border border-[#E5E7EB]">
             <button
               onClick={() => {
                 setMode("coach");
                 setMessages(INITIAL_COACH_MESSAGES);
               }}
-              className={`px-4 py-1.5 text-xs font-extrabold rounded-full transition-all ${
+              className={`px-4 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
                 mode === "coach" ? "bg-[#8B5CF6] text-white" : "text-[#64748B] hover:text-[#1E293B]"
               }`}
             >
@@ -112,7 +112,7 @@ export default function AIChatPage() {
                 setMode("mock-interview");
                 setMessages(INITIAL_MOCK_MESSAGES);
               }}
-              className={`px-4 py-1.5 text-xs font-extrabold rounded-full transition-all ${
+              className={`px-4 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
                 mode === "mock-interview" ? "bg-[#8B5CF6] text-white" : "text-[#64748B] hover:text-[#1E293B]"
               }`}
             >
@@ -134,10 +134,10 @@ export default function AIChatPage() {
         {messages.map((msg) => (
           <div key={msg.id} className={`flex gap-4 max-w-3xl ${msg.role === "user" ? "ml-auto flex-row-reverse" : ""}`}>
             <div
-              className={`h-9 w-9 rounded-2xl shrink-0 flex items-center justify-center text-xs font-bold ${
+              className={`h-9 w-9 rounded-xl shrink-0 flex items-center justify-center text-xs font-bold ${
                 msg.role === "ai"
                   ? "bg-[#8B5CF6] text-white"
-                  : "bg-[#2563EB] text-white"
+                  : "bg-[#0F172A] text-white"
               }`}
             >
               {msg.role === "ai" ? <Sparkles className="h-5 w-5" strokeWidth={1.5} /> : <User className="h-5 w-5" strokeWidth={1.5} />}
@@ -145,10 +145,10 @@ export default function AIChatPage() {
 
             <div className="space-y-2">
               <div
-                className={`px-6 py-4 rounded-[22px] text-sm leading-relaxed font-medium ${
+                className={`px-6 py-4 rounded-xl text-sm leading-relaxed font-medium ${
                   msg.role === "user"
-                    ? "bg-white border border-[#E5E7EB] text-[#1E293B] rounded-tr-sm"
-                    : "bg-[#F3E8FF] border border-[#8B5CF6]/20 text-[#1E293B] rounded-tl-sm"
+                    ? "bg-white border border-[#E5E7EB] text-[#1E293B]"
+                    : "bg-[#F3E8FF] border border-[#8B5CF6]/20 text-[#1E293B]"
                 }`}
               >
                 {msg.content}
@@ -191,7 +191,7 @@ export default function AIChatPage() {
                 <button
                   key={suggestion}
                   onClick={() => handleSend(suggestion)}
-                  className="bg-white text-[#1E293B] hover:bg-[#F3E8FF] hover:text-[#8B5CF6] border border-[#E5E7EB] text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap cursor-pointer"
+                  className="bg-white text-[#1E293B] hover:bg-[#F3E8FF] hover:text-[#8B5CF6] border border-[#E5E7EB] text-xs font-bold px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap cursor-pointer"
                 >
                   {suggestion}
                 </button>
@@ -199,7 +199,7 @@ export default function AIChatPage() {
             </div>
           )}
 
-          <div className="relative flex items-end bg-white border border-[#E5E7EB] rounded-2xl focus-within:border-[#8B5CF6] transition-all overflow-hidden p-2">
+          <div className="relative flex items-end bg-white border border-[#E5E7EB] rounded-xl focus-within:border-[#8B5CF6] transition-all overflow-hidden p-2">
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -216,7 +216,7 @@ export default function AIChatPage() {
             <button
               onClick={() => handleSend(input)}
               disabled={!input.trim() || isTyping}
-              className="bg-[#8B5CF6] text-white p-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0 mb-0.5 mr-0.5 hover:bg-[#7C3AED]"
+              className="bg-[#8B5CF6] text-white p-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0 mb-0.5 mr-0.5 hover:bg-[#7C3AED]"
             >
               <Send className="h-5 w-5" strokeWidth={1.5} />
             </button>

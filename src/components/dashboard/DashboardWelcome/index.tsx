@@ -11,7 +11,7 @@ interface DashboardWelcomeProps {
 
 export function DashboardWelcome({ userName, isEmployer }: DashboardWelcomeProps) {
   return (
-    <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+    <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
       <div>
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1E293B]">
           Welcome back, {userName || "User"}!
@@ -23,13 +23,13 @@ export function DashboardWelcome({ userName, isEmployer }: DashboardWelcomeProps
 
       {isEmployer ? (
         <Link href="/add-job">
-          <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3 text-sm">
+          <Button className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-lg font-extrabold px-8 py-3 text-sm">
             Post New Job
           </Button>
         </Link>
       ) : (
         <Link href="/explore-jobs">
-          <Button variant="ai" className="rounded-full font-extrabold px-8 py-3 text-sm">
+          <Button variant="ai" className="rounded-lg font-extrabold px-8 py-3 text-sm">
             Find AI Job Matches
           </Button>
         </Link>

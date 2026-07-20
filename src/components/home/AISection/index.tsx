@@ -9,11 +9,11 @@ export function AISection() {
     <section className="py-24 bg-white">
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[36px] p-8 md:p-16">
+        <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-8 md:p-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left AI Text Info */}
             <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#8B5CF6] text-white">
+              <div className="inline-flex items-center px-4 py-1.5 rounded-lg text-xs font-extrabold bg-[#8B5CF6] text-white">
                 <span>AI Feature Spotlight</span>
               </div>
 
@@ -54,19 +54,19 @@ export function AISection() {
             </div>
 
             {/* Right Side Interactive Card Preview */}
-            <div className="bg-white border border-[#E5E7EB] rounded-[28px] p-8 space-y-6">
+            <div className="bg-white border border-[#E5E7EB] rounded-2xl p-8 space-y-6">
               <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-5">
                 <div>
                   <h4 className="font-extrabold text-base text-[#0F172A]">AI Match Insight</h4>
                   <p className="text-xs text-[#64748B] font-semibold">Groq Llama 3.3 Engine</p>
                 </div>
-                <span className="text-xs font-black text-[#8B5CF6] bg-white px-3.5 py-1 rounded-full border border-[#E5E7EB]">
+                <span className="text-xs font-black text-[#8B5CF6] bg-white px-3.5 py-1 rounded-lg border border-[#E5E7EB]">
                   94% Match
                 </span>
               </div>
 
               {/* Sample Chat Bubble */}
-              <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-5 space-y-2">
+              <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-5 space-y-2">
                 <div className="text-xs font-extrabold text-[#8B5CF6]">
                   CareerPilot Assistant
                 </div>

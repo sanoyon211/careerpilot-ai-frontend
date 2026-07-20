@@ -21,10 +21,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (variant === "ghost") variantClasses = "hover:bg-[#FAFAFA] text-[#0F172A] hover:text-[#0F172A]";
     if (variant === "link") variantClasses = "text-[#8B5CF6] underline-offset-4 hover:underline";
 
-    let sizeClasses = "h-11 px-6 py-2.5 rounded-full text-sm font-extrabold tracking-tight";
-    if (size === "sm") sizeClasses = "h-9 px-4 rounded-full text-xs font-extrabold tracking-tight";
-    if (size === "lg") sizeClasses = "h-13 px-8 rounded-full text-base font-extrabold tracking-tight";
-    if (size === "icon") sizeClasses = "h-10 w-10 rounded-full flex items-center justify-center";
+    let sizeClasses = "h-11 px-6 py-2.5 rounded-xl text-sm font-extrabold tracking-tight";
+    if (size === "sm") sizeClasses = "h-9 px-4 rounded-lg text-xs font-extrabold tracking-tight";
+    if (size === "lg") sizeClasses = "h-13 px-8 rounded-xl text-base font-extrabold tracking-tight";
+    if (size === "icon") sizeClasses = "h-10 w-10 rounded-xl flex items-center justify-center";
 
     return (
       <Comp
