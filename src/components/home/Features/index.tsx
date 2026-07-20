@@ -1,73 +1,82 @@
-"use client"
-import { motion } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/common/Card"
-import { Briefcase, FileText, Target, Zap } from "lucide-react"
+"use client";
 
-const features = [
+import { Cpu, FileCheck2, Bot, ShieldCheck, Zap, Globe } from "lucide-react";
+
+const FEATURES = [
   {
-    title: "Smart Job Matching",
-    description: "Our AI analyzes your skills and matches you with roles that perfectly align with your career goals.",
-    icon: Target,
+    icon: Cpu,
+    title: "Groq Agentic AI Search",
+    desc: "Uses Groq Llama 3.3 70B LLM to understand candidate skill depth and match roles accurately based on intent.",
+    accent: "bg-[#2563EB]/10 text-[#2563EB]",
   },
   {
-    title: "AI Resume Analysis",
-    description: "Upload your resume and get instant feedback, ATS scores, and actionable improvement suggestions.",
-    icon: FileText,
+    icon: FileCheck2,
+    title: "ATS Resume Analyzer",
+    desc: "Extracts key technical competencies, computes ATS readiness scores, and provides immediate optimization tips.",
+    accent: "bg-[#8B5CF6]/10 text-[#8B5CF6]",
   },
   {
-    title: "Career Roadmaps",
-    description: "Generate personalized learning paths to bridge the gap between your current skills and your dream job.",
+    icon: Bot,
+    title: "24/7 AI Career Coach",
+    desc: "Integrated conversational assistant ready to guide salary negotiations, interview prep, and career pathing.",
+    accent: "bg-[#8B5CF6]/10 text-[#8B5CF6]",
+  },
+  {
     icon: Zap,
+    title: "One-Click AI Cover Letter",
+    desc: "Automatically drafts personalized, professional cover letters tailored to specific job description requirements.",
+    accent: "bg-[#2563EB]/10 text-[#2563EB]",
   },
   {
-    title: "Direct Talent Connection",
-    description: "Apply to multiple curated jobs instantly with your AI-optimized profile and generated cover letters.",
-    icon: Briefcase,
-  }
-]
+    icon: ShieldCheck,
+    title: "Pre-Verified Employers",
+    desc: "Every job posting comes from verified companies and engineering managers for transparent hiring.",
+    accent: "bg-emerald-500/10 text-emerald-600",
+  },
+  {
+    icon: Globe,
+    title: "Borderless Tech Hiring",
+    desc: "Connects global talent with remote, hybrid, and relocation opportunities across top technology hubs.",
+    accent: "bg-indigo-500/10 text-indigo-600",
+  },
+];
 
 export function Features() {
   return (
-    <section className="py-24 bg-zinc-50/50 dark:bg-zinc-950/40">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="text-center mb-16 space-y-3">
-          <span className="text-xs font-bold tracking-widest text-rose-600 uppercase">
-            WHY CAREERPILOT AI
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB] bg-[#F4F7FE] border border-[#E2E8F0] px-3.5 py-1.5 rounded-full">
+            Platform Capabilities
           </span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-            Build your team <span className="font-serif-italic text-rose-600 font-normal">at startup speed.</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1E293B] tracking-tight">
+            Engineered for Modern Tech Talent
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-normal">
-            Everything candidate-first and recruiter-ready powered by Gemini & Groq AI models.
+          <p className="text-[#64748B] text-base font-medium">
+            Everything you need to navigate job search, resume scoring, and technical interviews with AI precision.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="h-full border-rose-100 dark:border-zinc-800 bg-card rounded-3xl p-2 hover:border-rose-300 dark:hover:border-rose-900 transition-all hover:shadow-xl group">
-                <CardHeader>
-                  <div className="h-12 w-12 rounded-2xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 border border-rose-100 dark:border-rose-900 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                    <feature.icon className="h-6 w-6 text-rose-600" />
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {FEATURES.map((feature, idx) => {
+            const Icon = feature.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-8 hover:-translate-y-1 hover:shadow-xl hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className={`h-12 w-12 rounded-2xl ${feature.accent} flex items-center justify-center mb-6`}>
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <CardTitle className="text-xl font-extrabold">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm leading-relaxed text-muted-foreground font-normal">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  <h3 className="text-xl font-bold text-[#1E293B] mb-3">{feature.title}</h3>
+                  <p className="text-sm text-[#64748B] leading-relaxed font-medium">{feature.desc}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
-  )
+  );
 }
-

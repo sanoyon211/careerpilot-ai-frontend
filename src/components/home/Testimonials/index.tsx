@@ -1,76 +1,72 @@
-import { Card, CardContent, CardHeader } from "@/components/common/Card";
-import { Star, ShieldCheck } from "lucide-react";
+"use client";
 
-const testimonials = [
+import { Star, Quote } from "lucide-react";
+
+const TESTIMONIALS = [
   {
-    id: 1,
-    name: "Sarah Jenkins",
+    quote: "CareerPilot AI's resume match feature analyzed my technical background and recommended roles I wouldn't have found manually. Landed my Senior Fullstack role in 2 weeks!",
+    author: "Alex Morgan",
     role: "Senior Full Stack Engineer",
-    company: "Vercel",
-    content: "CareerPilot AI completely transformed my job search. The Groq LLM resume analyzer caught critical ATS optimization gaps I'd been making. Landed my lead role in 3 weeks!",
-    initials: "SJ",
+    company: "Vercel Partner",
+    stars: 5,
   },
   {
-    id: 2,
-    name: "Michael Chen",
-    role: "AI Infrastructure Lead",
-    company: "Stripe",
-    content: "The intent-based agentic search algorithm is incredible. Instead of scrolling through hundreds of generic postings, I matched directly with 5 high-impact engineering roles.",
-    initials: "MC",
+    quote: "As a technical recruiter, pre-screening 500+ candidates used to take days. Groq Agentic AI ranks candidate skills with remarkable precision.",
+    author: "Sarah Jenkins",
+    role: "Head of Talent",
+    company: "CloudScale Systems",
+    stars: 5,
   },
   {
-    id: 3,
-    name: "Elena Rodriguez",
-    role: "Staff Product Designer",
-    company: "Figma",
-    content: "The AI Career Coach and real-time candidate pipeline gave me complete clarity during salary negotiation and interview prep. Hands down the best career platform.",
-    initials: "ER",
+    quote: "The 24/7 AI Chat Coach gave me exact salary band insights and system design interview tips that boosted my confidence during final rounds.",
+    author: "David Chen",
+    role: "DevOps Architect",
+    company: "DataEngine Global",
+    stars: 5,
   },
 ];
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
-            Loved by professionals worldwide.
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-3.5 py-1.5 rounded-full">
+            User Success Stories
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1E293B] tracking-tight">
+            Trusted by Talent & Employers
           </h2>
-          <p className="text-base text-muted-foreground font-normal">
-            Hear from software engineers who accelerated their career trajectory with CareerPilot AI.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="bg-white dark:bg-[#161617] border border-black/[0.06] dark:border-white/[0.08] rounded-[28px] p-8 flex flex-col justify-between">
+        <div className="grid md:grid-cols-3 gap-8">
+          {TESTIMONIALS.map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+            >
               <div>
-                <CardHeader className="p-0 flex flex-row items-center gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-full bg-[#0071e3] text-white flex items-center justify-center font-bold text-base shadow-sm">
-                    {testimonial.initials}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-base text-foreground tracking-tight flex items-center gap-1.5">
-                      {testimonial.name} <ShieldCheck className="h-4 w-4 text-emerald-500" />
-                    </h4>
-                    <p className="text-xs text-muted-foreground font-normal">
-                      {testimonial.role} • {testimonial.company}
-                    </p>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="p-0">
-                  <div className="flex gap-1 mb-4">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-normal">
-                    "{testimonial.content}"
-                  </p>
-                </CardContent>
+                <div className="flex items-center gap-1 mb-6 text-amber-500">
+                  {Array.from({ length: item.stars }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-amber-400" />
+                  ))}
+                </div>
+                <Quote className="h-8 w-8 text-[#2563EB]/20 mb-3" />
+                <p className="text-sm text-[#1E293B] font-medium leading-relaxed mb-6">
+                  "{item.quote}"
+                </p>
               </div>
-            </Card>
+
+              <div className="pt-4 border-t border-[#E2E8F0] flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-[#2563EB] text-white font-extrabold flex items-center justify-center text-sm shadow-xs">
+                  {item.author.charAt(0)}
+                </div>
+                <div>
+                  <h4 className="font-extrabold text-sm text-[#1E293B]">{item.author}</h4>
+                  <p className="text-xs text-[#64748B] font-semibold">{item.role} • {item.company}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -8,6 +8,8 @@ import { useLoginMutation } from '@/redux/api/authApi';
 import { useAppDispatch } from '@/redux/hooks';
 import { setCredentials } from '@/redux/slices/authSlice';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/common/Button';
+import { Input } from '@/components/common/Input';
 
 export function LoginForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
@@ -33,39 +35,37 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-6 bg-white rounded shadow-md">
-      <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-      {errorMsg && <div className="text-red-500 text-sm text-center mb-4">{errorMsg}</div>}
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-8 bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] shadow-xs">
+      <h2 className="text-2xl font-extrabold text-center text-[#1E293B] mb-6">Login to CareerPilot</h2>
+      {errorMsg && <div className="text-red-500 text-xs font-bold text-center mb-4 p-2 bg-red-50 rounded-xl border border-red-200">{errorMsg}</div>}
       
-      <div>
-        <label className="block text-sm font-medium mb-1">Email</label>
-        <input 
+      <div className="space-y-1">
+        <label className="block text-xs font-bold uppercase tracking-wider text-[#64748B]">Email Address</label>
+        <Input 
           {...register('email')}
           type="email" 
-          className="w-full p-2 border rounded"
           placeholder="Enter your email"
         />
-        {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+        {errors.email && <span className="text-red-500 text-xs font-medium">{errors.email.message}</span>}
       </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">Password</label>
-        <input 
+      <div className="space-y-1">
+        <label className="block text-xs font-bold uppercase tracking-wider text-[#64748B]">Password</label>
+        <Input 
           {...register('password')}
           type="password" 
-          className="w-full p-2 border rounded"
           placeholder="Enter your password"
         />
-        {errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>}
+        {errors.password && <span className="text-red-500 text-xs font-medium">{errors.password.message}</span>}
       </div>
 
-      <button 
+      <Button 
         type="submit" 
-        disabled={isLoading}
-        className="w-full bg-blue-600 text-white p-2 rounded mt-4 hover:bg-blue-700 disabled:opacity-50"
+        isLoading={isLoading}
+        className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white mt-4 font-extrabold rounded-xl"
       >
-        {isLoading ? 'Logging in...' : 'Login'}
-      </button>
+        Sign In
+      </Button>
     </form>
   );
 }

@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
+  variable: "--font-jakarta",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "CareerPilot AI | Where Great Companies Meet Great Talent",
-  description: "AI-powered career platform for job seekers and recruiters.",
+  title: "CareerPilot AI | Intelligent Autonomous Career Copilot",
+  description: "AI-powered career platform combining Groq Agentic AI with human-centric recruitment.",
 };
 
 import { Providers } from "@/redux/provider";
@@ -27,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} ${inter.className} antialiased min-h-screen bg-background font-sans`}>
+    <html lang="en" className="light" style={{ colorScheme: "light" }}>
+      <body className={`${plusJakartaSans.variable} font-sans antialiased min-h-screen bg-white text-[#1E293B]`}>
         <Providers>
           <SweetAlertProvider>{children}</SweetAlertProvider>
         </Providers>
@@ -36,4 +31,3 @@ export default function RootLayout({
     </html>
   );
 }
-

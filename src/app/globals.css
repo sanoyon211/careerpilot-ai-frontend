@@ -1,117 +1,116 @@
 @import "tailwindcss";
 
 @theme {
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
+  --color-border: #E2E8F0;
+  --color-input: #E2E8F0;
+  --color-ring: #2563EB;
+  --color-background: #FFFFFF;
+  --color-foreground: #1E293B;
 
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-foreground: #FFFFFF;
 
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-ai-purple: #8B5CF6;
+  --color-ai-purple-hover: #7C3AED;
+  --color-ai-purple-light: #F3E8FF;
 
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-secondary: #F4F7FE;
+  --color-secondary-foreground: #1E293B;
 
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted: #F4F7FE;
+  --color-muted-foreground: #64748B;
 
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent: #F4F7FE;
+  --color-accent-foreground: #2563EB;
 
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: #F4F7FE;
+  --color-card-foreground: #1E293B;
 
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 4px);
-  --radius-sm: calc(var(--radius) - 8px);
+  --radius-lg: 1.25rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.75rem;
 }
 
 @layer base {
   :root {
-    /* Wellfound Light Mode - Crisp Canvas with Vibrant Rose Magenta */
-    --background: 0 0% 98.4%; /* #FAFAFA Soft Off-White */
-    --foreground: 240 10% 8%; /* #121217 Slate Onyx */
-    --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 240 10% 8%;
+    /* Exact Color Palette (Strict Light Mode) */
+    --background: 0 0% 100%; /* #FFFFFF Pure White */
+    --foreground: 222 47% 17%; /* #1E293B Dark Slate */
+    
+    --card: 222 60% 98%; /* #F4F7FE Soft Blue-Gray */
+    --card-foreground: 222 47% 17%; /* #1E293B */
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 8%;
-    --primary: 345 82% 50%; /* #E11D48 Hot Magenta Pink */
+    --popover-foreground: 222 47% 17%;
+    
+    --primary: 221 83% 53%; /* #2563EB Royal Blue */
     --primary-foreground: 0 0% 100%;
-    --secondary: 345 100% 97%; /* #FFF0F5 Soft Blush Pink */
-    --secondary-foreground: 345 82% 40%;
-    --muted: 240 4.8% 95.9%; /* #F4F4F6 Soft Gray */
-    --muted-foreground: 240 3.8% 46%; /* #71717A Zinc Gray */
-    --accent: 345 100% 96%;
-    --accent-foreground: 345 82% 40%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 240 5.9% 90%; /* #E4E4E7 Divider */
-    --input: 240 5.9% 90%;
-    --ring: 345 82% 50%;
-    --radius: 1.5rem; /* Extra Rounded Cards & Elements */
-  }
+    
+    --ai-purple: 262 83% 66%; /* #8B5CF6 Vibrant Purple */
+    --ai-purple-foreground: 0 0% 100%;
 
-  .dark {
-    /* Wellfound Dark Mode - Obsidian Deep Slate */
-    --background: 224 25% 6%; /* #0A0D14 Obsidian Dark */
-    --foreground: 0 0% 98%;
-    --card: 224 20% 9%; /* #10141E Dark Slate Card */
-    --card-foreground: 0 0% 98%;
-    --popover: 224 20% 9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 345 82% 53%; /* #E11D48 Vibrant Magenta */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 224 20% 13%; /* #181E2C */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 224 20% 13%;
-    --muted-foreground: 220 9% 68%;
-    --accent: 224 20% 13%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 40%;
+    --secondary: 222 60% 98%; /* #F4F7FE */
+    --secondary-foreground: 221 83% 53%;
+    
+    --muted: 222 60% 98%;
+    --muted-foreground: 215 16% 47%; /* #64748B */
+    
+    --accent: 222 60% 98%;
+    --accent-foreground: 221 83% 53%;
+    
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 224 15% 16%; /* #1E2536 */
-    --input: 224 15% 16%;
-    --ring: 345 82% 53%;
+    
+    --border: 214 32% 91%; /* #E2E8F0 */
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 1.25rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: #E2E8F0;
+  }
+  html {
+    color-scheme: light;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-rose-500/20 selection:text-rose-600;
-    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #FFFFFF;
+    color: #1E293B;
+    font-family: var(--font-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     letter-spacing: -0.015em;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Custom Serif Italic Accent Class for Wellfound Headlines */
-.font-serif-italic {
-  font-family: var(--font-serif), Georgia, Cambria, "Times New Roman", serif;
-  font-style: italic;
+/* Custom Soft Glass and Shadow Effects */
+.card-soft {
+  background-color: #F4F7FE;
+  border: 1px solid #E2E8F0;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Wellfound Card & Glass Effects */
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border: 1px solid rgba(225, 29, 72, 0.08);
+.card-soft:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(37, 99, 235, 0.08);
+  border-color: #CBD5E1;
 }
 
-.dark .glass-morphism {
-  background: rgba(10, 13, 20, 0.88);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.card-ai-purple {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(244, 247, 254, 1) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 1.5rem;
+}
+
+/* Bento Grid Helper Classes */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
 }
 
 /* Custom Sleek Scrollbar */
@@ -120,14 +119,14 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #F4F7FE;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(225, 29, 72, 0.25);
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(225, 29, 72, 0.45);
+  background: #2563EB;
 }
 
 button {

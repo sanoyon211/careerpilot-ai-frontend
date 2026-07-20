@@ -1,22 +1,26 @@
-import { Users, Briefcase, FileCheck, Award } from "lucide-react";
+"use client";
 
-const stats = [
-  { id: 1, name: "Active Candidates", value: "2.4M+", icon: Users },
-  { id: 2, name: "AI Position Matches", value: "150K+", icon: Briefcase },
-  { id: 3, name: "Resumes Evaluated", value: "850K+", icon: FileCheck },
-  { id: 4, name: "AI Match Precision", value: "94.8%", icon: Award },
-];
+import { useGetJobsQuery } from "@/redux/api/jobsApi";
 
 export function Statistics() {
+  const { data: jobsResponse } = useGetJobsQuery({ agenticSearch: true });
+  const liveJobsCount = jobsResponse?.data?.length || 0;
+
+  const STATS = [
+    { value: `${liveJobsCount}+`, label: "Active Jobs Verified" },
+    { value: "2.4M+", label: "Job Seekers Matched" },
+    { value: "94%", label: "AI Precision Rate" },
+    { value: "120+", label: "Global Tech Locations" },
+  ];
+
   return (
-    <section className="bg-[#000000] text-white py-24 border-y border-white/10">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map((stat) => (
-            <div key={stat.id} className="flex flex-col items-center justify-center p-6 rounded-3xl bg-[#161617] border border-white/10">
-              <stat.icon className="h-7 w-7 text-[#0071e3] mb-3" />
-              <div className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-none">{stat.value}</div>
-              <div className="text-xs font-semibold text-slate-400 mt-3 tracking-tight">{stat.name}</div>
+    <section className="py-16 bg-[#F4F7FE] border-y border-[#E2E8F0]">
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {STATS.map((stat, idx) => (
+            <div key={idx} className="bg-white border border-[#E2E8F0] rounded-[24px] p-6 text-center shadow-xs">
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#2563EB] mb-2">{stat.value}</div>
+              <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider">{stat.label}</div>
             </div>
           ))}
         </div>

@@ -2,98 +2,99 @@
 
 import Link from "next/link";
 import { Button } from "@/components/common/Button";
-import { Card, CardContent, CardFooter } from "@/components/common/Card";
-import { MapPin, DollarSign, Zap, ArrowRight, Briefcase } from "lucide-react";
+import { MapPin, Briefcase, DollarSign, Clock, ArrowRight } from "lucide-react";
 import { useGetJobsQuery } from "@/redux/api/jobsApi";
 
 export function FeaturedJobs() {
   const { data: jobsResponse, isLoading } = useGetJobsQuery({ agenticSearch: true });
-  const jobs = jobsResponse?.data?.slice(0, 4) || [];
+  const jobs = jobsResponse?.data?.slice(0, 6) || [];
 
   return (
-    <section className="py-24 bg-background border-t border-border/50">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-600 border border-rose-200 dark:border-rose-900 mb-3">
-              <Zap className="h-3.5 w-3.5 text-rose-600" />
-              <span>Real-Time Positions</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-              Featured <span className="font-serif-italic text-rose-600 font-normal">tech positions.</span>
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB] bg-[#F4F7FE] border border-[#E2E8F0] px-3.5 py-1.5 rounded-full">
+              Live Opportunities
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1E293B] tracking-tight mt-3">
+              Featured Job Listings
             </h2>
-            <p className="mt-2 text-muted-foreground text-sm font-normal">Hand-picked active positions matched in real time.</p>
           </div>
           <Link href="/explore-jobs">
-            <Button variant="outline" className="gap-2 rounded-full font-bold text-xs border-zinc-300 dark:border-zinc-700 hover:border-rose-300">
-              Explore All Jobs <ArrowRight className="h-3.5 w-3.5 text-rose-600" />
+            <Button variant="outline" className="gap-2 text-sm">
+              View All Positions <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
         </div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="bg-card border border-rose-100 dark:border-zinc-800 rounded-3xl p-6 h-[260px] animate-pulse space-y-4">
-                <div className="h-10 w-10 bg-muted rounded-full"></div>
-                <div className="h-5 bg-muted rounded w-3/4"></div>
-                <div className="h-4 bg-muted rounded w-1/2"></div>
-                <div className="h-10 bg-muted rounded-full w-full mt-auto"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {isLoading &&
+            Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-6 animate-pulse space-y-4 h-[280px]">
+                <div className="h-10 w-10 rounded-full bg-slate-200"></div>
+                <div className="h-6 bg-slate-200 rounded w-3/4"></div>
+                <div className="h-4 bg-slate-200 rounded w-1/2"></div>
               </div>
             ))}
-          </div>
-        ) : jobs.length === 0 ? (
-          <div className="text-center py-16 bg-card border border-rose-100 dark:border-zinc-800 rounded-3xl space-y-3">
-            <p className="font-bold text-base text-foreground">No active jobs found in database</p>
-            <p className="text-xs text-muted-foreground">Post a job as a recruiter or explore the full catalog.</p>
-            <Link href="/explore-jobs" className="inline-block mt-2">
-              <Button size="sm" className="rounded-full bg-rose-600 text-white font-bold">Explore Catalog</Button>
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            {jobs.map((job) => (
-              <Card key={job._id} className="flex flex-col bg-card border border-rose-100 dark:border-zinc-800 rounded-3xl overflow-hidden group hover:border-rose-300 transition-all hover:shadow-xl">
-                <CardContent className="p-6 flex-1">
-                  <div className="flex justify-between items-start mb-5">
-                    <div className="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center font-extrabold text-xl shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform">
+
+          {!isLoading && jobs.length === 0 && (
+            <div className="col-span-full text-center py-12 bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px]">
+              <p className="font-bold text-[#1E293B]">No featured jobs available right now.</p>
+            </div>
+          )}
+
+          {!isLoading &&
+            jobs.map((job) => (
+              <div
+                key={job._id}
+                className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-6 hover:-translate-y-1 hover:shadow-xl hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="h-12 w-12 rounded-2xl bg-[#2563EB] text-white font-extrabold text-xl flex items-center justify-center shadow-xs">
                       {job.employerId?.name?.charAt(0) || "C"}
                     </div>
-                    <span className="inline-flex items-center rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-600 px-3 py-0.5 text-[11px] font-bold border border-rose-200 dark:border-rose-900">
+                    <span className="inline-flex items-center rounded-full bg-white text-[#2563EB] px-3 py-1 text-xs font-bold border border-[#E2E8F0] shadow-2xs">
                       {job.workMode || "Remote"}
                     </span>
                   </div>
 
-                  <h3 className="font-extrabold text-lg line-clamp-1 group-hover:text-rose-600 transition-colors text-foreground tracking-tight">{job.title}</h3>
-                  <p className="text-muted-foreground text-xs font-normal mb-5">{job.employerId?.name || "Verified Employer"}</p>
+                  <h3 className="font-extrabold text-lg line-clamp-1 mb-1 text-[#1E293B] group-hover:text-[#2563EB] transition-colors">
+                    {job.title}
+                  </h3>
+                  <p className="text-[#64748B] text-xs font-semibold mb-4">{job.employerId?.name || "Verified Employer"}</p>
 
-                  <div className="space-y-2.5 text-xs text-muted-foreground font-normal">
+                  <div className="space-y-2 mb-6 text-xs font-semibold text-[#64748B]">
                     <div className="flex items-center gap-2">
-                      <MapPin className="h-3.5 w-3.5 text-rose-500 shrink-0" /> {job.location || "Flexible"}
+                      <MapPin className="h-3.5 w-3.5 text-[#2563EB] shrink-0" />
+                      <span className="line-clamp-1">{job.location || "Flexible"}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Briefcase className="h-3.5 w-3.5 text-rose-500 shrink-0" /> {job.jobType}
+                      <Briefcase className="h-3.5 w-3.5 text-[#2563EB] shrink-0" /> {job.jobType}
                     </div>
                     {job.salaryRange && (
-                      <div className="flex items-center gap-2 font-extrabold text-emerald-600 dark:text-emerald-400">
+                      <div className="flex items-center text-emerald-600 font-extrabold gap-2">
                         <DollarSign className="h-3.5 w-3.5 shrink-0" /> {job.salaryRange}
                       </div>
                     )}
                   </div>
-                </CardContent>
-                <CardFooter className="p-6 pt-0">
-                  <Link href={`/jobs/${job._id}`} className="w-full">
-                    <Button className="w-full bg-rose-600 hover:bg-rose-700 text-white rounded-full font-bold text-xs py-2.5 shadow-md shadow-rose-500/20">
+                </div>
+
+                <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+                  <span className="flex items-center text-[11px] text-[#64748B] font-semibold gap-1">
+                    <Clock className="h-3 w-3" /> {new Date(job.createdAt).toLocaleDateString()}
+                  </span>
+                  <Link href={`/jobs/${job._id}`}>
+                    <Button size="sm" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-bold px-5">
                       View Position
                     </Button>
                   </Link>
-                </CardFooter>
-              </Card>
+                </div>
+              </div>
             ))}
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );
 }
-
