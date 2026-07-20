@@ -1,99 +1,107 @@
 import Link from "next/link";
-import { Sparkles, ShieldCheck, Zap, Globe, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-secondary/30 backdrop-blur-xl text-muted-foreground text-xs">
+    <footer className="bg-[#090A0F] text-zinc-400 text-xs border-t border-zinc-900">
       <div className="container mx-auto px-4 md:px-8 py-16 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {/* Brand Column */}
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="h-7 w-7 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                <Sparkles className="h-3.5 w-3.5" />
-              </div>
-              <span className="text-base font-bold tracking-tight text-foreground">
-                CareerPilot <span className="text-primary font-black">AI</span>
+              <span className="text-2xl font-extrabold tracking-tight text-white font-sans">
+                careerpilot<span className="text-rose-500 font-black">:</span><span className="text-xs font-black uppercase tracking-widest text-rose-500 bg-rose-950/80 border border-rose-800 px-2 py-0.5 rounded-full ml-1.5">AI</span>
               </span>
             </Link>
-            <p className="text-xs text-muted-foreground leading-relaxed max-w-sm font-normal">
-              Autonomous Agentic AI Career Copilot. Matching world-class talent with global engineering opportunities powered by Groq Llama 3.3 70B AI.
+            <p className="text-xs text-zinc-400 leading-relaxed max-w-sm font-normal">
+              Where great companies meet great talent. AI-powered career assistant matching world-class candidates with top tech opportunities.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Apple HIG & Groq AI Systems Active</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+              <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse" />
+              <span>CareerPilot AI Network Active</span>
             </div>
           </div>
 
-          {/* Platform Links */}
+          {/* For Job Seekers */}
           <div>
-            <h4 className="font-bold text-xs text-foreground tracking-tight mb-3">Platform</h4>
-            <ul className="space-y-2.5 font-medium">
+            <h4 className="font-bold text-xs text-white tracking-widest uppercase mb-4">FOR JOB SEEKERS</h4>
+            <ul className="space-y-3 font-medium text-xs">
               <li>
-                <Link href="/explore-jobs" className="hover:text-foreground transition-colors flex items-center gap-1">
+                <Link href="/explore-jobs" className="hover:text-rose-400 transition-colors flex items-center gap-1">
                   Explore Jobs <ArrowUpRight className="h-3 w-3 opacity-50" />
                 </Link>
               </li>
               <li>
-                <Link href="/resume" className="hover:text-foreground transition-colors">
+                <Link href="/resume" className="hover:text-rose-400 transition-colors">
                   AI Resume Match
                 </Link>
               </li>
               <li>
-                <Link href="/ai-chat" className="hover:text-foreground transition-colors">
+                <Link href="/ai-chat" className="hover:text-rose-400 transition-colors">
                   AI Career Coach
+                </Link>
+              </li>
+              <li>
+                <Link href="/ai-recommendations" className="hover:text-rose-400 transition-colors">
+                  Recommended Jobs
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Company Links */}
+          {/* For Recruiters */}
           <div>
-            <h4 className="font-bold text-xs text-foreground tracking-tight mb-3">Company</h4>
-            <ul className="space-y-2.5 font-medium">
+            <h4 className="font-bold text-xs text-white tracking-widest uppercase mb-4">FOR RECRUITERS</h4>
+            <ul className="space-y-3 font-medium text-xs">
               <li>
-                <Link href="/about" className="hover:text-foreground transition-colors">
+                <Link href="/add-job" className="hover:text-rose-400 transition-colors">
+                  Post a Job
+                </Link>
+              </li>
+              <li>
+                <Link href="/manage-jobs" className="hover:text-rose-400 transition-colors">
+                  Manage Openings
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className="hover:text-rose-400 transition-colors">
+                  Recruiter Dashboard
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="font-bold text-xs text-white tracking-widest uppercase mb-4">COMPANY</h4>
+            <ul className="space-y-3 font-medium text-xs">
+              <li>
+                <Link href="/about" className="hover:text-rose-400 transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="hover:text-foreground transition-colors">
+                <Link href="/faq" className="hover:text-rose-400 transition-colors">
                   FAQ & Support
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-foreground transition-colors">
+                <Link href="/contact" className="hover:text-rose-400 transition-colors">
                   Contact Us
                 </Link>
               </li>
             </ul>
           </div>
-
-          {/* Security & Intelligence */}
-          <div>
-            <h4 className="font-bold text-xs text-foreground tracking-tight mb-3">Architecture</h4>
-            <ul className="space-y-2.5 font-medium">
-              <li className="flex items-center gap-1.5">
-                <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> Enterprise Auth
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Zap className="h-3.5 w-3.5 text-amber-500" /> Groq Llama 3.3
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Globe className="h-3.5 w-3.5 text-primary" /> Live Socket Sync
-              </li>
-            </ul>
-          </div>
         </div>
 
-        <div className="mt-12 border-t border-border/40 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-muted-foreground gap-4 font-normal">
-          <p>Copyright © {new Date().getFullYear()} CareerPilot AI Inc. All rights reserved.</p>
+        <div className="mt-14 border-t border-zinc-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4 font-normal">
+          <p>© {new Date().getFullYear()} CareerPilot AI, Inc. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-foreground">
+            <Link href="/privacy" className="hover:text-zinc-300">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-foreground">
+            <Link href="/terms" className="hover:text-zinc-300">
               Terms of Use
             </Link>
           </div>
@@ -102,3 +110,4 @@ export function Footer() {
     </footer>
   );
 }
+

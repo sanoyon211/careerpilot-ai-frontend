@@ -65,24 +65,21 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl transition-all">
-      <div className="container mx-auto flex h-14 items-center justify-between px-4 md:px-8 max-w-7xl">
-        {/* Brand Title with Sleek Cpu Icon */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="h-7 w-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-            <Cpu className="h-4 w-4" />
-          </div>
-          <span className="text-base font-bold tracking-tight text-foreground">
-            CareerPilot <span className="text-primary font-black">AI</span>
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-200/80 dark:border-zinc-800 bg-background/90 backdrop-blur-xl transition-all">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8 max-w-7xl">
+        {/* Brand Title: Wellfound Style Logo */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="text-xl font-extrabold tracking-tight text-foreground font-sans">
+            careerpilot<span className="text-rose-600 font-black">:</span><span className="text-xs font-black uppercase tracking-widest text-rose-600 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900/50 px-1.5 py-0.5 rounded-full ml-1">AI</span>
           </span>
         </Link>
 
         {/* Desktop Links */}
-        <nav className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-tight text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold tracking-tight text-zinc-600 dark:text-zinc-300">
           <Link
             href="/explore-jobs"
-            className={`transition-colors hover:text-foreground ${
-              pathname === "/explore-jobs" ? "text-primary font-extrabold" : ""
+            className={`transition-colors hover:text-rose-600 ${
+              pathname === "/explore-jobs" ? "text-rose-600 font-bold" : ""
             }`}
           >
             Explore Jobs
@@ -91,8 +88,8 @@ export function Navbar() {
           {user && (
             <Link
               href="/dashboard"
-              className={`transition-colors hover:text-foreground ${
-                pathname === "/dashboard" ? "text-primary font-extrabold" : ""
+              className={`transition-colors hover:text-rose-600 ${
+                pathname === "/dashboard" ? "text-rose-600 font-bold" : ""
               }`}
             >
               Dashboard
@@ -103,19 +100,19 @@ export function Navbar() {
             <>
               <Link
                 href="/resume"
-                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
-                  pathname === "/resume" ? "text-primary font-extrabold" : ""
+                className={`transition-colors hover:text-rose-600 flex items-center gap-1.5 ${
+                  pathname === "/resume" ? "text-rose-600 font-bold" : ""
                 }`}
               >
                 <FileText className="h-3.5 w-3.5" /> Resume Match
               </Link>
               <Link
                 href="/ai-chat"
-                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
-                  pathname === "/ai-chat" ? "text-primary font-extrabold" : ""
+                className={`transition-colors hover:text-rose-600 flex items-center gap-1.5 ${
+                  pathname === "/ai-chat" ? "text-rose-600 font-bold" : ""
                 }`}
               >
-                <Bot className="h-3.5 w-3.5 text-primary" /> AI Coach
+                <Bot className="h-3.5 w-3.5 text-rose-600" /> AI Coach
               </Link>
             </>
           )}
@@ -124,16 +121,16 @@ export function Navbar() {
             <>
               <Link
                 href="/add-job"
-                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
-                  pathname === "/add-job" ? "text-primary font-extrabold" : ""
+                className={`transition-colors hover:text-rose-600 flex items-center gap-1.5 ${
+                  pathname === "/add-job" ? "text-rose-600 font-bold" : ""
                 }`}
               >
-                <PlusCircle className="h-3.5 w-3.5 text-emerald-500" /> Post Job
+                <PlusCircle className="h-3.5 w-3.5 text-rose-600" /> Post Job
               </Link>
               <Link
                 href="/manage-jobs"
-                className={`transition-colors hover:text-foreground flex items-center gap-1.5 ${
-                  pathname === "/manage-jobs" ? "text-primary font-extrabold" : ""
+                className={`transition-colors hover:text-rose-600 flex items-center gap-1.5 ${
+                  pathname === "/manage-jobs" ? "text-rose-600 font-bold" : ""
                 }`}
               >
                 <Briefcase className="h-3.5 w-3.5" /> Manage Jobs
@@ -143,8 +140,8 @@ export function Navbar() {
 
           <Link
             href="/about"
-            className={`transition-colors hover:text-foreground ${
-              pathname === "/about" ? "text-primary font-extrabold" : ""
+            className={`transition-colors hover:text-rose-600 ${
+              pathname === "/about" ? "text-rose-600 font-bold" : ""
             }`}
           >
             About
@@ -152,8 +149,8 @@ export function Navbar() {
 
           <Link
             href="/faq"
-            className={`transition-colors hover:text-foreground ${
-              pathname === "/faq" ? "text-primary font-extrabold" : ""
+            className={`transition-colors hover:text-rose-600 ${
+              pathname === "/faq" ? "text-rose-600 font-bold" : ""
             }`}
           >
             FAQ
@@ -161,21 +158,21 @@ export function Navbar() {
         </nav>
 
         {/* Right User Actions */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           {user ? (
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-2 p-1 rounded-full hover:bg-secondary transition-colors focus:outline-none cursor-pointer"
+                className="flex items-center gap-2 p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors focus:outline-none cursor-pointer border border-zinc-200 dark:border-zinc-700"
               >
                 {user.photoURL ? (
                   <img
                     src={user.photoURL}
                     alt={user.name}
-                    className="h-8 w-8 rounded-full object-cover border"
+                    className="h-7 w-7 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="h-8 w-8 rounded-full bg-primary text-white font-extrabold flex items-center justify-center text-xs">
+                  <div className="h-7 w-7 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs">
                     {getInitials(user.name)}
                   </div>
                 )}
@@ -226,15 +223,20 @@ export function Navbar() {
               )}
             </div>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <Link href="/login">
-                <Button variant="ghost" size="sm" className="text-xs font-semibold">
-                  Sign In
+                <Button variant="outline" size="sm" className="text-xs font-semibold rounded-full border-zinc-300">
+                  Log in
                 </Button>
               </Link>
               <Link href="/register">
-                <Button size="sm" className="text-xs font-semibold bg-primary text-white hover:bg-primary/90">
-                  Get Started
+                <Button size="sm" className="text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white rounded-full shadow-md shadow-rose-500/20">
+                  For job seekers
+                </Button>
+              </Link>
+              <Link href="/register?role=employer">
+                <Button variant="secondary" size="sm" className="text-xs font-semibold bg-zinc-900 text-white hover:bg-zinc-800 rounded-full">
+                  Recruiter
                 </Button>
               </Link>
             </div>

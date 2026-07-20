@@ -36,8 +36,8 @@ export default function AppliedJobsPage() {
   return (
     <div className="max-w-5xl space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Applied Jobs History</h1>
-        <p className="text-muted-foreground mt-1">Track the real-time status and progress of all your job applications.</p>
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">Applied Jobs History</h1>
+        <p className="text-muted-foreground mt-1 text-sm">Track the real-time status and progress of all your job applications.</p>
       </div>
 
       <div className="bg-card border rounded-3xl overflow-hidden shadow-xs">
@@ -50,7 +50,7 @@ export default function AppliedJobsPage() {
                 variant={statusFilter === status ? "default" : "outline"}
                 size="sm"
                 onClick={() => setStatusFilter(status)}
-                className="rounded-full text-xs font-bold shrink-0"
+                className="rounded-full text-xs font-extrabold shrink-0"
               >
                 {status}
               </Button>
@@ -62,22 +62,22 @@ export default function AppliedJobsPage() {
         <div className="divide-y">
           {isLoading && (
             <div className="p-12 text-center text-muted-foreground">
-              <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent mx-auto mb-2" />
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-rose-600 border-t-transparent mx-auto mb-2" />
               Loading your application history...
             </div>
           )}
 
           {!isLoading && filteredApps.length === 0 && (
             <div className="p-12 text-center bg-card">
-              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
+              <div className="mx-auto w-16 h-16 bg-rose-50 dark:bg-rose-950/60 rounded-full flex items-center justify-center mb-4 text-rose-600 border border-rose-100">
                 <Building2 className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-2">No applications found</h3>
-              <p className="text-muted-foreground text-sm max-w-sm mx-auto mb-6">
+              <h3 className="text-xl font-extrabold mb-2">No applications found</h3>
+              <p className="text-muted-foreground text-sm max-w-sm mx-auto mb-6 font-normal">
                 You haven't submitted any job applications under this status yet.
               </p>
               <Link href="/explore-jobs">
-                <Button className="bg-primary hover:bg-primary/90 rounded-xl">Explore Open Positions</Button>
+                <Button className="bg-rose-600 hover:bg-rose-700 text-white rounded-full font-extrabold shadow-md shadow-rose-500/20">Explore Open Positions</Button>
               </Link>
             </div>
           )}
@@ -89,7 +89,7 @@ export default function AppliedJobsPage() {
               <div key={app._id} className="p-4 sm:p-6 hover:bg-muted/30 transition-colors">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="flex items-start gap-4 flex-1">
-                    <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-xl font-bold text-primary shrink-0 border">
+                    <div className="h-12 w-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center text-xl font-extrabold shrink-0 shadow-md shadow-rose-500/20">
                       {job?.title?.charAt(0) || "J"}
                     </div>
                     <div>

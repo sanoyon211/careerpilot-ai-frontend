@@ -39,27 +39,27 @@ export default function AddJobPage() {
 
   return (
     <div className="max-w-4xl space-y-6">
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Post a New Job</h1>
-          <p className="text-muted-foreground mt-1">Fill in the details below to create a new job listing.</p>
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">Post a New Job</h1>
+          <p className="text-muted-foreground mt-1 text-sm font-normal">Fill in the details below to publish a new job listing.</p>
         </div>
-        <Button variant="outline" className="gap-2 text-primary border-primary/20 bg-primary/5 hover:bg-primary/10" onClick={() => setShowAiEnhance(true)}>
-          <Sparkles className="h-4 w-4" /> AI Enhance
+        <Button variant="outline" className="gap-2 text-rose-600 border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/50 hover:bg-rose-100 rounded-full font-extrabold text-xs" onClick={() => setShowAiEnhance(true)}>
+          <Sparkles className="h-4 w-4 text-rose-600" /> AI Enhance
         </Button>
       </div>
 
       {showAiEnhance && (
-        <div className="bg-gradient-to-br from-primary/10 to-blue-500/10 border border-primary/20 rounded-2xl p-6 shadow-sm flex gap-4">
-          <Sparkles className="h-8 w-8 text-primary shrink-0" />
+        <div className="bg-rose-50/80 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-3xl p-6 shadow-sm flex gap-4">
+          <Sparkles className="h-8 w-8 text-rose-600 shrink-0" />
           <div>
-            <h3 className="font-bold text-primary mb-1">AI Job Description Generator</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Not sure how to write the perfect description? Just type the job title and key requirements, and our AI will generate a professional, bias-free job post for you.
+            <h3 className="font-extrabold text-rose-600 mb-1">AI Job Description Generator</h3>
+            <p className="text-sm text-muted-foreground mb-4 font-normal">
+              Not sure how to write the perfect description? Type the job title and key requirements, and our AI will generate a professional job post for you.
             </p>
             <div className="flex gap-2">
-              <input type="text" placeholder="e.g. React Developer with 3 years experience" className="flex-1 rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-              <Button size="sm">Generate</Button>
+              <input type="text" placeholder="e.g. React Developer with 3 years experience" className="flex-1 rounded-full border bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500" />
+              <Button size="sm" className="rounded-full bg-rose-600 text-white font-extrabold">Generate</Button>
             </div>
           </div>
         </div>

@@ -13,11 +13,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", asChild = false, isLoading, disabled, children, ...props }, ref) => {
     const Comp = asChild ? "span" : "button";
 
-    let variantClasses = "bg-primary text-primary-foreground hover:opacity-90 shadow-sm active:scale-[0.98]";
+    let variantClasses = "bg-primary text-primary-foreground hover:bg-rose-600 shadow-md shadow-rose-500/20 active:scale-[0.98]";
     if (variant === "destructive") variantClasses = "bg-red-600 text-white hover:bg-red-700 shadow-sm active:scale-[0.98]";
-    if (variant === "outline") variantClasses = "border border-border/80 bg-card/60 hover:bg-secondary text-foreground active:scale-[0.98]";
-    if (variant === "secondary") variantClasses = "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-[0.98]";
-    if (variant === "ghost") variantClasses = "hover:bg-secondary text-foreground";
+    if (variant === "outline") variantClasses = "border border-zinc-300 dark:border-zinc-700 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-foreground active:scale-[0.98]";
+    if (variant === "secondary") variantClasses = "bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 active:scale-[0.98]";
+    if (variant === "ghost") variantClasses = "hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-zinc-800 text-foreground";
     if (variant === "link") variantClasses = "text-primary underline-offset-4 hover:underline";
 
     let sizeClasses = "h-10 px-5 py-2 rounded-full text-sm font-semibold";

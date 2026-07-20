@@ -163,11 +163,10 @@ export default function DashboardLayout({
     <div className="min-h-screen bg-muted/20 flex flex-col md:flex-row">
       {/* Mobile Topbar */}
       <div className="md:hidden bg-card border-b p-4 flex items-center justify-between sticky top-0 z-20 shadow-xs">
-        <Link
-          href="/"
-          className="font-extrabold text-xl bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent"
-        >
-          CareerPilot AI
+        <Link href="/" className="flex items-center gap-1">
+          <span className="font-extrabold text-xl tracking-tight text-foreground font-sans">
+            careerpilot<span className="text-rose-600 font-black">:</span><span className="text-xs font-black uppercase text-rose-600 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 px-1.5 py-0.5 rounded-full ml-1">AI</span>
+          </span>
         </Link>
         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-muted-foreground">
           {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -183,28 +182,25 @@ export default function DashboardLayout({
       >
         {/* Header Logo */}
         <div className="p-6 hidden md:block border-b">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="bg-primary/10 text-primary p-2 rounded-xl">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-primary via-indigo-600 to-blue-600 bg-clip-text text-transparent">
-              CareerPilot AI
+          <Link href="/" className="flex items-center gap-1 group">
+            <span className="font-extrabold text-xl tracking-tight text-foreground font-sans">
+              careerpilot<span className="text-rose-600 font-black">:</span><span className="text-xs font-black uppercase text-rose-600 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 px-1.5 py-0.5 rounded-full ml-1">AI</span>
             </span>
           </Link>
         </div>
 
         {/* User Card in Sidebar */}
-        <div className="p-4 mx-3 my-3 bg-secondary border border-border rounded-2xl flex items-center gap-3">
+        <div className="p-4 mx-3 my-3 bg-rose-50/50 dark:bg-zinc-900/60 border border-rose-100 dark:border-zinc-800 rounded-2xl flex items-center gap-3">
           {user.photoURL ? (
             <img src={user.photoURL} alt={user.name} className="h-10 w-10 rounded-full object-cover border" />
           ) : (
-            <div className="h-10 w-10 rounded-full bg-primary text-white font-bold flex items-center justify-center text-xs shrink-0">
+            <div className="h-10 w-10 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs shrink-0 shadow-md shadow-rose-500/20">
               {getInitials(user.name)}
             </div>
           )}
           <div className="overflow-hidden">
-            <p className="font-bold text-xs truncate text-foreground">{user.name}</p>
-            <span className="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 border border-indigo-500/20">
+            <p className="font-extrabold text-xs truncate text-foreground">{user.name}</p>
+            <span className="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-rose-100 dark:bg-rose-950/80 text-rose-600 border border-rose-200 dark:border-rose-900">
               {isEmployer ? "Employer" : "Job Seeker"}
             </span>
           </div>
