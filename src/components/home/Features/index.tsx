@@ -47,7 +47,7 @@ export function Features() {
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-4 py-1.5 rounded-full shadow-2xs">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-4 py-1.5 rounded-full">
             Platform Capabilities
           </span>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight">
@@ -58,16 +58,16 @@ export function Features() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {FEATURES.map((feature, idx) => {
             const Icon = feature.icon;
             return (
               <div
                 key={idx}
-                className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 hover:-translate-y-1 hover:shadow-xl hover:border-[#8B5CF6]/30 transition-all duration-300 flex flex-col justify-between shadow-subtle"
+                className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className={`h-14 w-14 rounded-2xl ${feature.accent} flex items-center justify-center mb-8 shadow-2xs`}>
+                  <div className={`h-14 w-14 rounded-2xl ${feature.accent} flex items-center justify-center mb-8`}>
                     <Icon className="h-7 w-7" />
                   </div>
                   <h3 className="text-2xl font-extrabold text-[#0F172A] mb-3">{feature.title}</h3>

@@ -67,12 +67,12 @@ export default function ProfilePage() {
         </Button>
       </div>
 
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10">
         
         {/* Avatar Section */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 pb-8 border-b border-[#E2E8F0]">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 pb-8 border-b border-[#E5E7EB]">
           <div className="relative">
-            <div className="h-24 w-24 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-3xl font-extrabold border-4 border-white shadow-md shadow-blue-500/20">
+            <div className="h-24 w-24 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-3xl font-extrabold border-4 border-white">
               {user?.name?.charAt(0) || "U"}
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function ProfilePage() {
                   rows={4}
                   disabled={!isEditing}
                   placeholder="Tell us about your technical experience and career background..."
-                  className="flex w-full rounded-2xl border border-[#E2E8F0] bg-white px-4 py-3 text-sm font-medium text-[#1E293B] placeholder:text-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] disabled:opacity-50 shadow-xs resize-y"
+                  className="flex w-full rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-medium text-[#1E293B] placeholder:text-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] disabled:opacity-50 resize-y"
                 />
               </div>
               <div className="space-y-1">

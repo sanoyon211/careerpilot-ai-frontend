@@ -7,7 +7,7 @@ import { Button } from "@/components/common/Button";
 export function DashboardHealthSidebar() {
   return (
     <div className="space-y-6">
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
         <h3 className="font-extrabold text-base text-[#1E293B] mb-4 flex items-center gap-2">
           <TrendingUp className="h-4.5 w-4.5 text-[#2563EB]" /> Workspace Health
         </h3>
@@ -17,7 +17,7 @@ export function DashboardHealthSidebar() {
             <span className="text-[#1E293B]">Verification Status</span>
             <span className="text-emerald-600 font-extrabold">Active</span>
           </div>
-          <div className="h-2.5 w-full bg-white border border-[#E2E8F0] rounded-full overflow-hidden">
+          <div className="h-2.5 w-full bg-white border border-[#E5E7EB] rounded-full overflow-hidden">
             <div className="h-full bg-emerald-500 rounded-full w-[100%]"></div>
           </div>
         </div>

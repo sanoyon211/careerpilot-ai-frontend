@@ -120,7 +120,7 @@ export default function ManageJobsPage() {
         </Link>
       </div>
 
-      <div className="bg-card border rounded-3xl shadow-xs overflow-hidden">
+      <div className="bg-card border rounded-3xl overflow-hidden">
         {/* Toolbar */}
         <div className="p-4 border-b flex flex-col sm:flex-row justify-between gap-4 bg-muted/10">
           <div className="relative flex-1 max-w-sm">
@@ -280,7 +280,7 @@ export default function ManageJobsPage() {
       {/* Edit Job Modal */}
       {editingJob && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-card border rounded-3xl p-6 w-full max-w-lg shadow-2xl space-y-5">
+          <div className="bg-card border rounded-3xl p-6 w-full max-w-lg space-y-5">
             <div className="flex justify-between items-center border-b pb-3">
               <h2 className="text-xl font-bold">Edit Job Details</h2>
               <button onClick={() => setEditingJob(null)} className="p-1 text-muted-foreground hover:text-foreground">
@@ -382,7 +382,7 @@ export default function ManageJobsPage() {
       {/* Promote Job Modal */}
       {promotingJob && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-card border rounded-3xl p-6 w-full max-w-md shadow-2xl space-y-4 text-center">
+          <div className="bg-card border rounded-3xl p-6 w-full max-w-md space-y-4 text-center">
             <div className="h-12 w-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mx-auto">
               <Sparkles className="h-6 w-6" />
             </div>

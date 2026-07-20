@@ -22,8 +22,8 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
         </Link>
       </div>
 
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] overflow-hidden shadow-subtle mb-8">
-        <div className="divide-y divide-[#E2E8F0]">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] overflow-hidden mb-8">
+        <div className="divide-y divide-[#E5E7EB]">
           {employerJobs.length > 0 ? (
             employerJobs.map((job: any) => (
               <div key={job._id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 hover:bg-white transition-colors">
@@ -38,7 +38,7 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
                 </div>
 
                 <div className="flex items-center gap-3 self-end sm:self-auto">
-                  <span className="text-xs font-extrabold px-3.5 py-1.5 rounded-full bg-white text-[#2563EB] border border-[#E2E8F0] shadow-2xs">
+                  <span className="text-xs font-extrabold px-3.5 py-1.5 rounded-full bg-white text-[#2563EB] border border-[#E5E7EB]">
                     {job.applicantsCount || 0} Applicants
                   </span>
                   <Link href={`/manage-jobs/${job._id}/applications`}>
@@ -59,15 +59,15 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
 
       {chartData && (
         <div className="grid sm:grid-cols-2 gap-8">
-          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle">
+          <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
             <h3 className="font-extrabold text-base text-[#1E293B] mb-6">Job Views & Applications</h3>
             <div className="h-60 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData.viewsData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
                   <XAxis dataKey="name" axisLine={false} tickLine={false} fontSize={11} stroke="#64748B" />
                   <YAxis axisLine={false} tickLine={false} fontSize={11} stroke="#64748B" />
-                  <Tooltip contentStyle={{ borderRadius: "12px", border: "1px solid #E2E8F0", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }} />
+                  <Tooltip contentStyle={{ borderRadius: "12px", border: "1px solid #E5E7EB", boxShadow: "none" }} />
                   <Legend iconType="circle" />
                   <Line type="monotone" dataKey="views" stroke="#2563EB" strokeWidth={3} dot={false} />
                   <Line type="monotone" dataKey="applications" stroke="#8B5CF6" strokeWidth={3} dot={false} />
@@ -76,7 +76,7 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
             </div>
           </div>
 
-          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle">
+          <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8">
             <h3 className="font-extrabold text-base text-[#1E293B] mb-6">Candidate Pipeline Breakdown</h3>
             <div className="h-60 w-full flex justify-center">
               <ResponsiveContainer width="100%" height="100%">
@@ -90,7 +90,7 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
                     paddingAngle={5}
                     dataKey="value"
                   />
-                  <Tooltip contentStyle={{ borderRadius: "12px", border: "1px solid #E2E8F0", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }} />
+                  <Tooltip contentStyle={{ borderRadius: "12px", border: "1px solid #E5E7EB", boxShadow: "none" }} />
                   <Legend iconType="circle" verticalAlign="bottom" />
                 </PieChart>
               </ResponsiveContainer>

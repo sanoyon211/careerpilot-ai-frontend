@@ -34,7 +34,7 @@ export function ContactForm() {
 
   return (
     <div className="lg:col-span-2">
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10">
         {isSubmitted ? (
           <div className="text-center py-16 space-y-4">
             <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-emerald-500/10 text-emerald-600 mb-4 border border-emerald-500/20">
@@ -106,12 +106,12 @@ export function ContactForm() {
                 required
                 value={formData.message}
                 onChange={handleChange}
-                className="flex min-h-[160px] w-full rounded-2xl border border-[#E2E8F0] bg-white px-4 py-3.5 text-sm font-semibold text-[#0F172A] placeholder:text-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] shadow-xs resize-y"
+                className="flex min-h-[160px] w-full rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3.5 text-sm font-semibold text-[#0F172A] placeholder:text-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] resize-y"
                 placeholder="Write your message here..."
               />
             </div>
 
-            <Button type="submit" isLoading={isSubmitting} size="lg" className="w-full sm:w-auto px-8 gap-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold shadow-md shadow-purple-600/20 py-3.5">
+            <Button type="submit" isLoading={isSubmitting} size="lg" className="w-full sm:w-auto px-8 gap-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold py-3.5">
               <Send className="h-4.5 w-4.5" /> Send Message
             </Button>
           </form>

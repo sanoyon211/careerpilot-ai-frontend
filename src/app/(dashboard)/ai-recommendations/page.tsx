@@ -37,8 +37,8 @@ export default function AIRecommendationsPage() {
           
           <div className="space-y-4">
             {RECOMMENDED_JOBS.map(job => (
-              <div key={job.id} className="bg-card border border-blue-500/20 rounded-2xl p-6 shadow-sm relative overflow-hidden group">
-                <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1.5 rounded-bl-xl shadow-sm">
+              <div key={job.id} className="bg-card border border-blue-500/20 rounded-2xl p-6 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1.5 rounded-bl-xl">
                   {job.match}% Match
                 </div>
                 
@@ -70,7 +70,7 @@ export default function AIRecommendationsPage() {
           
           <div className="space-y-4">
             {RECOMMENDED_SKILLS.map((skill, idx) => (
-              <div key={idx} className="bg-card border border-yellow-500/20 rounded-2xl p-6 shadow-sm">
+              <div key={idx} className="bg-card border border-yellow-500/20 rounded-2xl p-6">
                 
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-bold text-lg">{skill.name}</h3>

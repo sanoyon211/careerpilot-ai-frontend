@@ -139,7 +139,7 @@ export default function ResumePage() {
     <div className="max-w-6xl space-y-8 pb-10">
       
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-[#F4F7FE] text-[#1E293B] p-8 sm:p-10 rounded-[28px] shadow-subtle border border-[#E2E8F0]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-[#FAFAFA] text-[#1E293B] p-8 sm:p-10 rounded-[28px] border border-[#E5E7EB]">
         <div className="space-y-3">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/20">
             <Zap className="h-4 w-4" />
@@ -158,7 +158,7 @@ export default function ResumePage() {
               size="lg"
               onClick={handleReAnalyze}
               isLoading={isParsing}
-              className="font-extrabold rounded-2xl shadow-md shadow-purple-500/20 px-6 gap-2"
+              className="font-extrabold rounded-2xl px-6 gap-2"
             >
               <RefreshCw className="h-4 w-4" /> Re-Analyze
             </Button>
@@ -172,7 +172,7 @@ export default function ResumePage() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Upload & Manage Card */}
-          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle">
+          <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
@@ -189,9 +189,9 @@ export default function ResumePage() {
               </div>
             ) : resume ? (
               <div className="space-y-4">
-                <div className="border border-[#E2E8F0] rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white shadow-xs">
+                <div className="border border-[#E5E7EB] rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white">
                   <div className="flex items-center gap-4">
-                    <div className="bg-[#2563EB] text-white p-4 rounded-2xl shadow-md shadow-blue-500/15">
+                    <div className="bg-[#2563EB] text-white p-4 rounded-2xl">
                       <FileText className="h-7 w-7" />
                     </div>
                     <div>
@@ -248,7 +248,7 @@ export default function ResumePage() {
                     : "border-[#CBD5E1] bg-white hover:border-[#2563EB] hover:bg-[#F4F7FE]"
                 }`}
               >
-                <div className="bg-[#2563EB]/10 text-[#2563EB] p-4 rounded-2xl mb-4 shadow-2xs">
+                <div className="bg-[#2563EB]/10 text-[#2563EB] p-4 rounded-2xl mb-4">
                   <UploadCloud className="h-10 w-10" />
                 </div>
                 <h3 className="font-extrabold text-lg text-[#1E293B] mb-1">Drag & drop your resume here</h3>
@@ -262,7 +262,7 @@ export default function ResumePage() {
                   accept=".pdf,.doc,.docx"
                   onChange={handleFileChange}
                 />
-                <Button asChild isLoading={isWorking} className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-8 py-3 rounded-2xl font-extrabold shadow-md shadow-blue-500/15">
+                <Button asChild isLoading={isWorking} className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-8 py-3 rounded-2xl font-extrabold">
                   <label htmlFor="resume-upload-input" className="cursor-pointer">
                     {isWorking ? "Parsing Resume..." : "Browse Computer Files"}
                   </label>
@@ -273,7 +273,7 @@ export default function ResumePage() {
 
           {/* Dominant Feature Card: ATS Score & Analytics */}
           {resume && (
-            <div className="bg-gradient-to-br from-[#F3E8FF] via-[#F4F7FE] to-white border border-[#8B5CF6]/30 rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-6">
+            <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E2E8F0]">
                 <div>
                   <h2 className="text-2xl font-extrabold flex items-center gap-2 text-[#1E293B]">
@@ -287,15 +287,15 @@ export default function ResumePage() {
               </div>
 
               <div className="grid sm:grid-cols-3 gap-6">
-                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-xs">
+                <div className="bg-white border border-[#E5E7EB] p-6 rounded-2xl flex flex-col items-center justify-center text-center">
                   <span className="text-4xl font-black text-[#2563EB]">{atsScore}</span>
                   <span className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-1.5">ATS Score / 100</span>
                 </div>
-                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-xs">
+                <div className="bg-white border border-[#E5E7EB] p-6 rounded-2xl flex flex-col items-center justify-center text-center">
                   <span className="text-3xl font-extrabold text-[#8B5CF6]">{resume.parsedData?.technicalSkills?.length || 0}</span>
                   <span className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-1.5">Tech Skills Extracted</span>
                 </div>
-                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-xs">
+                <div className="bg-white border border-[#E5E7EB] p-6 rounded-2xl flex flex-col items-center justify-center text-center">
                   <span className="text-3xl font-extrabold text-emerald-600">{recData?.data?.recommendedJobs?.length || 0}</span>
                   <span className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-1.5">Matched Active Jobs</span>
                 </div>
@@ -317,7 +317,7 @@ export default function ResumePage() {
 
               {/* ATS Improvement Suggestions */}
               {resume.parsedData?.atsFeedback && resume.parsedData.atsFeedback.length > 0 && (
-                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl space-y-3 shadow-xs">
+                <div className="bg-white border border-[#E5E7EB] p-6 rounded-2xl space-y-3">
                   <h4 className="text-xs font-extrabold text-amber-600 uppercase tracking-wider flex items-center gap-2">
                     <AlertCircle className="h-4 w-4" /> Recommended ATS Improvements
                   </h4>
@@ -336,7 +336,7 @@ export default function ResumePage() {
 
           {/* AI Extracted Skills Breakdown (#F4EEFF Skill Bubbles with Thin Purple Border) */}
           {resume && resume.parsedData && (
-            <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-8">
+            <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 space-y-8">
               <h2 className="text-xl font-extrabold flex items-center gap-2 border-b border-[#E2E8F0] pb-4 text-[#1E293B]">
                 <Sparkles className="h-5 w-5 text-[#8B5CF6]" /> Extracted Skill Matrix
               </h2>
@@ -350,7 +350,7 @@ export default function ResumePage() {
                     {resume.parsedData.technicalSkills?.map((skill: string) => (
                       <span
                         key={skill}
-                        className="bg-[#F4EEFF] text-[#8B5CF6] border border-[#8B5CF6]/30 text-xs px-4 py-2 rounded-2xl font-extrabold shadow-2xs hover:bg-[#8B5CF6] hover:text-white transition-all cursor-default"
+                        className="bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30 text-xs px-4 py-2 rounded-2xl font-extrabold hover:bg-[#8B5CF6] hover:text-white transition-all cursor-default"
                       >
                         {skill}
                       </span>
@@ -366,7 +366,7 @@ export default function ResumePage() {
                     {resume.parsedData.softSkills?.map((skill: string) => (
                       <span
                         key={skill}
-                        className="bg-emerald-50 text-emerald-700 border border-emerald-300 text-xs px-4 py-2 rounded-2xl font-extrabold shadow-2xs"
+                        className="bg-emerald-50 text-emerald-700 border border-emerald-300 text-xs px-4 py-2 rounded-2xl font-extrabold"
                       >
                         {skill}
                       </span>
@@ -376,7 +376,7 @@ export default function ResumePage() {
 
                 <div className="pt-4 border-t border-[#E2E8F0]">
                   <h3 className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mb-3">Experience Summary</h3>
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 text-sm leading-relaxed text-[#1E293B] font-medium italic shadow-xs">
+                  <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 text-sm leading-relaxed text-[#1E293B] font-medium italic">
                     "{resume.parsedData.experienceSummary || "No summary provided."}"
                   </div>
                 </div>
@@ -386,7 +386,7 @@ export default function ResumePage() {
 
           {/* AI Skill Gap & Career Advice Card */}
           {recData?.data?.recommendedSkills && recData.data.recommendedSkills.length > 0 && (
-            <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-6">
+            <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 space-y-6">
               <div>
                 <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
                   <Target className="h-5 w-5 text-[#2563EB]" /> AI Skill Gap Analysis & Target Skills
@@ -396,7 +396,7 @@ export default function ResumePage() {
 
               <div className="grid gap-4">
                 {recData.data.recommendedSkills.map((skill, idx) => (
-                  <div key={idx} className="border border-[#E2E8F0] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white shadow-xs">
+                  <div key={idx} className="border border-[#E5E7EB] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span className="font-extrabold text-sm text-[#1E293B]">{skill.name}</span>
@@ -422,7 +422,7 @@ export default function ResumePage() {
 
           {/* AI Matched Jobs Section */}
           {resume && (
-            <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-6">
+            <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 space-y-6">
               <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
                 <div>
                   <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
@@ -431,7 +431,7 @@ export default function ResumePage() {
                   <p className="text-xs text-[#64748B] font-medium mt-1">Roles autonomously ranked by skill similarity score</p>
                 </div>
                 {recData?.data?.recommendedJobs?.length ? (
-                  <span className="bg-[#2563EB] text-white text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-xs">
+                  <span className="bg-[#2563EB] text-white text-xs font-extrabold px-3.5 py-1.5 rounded-full">
                     {recData.data.recommendedJobs.length} Matches Found
                   </span>
                 ) : null}
@@ -449,7 +449,7 @@ export default function ResumePage() {
                     return (
                       <div
                         key={rec.jobId}
-                        className="border border-[#E2E8F0] rounded-2xl p-6 hover:-translate-y-1 hover:shadow-lg transition-all bg-white"
+                        className="border border-[#E5E7EB] rounded-2xl p-6 hover:border-[#CBD5E1] transition-all bg-white"
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                           <div>
@@ -473,7 +473,7 @@ export default function ResumePage() {
                           </div>
 
                           <div className="flex items-center gap-2 shrink-0">
-                            <span className="bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-2xs">
+                            <span className="bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3.5 py-1.5 rounded-full">
                               {rec.matchPercentage}% Match
                             </span>
                           </div>
@@ -507,7 +507,7 @@ export default function ResumePage() {
 
         {/* Sidebar Info Column */}
         <div className="space-y-6">
-          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 text-[#1E293B] shadow-subtle space-y-5">
+          <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 text-[#1E293B] space-y-5">
             <div className="bg-[#2563EB]/10 p-3.5 rounded-2xl w-fit text-[#2563EB]">
               <Zap className="h-6 w-6" />
             </div>
@@ -528,7 +528,7 @@ export default function ResumePage() {
             </ul>
           </div>
 
-          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle space-y-3">
+          <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 space-y-3">
             <h3 className="font-extrabold text-sm flex items-center gap-2 text-[#1E293B]">
               <ShieldCheck className="h-4.5 w-4.5 text-emerald-600" /> Privacy & Security Guarantee
             </h3>

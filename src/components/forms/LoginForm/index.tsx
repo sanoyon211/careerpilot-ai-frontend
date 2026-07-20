@@ -35,7 +35,7 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-8 bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] shadow-xs">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-8 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px]">
       <h2 className="text-2xl font-extrabold text-center text-[#1E293B] mb-6">Login to CareerPilot</h2>
       {errorMsg && <div className="text-red-500 text-xs font-bold text-center mb-4 p-2 bg-red-50 rounded-xl border border-red-200">{errorMsg}</div>}
       

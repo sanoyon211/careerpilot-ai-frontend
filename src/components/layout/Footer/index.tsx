@@ -13,7 +13,7 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-2">
               <span className="text-2xl font-extrabold tracking-tight text-[#0F172A]">
                 careerpilot<span className="text-[#8B5CF6] font-black">:</span>
-                <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-2.5 py-0.5 rounded-full ml-1.5 shadow-2xs">
+                <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-2.5 py-0.5 rounded-full ml-1.5">
                   AI
                 </span>
               </span>

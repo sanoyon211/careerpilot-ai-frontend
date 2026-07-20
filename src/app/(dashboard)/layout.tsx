@@ -141,7 +141,7 @@ export default function DashboardLayout({
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F4F7FE]">
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
         <div className="text-center space-y-3">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#2563EB] border-t-transparent mx-auto text-[#2563EB]" />
           <p className="text-sm font-bold text-[#64748B] animate-pulse">
@@ -155,7 +155,7 @@ export default function DashboardLayout({
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Mobile Topbar */}
-      <div className="md:hidden bg-white border-b border-[#E2E8F0] p-4 flex items-center justify-between sticky top-0 z-20 shadow-subtle">
+      <div className="md:hidden bg-white border-b border-[#E5E7EB] p-4 flex items-center justify-between sticky top-0 z-20">
         <Link href="/" className="flex items-center gap-1">
           <span className="font-extrabold text-xl tracking-tight text-[#1E293B] font-sans">
             careerpilot<span className="text-[#2563EB] font-black">:</span>
@@ -173,15 +173,15 @@ export default function DashboardLayout({
       <aside
         className={`
         ${isMobileMenuOpen ? "fixed inset-0 top-[65px] z-30 bg-white" : "hidden"} 
-        md:block md:w-64 md:shrink-0 bg-[#F4F7FE] border-r border-[#E2E8F0] md:sticky md:top-0 md:h-screen flex flex-col overflow-y-auto shadow-subtle
+        md:block md:w-64 md:shrink-0 bg-[#FAFAFA] border-r border-[#E5E7EB] md:sticky md:top-0 md:h-screen flex flex-col overflow-y-auto
       `}
       >
         {/* Header Logo */}
-        <div className="p-6 hidden md:block border-b border-[#E2E8F0] bg-white">
+        <div className="p-6 hidden md:block border-b border-[#E5E7EB] bg-white">
           <Link href="/" className="flex items-center gap-1 group">
             <span className="font-extrabold text-xl tracking-tight text-[#1E293B] font-sans">
               careerpilot<span className="text-[#2563EB] font-black">:</span>
-              <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full ml-1 shadow-2xs">
+              <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full ml-1">
                 AI
               </span>
             </span>
@@ -189,11 +189,11 @@ export default function DashboardLayout({
         </div>
 
         {/* Compact Sidebar Profile Box */}
-        <div className="p-3.5 mx-3 my-4 bg-white border border-[#E2E8F0] rounded-2xl flex items-center gap-3 shadow-subtle">
+        <div className="p-3.5 mx-3 my-4 bg-white border border-[#E5E7EB] rounded-2xl flex items-center gap-3">
           {user.photoURL ? (
-            <img src={user.photoURL} alt={user.name} className="h-9 w-9 rounded-full object-cover border border-[#E2E8F0]" />
+            <img src={user.photoURL} alt={user.name} className="h-9 w-9 rounded-full object-cover border border-[#E5E7EB]" />
           ) : (
-            <div className="h-9 w-9 rounded-full bg-[#2563EB] text-white font-extrabold flex items-center justify-center text-xs shrink-0 shadow-xs">
+            <div className="h-9 w-9 rounded-full bg-[#2563EB] text-white font-extrabold flex items-center justify-center text-xs shrink-0">
               {getInitials(user.name)}
             </div>
           )}
@@ -218,9 +218,9 @@ export default function DashboardLayout({
             let linkClass = "text-[#64748B] hover:bg-white hover:text-[#2563EB]";
             if (isActive) {
               if (isAICoachActive) {
-                linkClass = "bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] text-white font-extrabold shadow-md shadow-purple-500/20";
+                linkClass = "bg-[#8B5CF6] text-white font-extrabold";
               } else {
-                linkClass = "bg-[#2563EB] text-white font-extrabold shadow-sm shadow-blue-500/15";
+                linkClass = "bg-[#2563EB] text-white font-extrabold";
               }
             }
 
@@ -242,14 +242,14 @@ export default function DashboardLayout({
         </nav>
 
         {/* Sidebar Footer Controls */}
-        <div className="p-3.5 border-t border-[#E2E8F0] bg-white space-y-1.5 mt-auto">
+        <div className="p-3.5 border-t border-[#E5E7EB] bg-white space-y-1.5 mt-auto">
           <Link
             href="/settings"
             onClick={() => setIsMobileMenuOpen(false)}
             className={`flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-bold transition-all ${
               pathname === "/settings"
-                ? "bg-[#2563EB] text-white shadow-sm"
-                : "text-[#64748B] hover:bg-[#F4F7FE] hover:text-[#2563EB]"
+                ? "bg-[#2563EB] text-white"
+                : "text-[#64748B] hover:bg-[#FAFAFA] hover:text-[#2563EB]"
             }`}
           >
             <Settings className="h-4.5 w-4.5 shrink-0" /> Settings

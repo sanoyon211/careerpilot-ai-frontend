@@ -16,7 +16,7 @@ export function AboutValues() {
         {values.map((value, idx) => {
           const Icon = value.icon;
           return (
-            <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 hover:-translate-y-1 hover:border-[#8B5CF6]/30 transition-all shadow-subtle">
+            <div key={idx} className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10 hover:border-[#CBD5E1] transition-all">
               <Icon className="h-12 w-12 text-[#8B5CF6] mb-6" />
               <h3 className="text-2xl font-extrabold text-[#0F172A] mb-3">{value.title}</h3>
               <p className="text-[#64748B] leading-relaxed text-base font-medium">{value.desc}</p>

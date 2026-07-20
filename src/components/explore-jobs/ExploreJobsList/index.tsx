@@ -40,7 +40,7 @@ export function ExploreJobsList({
 }: ExploreJobsListProps) {
   return (
     <main className="flex-1 space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#F4F7FE] border border-[#E2E8F0] p-5 rounded-2xl shadow-subtle">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#FAFAFA] border border-[#E5E7EB] p-5 rounded-2xl">
         <p className="text-sm text-[#64748B] font-medium">
           Showing <strong className="text-[#0F172A] font-black">{jobs.length}</strong> of{" "}
           <strong className="text-[#0F172A] font-black">{totalJobs}</strong> jobs
@@ -56,7 +56,7 @@ export function ExploreJobsList({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {isLoading &&
           Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-7 flex flex-col h-[300px] animate-pulse space-y-4">
+            <div key={i} className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-7 flex flex-col h-[300px] animate-pulse space-y-4">
               <div className="h-12 w-12 rounded-2xl bg-slate-200"></div>
               <div className="h-6 bg-slate-200 rounded w-3/4"></div>
               <div className="h-4 bg-slate-200 rounded w-1/2"></div>
@@ -69,7 +69,7 @@ export function ExploreJobsList({
           ))}
 
         {!isLoading && totalJobs === 0 && (
-          <div className="col-span-full text-center py-20 bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] space-y-4">
+          <div className="col-span-full text-center py-20 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] space-y-4">
             <p className="font-black text-xl text-[#0F172A]">No jobs found matching your criteria</p>
             <p className="text-sm text-[#64748B] max-w-md mx-auto font-medium">
               Try broadening your search query or clearing filter options.
@@ -84,14 +84,14 @@ export function ExploreJobsList({
           jobs.map((job) => (
             <div
               key={job._id}
-              className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-7 hover:-translate-y-1 hover:shadow-xl hover:border-[#8B5CF6]/30 transition-all duration-300 group flex flex-col justify-between shadow-subtle"
+              className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-7 hover:border-[#CBD5E1] transition-all duration-300 group flex flex-col justify-between"
             >
               <div>
                 <div className="flex justify-between items-start mb-5">
-                  <div className="h-12 w-12 rounded-2xl bg-[#0F172A] text-white font-black text-xl flex items-center justify-center shadow-xs">
+                  <div className="h-12 w-12 rounded-2xl bg-[#0F172A] text-white font-black text-xl flex items-center justify-center">
                     {job.employerId?.name?.charAt(0) || "C"}
                   </div>
-                  <span className="inline-flex items-center rounded-full bg-white text-[#8B5CF6] px-3.5 py-1 text-xs font-extrabold border border-[#8B5CF6]/30 shadow-2xs">
+                  <span className="inline-flex items-center rounded-full bg-white text-[#8B5CF6] px-3.5 py-1 text-xs font-extrabold border border-[#E5E7EB]">
                     {job.workMode || "Remote"}
                   </span>
                 </div>
@@ -117,7 +117,7 @@ export function ExploreJobsList({
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+              <div className="pt-4 border-t border-[#E5E7EB] flex items-center justify-between">
                 <span className="flex items-center text-[11px] text-[#64748B] font-semibold gap-1">
                   <Clock className="h-3 w-3" /> {new Date(job.createdAt).toLocaleDateString()}
                 </span>

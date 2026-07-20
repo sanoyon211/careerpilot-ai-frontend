@@ -14,12 +14,12 @@ export function Statistics() {
   ];
 
   return (
-    <section className="py-20 bg-[#F4F7FE] border-y border-[#E2E8F0]">
+    <section className="py-20 bg-white border-y border-[#E5E7EB]">
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {STATS.map((stat, idx) => (
-            <div key={idx} className="bg-white border border-[#E2E8F0] rounded-[28px] p-8 text-center shadow-subtle">
+            <div key={idx} className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 text-center">
               <div className="text-4xl sm:text-5xl font-black text-[#8B5CF6] mb-2">{stat.value}</div>
               <div className="text-xs font-black text-[#64748B] uppercase tracking-wider">{stat.label}</div>
             </div>

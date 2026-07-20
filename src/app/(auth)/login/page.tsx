@@ -116,7 +116,7 @@ function LoginForm() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-card border rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-card border rounded-2xl overflow-hidden">
         <div className="p-8">
           <div className="text-center mb-6">
             <Link href="/" className="inline-block mb-3">
@@ -146,7 +146,7 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleQuickDemoLogin("seeker")}
                 disabled={isLoading}
-                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-primary/10 hover:border-primary/40 transition-all text-xs font-bold text-left shadow-2xs group"
+                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-primary/10 hover:border-primary/40 transition-all text-xs font-bold text-left group"
               >
                 <UserCheck className="h-4 w-4 text-indigo-500 shrink-0 group-hover:scale-110 transition-transform" />
                 <div className="overflow-hidden">
@@ -159,7 +159,7 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleQuickDemoLogin("employer")}
                 disabled={isLoading}
-                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all text-xs font-bold text-left shadow-2xs group"
+                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl border bg-card hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all text-xs font-bold text-left group"
               >
                 <Building2 className="h-4 w-4 text-emerald-500 shrink-0 group-hover:scale-110 transition-transform" />
                 <div className="overflow-hidden">

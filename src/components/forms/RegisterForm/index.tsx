@@ -36,7 +36,7 @@ export function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-8 bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] shadow-xs">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-sm mx-auto p-8 bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px]">
       <h2 className="text-2xl font-extrabold text-center text-[#1E293B] mb-6">Create Your Account</h2>
       {errorMsg && <div className="text-red-500 text-xs font-bold text-center mb-4 p-2 bg-red-50 rounded-xl border border-red-200">{errorMsg}</div>}
       {successMsg && <div className="text-emerald-600 text-xs font-bold text-center mb-4 p-2 bg-emerald-50 rounded-xl border border-emerald-200">{successMsg}</div>}
@@ -75,7 +75,7 @@ export function RegisterForm() {
         <label className="block text-xs font-bold uppercase tracking-wider text-[#64748B]">Account Type</label>
         <select 
           {...register('role')}
-          className="flex h-11 w-full rounded-2xl border border-[#E2E8F0] bg-white px-4 py-2.5 text-sm font-bold text-[#1E293B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] shadow-xs"
+          className="flex h-11 w-full rounded-2xl border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm font-bold text-[#1E293B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
         >
           <option value="job-seeker">Job Seeker</option>
           <option value="employer">Employer / Recruiter</option>

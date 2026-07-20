@@ -70,7 +70,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2 group">
           <span className="text-2xl font-extrabold tracking-tight text-[#0F172A] font-sans">
             careerpilot<span className="text-[#8B5CF6] font-black">:</span>
-            <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-2.5 py-0.5 rounded-full ml-1.5 shadow-2xs">
+            <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-2.5 py-0.5 rounded-full ml-1.5">
               AI
             </span>
           </span>
@@ -192,7 +192,7 @@ export function Navbar() {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-white border border-[#E5E7EB] shadow-none py-2 text-xs z-50 animate-in fade-in duration-150">
+                <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-white border border-[#E5E7EB] py-2 text-xs z-50 animate-in fade-in duration-150">
                   <div className="px-4 py-3 border-b border-[#E5E7EB]">
                     <p className="font-extrabold text-[#0F172A] text-sm">{user.name}</p>
                     <p className="text-[11px] text-[#64748B] truncate">{user.email}</p>

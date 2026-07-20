@@ -97,7 +97,7 @@ export default function RegisterPage() {
       </div>
 
       <div className="w-full max-w-md my-8">
-        <div className="bg-card border rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-card border rounded-2xl overflow-hidden">
           <div className="p-8">
             <div className="text-center mb-8">
               <Link href="/" className="inline-block mb-4">

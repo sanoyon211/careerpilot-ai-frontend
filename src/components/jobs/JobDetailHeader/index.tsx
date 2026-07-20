@@ -21,10 +21,10 @@ export function JobDetailHeader({
   coverLetter,
 }: JobDetailHeaderProps) {
   return (
-    <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[32px] p-8 sm:p-12 shadow-subtle">
+    <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[32px] p-8 sm:p-12">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-8">
         <div className="flex items-start gap-6">
-          <div className="h-18 w-18 sm:h-24 sm:w-24 shrink-0 rounded-2xl bg-[#0F172A] text-white font-black flex items-center justify-center text-3xl sm:text-4xl shadow-md">
+          <div className="h-18 w-18 sm:h-24 sm:w-24 shrink-0 rounded-2xl bg-[#0F172A] text-white font-black flex items-center justify-center text-3xl sm:text-4xl">
             {job.employerId?.name?.charAt(0) || "C"}
           </div>
           <div>
@@ -42,13 +42,13 @@ export function JobDetailHeader({
         </div>
       </div>
 
-      <div className="mt-10 pt-8 border-t border-[#E2E8F0] flex flex-col sm:flex-row gap-4 items-center flex-wrap">
+      <div className="mt-10 pt-8 border-t border-[#E5E7EB] flex flex-col sm:flex-row gap-4 items-center flex-wrap">
         {isAppliedSuccess ? (
           <div className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 font-extrabold text-sm">
             <CheckCircle2 className="h-5 w-5" /> Applied to this position
           </div>
         ) : (
-          <Button size="lg" className="w-full sm:w-auto px-10 py-3.5 text-base bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold shadow-md shadow-purple-600/20 gap-2.5" onClick={onOpenApplyModal}>
+          <Button size="lg" className="w-full sm:w-auto px-10 py-3.5 text-base bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full font-extrabold gap-2.5" onClick={onOpenApplyModal}>
             <Send className="h-5 w-5" /> Apply Now
           </Button>
         )}
@@ -63,7 +63,7 @@ export function JobDetailHeader({
       </div>
 
       {coverLetter && (
-        <div className="mt-8 bg-white border border-[#E2E8F0] rounded-2xl p-8 shadow-xs">
+        <div className="mt-8 bg-white border border-[#E5E7EB] rounded-2xl p-8">
           <h3 className="font-extrabold text-base mb-4 flex items-center gap-2 text-[#8B5CF6]">
             <FileText className="h-5 w-5" /> AI Generated Cover Letter
           </h3>

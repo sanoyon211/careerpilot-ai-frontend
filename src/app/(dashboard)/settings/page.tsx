@@ -82,9 +82,9 @@ export default function SettingsPage() {
       </div>
 
       {/* Account Profile Summary Card */}
-      <div className="bg-card border rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-card border rounded-3xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-primary to-indigo-600 text-white font-extrabold text-xl flex items-center justify-center shadow-md">
+          <div className="h-14 w-14 rounded-2xl bg-[#0F172A] text-white font-extrabold text-xl flex items-center justify-center">
             {user?.name?.charAt(0) || "U"}
           </div>
           <div>
@@ -106,7 +106,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Security & Password Section */}
-      <div className="bg-card border rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+      <div className="bg-card border rounded-3xl p-6 sm:p-8 space-y-6">
         <div className="flex items-center gap-3 border-b pb-4">
           <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
             <KeyRound className="h-5 w-5" />
@@ -175,7 +175,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Notification Preferences Section */}
-      <div className="bg-card border rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+      <div className="bg-card border rounded-3xl p-6 sm:p-8 space-y-6">
         <div className="flex items-center gap-3 border-b pb-4">
           <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-600">
             <Bell className="h-5 w-5" />

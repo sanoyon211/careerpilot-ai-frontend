@@ -35,7 +35,7 @@ export function ExploreJobsHeader({
           <Search className="absolute left-4 top-3.5 h-5 w-5 text-[#64748B]" />
           <Input
             placeholder="Job title, keywords, or skills..."
-            className="pl-12 h-12 text-base"
+            className="pl-12 h-12 text-base border-[#E5E7EB]"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -44,12 +44,12 @@ export function ExploreJobsHeader({
           <MapPin className="absolute left-4 top-3.5 h-5 w-5 text-[#64748B]" />
           <Input
             placeholder="City or Remote..."
-            className="pl-12 h-12 text-base"
+            className="pl-12 h-12 text-base border-[#E5E7EB]"
             value={locationQuery}
             onChange={(e) => setLocationQuery(e.target.value)}
           />
         </div>
-        <Button size="lg" onClick={onSearch} className="rounded-2xl px-9 h-12 bg-[#8B5CF6] hover:bg-[#7C3AED] font-extrabold text-white shadow-md shadow-purple-600/20">
+        <Button size="lg" onClick={onSearch} className="rounded-2xl px-9 h-12 bg-[#8B5CF6] hover:bg-[#7C3AED] font-extrabold text-white">
           Search
         </Button>
       </div>

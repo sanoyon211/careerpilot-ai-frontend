@@ -5,11 +5,11 @@ import { Mail, Phone, MapPin } from "lucide-react";
 export function ContactInfo() {
   return (
     <div className="lg:col-span-1 space-y-8">
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 sm:p-10">
         <h3 className="text-2xl font-extrabold text-[#0F172A] mb-8">Contact Information</h3>
         <div className="space-y-8">
           <div className="flex items-start gap-4">
-            <div className="bg-[#8B5CF6]/15 p-3.5 rounded-2xl text-[#8B5CF6] shrink-0">
+            <div className="bg-white border border-[#E5E7EB] p-3.5 rounded-2xl text-[#8B5CF6] shrink-0">
               <Mail className="h-6 w-6" />
             </div>
             <div>
@@ -20,7 +20,7 @@ export function ContactInfo() {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="bg-[#8B5CF6]/15 p-3.5 rounded-2xl text-[#8B5CF6] shrink-0">
+            <div className="bg-white border border-[#E5E7EB] p-3.5 rounded-2xl text-[#8B5CF6] shrink-0">
               <Phone className="h-6 w-6" />
             </div>
             <div>
@@ -31,7 +31,7 @@ export function ContactInfo() {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="bg-[#8B5CF6]/15 p-3.5 rounded-2xl text-[#8B5CF6] shrink-0">
+            <div className="bg-white border border-[#E5E7EB] p-3.5 rounded-2xl text-[#8B5CF6] shrink-0">
               <MapPin className="h-6 w-6" />
             </div>
             <div>

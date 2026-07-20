@@ -19,12 +19,12 @@ export function BlogFeaturedPost({ post }: { post: BlogPost }) {
 
   return (
     <div className="mb-16">
-      <Link href={`/blog/${post.id}`} className="group flex flex-col md:flex-row bg-[#F4F7FE] border border-[#E2E8F0] rounded-[32px] overflow-hidden shadow-subtle hover:shadow-xl hover:border-[#8B5CF6]/30 transition-all">
-        <div className={`md:w-1/2 h-72 md:h-auto bg-gradient-to-br ${post.color} relative`}>
-          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+      <Link href={`/blog/${post.id}`} className="group flex flex-col md:flex-row bg-[#FAFAFA] border border-[#E5E7EB] rounded-[32px] overflow-hidden hover:border-[#CBD5E1] transition-all">
+        <div className={`md:w-1/2 h-72 md:h-auto bg-[#FAFAFA] border-r border-[#E5E7EB] relative`}>
+          <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
         </div>
         <div className="md:w-1/2 p-8 md:p-14 flex flex-col justify-center">
-          <span className="text-[#8B5CF6] font-extrabold text-xs tracking-wider uppercase mb-4 bg-white px-3.5 py-1 rounded-full w-fit border border-[#8B5CF6]/30 shadow-2xs">
+          <span className="text-[#8B5CF6] font-extrabold text-xs tracking-wider uppercase mb-4 bg-white px-3.5 py-1 rounded-full w-fit border border-[#E5E7EB]">
             {post.category}
           </span>
           <h2 className="text-2xl md:text-4xl font-extrabold text-[#0F172A] mb-4 group-hover:text-[#8B5CF6] transition-colors leading-tight">

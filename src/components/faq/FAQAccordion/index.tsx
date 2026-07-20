@@ -41,7 +41,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-[#E2E8F0] last:border-0">
+    <div className="border-b border-[#E5E7EB] last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center py-6 text-left focus:outline-none cursor-pointer group"
@@ -68,7 +68,7 @@ export function FAQAccordion({ faqs = DEFAULT_FAQS }: { faqs?: FAQCategory[] }) 
   return (
     <div className="space-y-10">
       {faqs.map((section, idx) => (
-        <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 md:p-12 shadow-subtle">
+        <div key={idx} className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-8 md:p-12">
           <h2 className="text-2xl font-extrabold mb-6 text-[#8B5CF6]">{section.category}</h2>
           <div className="flex flex-col">
             {section.questions.map((faq, fIdx) => (

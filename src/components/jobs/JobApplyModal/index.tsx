@@ -39,13 +39,13 @@ export function JobApplyModal({
 }: JobApplyModalProps) {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white border border-[#E2E8F0] rounded-[32px] p-8 sm:p-10 w-full max-w-xl shadow-2xl space-y-6">
-        <div className="flex justify-between items-center border-b border-[#E2E8F0] pb-5">
+      <div className="bg-white border border-[#E5E7EB] rounded-[32px] p-8 sm:p-10 w-full max-w-xl space-y-6">
+        <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-5">
           <div>
             <h2 className="text-2xl font-extrabold text-[#0F172A]">Apply for Position</h2>
             <p className="text-xs text-[#64748B] font-semibold mt-1">{jobTitle} at {employerName || "Employer"}</p>
           </div>
-          <button onClick={onClose} className="p-2 rounded-full hover:bg-[#F4F7FE] text-[#64748B] hover:text-[#0F172A]">
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-[#FAFAFA] text-[#64748B] hover:text-[#0F172A]">
             <X className="h-6 w-6" />
           </button>
         </div>
@@ -109,7 +109,7 @@ export function JobApplyModal({
               value={coverLetter}
               onChange={(e) => setCoverLetter(e.target.value)}
               placeholder="Introduce yourself and explain why you're a great fit..."
-              className="w-full h-32 p-4 rounded-2xl border border-[#E2E8F0] bg-[#F4F7FE] text-xs font-medium text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] resize-y"
+              className="w-full h-32 p-4 rounded-2xl border border-[#E5E7EB] bg-white text-xs font-medium text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] resize-y"
             />
           </div>
 
@@ -117,7 +117,7 @@ export function JobApplyModal({
             <Button type="button" variant="outline" className="rounded-full font-bold px-6" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" isLoading={isApplying} className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full px-8 gap-2 font-extrabold shadow-md shadow-purple-600/20">
+            <Button type="submit" isLoading={isApplying} className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full px-8 gap-2 font-extrabold">
               <Send className="h-4 w-4" /> Send Application
             </Button>
           </div>

@@ -69,7 +69,7 @@ export function SweetAlertProvider({ children }: { children: React.ReactNode }) 
 
       {activeDialog && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-card border rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl space-y-5 text-center animate-in zoom-in-95 duration-150">
+          <div className="bg-card border rounded-3xl p-6 sm:p-8 w-full max-w-md space-y-5 text-center animate-in zoom-in-95 duration-150">
             <div className="flex justify-end">
               <button onClick={handleCancel} className="p-1 text-muted-foreground hover:text-foreground rounded-full">
                 <X className="h-5 w-5" />

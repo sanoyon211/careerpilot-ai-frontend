@@ -123,7 +123,7 @@ export default function JobApplicationsBoard() {
   return (
     <div className="flex flex-col h-[calc(100vh-100px)] -m-4 sm:-m-8">
       {/* Header Bar */}
-      <div className="bg-card border-b p-4 sm:px-8 shadow-xs z-10 shrink-0">
+      <div className="bg-card border-b p-4 sm:px-8 z-10 shrink-0">
         <Link href="/manage-jobs" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-2 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Manage Jobs
         </Link>
@@ -164,7 +164,7 @@ export default function JobApplicationsBoard() {
                 {/* Column Header */}
                 <div className="p-4 border-b bg-background/60 backdrop-blur-md flex justify-between items-center">
                   <h3 className="font-bold text-sm tracking-tight">{column.title}</h3>
-                  <span className="bg-background px-2.5 py-0.5 rounded-full text-xs font-bold border shadow-2xs">
+                  <span className="bg-background px-2.5 py-0.5 rounded-full text-xs font-bold border">
                     {columnApps.length}
                   </span>
                 </div>
@@ -197,7 +197,7 @@ export default function JobApplicationsBoard() {
                             {applicant?.avatar ? (
                               <img src={applicant.avatar} alt="" className="h-10 w-10 rounded-full object-cover border shrink-0" />
                             ) : (
-                              <div className="h-10 w-10 rounded-2xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0 border text-sm shadow-2xs">
+                              <div className="h-10 w-10 rounded-2xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0 border text-sm">
                                 {initials}
                               </div>
                             )}
@@ -274,10 +274,10 @@ export default function JobApplicationsBoard() {
       {/* Candidate Profile Details Modal */}
       {selectedCandidate && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-card border rounded-3xl p-6 sm:p-8 w-full max-w-lg shadow-2xl space-y-6 animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-card border rounded-3xl p-6 sm:p-8 w-full max-w-lg space-y-6 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex justify-between items-start border-b pb-4">
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-indigo-600 text-white font-extrabold text-xl flex items-center justify-center shrink-0 shadow-md">
+                <div className="h-12 w-12 rounded-2xl bg-indigo-600 text-white font-extrabold text-xl flex items-center justify-center shrink-0">
                   {(selectedCandidate.applicantName || selectedCandidate.applicantId?.name || "A").charAt(0).toUpperCase()}
                 </div>
                 <div>
@@ -329,7 +329,7 @@ export default function JobApplicationsBoard() {
                     href={selectedCandidate.resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-primary text-primary-foreground font-bold text-xs hover:bg-primary/90 transition-all shadow-sm"
+                    className="w-full flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-primary text-primary-foreground font-bold text-xs hover:bg-primary/90 transition-all"
                   >
                     <FileText className="h-4 w-4" /> View Full Resume / PDF Document
                   </a>

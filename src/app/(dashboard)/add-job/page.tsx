@@ -65,7 +65,7 @@ export default function AddJobPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-card border rounded-2xl p-6 sm:p-8 shadow-sm space-y-8">
+      <form onSubmit={handleSubmit} className="bg-card border rounded-2xl p-6 sm:p-8 space-y-8">
         {/* Basic Information */}
         <div className="space-y-4">
           <h3 className="font-semibold text-lg border-b pb-2">Basic Information</h3>

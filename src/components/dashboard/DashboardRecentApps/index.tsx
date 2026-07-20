@@ -12,12 +12,12 @@ export function DashboardRecentApps({ recentApps }: { recentApps: any[] }) {
         </Link>
       </div>
 
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] overflow-hidden shadow-subtle">
-        <div className="divide-y divide-[#E2E8F0]">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] overflow-hidden">
+        <div className="divide-y divide-[#E5E7EB]">
           {recentApps.length > 0 ? (
             recentApps.map((app: any) => {
               const job = app.jobId;
-              let statusColor = "text-[#64748B] bg-white border-[#E2E8F0]";
+              let statusColor = "text-[#64748B] bg-white border-[#E5E7EB]";
               if (app.status === "Reviewed" || app.status === "Shortlisted") statusColor = "text-[#2563EB] bg-blue-50 border-blue-200";
               if (app.status === "Hired") statusColor = "text-emerald-600 bg-emerald-50 border-emerald-200";
               if (app.status === "Rejected") statusColor = "text-red-600 bg-red-50 border-red-200";
@@ -25,7 +25,7 @@ export function DashboardRecentApps({ recentApps }: { recentApps: any[] }) {
               return (
                 <div key={app._id} className="p-6 flex items-center justify-between gap-6 hover:bg-white transition-colors">
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-lg font-extrabold shrink-0 shadow-xs">
+                    <div className="h-12 w-12 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-lg font-extrabold shrink-0">
                       {job?.title?.charAt(0) || "J"}
                     </div>
                     <div>

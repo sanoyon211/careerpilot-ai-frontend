@@ -11,9 +11,9 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
       {/* 4 Column Grid on Extra Large Screens */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {posts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.id}`} className="group flex flex-col bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] overflow-hidden shadow-subtle hover:shadow-xl hover:border-[#8B5CF6]/30 transition-all">
-            <div className={`h-52 w-full bg-gradient-to-br ${post.color} relative`}>
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+          <Link key={post.id} href={`/blog/${post.id}`} className="group flex flex-col bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] overflow-hidden hover:border-[#CBD5E1] transition-all">
+            <div className={`h-52 w-full bg-[#FAFAFA] border-b border-[#E5E7EB] relative`}>
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
             </div>
             
             <div className="p-7 flex flex-col flex-1">
@@ -32,7 +32,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
                 {post.excerpt}
               </p>
               
-              <div className="flex items-center justify-between pt-4 border-t border-[#E2E8F0] mt-auto">
+              <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB] mt-auto">
                 <div className="flex items-center gap-2 text-xs font-extrabold text-[#64748B]">
                   <User className="h-3.5 w-3.5 text-[#8B5CF6]" />
                   <span className="truncate max-w-[110px]">{post.author}</span>

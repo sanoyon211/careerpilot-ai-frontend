@@ -40,9 +40,9 @@ export default function AppliedJobsPage() {
         <p className="text-[#64748B] font-medium mt-1 text-sm">Track the real-time status and progress of all your job applications.</p>
       </div>
 
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] overflow-hidden shadow-subtle">
+      <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] overflow-hidden">
         {/* Filter Toolbar */}
-        <div className="p-6 border-b border-[#E2E8F0] flex flex-col sm:flex-row justify-between items-center gap-4 bg-white">
+        <div className="p-6 border-b border-[#E5E7EB] flex flex-col sm:flex-row justify-between items-center gap-4 bg-white">
           <div className="flex gap-2.5 w-full sm:w-auto overflow-x-auto pb-1 hide-scrollbar">
             {["All", "Applied", "Reviewed", "Shortlisted", "Hired", "Rejected"].map((status) => (
               <Button
@@ -61,7 +61,7 @@ export default function AppliedJobsPage() {
         </div>
 
         {/* Applications List with 25%+ Padding */}
-        <div className="divide-y divide-[#E2E8F0]">
+        <div className="divide-y divide-[#E5E7EB]">
           {isLoading && (
             <div className="p-16 text-center text-[#64748B] font-semibold">
               <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#2563EB] border-t-transparent mx-auto mb-3" />
@@ -70,7 +70,7 @@ export default function AppliedJobsPage() {
           )}
 
           {!isLoading && filteredApps.length === 0 && (
-            <div className="p-16 text-center bg-[#F4F7FE]">
+            <div className="p-16 text-center bg-[#FAFAFA]">
               <div className="mx-auto w-16 h-16 bg-[#2563EB]/10 rounded-full flex items-center justify-center mb-4 text-[#2563EB]">
                 <Building2 className="h-8 w-8" />
               </div>
@@ -79,7 +79,7 @@ export default function AppliedJobsPage() {
                 You haven't submitted any job applications under this status yet.
               </p>
               <Link href="/explore-jobs">
-                <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3 shadow-md shadow-blue-500/15">
+                <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3">
                   Explore Open Positions
                 </Button>
               </Link>
@@ -93,7 +93,7 @@ export default function AppliedJobsPage() {
               <div key={app._id} className="p-6 sm:p-8 hover:bg-white transition-colors">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div className="flex items-start gap-5 flex-1">
-                    <div className="h-14 w-14 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-xl font-extrabold shrink-0 shadow-xs">
+                    <div className="h-14 w-14 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-xl font-extrabold shrink-0">
                       {job?.title?.charAt(0) || "J"}
                     </div>
                     <div>
@@ -115,7 +115,7 @@ export default function AppliedJobsPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between md:justify-end gap-6 md:w-1/3 border-t md:border-0 border-[#E2E8F0] pt-4 md:pt-0">
+                  <div className="flex items-center justify-between md:justify-end gap-6 md:w-1/3 border-t md:border-0 border-[#E5E7EB] pt-4 md:pt-0">
                     <div className="flex flex-col items-start md:items-end gap-1.5">
                       <span className={`text-xs font-extrabold px-3.5 py-1 rounded-full border ${getStatusBadge(app.status)}`}>
                         {app.status}

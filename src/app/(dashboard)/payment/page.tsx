@@ -30,7 +30,7 @@ export default function PaymentMockupPage() {
 
       <div className="grid md:grid-cols-2 gap-8 items-start">
         {/* Plan Details */}
-        <div className="bg-gradient-to-br from-primary/10 to-blue-500/10 border border-primary/20 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="bg-card border border-primary/20 rounded-2xl p-6 space-y-6">
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
               <Sparkles className="h-6 w-6" />
@@ -54,7 +54,7 @@ export default function PaymentMockupPage() {
         </div>
 
         {/* Checkout Form */}
-        <div className="bg-card border rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="bg-card border rounded-2xl p-6 space-y-6">
           <div className="flex items-center gap-2 pb-4 border-b">
             <ShieldCheck className="h-5 w-5 text-green-500" />
             <span className="font-medium">Secure Checkout</span>

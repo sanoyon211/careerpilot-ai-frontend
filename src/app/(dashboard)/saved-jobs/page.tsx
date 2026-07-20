@@ -39,18 +39,18 @@ export default function SavedJobsPage() {
             return (
               <div
                 key={item._id}
-                className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-7 shadow-subtle hover:-translate-y-1 hover:shadow-lg transition-all flex flex-col relative group"
+                className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-7 hover:border-[#CBD5E1] transition-all flex flex-col relative group"
               >
                 <button
                   onClick={() => handleRemove(item._id)}
-                  className="absolute top-5 right-5 p-2.5 bg-white border border-[#E2E8F0] rounded-full text-[#64748B] hover:text-red-600 hover:border-red-200 transition-colors opacity-0 group-hover:opacity-100 shadow-xs z-10 cursor-pointer"
+                  className="absolute top-5 right-5 p-2.5 bg-white border border-[#E5E7EB] rounded-full text-[#64748B] hover:text-red-600 hover:border-red-200 transition-colors opacity-0 group-hover:opacity-100 z-10 cursor-pointer"
                   title="Remove from saved"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
 
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="h-12 w-12 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-xl font-extrabold shrink-0 shadow-xs">
+                  <div className="h-12 w-12 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-xl font-extrabold shrink-0">
                     {job.company?.charAt(0) || "C"}
                   </div>
                   <div>
@@ -61,7 +61,7 @@ export default function SavedJobsPage() {
 
                 {job.isAiMatch && (
                   <div className="mb-4">
-                    <span className="inline-flex items-center gap-1.5 bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3 py-1 rounded-full shadow-2xs">
+                    <span className="inline-flex items-center gap-1.5 bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3 py-1 rounded-full">
                       <Sparkles className="h-3.5 w-3.5" /> High AI Match
                     </span>
                   </div>
@@ -81,7 +81,7 @@ export default function SavedJobsPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-3 mt-auto border-t border-[#E2E8F0] pt-4">
+                <div className="flex gap-3 mt-auto border-t border-[#E5E7EB] pt-4">
                   <Link href={`/jobs/${job._id}`} className="flex-1">
                     <Button className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-bold">Apply Now</Button>
                   </Link>
@@ -96,14 +96,14 @@ export default function SavedJobsPage() {
           })}
         </div>
       ) : (
-        <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-16 text-center shadow-subtle">
+        <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[28px] p-16 text-center">
           <div className="mx-auto w-16 h-16 bg-[#2563EB]/10 rounded-full flex items-center justify-center mb-4 text-[#2563EB]">
             <Bookmark className="h-8 w-8" />
           </div>
           <h3 className="text-xl font-extrabold text-[#1E293B] mb-2">No saved jobs</h3>
           <p className="text-[#64748B] text-sm font-medium mb-6">You haven't bookmarked any jobs yet. Start exploring to find your perfect match.</p>
           <Link href="/explore-jobs">
-            <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3 shadow-md shadow-blue-500/15">
+            <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-full font-extrabold px-8 py-3">
               Explore Jobs
             </Button>
           </Link>

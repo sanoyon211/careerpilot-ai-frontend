@@ -53,7 +53,7 @@ export default function ExploreJobsPage() {
       <div className="lg:hidden flex justify-end">
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 text-xs font-extrabold bg-[#F4F7FE] border border-[#E2E8F0] px-4 py-2.5 rounded-full text-[#0F172A]"
+          className="flex items-center gap-2 text-xs font-extrabold bg-[#FAFAFA] border border-[#E5E7EB] px-4 py-2.5 rounded-full text-[#0F172A]"
         >
           <SlidersHorizontal className="h-4 w-4 text-[#8B5CF6]" />
           {showFilters ? "Hide Filters" : "Show Filters"}
