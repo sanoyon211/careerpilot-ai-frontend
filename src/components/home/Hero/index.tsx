@@ -3,14 +3,24 @@
 import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { Search, Sparkles, Cpu, ArrowRight, ShieldCheck, Zap, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-white py-16 md:py-24">
+      {/* Ambient Radial Glows */}
+      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none" />
+
       {/* Fluid Full-Width Container */}
-      <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
+      <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
         {/* Top Header Badge */}
-        <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center px-4 py-1.5 rounded-lg text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/30">
             <span>Autonomous Groq Llama 3.3 70B AI Platform</span>
           </div>
@@ -36,10 +46,15 @@ export function Hero() {
               </Button>
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bento Grid Showcase scaling to 1440px */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-12 gap-8"
+        >
           {/* Bento Card 1: AI Agentic Matching */}
           <div className="md:col-span-7 bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-8 md:p-12 relative overflow-hidden hover:border-[#CBD5E1] transition-all group flex flex-col justify-between">
             <div>
@@ -95,7 +110,7 @@ export function Hero() {
             <div className="text-3xl font-black text-[#0F172A]">Instant</div>
             <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-0.5">AI Cover Letter Gen</div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

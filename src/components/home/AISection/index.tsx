@@ -3,16 +3,26 @@
 import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { Sparkles, Bot, FileText, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function AISection() {
   return (
     <section className="py-24 bg-white">
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-8 md:p-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-8 md:p-16 relative overflow-hidden">
+          {/* Ambient Glow for AI Section */}
+          <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#8B5CF6]/10 blur-[100px] pointer-events-none" />
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
             {/* Left AI Text Info */}
-            <div className="space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
               <div className="inline-flex items-center px-4 py-1.5 rounded-lg text-xs font-extrabold bg-[#8B5CF6] text-white">
                 <span>AI Feature Spotlight</span>
               </div>
@@ -51,10 +61,16 @@ export function AISection() {
                   </Button>
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Side Interactive Card Preview */}
-            <div className="bg-white border border-[#E5E7EB] rounded-2xl p-8 space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white border border-[#E5E7EB] rounded-2xl p-8 space-y-6 shadow-sm"
+            >
               <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-5">
                 <div>
                   <h4 className="font-extrabold text-base text-[#0F172A]">AI Match Insight</h4>
@@ -86,7 +102,7 @@ export function AISection() {
                   <span className="text-[#8B5CF6] font-black">Ready to Send</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

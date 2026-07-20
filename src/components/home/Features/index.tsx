@@ -1,6 +1,7 @@
 "use client";
 
 import { Cpu, FileCheck2, Bot, ShieldCheck, Zap, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
 const FEATURES = [
   {
@@ -46,7 +47,13 @@ export function Features() {
     <section className="py-24 bg-white">
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20 space-y-4"
+        >
           <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-4 py-1.5 rounded-lg">
             Platform Capabilities
           </span>
@@ -56,21 +63,25 @@ export function Features() {
           <p className="text-[#64748B] text-base sm:text-lg font-medium leading-relaxed">
             Everything you need to navigate job search, resume scoring, and technical interviews with AI precision.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {FEATURES.map((feature, idx) => {
             const Icon = feature.icon;
             return (
-              <div
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl p-8 sm:p-10 hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <h3 className="text-2xl font-extrabold text-[#0F172A] mb-3">{feature.title}</h3>
                   <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">{feature.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

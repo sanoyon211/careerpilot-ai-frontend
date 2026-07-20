@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { MapPin, Briefcase, DollarSign, Clock } from "lucide-react";
 import { useGetJobsQuery } from "@/redux/api/jobsApi";
+import { motion } from "framer-motion";
 
 export function FeaturedJobs() {
   const { data: jobsResponse, isLoading } = useGetJobsQuery({ agenticSearch: true });
@@ -13,7 +14,13 @@ export function FeaturedJobs() {
     <section className="py-24 bg-white">
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16"
+        >
           <div>
             <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] border border-[#E5E7EB] px-4 py-1.5 rounded-full">
               Live Opportunities
@@ -27,7 +34,7 @@ export function FeaturedJobs() {
               View All Positions
             </Button>
           </Link>
-        </div>
+        </motion.div>
 
         {/* 4 Columns Grid on Extra Wide Monitors */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-10">
@@ -46,9 +53,13 @@ export function FeaturedJobs() {
           )}
 
           {!isLoading &&
-            jobs.map((job) => (
-              <div
+            jobs.map((job, idx) => (
+              <motion.div
                 key={job._id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-7 hover:border-[#0F172A]/20 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
@@ -93,7 +104,7 @@ export function FeaturedJobs() {
                     </Button>
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
         </div>
       </div>

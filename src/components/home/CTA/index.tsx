@@ -3,13 +3,23 @@
 import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { Sparkles, Search, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function CTA() {
   return (
     <section className="py-24 bg-white">
       {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="relative overflow-hidden bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-10 md:p-20 text-[#0F172A] text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="relative overflow-hidden bg-[#FAFAFA] border border-[#E5E7EB] rounded-2xl p-10 md:p-20 text-[#0F172A] text-center"
+        >
+          {/* Ambient Glow for CTA */}
+          <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-[#8B5CF6]/15 blur-[120px] pointer-events-none" />
+
           <div className="relative z-10 max-w-4xl mx-auto space-y-8">
             <div className="inline-flex items-center px-4 py-1.5 rounded-lg text-xs font-extrabold bg-white border border-[#E5E7EB] text-[#8B5CF6]">
               <span>Ready to Elevate Your Tech Career?</span>
@@ -36,7 +46,7 @@ export function CTA() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
