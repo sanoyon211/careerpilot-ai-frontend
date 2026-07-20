@@ -7,12 +7,12 @@ import { Button } from "@/components/common/Button";
 export function DashboardHealthSidebar() {
   return (
     <div className="space-y-6">
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-6 shadow-xs">
-        <h3 className="font-extrabold text-base text-[#1E293B] mb-3 flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-[#2563EB]" /> Workspace Health
+      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle">
+        <h3 className="font-extrabold text-base text-[#1E293B] mb-4 flex items-center gap-2">
+          <TrendingUp className="h-4.5 w-4.5 text-[#2563EB]" /> Workspace Health
         </h3>
 
-        <div className="space-y-2 mb-4">
+        <div className="space-y-2 mb-6">
           <div className="flex justify-between text-xs font-bold">
             <span className="text-[#1E293B]">Verification Status</span>
             <span className="text-emerald-600 font-extrabold">Active</span>
@@ -22,18 +22,18 @@ export function DashboardHealthSidebar() {
           </div>
         </div>
 
-        <ul className="space-y-2 text-xs text-[#64748B] font-semibold mb-6">
-          <li className="flex items-center gap-2">
+        <ul className="space-y-3 text-xs text-[#64748B] font-semibold mb-8">
+          <li className="flex items-center gap-2.5">
             <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> Groq Llama 3.3 AI Engine Active
           </li>
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-2.5">
             <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> Socket.io Real-Time System Active
           </li>
         </ul>
 
         <Link href="/profile">
-          <Button variant="outline" className="w-full rounded-xl text-xs font-bold">
-            View Company Profile
+          <Button variant="outline" className="w-full rounded-xl text-xs font-extrabold py-3">
+            View Profile Settings
           </Button>
         </Link>
       </div>

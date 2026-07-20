@@ -12,17 +12,17 @@ export interface StatCardItem {
 
 export function DashboardStats({ stats }: { stats: StatCardItem[] }) {
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {stats.map((stat, idx) => {
         const Icon = stat.icon;
         return (
-          <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-6 flex items-center gap-4 shadow-xs">
-            <div className={`h-12 w-12 rounded-2xl flex items-center justify-center shrink-0 bg-white border border-[#E2E8F0] ${stat.color}`}>
-              <Icon className="h-6 w-6" />
+          <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-7 flex items-center gap-5 shadow-subtle hover:-translate-y-1 transition-all duration-300">
+            <div className={`h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 bg-white border border-[#E2E8F0] ${stat.color} shadow-2xs`}>
+              <Icon className="h-7 w-7" />
             </div>
             <div>
-              <div className="text-2xl font-extrabold text-[#1E293B]">{stat.value}</div>
-              <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider">{stat.label}</div>
+              <div className="text-3xl font-extrabold text-[#1E293B]">{stat.value}</div>
+              <div className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-1">{stat.label}</div>
             </div>
           </div>
         );

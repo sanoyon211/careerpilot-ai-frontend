@@ -11,15 +11,15 @@ export function AboutValues() {
 
   return (
     <div className="mb-16">
-      <h2 className="text-3xl font-extrabold text-[#1E293B] text-center mb-12">Our Core Values</h2>
+      <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] text-center mb-16">Our Core Values</h2>
       <div className="grid md:grid-cols-3 gap-8">
         {values.map((value, idx) => {
           const Icon = value.icon;
           return (
-            <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-8 hover:-translate-y-1 hover:border-[#CBD5E1] transition-all shadow-xs">
-              <Icon className="h-10 w-10 text-[#2563EB] mb-6" />
-              <h3 className="text-xl font-extrabold text-[#1E293B] mb-3">{value.title}</h3>
-              <p className="text-[#64748B] leading-relaxed text-sm font-medium">{value.desc}</p>
+            <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 hover:-translate-y-1 hover:border-[#8B5CF6]/30 transition-all shadow-subtle">
+              <Icon className="h-12 w-12 text-[#8B5CF6] mb-6" />
+              <h3 className="text-2xl font-extrabold text-[#0F172A] mb-3">{value.title}</h3>
+              <p className="text-[#64748B] leading-relaxed text-base font-medium">{value.desc}</p>
             </div>
           );
         })}

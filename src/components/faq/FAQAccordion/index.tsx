@@ -44,21 +44,21 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
     <div className="border-b border-[#E2E8F0] last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center py-5 text-left focus:outline-none cursor-pointer"
+        className="w-full flex justify-between items-center py-6 text-left focus:outline-none cursor-pointer group"
       >
-        <span className="font-bold text-lg text-[#1E293B]">{question}</span>
+        <span className="font-extrabold text-lg sm:text-xl text-[#0F172A] group-hover:text-[#8B5CF6] transition-colors">{question}</span>
         {isOpen ? (
-          <Minus className="h-5 w-5 text-[#2563EB] shrink-0 ml-4" />
+          <Minus className="h-5 w-5 text-[#8B5CF6] shrink-0 ml-4" />
         ) : (
-          <Plus className="h-5 w-5 text-[#64748B] shrink-0 ml-4" />
+          <Plus className="h-5 w-5 text-[#64748B] shrink-0 ml-4 group-hover:text-[#8B5CF6] transition-colors" />
         )}
       </button>
       <div 
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-96 opacity-100 pb-5" : "max-h-0 opacity-0"
+          isOpen ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
         }`}
       >
-        <p className="text-[#64748B] leading-relaxed font-medium text-sm">{answer}</p>
+        <p className="text-[#64748B] leading-relaxed font-medium text-base">{answer}</p>
       </div>
     </div>
   );
@@ -66,10 +66,10 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
 
 export function FAQAccordion({ faqs = DEFAULT_FAQS }: { faqs?: FAQCategory[] }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {faqs.map((section, idx) => (
-        <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-6 md:p-8 shadow-xs">
-          <h2 className="text-2xl font-extrabold mb-6 text-[#2563EB]">{section.category}</h2>
+        <div key={idx} className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 md:p-12 shadow-subtle">
+          <h2 className="text-2xl font-extrabold mb-6 text-[#8B5CF6]">{section.category}</h2>
           <div className="flex flex-col">
             {section.questions.map((faq, fIdx) => (
               <AccordionItem key={fIdx} question={faq.q} answer={faq.a} />

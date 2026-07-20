@@ -131,7 +131,7 @@ export default function ResumePage() {
   const atsScore = resume?.parsedData?.atsScore ?? 85;
   const getScoreBadge = (score: number) => {
     if (score >= 90) return { label: "Excellent ATS Fit", color: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" };
-    if (score >= 75) return { label: "Strong Candidate Fit", color: "bg-indigo-500/10 text-indigo-600 border-indigo-500/20" };
+    if (score >= 75) return { label: "Strong Candidate Fit", color: "bg-[#2563EB]/10 text-[#2563EB] border-[#2563EB]/20" };
     return { label: "Needs Optimization", color: "bg-amber-500/10 text-amber-600 border-amber-500/20" };
   };
 
@@ -139,28 +139,28 @@ export default function ResumePage() {
     <div className="max-w-6xl space-y-8 pb-10">
       
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card text-foreground p-6 sm:p-8 rounded-[24px] shadow-sm border border-border">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-            <Zap className="h-3.5 w-3.5" />
-            <span>Agentic AI Engine Active (Groq Llama 3.3 70B & Gemini 2.0)</span>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-[#F4F7FE] text-[#1E293B] p-8 sm:p-10 rounded-[28px] shadow-subtle border border-[#E2E8F0]">
+        <div className="space-y-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-extrabold bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/20">
+            <Zap className="h-4 w-4" />
+            <span>Agentic AI Engine Active (Groq Llama 3.3 70B)</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-foreground">Resume & AI Match</h1>
-          <p className="text-muted-foreground text-sm max-w-2xl leading-relaxed">
-            Upload your resume to extract key skills, compute your ATS Readiness Score, identify skill gaps, and autonomously match with top jobs.
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1E293B]">Resume & AI Match</h1>
+          <p className="text-[#64748B] text-base max-w-2xl leading-relaxed font-medium">
+            Upload your resume to extract key technical competencies, compute your ATS Readiness Score, identify skill gaps, and match with top opportunities.
           </p>
         </div>
         
         {resume && (
           <div className="flex items-center gap-3 shrink-0">
             <Button
-              variant="outline"
-              size="sm"
+              variant="ai"
+              size="lg"
               onClick={handleReAnalyze}
               isLoading={isParsing}
-              className="bg-slate-800/80 border-slate-700 text-white hover:bg-slate-700"
+              className="font-extrabold rounded-2xl shadow-md shadow-purple-500/20 px-6 gap-2"
             >
-              <RefreshCw className="h-4 w-4 mr-2" /> Re-Analyze
+              <RefreshCw className="h-4 w-4" /> Re-Analyze
             </Button>
           </div>
         )}
@@ -172,35 +172,35 @@ export default function ResumePage() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Upload & Manage Card */}
-          <div className="bg-card border rounded-3xl p-6 sm:p-8 shadow-sm">
+          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-indigo-600" /> Manage Your Resume
+                <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
+                  <FileText className="h-5 w-5 text-[#2563EB]" /> Manage Your Resume
                 </h2>
-                <p className="text-xs text-muted-foreground mt-0.5">PDF or DOCX documents up to 5MB</p>
+                <p className="text-xs font-medium text-[#64748B] mt-1">PDF or DOCX documents up to 5MB</p>
               </div>
             </div>
 
             {isLoadingResume ? (
-              <div className="p-10 text-center text-muted-foreground animate-pulse flex flex-col items-center justify-center gap-3">
-                <RefreshCw className="h-8 w-8 animate-spin text-indigo-600" />
+              <div className="p-12 text-center text-[#64748B] animate-pulse flex flex-col items-center justify-center gap-3 font-semibold">
+                <RefreshCw className="h-8 w-8 animate-spin text-[#2563EB]" />
                 <p>Loading your resume profile...</p>
               </div>
             ) : resume ? (
               <div className="space-y-4">
-                <div className="border border-indigo-100 dark:border-slate-800 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-indigo-50/40 dark:bg-slate-900/40">
+                <div className="border border-[#E2E8F0] rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white shadow-xs">
                   <div className="flex items-center gap-4">
-                    <div className="bg-indigo-600 text-white p-3.5 rounded-xl shadow-md">
+                    <div className="bg-[#2563EB] text-white p-4 rounded-2xl shadow-md shadow-blue-500/15">
                       <FileText className="h-7 w-7" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-base text-foreground">{resume.fileName || "Uploaded Resume"}</h3>
-                      <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                      <h3 className="font-extrabold text-base text-[#1E293B]">{resume.fileName || "Uploaded Resume"}</h3>
+                      <div className="flex items-center gap-3 mt-1 text-xs text-[#64748B] font-semibold">
                         <span className="flex items-center gap-1">
                           <Clock className="h-3.5 w-3.5" /> Uploaded {new Date(resume.createdAt).toLocaleDateString()}
                         </span>
-                        <span className="bg-emerald-500/10 text-emerald-600 px-2 py-0.5 rounded font-semibold text-[11px]">
+                        <span className="bg-emerald-500/10 text-emerald-600 px-2.5 py-0.5 rounded-full font-extrabold text-[11px] border border-emerald-500/20">
                           Parsed
                         </span>
                       </div>
@@ -209,14 +209,14 @@ export default function ResumePage() {
 
                   <div className="flex items-center gap-2 self-end sm:self-center">
                     <a href={resume.fileUrl} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" size="sm" className="h-9 px-3 gap-1.5" title="Download Resume">
+                      <Button variant="outline" size="sm" className="h-10 px-4 gap-1.5 font-bold rounded-xl" title="Download Resume">
                         <Download className="h-4 w-4" /> Download
                       </Button>
                     </a>
                     <Button
                       variant="outline"
                       size="sm"
-                      className="h-9 w-9 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                      className="h-10 w-10 p-0 text-red-600 hover:bg-red-50 rounded-xl"
                       title="Delete Resume"
                       onClick={handleDelete}
                       isLoading={isDeleting}
@@ -226,12 +226,12 @@ export default function ResumePage() {
                   </div>
                 </div>
 
-                <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 p-4 rounded-xl flex items-start gap-3 text-sm">
+                <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 p-5 rounded-2xl flex items-start gap-3.5 text-sm font-medium">
                   <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold">AI Resume Parsing Complete</p>
-                    <p className="text-xs opacity-90 mt-0.5 leading-relaxed">
-                      Your resume has been indexed by Groq Llama 3.3 70B. Skills and background details are live for real-time job matching.
+                    <p className="font-extrabold text-[#1E293B]">AI Resume Parsing Complete</p>
+                    <p className="text-xs text-[#64748B] font-medium leading-relaxed mt-1">
+                      Your resume has been indexed by Groq Llama 3.3 70B. Technical skills are active for intent-driven job matching.
                     </p>
                   </div>
                 </div>
@@ -242,17 +242,17 @@ export default function ResumePage() {
                 onDragLeave={handleDrag}
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
-                className={`border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center text-center transition-all ${
+                className={`border-2 border-dashed rounded-2xl p-12 flex flex-col items-center justify-center text-center transition-all ${
                   dragActive
-                    ? "border-indigo-600 bg-indigo-500/10 scale-[1.01]"
-                    : "border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/30 hover:border-indigo-400 hover:bg-slate-50"
+                    ? "border-[#2563EB] bg-blue-50/50 scale-[1.01]"
+                    : "border-[#CBD5E1] bg-white hover:border-[#2563EB] hover:bg-[#F4F7FE]"
                 }`}
               >
-                <div className="bg-indigo-600/10 text-indigo-600 p-4 rounded-full mb-4 shadow-sm">
+                <div className="bg-[#2563EB]/10 text-[#2563EB] p-4 rounded-2xl mb-4 shadow-2xs">
                   <UploadCloud className="h-10 w-10" />
                 </div>
-                <h3 className="font-bold text-lg mb-1">Drag & drop your resume here</h3>
-                <p className="text-xs text-muted-foreground mb-6 max-w-sm">
+                <h3 className="font-extrabold text-lg text-[#1E293B] mb-1">Drag & drop your resume here</h3>
+                <p className="text-xs text-[#64748B] font-medium mb-6 max-w-sm">
                   Supports PDF and DOCX files. Groq AI will parse your skills in seconds.
                 </p>
                 <input
@@ -262,7 +262,7 @@ export default function ResumePage() {
                   accept=".pdf,.doc,.docx"
                   onChange={handleFileChange}
                 />
-                <Button asChild isLoading={isWorking} className="bg-indigo-600 hover:bg-indigo-700 text-white px-6">
+                <Button asChild isLoading={isWorking} className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-8 py-3 rounded-2xl font-extrabold shadow-md shadow-blue-500/15">
                   <label htmlFor="resume-upload-input" className="cursor-pointer">
                     {isWorking ? "Parsing Resume..." : "Browse Computer Files"}
                   </label>
@@ -271,45 +271,45 @@ export default function ResumePage() {
             )}
           </div>
 
-          {/* ATS Score & Analytics Card */}
+          {/* Dominant Feature Card: ATS Score & Analytics */}
           {resume && (
-            <div className="bg-card border rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b">
+            <div className="bg-gradient-to-br from-[#F3E8FF] via-[#F4F7FE] to-white border border-[#8B5CF6]/30 rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E2E8F0]">
                 <div>
-                  <h2 className="text-xl font-bold flex items-center gap-2">
-                    <Award className="h-5 w-5 text-indigo-600" /> ATS Compatibility Score
+                  <h2 className="text-2xl font-extrabold flex items-center gap-2 text-[#1E293B]">
+                    <Award className="h-6 w-6 text-[#8B5CF6]" /> ATS Compatibility Score
                   </h2>
-                  <p className="text-xs text-muted-foreground mt-0.5">Automated screening assessment against ATS standards</p>
+                  <p className="text-xs text-[#64748B] font-semibold mt-1">Automated screening assessment against ATS standards</p>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getScoreBadge(atsScore).color}`}>
+                <span className={`px-4 py-1.5 rounded-full text-xs font-extrabold border ${getScoreBadge(atsScore).color}`}>
                   {getScoreBadge(atsScore).label}
                 </span>
               </div>
 
-              <div className="grid sm:grid-cols-3 gap-4">
-                <div className="bg-secondary border border-border p-5 rounded-2xl flex flex-col items-center justify-center text-center">
-                  <span className="text-4xl font-extrabold text-primary">{atsScore}</span>
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">ATS Score / 100</span>
+              <div className="grid sm:grid-cols-3 gap-6">
+                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-xs">
+                  <span className="text-4xl font-black text-[#2563EB]">{atsScore}</span>
+                  <span className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-1.5">ATS Score / 100</span>
                 </div>
-                <div className="bg-secondary border border-border p-5 rounded-2xl flex flex-col items-center justify-center text-center">
-                  <span className="text-3xl font-bold text-foreground">{resume.parsedData?.technicalSkills?.length || 0}</span>
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">Tech Skills Extracted</span>
+                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-xs">
+                  <span className="text-3xl font-extrabold text-[#8B5CF6]">{resume.parsedData?.technicalSkills?.length || 0}</span>
+                  <span className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-1.5">Tech Skills Extracted</span>
                 </div>
-                <div className="bg-secondary border border-border p-5 rounded-2xl flex flex-col items-center justify-center text-center">
-                  <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{recData?.data?.recommendedJobs?.length || 0}</span>
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">Matched Active Jobs</span>
+                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-xs">
+                  <span className="text-3xl font-extrabold text-emerald-600">{recData?.data?.recommendedJobs?.length || 0}</span>
+                  <span className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mt-1.5">Matched Active Jobs</span>
                 </div>
               </div>
 
               {/* Score Bar */}
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs font-semibold">
-                  <span>ATS Readinss</span>
+              <div className="space-y-2 pt-2">
+                <div className="flex justify-between text-xs font-extrabold text-[#1E293B]">
+                  <span>ATS Readiness Gauge</span>
                   <span>{atsScore}%</span>
                 </div>
-                <div className="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+                <div className="w-full bg-slate-200 h-3 rounded-full overflow-hidden border border-[#E2E8F0]">
                   <div
-                    className="bg-gradient-to-r from-indigo-600 to-emerald-500 h-full rounded-full transition-all duration-1000"
+                    className="bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] h-full rounded-full transition-all duration-1000"
                     style={{ width: `${atsScore}%` }}
                   />
                 </div>
@@ -317,14 +317,14 @@ export default function ResumePage() {
 
               {/* ATS Improvement Suggestions */}
               {resume.parsedData?.atsFeedback && resume.parsedData.atsFeedback.length > 0 && (
-                <div className="bg-amber-500/5 border border-amber-500/20 p-4 rounded-2xl space-y-2">
-                  <h4 className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl space-y-3 shadow-xs">
+                  <h4 className="text-xs font-extrabold text-amber-600 uppercase tracking-wider flex items-center gap-2">
                     <AlertCircle className="h-4 w-4" /> Recommended ATS Improvements
                   </h4>
-                  <ul className="space-y-1.5 pl-1">
+                  <ul className="space-y-2 pl-1">
                     {resume.parsedData.atsFeedback.map((item: string, idx: number) => (
-                      <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
+                      <li key={idx} className="text-xs font-medium text-[#1E293B] flex items-start gap-2.5">
+                        <span className="h-2 w-2 rounded-full bg-amber-500 shrink-0 mt-1.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -334,49 +334,49 @@ export default function ResumePage() {
             </div>
           )}
 
-          {/* AI Extracted Skills Breakdown */}
+          {/* AI Extracted Skills Breakdown (#F4EEFF Skill Bubbles with Thin Purple Border) */}
           {resume && resume.parsedData && (
-            <div className="bg-card border rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-              <h2 className="text-xl font-bold flex items-center gap-2 border-b pb-4">
-                <Sparkles className="h-5 w-5 text-indigo-600" /> Extracted Skill Matrix
+            <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-8">
+              <h2 className="text-xl font-extrabold flex items-center gap-2 border-b border-[#E2E8F0] pb-4 text-[#1E293B]">
+                <Sparkles className="h-5 w-5 text-[#8B5CF6]" /> Extracted Skill Matrix
               </h2>
 
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <div>
-                  <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                    <Layers className="h-4 w-4 text-indigo-500" /> Technical Skills
+                  <h3 className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <Layers className="h-4 w-4 text-[#8B5CF6]" /> Technical Skills
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5">
                     {resume.parsedData.technicalSkills?.map((skill: string) => (
                       <span
                         key={skill}
-                        className="bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 text-xs px-3.5 py-1.5 rounded-xl font-semibold shadow-2xs hover:bg-indigo-500/20 transition-colors"
+                        className="bg-[#F4EEFF] text-[#8B5CF6] border border-[#8B5CF6]/30 text-xs px-4 py-2 rounded-2xl font-extrabold shadow-2xs hover:bg-[#8B5CF6] hover:text-white transition-all cursor-default"
                       >
                         {skill}
                       </span>
-                    )) || <span className="text-xs text-muted-foreground">No technical skills detected.</span>}
+                    )) || <span className="text-xs text-[#64748B]">No technical skills detected.</span>}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                    <TrendingUp className="h-4 w-4 text-emerald-500" /> Soft Skills & Traits
+                  <h3 className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4 text-emerald-600" /> Soft Skills & Traits
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5">
                     {resume.parsedData.softSkills?.map((skill: string) => (
                       <span
                         key={skill}
-                        className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 text-xs px-3.5 py-1.5 rounded-xl font-semibold shadow-2xs"
+                        className="bg-emerald-50 text-emerald-700 border border-emerald-300 text-xs px-4 py-2 rounded-2xl font-extrabold shadow-2xs"
                       >
                         {skill}
                       </span>
-                    )) || <span className="text-xs text-muted-foreground">No soft skills detected.</span>}
+                    )) || <span className="text-xs text-[#64748B]">No soft skills detected.</span>}
                   </div>
                 </div>
 
-                <div className="pt-3 border-t">
-                  <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Experience Summary</h3>
-                  <div className="bg-slate-50 dark:bg-slate-900 border rounded-2xl p-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300 italic">
+                <div className="pt-4 border-t border-[#E2E8F0]">
+                  <h3 className="text-xs font-extrabold text-[#64748B] uppercase tracking-wider mb-3">Experience Summary</h3>
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 text-sm leading-relaxed text-[#1E293B] font-medium italic shadow-xs">
                     "{resume.parsedData.experienceSummary || "No summary provided."}"
                   </div>
                 </div>
@@ -386,33 +386,33 @@ export default function ResumePage() {
 
           {/* AI Skill Gap & Career Advice Card */}
           {recData?.data?.recommendedSkills && recData.data.recommendedSkills.length > 0 && (
-            <div className="bg-card border rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-6">
               <div>
-                <h2 className="text-xl font-bold flex items-center gap-2">
-                  <Target className="h-5 w-5 text-indigo-600" /> AI Skill Gap Analysis & Target Skills
+                <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
+                  <Target className="h-5 w-5 text-[#2563EB]" /> AI Skill Gap Analysis & Target Skills
                 </h2>
-                <p className="text-xs text-muted-foreground mt-0.5">Acquiring these skills will increase your match rate for higher-paying roles</p>
+                <p className="text-xs text-[#64748B] font-medium mt-1">Acquiring these skills will increase your match rate for higher-paying roles</p>
               </div>
 
-              <div className="grid gap-3">
+              <div className="grid gap-4">
                 {recData.data.recommendedSkills.map((skill, idx) => (
-                  <div key={idx} className="border rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/50 dark:bg-slate-900/30">
+                  <div key={idx} className="border border-[#E2E8F0] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white shadow-xs">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-sm">{skill.name}</span>
+                        <span className="font-extrabold text-sm text-[#1E293B]">{skill.name}</span>
                         <span
-                          className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full border ${
+                          className={`text-[10px] uppercase font-black px-2.5 py-0.5 rounded-full border ${
                             skill.importance === "High"
-                              ? "bg-rose-500/10 text-rose-600 border-rose-500/20"
+                              ? "bg-rose-50 text-rose-600 border-rose-200"
                               : skill.importance === "Medium"
-                              ? "bg-amber-500/10 text-amber-600 border-amber-500/20"
-                              : "bg-blue-500/10 text-blue-600 border-blue-500/20"
+                              ? "bg-amber-50 text-amber-600 border-amber-200"
+                              : "bg-blue-50 text-[#2563EB] border-blue-200"
                           }`}
                         >
                           {skill.importance} Priority
                         </span>
                       </div>
-                      <p className="text-xs text-muted-foreground">{skill.reason}</p>
+                      <p className="text-xs text-[#64748B] font-medium">{skill.reason}</p>
                     </div>
                   </div>
                 ))}
@@ -422,71 +422,71 @@ export default function ResumePage() {
 
           {/* AI Matched Jobs Section */}
           {resume && (
-            <div className="bg-card border rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-              <div className="flex items-center justify-between border-b pb-4">
+            <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 shadow-subtle space-y-6">
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
                 <div>
-                  <h2 className="text-xl font-bold flex items-center gap-2">
-                    <Briefcase className="h-5 w-5 text-indigo-600" /> AI Matched Job Opportunities
+                  <h2 className="text-xl font-extrabold flex items-center gap-2 text-[#1E293B]">
+                    <Briefcase className="h-5 w-5 text-[#2563EB]" /> AI Matched Job Opportunities
                   </h2>
-                  <p className="text-xs text-muted-foreground mt-0.5">Roles autonomously ranked by skill similarity score</p>
+                  <p className="text-xs text-[#64748B] font-medium mt-1">Roles autonomously ranked by skill similarity score</p>
                 </div>
                 {recData?.data?.recommendedJobs?.length ? (
-                  <span className="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">
+                  <span className="bg-[#2563EB] text-white text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-xs">
                     {recData.data.recommendedJobs.length} Matches Found
                   </span>
                 ) : null}
               </div>
 
               {isLoadingRecs ? (
-                <div className="text-center py-10 text-muted-foreground animate-pulse space-y-3">
-                  <RefreshCw className="h-8 w-8 animate-spin mx-auto text-indigo-600" />
+                <div className="text-center py-12 text-[#64748B] animate-pulse space-y-3 font-semibold">
+                  <RefreshCw className="h-8 w-8 animate-spin mx-auto text-[#2563EB]" />
                   <p className="text-sm">Groq Llama 3.3 70B is analyzing candidate-job alignment...</p>
                 </div>
               ) : recData?.data?.recommendedJobs?.length ? (
-                <div className="grid gap-4">
+                <div className="grid gap-6">
                   {recData.data.recommendedJobs.map((rec) => {
                     const job = rec.jobDetails;
                     return (
                       <div
                         key={rec.jobId}
-                        className="border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-indigo-500/50 hover:shadow-md transition-all bg-card"
+                        className="border border-[#E2E8F0] rounded-2xl p-6 hover:-translate-y-1 hover:shadow-lg transition-all bg-white"
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                           <div>
-                            <h3 className="font-bold text-lg text-foreground">
+                            <h3 className="font-extrabold text-lg text-[#1E293B]">
                               {job?.title || "Matching Position"}
                             </h3>
-                            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mt-1">
-                              {job?.category && <span className="bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded font-medium">{job.category}</span>}
+                            <div className="flex flex-wrap items-center gap-2.5 text-xs text-[#64748B] font-semibold mt-1">
+                              {job?.category && <span className="bg-[#F4F7FE] px-3 py-1 rounded-full border border-[#E2E8F0]">{job.category}</span>}
                               {job?.location && (
                                 <span className="flex items-center gap-1">
-                                  <MapPin className="h-3 w-3" /> {job.location}
+                                  <MapPin className="h-3.5 w-3.5 text-[#2563EB]" /> {job.location}
                                 </span>
                               )}
-                              {job?.workMode && <span className="text-indigo-600 font-semibold">{job.workMode}</span>}
+                              {job?.workMode && <span className="text-[#2563EB] font-bold">{job.workMode}</span>}
                               {job?.salaryRange && (
-                                <span className="flex items-center gap-1 text-emerald-600 font-medium">
-                                  <DollarSign className="h-3 w-3" /> {job.salaryRange}
+                                <span className="flex items-center gap-1 text-emerald-600 font-extrabold">
+                                  <DollarSign className="h-3.5 w-3.5" /> {job.salaryRange}
                                 </span>
                               )}
                             </div>
                           </div>
 
                           <div className="flex items-center gap-2 shrink-0">
-                            <span className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 text-xs font-extrabold px-3 py-1.5 rounded-full">
+                            <span className="bg-[#F3E8FF] border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-2xs">
                               {rec.matchPercentage}% Match
                             </span>
                           </div>
                         </div>
 
-                        <p className="text-xs text-muted-foreground mb-4 line-clamp-2 leading-relaxed bg-slate-50 dark:bg-slate-900/60 p-3 rounded-xl">
-                          <strong className="text-foreground font-semibold">AI Match Rationale: </strong>
+                        <p className="text-xs text-[#64748B] mb-5 line-clamp-2 leading-relaxed bg-[#F4F7FE] border border-[#E2E8F0] p-4 rounded-xl font-medium">
+                          <strong className="text-[#1E293B] font-bold">AI Match Rationale: </strong>
                           {rec.reason}
                         </p>
 
                         <div className="flex justify-end">
                           <Link href={`/jobs/${job?._id || rec.jobId}`}>
-                            <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700 text-white gap-1">
+                            <Button size="sm" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white gap-1 rounded-full font-bold px-6">
                               View & Apply Job <ChevronRight className="h-4 w-4" />
                             </Button>
                           </Link>
@@ -496,8 +496,8 @@ export default function ResumePage() {
                   })}
                 </div>
               ) : (
-                <div className="text-center py-10 text-muted-foreground space-y-2">
-                  <p className="font-semibold text-sm">No active job matches found at this time.</p>
+                <div className="text-center py-12 text-[#64748B] space-y-2 font-medium">
+                  <p className="font-extrabold text-sm text-[#1E293B]">No active job matches found at this time.</p>
                   <p className="text-xs">New jobs are posted daily. We will update matches automatically.</p>
                 </div>
               )}
@@ -507,34 +507,33 @@ export default function ResumePage() {
 
         {/* Sidebar Info Column */}
         <div className="space-y-6">
-          
-          <div className="bg-card border border-border rounded-[24px] p-6 text-foreground shadow-sm space-y-4">
-            <div className="bg-primary/10 p-3 rounded-2xl w-fit text-primary">
+          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 text-[#1E293B] shadow-subtle space-y-5">
+            <div className="bg-[#2563EB]/10 p-3.5 rounded-2xl w-fit text-[#2563EB]">
               <Zap className="h-6 w-6" />
             </div>
-            <h3 className="font-bold text-lg text-foreground">How Agentic AI Matching Works</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Our Agentic AI leverages Groq Llama 3.3 70B & Gemini 2.0 Flash to analyze contextual experience rather than plain keywords. It evaluates candidate capability, domain depth, and culture fit against live job requirements.
+            <h3 className="font-extrabold text-lg text-[#1E293B]">How Agentic AI Matching Works</h3>
+            <p className="text-xs text-[#64748B] leading-relaxed font-medium">
+              Our Agentic AI leverages Groq Llama 3.3 70B to analyze contextual experience rather than plain keywords. It evaluates candidate capability and domain depth against live job requirements.
             </p>
-            <ul className="space-y-2.5 text-xs pt-2">
-              <li className="flex items-center gap-2 text-foreground font-medium">
+            <ul className="space-y-3 text-xs pt-2 font-bold text-[#1E293B]">
+              <li className="flex items-center gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> Contextual Skill & Experience Mapping
               </li>
-              <li className="flex items-center gap-2 text-foreground font-medium">
+              <li className="flex items-center gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> ATS Compatibility Score Computation
               </li>
-              <li className="flex items-center gap-2 text-foreground font-medium">
+              <li className="flex items-center gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> Targeted Skill Gap Recommendations
               </li>
             </ul>
           </div>
 
-          <div className="bg-card border rounded-3xl p-6 shadow-sm space-y-3">
-            <h3 className="font-bold text-sm flex items-center gap-2">
+          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle space-y-3">
+            <h3 className="font-extrabold text-sm flex items-center gap-2 text-[#1E293B]">
               <ShieldCheck className="h-4.5 w-4.5 text-emerald-600" /> Privacy & Security Guarantee
             </h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Your resume data is stored using enterprise encryption. It is only shared with employers when you explicitly apply for a job posting.
+            <p className="text-xs text-[#64748B] leading-relaxed font-medium">
+              Your resume data is stored securely and only shared with employers when you explicitly apply for a job posting.
             </p>
           </div>
         </div>

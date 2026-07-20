@@ -11,13 +11,11 @@ export default function AboutPage() {
   const realJobsCount = jobsResponse?.data?.length || 0;
 
   return (
-    <div className="min-h-screen bg-background py-16">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <AboutHero />
-        <AboutStats realJobsCount={realJobsCount} />
-        <AboutMission />
-        <AboutValues />
-      </div>
+    <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 py-16 md:py-24">
+      <AboutHero />
+      <AboutStats realJobsCount={realJobsCount} />
+      <AboutMission />
+      <AboutValues />
     </div>
   );
 }

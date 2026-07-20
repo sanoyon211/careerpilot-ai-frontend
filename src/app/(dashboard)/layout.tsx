@@ -30,16 +30,16 @@ interface NavItem {
   href: string;
   label: string;
   icon: any;
-  isPremium?: boolean;
+  isAI?: boolean;
 }
 
 const JOB_SEEKER_LINKS: NavItem[] = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/profile", label: "My Profile", icon: User },
-  { href: "/resume", label: "Resume & AI Match", icon: FileText },
+  { href: "/resume", label: "Resume & AI Match", icon: FileText, isAI: true },
   { href: "/saved-jobs", label: "Saved Jobs", icon: Bookmark },
   { href: "/applied-jobs", label: "Applied Jobs", icon: CheckSquare },
-  { href: "/ai-chat", label: "AI Career Coach", icon: MessageSquare, isPremium: true },
+  { href: "/ai-chat", label: "AI Career Coach", icon: MessageSquare, isAI: true },
 ];
 
 const EMPLOYER_LINKS: NavItem[] = [
@@ -69,7 +69,6 @@ export default function DashboardLayout({
 
   const cookieToken = typeof window !== "undefined" ? getAccessTokenFromCookie() : null;
 
-  // Skip profile fetching if user is already in Redux OR if there's no valid access token in cookies
   const { data: profileResponse, isLoading: isLoadingProfile, isError: isProfileError } = useGetMyProfileQuery(
     undefined,
     {
@@ -77,7 +76,6 @@ export default function DashboardLayout({
     }
   );
 
-  // Rehydrate Redux state if profile is fetched via cookie token
   useEffect(() => {
     if (!user && profileResponse?.data) {
       const token = getAccessTokenFromCookie() || "";
@@ -85,10 +83,8 @@ export default function DashboardLayout({
     }
   }, [user, profileResponse, dispatch]);
 
-  // Client-side authentication guard redirect
   useEffect(() => {
     const token = getAccessTokenFromCookie();
-
     if (!user) {
       if (!token || isProfileError) {
         document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -98,13 +94,11 @@ export default function DashboardLayout({
     }
   }, [user, isProfileError, pathname]);
 
-  // Socket.io real-time notification room connection
   useEffect(() => {
     if (!user?._id) return;
 
     const rawUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
     const socketUrl = rawUrl.replace(/\/api\/v1\/?$/, "");
-
     const socket = io(socketUrl);
 
     socket.emit("join_user_room", user._id);
@@ -115,7 +109,6 @@ export default function DashboardLayout({
         duration: 8000,
       });
 
-      // Invalidate RTK Query tags to refresh UI instantly without reloading
       dispatch(baseApi.util.invalidateTags(["Application", "SavedJob", "Job"]));
     });
 
@@ -148,10 +141,10 @@ export default function DashboardLayout({
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-muted/20">
+      <div className="min-h-screen flex items-center justify-center bg-[#F4F7FE]">
         <div className="text-center space-y-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto text-primary" />
-          <p className="text-sm font-semibold text-muted-foreground animate-pulse">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#2563EB] border-t-transparent mx-auto text-[#2563EB]" />
+          <p className="text-sm font-bold text-[#64748B] animate-pulse">
             {isLoadingProfile ? "Verifying authentication session..." : "Redirecting to login..."}
           </p>
         </div>
@@ -160,15 +153,18 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-muted/20 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Mobile Topbar */}
-      <div className="md:hidden bg-card border-b p-4 flex items-center justify-between sticky top-0 z-20 shadow-xs">
+      <div className="md:hidden bg-white border-b border-[#E2E8F0] p-4 flex items-center justify-between sticky top-0 z-20 shadow-subtle">
         <Link href="/" className="flex items-center gap-1">
-          <span className="font-extrabold text-xl tracking-tight text-foreground font-sans">
-            careerpilot<span className="text-rose-600 font-black">:</span><span className="text-xs font-black uppercase text-rose-600 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 px-1.5 py-0.5 rounded-full ml-1">AI</span>
+          <span className="font-extrabold text-xl tracking-tight text-[#1E293B] font-sans">
+            careerpilot<span className="text-[#2563EB] font-black">:</span>
+            <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full ml-1">
+              AI
+            </span>
           </span>
         </Link>
-        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-muted-foreground">
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-[#64748B]">
           {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
@@ -176,59 +172,69 @@ export default function DashboardLayout({
       {/* Sidebar Navigation */}
       <aside
         className={`
-        ${isMobileMenuOpen ? "fixed inset-0 top-[65px] z-30 bg-background" : "hidden"} 
-        md:block md:w-64 md:shrink-0 bg-card border-r md:sticky md:top-0 md:h-screen flex flex-col overflow-y-auto transition-all shadow-xs
+        ${isMobileMenuOpen ? "fixed inset-0 top-[65px] z-30 bg-white" : "hidden"} 
+        md:block md:w-64 md:shrink-0 bg-[#F4F7FE] border-r border-[#E2E8F0] md:sticky md:top-0 md:h-screen flex flex-col overflow-y-auto shadow-subtle
       `}
       >
         {/* Header Logo */}
-        <div className="p-6 hidden md:block border-b">
+        <div className="p-6 hidden md:block border-b border-[#E2E8F0] bg-white">
           <Link href="/" className="flex items-center gap-1 group">
-            <span className="font-extrabold text-xl tracking-tight text-foreground font-sans">
-              careerpilot<span className="text-rose-600 font-black">:</span><span className="text-xs font-black uppercase text-rose-600 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 px-1.5 py-0.5 rounded-full ml-1">AI</span>
+            <span className="font-extrabold text-xl tracking-tight text-[#1E293B] font-sans">
+              careerpilot<span className="text-[#2563EB] font-black">:</span>
+              <span className="text-xs font-black uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full ml-1 shadow-2xs">
+                AI
+              </span>
             </span>
           </Link>
         </div>
 
-        {/* User Card in Sidebar */}
-        <div className="p-4 mx-3 my-3 bg-rose-50/50 dark:bg-zinc-900/60 border border-rose-100 dark:border-zinc-800 rounded-2xl flex items-center gap-3">
+        {/* Compact Sidebar Profile Box */}
+        <div className="p-3.5 mx-3 my-4 bg-white border border-[#E2E8F0] rounded-2xl flex items-center gap-3 shadow-subtle">
           {user.photoURL ? (
-            <img src={user.photoURL} alt={user.name} className="h-10 w-10 rounded-full object-cover border" />
+            <img src={user.photoURL} alt={user.name} className="h-9 w-9 rounded-full object-cover border border-[#E2E8F0]" />
           ) : (
-            <div className="h-10 w-10 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs shrink-0 shadow-md shadow-rose-500/20">
+            <div className="h-9 w-9 rounded-full bg-[#2563EB] text-white font-extrabold flex items-center justify-center text-xs shrink-0 shadow-xs">
               {getInitials(user.name)}
             </div>
           )}
-          <div className="overflow-hidden">
-            <p className="font-extrabold text-xs truncate text-foreground">{user.name}</p>
-            <span className="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-rose-100 dark:bg-rose-950/80 text-rose-600 border border-rose-200 dark:border-rose-900">
+          <div className="overflow-hidden min-w-0">
+            <p className="font-extrabold text-xs text-[#1E293B] truncate">{user.name}</p>
+            <span className="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-[#F3E8FF] text-[#8B5CF6] border border-[#8B5CF6]/20">
               {isEmployer ? "Employer" : "Job Seeker"}
             </span>
           </div>
         </div>
 
         {/* Menu Items */}
-        <nav className="p-4 space-y-1 flex-1">
-          <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-3 px-3">
+        <nav className="p-3.5 space-y-1.5 flex-1">
+          <div className="text-[11px] font-extrabold text-[#64748B] uppercase tracking-wider mb-3 px-3">
             {isEmployer ? "Employer Workspace" : "Job Seeker Navigation"}
           </div>
 
           {navItems.map((link) => {
             const isActive = pathname === link.href;
+            const isAICoachActive = link.href === "/ai-chat" && isActive;
+
+            let linkClass = "text-[#64748B] hover:bg-white hover:text-[#2563EB]";
+            if (isActive) {
+              if (isAICoachActive) {
+                linkClass = "bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] text-white font-extrabold shadow-md shadow-purple-500/20";
+              } else {
+                linkClass = "bg-[#2563EB] text-white font-extrabold shadow-sm shadow-blue-500/15";
+              }
+            }
+
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all ${linkClass}`}
               >
-                <link.icon className="h-4.5 w-4.5 shrink-0" />
+                <link.icon className={`h-4.5 w-4.5 shrink-0 ${!isActive && link.isAI ? "text-[#8B5CF6]" : ""}`} />
                 <span>{link.label}</span>
-                {link.isPremium && (
-                  <Sparkles className={`h-3.5 w-3.5 ml-auto ${isActive ? "text-yellow-300" : "text-yellow-500"}`} />
+                {link.isAI && !isAICoachActive && (
+                  <Sparkles className={`h-3.5 w-3.5 ml-auto ${isActive ? "text-white" : "text-[#8B5CF6]"}`} />
                 )}
               </Link>
             );
@@ -236,14 +242,14 @@ export default function DashboardLayout({
         </nav>
 
         {/* Sidebar Footer Controls */}
-        <div className="p-4 border-t bg-card space-y-1 mt-auto">
+        <div className="p-3.5 border-t border-[#E2E8F0] bg-white space-y-1.5 mt-auto">
           <Link
             href="/settings"
             onClick={() => setIsMobileMenuOpen(false)}
-            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+            className={`flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-bold transition-all ${
               pathname === "/settings"
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                ? "bg-[#2563EB] text-white shadow-sm"
+                : "text-[#64748B] hover:bg-[#F4F7FE] hover:text-[#2563EB]"
             }`}
           >
             <Settings className="h-4.5 w-4.5 shrink-0" /> Settings
@@ -251,15 +257,15 @@ export default function DashboardLayout({
 
           <button
             onClick={handleSignOut}
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-500/10 transition-colors text-left"
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors text-left cursor-pointer"
           >
             <LogOut className="h-4.5 w-4.5 shrink-0" /> Sign Out
           </button>
         </div>
       </aside>
 
-      {/* Main Page Area */}
-      <main className="flex-1 p-4 md:p-8 overflow-x-hidden max-w-full">{children}</main>
+      {/* Main Page Area with Generous Whitespace */}
+      <main className="flex-1 p-6 md:p-10 overflow-x-hidden max-w-full bg-white">{children}</main>
     </div>
   );
 }

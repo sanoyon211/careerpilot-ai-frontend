@@ -15,30 +15,30 @@ interface DashboardEmployerJobsProps {
 export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmployerJobsProps) {
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-extrabold text-[#1E293B]">Your Active Job Postings</h2>
         <Link href="/manage-jobs" className="text-xs font-extrabold text-[#2563EB] hover:underline">
           Manage All Jobs
         </Link>
       </div>
 
-      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] overflow-hidden shadow-xs">
+      <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] overflow-hidden shadow-subtle mb-8">
         <div className="divide-y divide-[#E2E8F0]">
           {employerJobs.length > 0 ? (
             employerJobs.map((job: any) => (
-              <div key={job._id} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-[#2563EB]/10 text-[#2563EB] font-extrabold flex items-center justify-center text-sm border border-[#2563EB]/20 shrink-0">
+              <div key={job._id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 hover:bg-white transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 rounded-2xl bg-[#2563EB]/10 text-[#2563EB] font-extrabold flex items-center justify-center text-base border border-[#2563EB]/20 shrink-0">
                     {job.title.charAt(0)}
                   </div>
                   <div>
-                    <h3 className="font-extrabold text-sm text-[#1E293B]">{job.title}</h3>
-                    <p className="text-xs font-semibold text-[#64748B]">{job.jobType} • {job.location}</p>
+                    <h3 className="font-extrabold text-base text-[#1E293B]">{job.title}</h3>
+                    <p className="text-xs font-semibold text-[#64748B] mt-0.5">{job.jobType} • {job.location}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3 self-end sm:self-auto">
-                  <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-white text-[#2563EB] border border-[#E2E8F0]">
+                  <span className="text-xs font-extrabold px-3.5 py-1.5 rounded-full bg-white text-[#2563EB] border border-[#E2E8F0] shadow-2xs">
                     {job.applicantsCount || 0} Applicants
                   </span>
                   <Link href={`/manage-jobs/${job._id}/applications`}>
@@ -50,7 +50,7 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
               </div>
             ))
           ) : (
-            <div className="p-8 text-center text-xs text-[#64748B] font-semibold">
+            <div className="p-10 text-center text-xs text-[#64748B] font-semibold">
               You haven't posted any jobs yet. Click "Post New Job" above.
             </div>
           )}
@@ -58,10 +58,10 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
       </div>
 
       {chartData && (
-        <div className="grid sm:grid-cols-2 gap-6 mt-6">
-          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-6 shadow-xs">
-            <h3 className="font-extrabold text-base text-[#1E293B] mb-4">Job Views & Applications</h3>
-            <div className="h-56 w-full">
+        <div className="grid sm:grid-cols-2 gap-8">
+          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle">
+            <h3 className="font-extrabold text-base text-[#1E293B] mb-6">Job Views & Applications</h3>
+            <div className="h-60 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData.viewsData}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
@@ -76,9 +76,9 @@ export function DashboardEmployerJobs({ employerJobs, chartData }: DashboardEmpl
             </div>
           </div>
 
-          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[24px] p-6 shadow-xs">
-            <h3 className="font-extrabold text-base text-[#1E293B] mb-4">Candidate Pipeline Breakdown</h3>
-            <div className="h-56 w-full flex justify-center">
+          <div className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 shadow-subtle">
+            <h3 className="font-extrabold text-base text-[#1E293B] mb-6">Candidate Pipeline Breakdown</h3>
+            <div className="h-60 w-full flex justify-center">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie

@@ -38,23 +38,23 @@ export function JobApplyModal({
   isApplying,
 }: JobApplyModalProps) {
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white border border-[#E2E8F0] rounded-[32px] p-6 sm:p-8 w-full max-w-lg shadow-2xl space-y-5">
-        <div className="flex justify-between items-center border-b border-[#E2E8F0] pb-4">
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-white border border-[#E2E8F0] rounded-[32px] p-8 sm:p-10 w-full max-w-xl shadow-2xl space-y-6">
+        <div className="flex justify-between items-center border-b border-[#E2E8F0] pb-5">
           <div>
-            <h2 className="text-xl font-extrabold text-[#1E293B]">Apply for Position</h2>
-            <p className="text-xs text-[#64748B] font-medium mt-0.5">{jobTitle} at {employerName || "Employer"}</p>
+            <h2 className="text-2xl font-extrabold text-[#0F172A]">Apply for Position</h2>
+            <p className="text-xs text-[#64748B] font-semibold mt-1">{jobTitle} at {employerName || "Employer"}</p>
           </div>
-          <button onClick={onClose} className="p-1.5 rounded-full hover:bg-[#F4F7FE] text-[#64748B] hover:text-[#1E293B]">
-            <X className="h-5 w-5" />
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-[#F4F7FE] text-[#64748B] hover:text-[#0F172A]">
+            <X className="h-6 w-6" />
           </button>
         </div>
 
-        <form onSubmit={onSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1">
-                <User className="h-3.5 w-3.5 text-[#2563EB]" /> Full Name
+        <form onSubmit={onSubmit} className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1.5">
+                <User className="h-3.5 w-3.5 text-[#8B5CF6]" /> Full Name
               </label>
               <Input
                 type="text"
@@ -65,9 +65,9 @@ export function JobApplyModal({
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1">
-                <Mail className="h-3.5 w-3.5 text-[#2563EB]" /> Email Address
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1.5">
+                <Mail className="h-3.5 w-3.5 text-[#8B5CF6]" /> Email Address
               </label>
               <Input
                 type="email"
@@ -79,9 +79,9 @@ export function JobApplyModal({
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1">
-              <Phone className="h-3.5 w-3.5 text-[#2563EB]" /> Phone Number
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#64748B] uppercase flex items-center gap-1.5">
+              <Phone className="h-3.5 w-3.5 text-[#8B5CF6]" /> Phone Number
             </label>
             <Input
               type="text"
@@ -93,14 +93,14 @@ export function JobApplyModal({
           </div>
 
           <div>
-            <div className="flex justify-between items-center mb-1">
+            <div className="flex justify-between items-center mb-1.5">
               <label className="text-xs font-bold text-[#64748B] uppercase">
                 Cover Letter (Optional)
               </label>
               <button
                 type="button"
                 onClick={onGenerateAICoverLetter}
-                className="text-xs font-extrabold text-[#8B5CF6] hover:underline flex items-center gap-1"
+                className="text-xs font-black text-[#8B5CF6] hover:underline flex items-center gap-1 cursor-pointer"
               >
                 <Sparkles className="h-3.5 w-3.5" /> Auto-Generate AI
               </button>
@@ -109,15 +109,15 @@ export function JobApplyModal({
               value={coverLetter}
               onChange={(e) => setCoverLetter(e.target.value)}
               placeholder="Introduce yourself and explain why you're a great fit..."
-              className="w-full h-28 p-3 rounded-2xl border border-[#E2E8F0] bg-[#F4F7FE] text-xs font-medium text-[#1E293B] focus:outline-none focus:ring-2 focus:ring-[#2563EB] resize-y"
+              className="w-full h-32 p-4 rounded-2xl border border-[#E2E8F0] bg-[#F4F7FE] text-xs font-medium text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] resize-y"
             />
           </div>
 
-          <div className="pt-2 flex justify-end gap-3">
-            <Button type="button" variant="outline" className="rounded-xl font-bold" onClick={onClose}>
+          <div className="pt-3 flex justify-end gap-3">
+            <Button type="button" variant="outline" className="rounded-full font-bold px-6" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" isLoading={isApplying} className="bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl px-6 gap-2 font-extrabold">
+            <Button type="submit" isLoading={isApplying} className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full px-8 gap-2 font-extrabold shadow-md shadow-purple-600/20">
               <Send className="h-4 w-4" /> Send Application
             </Button>
           </div>

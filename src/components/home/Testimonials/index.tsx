@@ -28,13 +28,14 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/20 px-3.5 py-1.5 rounded-full">
+    <section className="py-24 bg-white">
+      {/* Fluid Full-Width Container */}
+      <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
+        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#8B5CF6] bg-[#F3E8FF] border border-[#8B5CF6]/30 px-4 py-1.5 rounded-full shadow-2xs">
             User Success Stories
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1E293B] tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight">
             Trusted by Talent & Employers
           </h2>
         </div>
@@ -43,7 +44,7 @@ export function Testimonials() {
           {TESTIMONIALS.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="bg-[#F4F7FE] border border-[#E2E8F0] rounded-[28px] p-8 sm:p-10 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col justify-between shadow-subtle"
             >
               <div>
                 <div className="flex items-center gap-1 mb-6 text-amber-500">
@@ -51,18 +52,18 @@ export function Testimonials() {
                     <Star key={i} className="h-4 w-4 fill-amber-400" />
                   ))}
                 </div>
-                <Quote className="h-8 w-8 text-[#2563EB]/20 mb-3" />
-                <p className="text-sm text-[#1E293B] font-medium leading-relaxed mb-6">
+                <Quote className="h-9 w-9 text-[#8B5CF6]/20 mb-4" />
+                <p className="text-base text-[#0F172A] font-medium leading-relaxed mb-8">
                   "{item.quote}"
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#E2E8F0] flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-[#2563EB] text-white font-extrabold flex items-center justify-center text-sm shadow-xs">
+              <div className="pt-5 border-t border-[#E2E8F0] flex items-center gap-4">
+                <div className="h-12 w-12 rounded-2xl bg-[#0F172A] text-white font-extrabold flex items-center justify-center text-base shadow-xs">
                   {item.author.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-sm text-[#1E293B]">{item.author}</h4>
+                  <h4 className="font-extrabold text-base text-[#0F172A]">{item.author}</h4>
                   <p className="text-xs text-[#64748B] font-semibold">{item.role} • {item.company}</p>
                 </div>
               </div>
