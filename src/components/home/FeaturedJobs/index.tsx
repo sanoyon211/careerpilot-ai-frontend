@@ -7,7 +7,7 @@ import { useGetJobsQuery } from "@/redux/api/jobsApi";
 
 export function FeaturedJobs() {
   const { data: jobsResponse, isLoading } = useGetJobsQuery({ agenticSearch: true });
-  const jobs = jobsResponse?.data?.slice(0, 8) || [];
+  const jobs = jobsResponse?.data?.slice(0, 4) || [];
 
   return (
     <section className="py-24 bg-white">
@@ -70,12 +70,12 @@ export function FeaturedJobs() {
                       <span className="line-clamp-1">{job.location || "Flexible"}</span>
                     </div>
                     <div className="flex items-center gap-2.5">
-                      <Briefcase className="h-4 w-4 text-[#0F172A] opacity-70 shrink-0" strokeWidth={1.5} /> 
+                      <Briefcase className="h-4 w-4 text-[#0F172A] opacity-70 shrink-0" strokeWidth={1.5} />
                       {job.jobType}
                     </div>
                     {job.salaryRange && (
                       <div className="flex items-center text-[#0F172A] font-extrabold gap-2.5">
-                        <DollarSign className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} /> 
+                        <DollarSign className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} />
                         {job.salaryRange}
                       </div>
                     )}
@@ -84,7 +84,7 @@ export function FeaturedJobs() {
 
                 <div className="pt-5 border-t border-[#E5E7EB] flex items-center justify-between">
                   <span className="flex items-center text-[12px] text-[#64748B] font-semibold gap-1.5">
-                    <Clock className="h-3.5 w-3.5 opacity-70" strokeWidth={1.5} /> 
+                    <Clock className="h-3.5 w-3.5 opacity-70" strokeWidth={1.5} />
                     {new Date(job.createdAt).toLocaleDateString()}
                   </span>
                   <Link href={`/jobs/${job._id}`}>

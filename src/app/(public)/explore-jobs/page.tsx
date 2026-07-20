@@ -29,8 +29,24 @@ export default function ExploreJobsPage() {
 
   const { data: jobsResponse, isLoading } = useGetJobsQuery(queryParams);
 
-  const jobs = jobsResponse?.data || [];
-  const meta = jobsResponse?.meta || { total: 0, page: 1, limit: 12, totalPages: 1 };
+  const allJobs = jobsResponse?.data || [];
+  
+  // Frontend Pagination Logic
+  const itemsPerPage = 6;
+  const totalJobs = allJobs.length;
+  const totalPages = Math.max(1, Math.ceil(totalJobs / itemsPerPage));
+  const currentPage = Math.min(page, totalPages);
+  
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedJobs = allJobs.slice(startIndex, endIndex);
+
+  const meta = jobsResponse?.meta || { 
+    total: totalJobs, 
+    page: currentPage, 
+    limit: itemsPerPage, 
+    totalPages 
+  };
 
   const handleClearFilters = () => {
     setSearchQuery("");
@@ -75,7 +91,7 @@ export default function ExploreJobsPage() {
         />
 
         <ExploreJobsList
-          jobs={jobs}
+          jobs={paginatedJobs}
           isLoading={isLoading}
           totalJobs={meta.total}
           currentPage={meta.page}

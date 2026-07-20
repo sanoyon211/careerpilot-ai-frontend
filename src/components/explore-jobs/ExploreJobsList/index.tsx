@@ -43,7 +43,7 @@ export function ExploreJobsList({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#FAFAFA] border border-[#E5E7EB] p-5 rounded-2xl">
         <p className="text-sm text-[#64748B] font-medium">
           Showing <strong className="text-[#0F172A] font-black">{jobs.length}</strong> of{" "}
-          <strong className="text-[#0F172A] font-black">{totalJobs}</strong> jobs
+          <strong className="text-[#0F172A] font-black">{Math.max(totalJobs, jobs.length)}</strong> jobs
           {agenticSearch && <span className="ml-2 text-xs text-[#8B5CF6] font-black">(AI Intent Match Active)</span>}
         </p>
 
@@ -68,7 +68,7 @@ export function ExploreJobsList({
             </div>
           ))}
 
-        {!isLoading && totalJobs === 0 && (
+        {!isLoading && jobs.length === 0 && (
           <div className="col-span-full text-center py-20 bg-[#FAFAFA] border border-[#E5E7EB] rounded-xl space-y-4">
             <p className="font-black text-xl text-[#0F172A]">No jobs found matching your criteria</p>
             <p className="text-sm text-[#64748B] max-w-md mx-auto font-medium">
