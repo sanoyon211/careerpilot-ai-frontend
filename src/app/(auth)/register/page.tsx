@@ -72,8 +72,8 @@ export default function RegisterPage() {
               accessToken: response.data.accessToken
             }))
             document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=604800; SameSite=Lax`;
-            setSuccessMsg("Account created! Redirecting to dashboard...")
-            setTimeout(() => router.push("/dashboard"), 1500)
+            setSuccessMsg("Account created! Redirecting to home page...")
+            setTimeout(() => router.push("/"), 1500)
             return 'Registration successful!'
           },
           error: (err) => {

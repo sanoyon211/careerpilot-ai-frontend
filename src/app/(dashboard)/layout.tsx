@@ -20,6 +20,7 @@ import {
   MessageSquare,
   PlusCircle,
   Briefcase,
+  Home,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
@@ -255,6 +256,14 @@ export default function DashboardLayout({
 
         {/* Sidebar Footer Controls */}
         <div className="p-3.5 border-t border-[#E5E7EB] bg-white space-y-1.5 mt-auto">
+          <Link
+            href="/"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-bold text-[#64748B] hover:bg-[#FAFAFA] hover:text-[#8B5CF6] transition-all"
+          >
+            <Home className="h-5 w-5 shrink-0 text-[#0F172A]" strokeWidth={1.5} /> Back to Home
+          </Link>
+
           <Link
             href="/settings"
             onClick={() => setIsMobileMenuOpen(false)}

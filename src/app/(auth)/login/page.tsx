@@ -21,7 +21,7 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
 
-  const redirectTarget = searchParams.get("redirect") || "/dashboard";
+  const redirectTarget = searchParams.get("redirect") || "/";
 
   const [login, { isLoading }] = useLoginMutation();
   const [socialLogin, { isLoading: isSocialLoading }] = useSocialLoginMutation();

@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
   const isAuthPath = authPaths.some((path) => pathname.startsWith(path));
 
   if (isAuthPath && accessToken) {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   // Role-based route protection
@@ -76,11 +76,11 @@ export function middleware(request: NextRequest) {
         );
 
         if (role === 'employer' && isTryingJobSeekerRoute) {
-          return NextResponse.redirect(new URL('/dashboard', request.url));
+          return NextResponse.redirect(new URL('/', request.url));
         }
 
         if (role === 'job-seeker' && isTryingEmployerRoute) {
-          return NextResponse.redirect(new URL('/dashboard', request.url));
+          return NextResponse.redirect(new URL('/', request.url));
         }
       }
     } catch (error) {
