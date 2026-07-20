@@ -74,8 +74,9 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#E5E7EB] bg-white/90 backdrop-blur-xl transition-all">
-      {/* Fluid Full-Width Container */}
+    <>
+      <header className="sticky top-0 z-50 w-full border-b border-[#E5E7EB] bg-white/90 backdrop-blur-xl transition-all">
+        {/* Fluid Full-Width Container */}
       <div className="w-full max-w-[1440px] mx-auto flex h-18 items-center justify-between px-6 md:px-12">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2 group">
@@ -273,15 +274,16 @@ export function Navbar() {
           {isMobileMenuOpen ? <X className="h-6 w-6" strokeWidth={1.5} /> : <Menu className="h-6 w-6 text-[#0F172A]" strokeWidth={1.5} />}
         </button>
       </div>
+      </header>
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 z-[998] md:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 right-0 w-[280px] bg-white z-50 shadow-2xl md:hidden flex flex-col animate-in slide-in-from-right duration-300">
+          <div className="fixed inset-y-0 right-0 w-[280px] bg-white z-[999] shadow-2xl md:hidden flex flex-col animate-in slide-in-from-right duration-300">
             <div className="flex items-center justify-between p-6 border-b border-[#E5E7EB]">
               <span className="text-lg font-extrabold text-[#0F172A]">Menu</span>
               <button
@@ -318,6 +320,6 @@ export function Navbar() {
           </div>
         </>
       )}
-    </header>
+    </>
   );
 }
